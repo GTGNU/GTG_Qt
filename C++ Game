@@ -4,6 +4,6 @@ using namespace std;
 int main() {
     
     cout << "Stallman, wake up!" << endl
-    cout << You wake up covered in stale cheetoes from the a long night of checking troll emails from /g/.
+    cout << You wake up covered in stale cheetoes from the a long night of checking troll emails from /g/. << endl
     return 0;
 }
