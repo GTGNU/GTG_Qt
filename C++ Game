@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
-
+    
+    cout << "Stallman, wake up!" << endl
+    
     return 0;
 }
