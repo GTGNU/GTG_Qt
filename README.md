@@ -12,10 +12,10 @@ http://grandtheftgentoo.host56.com
 RESOURCES
 =========
 #git and github:
-https://help.github.com/articles/set-up-git#platform-all 
-http://git-scm.com/book/en/Getting-Started-Git-Basics
-man gittutorial
+*https://help.github.com/articles/set-up-git#platform-all 
+*http://git-scm.com/book/en/Getting-Started-Git-Basics
+*man gittutorial
 
 #c++:
-http://www.stanford.edu/class/cs193d/handouts/04-A-Crash-Course.pdf
-http://www.cplusplus.com/
+*http://www.stanford.edu/class/cs193d/handouts/04-A-Crash-Course.pdf
+*http://www.cplusplus.com/
