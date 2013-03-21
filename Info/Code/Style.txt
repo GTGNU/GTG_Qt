@@ -1,0 +1,117 @@
+/*
+ 
+-- THIS IS A DRAFT AND NOT THE FINAL VERSION --
+ 
+GENERAL:
+ 
+- Keep the number of dependencies small
+        Suggestion: The Qt framework contains a lot of stuff so make sure to check
+        it before looking for other libraries
+ 
+- Separate the logic and the graphics as much as possible.
+        Suggestion: MVC (model - view - controller).
+ 
+- Keep the number of programming languages small. Mixing languages can become
+        a pain in the end.
+ 
+- Keep the code as abstract as possible. Don't hardcode data in-place. If you
+        really need to write some coordinate, give it a proper name and declare it
+        as a constant in some file such as constants.h
+ 
+ 
+C++ STYLE:
+ 
+- Avoid macros. Templates and constexpr's are type-safe and provide nearly
+        the same functionality.
+ 
+- Strict const-correctness
+ 
+- Don't write C with classes. C++11 provides many modern constructs
+        that make the code more readable and maintainable. This includes:
+ 
+- Avoid manual memory management:
+        - Use RAII if it's possible
+        - Use references if the value can't be null
+        - Use smart pointers if you really need heap-allocated memory
+ 
+- Prefer Qt Containers over STL ones. This will make the code more consistent
+        since we are already using Qt classes everywhere anyway.
+ 
+ 
+NAMING:
+ 
+        Variables:            fooBar
+        Member variables:     m_fooBar
+        Globals (avoid them): g_fooBar
+        Methods:              fooBar(Type1 arg1, Type2 arg2...)
+        Classes:              FooBar
+        Namespaces:           foobar
+ 
+ 
+ 
+FORMATTING:
+ 
+- Tabs-only. They are more comfortable to insert/delete for everybody and
+        enabling whitespace display on your editor is a clean way to easily
+        see the indentation level. Spaces can easily mess up indentation.
+ 
+- If you really need to align some code, use spaces. This is the only place where
+        they should be used.
+ 
+- K&R style for braces.
+ 
+- Use new lines to separate different parts of the code
+ 
+- Empty lines are empty. No useless whitespace.
+ 
+- If anything is missing here, refer to the Linux kernel coding style guide.
+ 
+ 
+*/
+ 
+// Code example
+ 
+enum License
+{
+        GPL,
+        BSD
+};
+ 
+class NonFreeSoftware
+        : public EvilSoftware
+{
+        private:
+                bool m_respectsFreedom;
+ 
+        public:
+                NonFreeSoftware();
+                ~NonFreeSoftware();
+ 
+                bool respectsFreedom();
+                void setRespectsFreedom(bool value);
+};
+ 
+NonFreeSoftware::NonFreeSoftware()
+        : EvilSoftware()
+{
+        m_respectsFreedom = false;
+}
+ 
+NonFreeSoftware::~NonFreeSoftware()
+{
+}
+ 
+NonFreeSoftware::respectsFreedom() const
+{
+        return m_respectsFreedom;
+}
+ 
+NonFreeSoftware::setRespectsFreedom(bool value)
+{
+        if (value) {
+                std::cout << "you can't trick me" << std::endl;
+        }
+ 
+        // we ignore proprietary fags anyway
+        //m_respectsFreedom = value;
+}
