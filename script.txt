@@ -24,7 +24,7 @@ by carrot
 
 
 "Stallman, wake up!"
->you wakes up
+>you wake up
 You find yourself covered in stale cheetos from a long night of reading troll emails from /g/.
 >you look at the clock, it's 2 in the afternoon
 "What the hell! I'm not supposed to wake up for another 2 hours and twenty minutes, this better be fucking important!" You say. 
@@ -36,7 +36,7 @@ You find yourself covered in stale cheetos from a long night of reading troll em
 
 
 >shota-linus helps RMS out of bed 
-"Quick, Linus boot up my Yeemote!" You say.
+"Quick, Linus boot up my Lemote!" You say.
 "But that'll take forever!" He replies.
 >RMS boots it up anyway
 >after 30 minutes, the ancient machine dimly displays the gNewSense logo 
@@ -44,7 +44,7 @@ You find yourself covered in stale cheetos from a long night of reading troll em
 shota-linus tugs your beard 
 "They're uploading the proprietary version in an hour!" He says 
 You look at your inbox and, despite the fact that you still have over 300 unread e-mails, you nod your head.
-"Start up your peice of junk, then."
+"Start up your piece of junk, then."
 shota-linus starts up the laptop that some company paid him 10 dollars to write a good review about. It boots in 7 seconds, and the walk out the door. 
 "Hey, Stallman, if we're such great programmers and developers, why do we do most of our stuff on shitty laptops?"
 >you remain silent.
@@ -59,5 +59,5 @@ shota-linus starts up the laptop that some company paid him 10 dollars to write 
 >see all the ubuntu platforms
 >you leave
 >you return to the apartment 
->discus what happened and wonder what should be done about it
+>discuss what happened and wonder what should be done about it
 >
