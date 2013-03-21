@@ -1,44 +1,37 @@
-Grand Theft Gentoo
-by carrot
+######BACKGROUND/SETTING######
 
+RMS is a programmer and hobbyist hacker whose only love in life is freedom. He dreams of a world in witch the user has control and is able to change software to fit his needs. What stands in his 
+way is the large and evil Corps such as Microshaft and, Crapple. People such as Billy Fence (the owner of Microshaft), Stephen Works (of Crapple), Mark Rocketvalue (of ubongo) and, Steven Sphearmor (also
+from Microshaft) are out to stop our hero RMS. In this game the goal is to free the world and take down the large corps. You team up with people such as Richard Greenblatt, Tom Knight, Bill Gosper, Eric
+S. Raymond and, Linus Torvalds just to name a few.
 
+	In this top view action packed you will fight off waves of code monkies, fight bosses and, hack into systems all while defending the rights of the user and hackers every where. YOU’LL BE FREE
+HACKERS! YOU’LL BE FREE!
 
-"Stallman, wake up!"
->you wakes up
-You find yourself covered in stale cheetos from a long night of reading troll emails from /g/.
->You look at the clock, it's 2 in the afternoon
-"What the hell! I'm not supposed to wake up for another 2 hours and twenty minutes, this better be fucking important!" You say.
->You shift over to look at Linus who woke you up.
-"IT IS IMPORTANT! Ubuntu's gone proprietary." He says
-"WHAT! That's against the liscense!"
-"They found a loophole somehow. They're going to bring linux to the masses in proprietary form!"
-"What do they think this is, BSD?"
+Setting: Santa Clara, CA 2014
 
->Linus helps RMS out of bed
-"Quick, Linus boot up my Yeemote!" You say.
-"But that'll take forever!" He replies.
->RMS boots it up anyway
->after 30 minutes, the ancient machine dimly displays the gNewSense logo
->RMS spends the next 3 hours checking emails
->Linus tugs your beard
-"They're uploading the proprietary version in an hour!" He says
-You look at your inbox and, despite the fact that you still have over 300 unread e-mails, you nod your head.
-"Start up your peice of junk, then."
-Linus starts up the laptop that some company paid him 10 dollars to write a good review about. It boots in 7 seconds, and they walk out the door.
-"Hey, Stallman, if we're such great programmers and developers, why do we do most of our stuff on shitty laptops?"
->You remain silent.
+######OPENING######
 
-
-
->After a long walk through a dark world, you and Linus walk to the Ubuntu convention. You see Mark Shuttleworth at a stand.
->you see he's shaking hands with someone
->It's Steve Ballmer
->Linus vomits 
-�It�s worse than I thought� You say. 
->Shuttleworth announces that the starting price for the new proprietary version of Ubuntu will come preinstalled on their own line of PC�s 
->Starting price is $2000
->the crowd cheers 
->You look around
->Linus is gone
->Shuttleworth paid him and now he�s writing a review of their new laptop talking about how �other companies aren�t trying�
->You�re
+        >Location: Behind Intell HQ
+        >Piles of old towers stacked up against the back of the building
+        >A car pulls up, you cant see who steps out because of the head lights
+>RMS: “Are you who I’m meeting?”
+>man: “I’m the only one here aren’t I?”
+>RMS: “Where is it?”
+>man: “It's right here”
+>You can see the out line of a case. A thought occurs to you, this man sounds familiar.
+>man: “where is the code that we talked about?”
+>"Where do I know this voice from?" You think.
+>You hold up the flash drive.
+>RMS: “It's right here. How do you suppose we do this?”
+>man: “I'll set the case down over here and then you toss me the drive”
+>WHERETHE HELL DO I KNOW HIM FROM?!?!
+>RMS: “Sounds good to me.”
+>The man walks a few feet away from the car and sets the case down, he walks back and motions for you to throw the drive. You toss it to him.
+>RMS: “that better be all there”
+>man: “Don' worry, Mr. Stallman. You have more reason to trust us then we do you.”
+>He gets back in the car and drives off.
+>You wait until he's out of the lot to retrieve the case.
+>You open it. It looks okay.
+Who was that? You know him, but from where?
+        >fade out on “but from where?”
