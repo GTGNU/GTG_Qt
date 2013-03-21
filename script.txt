@@ -63,21 +63,30 @@ RMS: “Really? Neat, I’ll be there soon.”
 *****this is where you start controlling RMS*****
         >you can access the computer
         >book shelf with several books
-        >go to different sections
-
+        >personal journal with some entries
+ 
+####### leaving the room #####
+ 
+        >>takes you to MIT
+                >you can walk around
+                >talk to people
+                >go to different sections
+ 
 >>story moves forward when you go to the computer lab
-
+ 
 ####### Lab #######
-
+ 
 >>starts auto pilot<<
 theres a group of people huddled around a computer, you walk over to take a look
 you see Tom Knight, Eric Raymond, Bil Gosper and Richard.
-
+ 
 >Richard: “Oh good you’re here Stallman. Take a look at this! Protected memory, cooperative multitasking, more sophisticated hard disk, a built-in screensaver, an advanced calculator with a paper tape and RPN, support for up to 2 megabytes of RAM, expansion slots, a numeric keypad, data corruption protection, non-physical file names, high res display. It’s not bad.But, we’re better.”
 >>everyone chuckels<<
 >RMS: “what have you done to it so far?”
->Richard: “Nothing yet but, we’ve found some bugs. The LisaClac doesn’t restore the the cell 
+>Richard: “Nothing yet but, we’ve found some bugs. The LisaClac doesn’t restore the the cell
 correctly if you cancel the operation. We’ll see what they do about it.”
 >>Tom Knight speaks up<<
 >Tom: “Over all its nice. I could use something like this in my lab.”
->Richard: “Too bad it
+>Richard: “Too bad it costs 10k.”
+>RMS: “I wouldnt but one of these if I was the richest man in the world. What is the point of all      of that “innovation” if the source is locked up in a vault some where. We might be able to fix the bugs if we could see how it ran.”
+>>everyone looks at RMS<<
