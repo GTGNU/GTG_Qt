@@ -14,7 +14,7 @@ RESOURCES
 #git and github:
 * [How to set up git](https://help.github.com/articles/set-up-git#platform-all)
 * [Git Basics](http://git-scm.com/book/en/Getting-Started-Git-Basics)
-* man gittutorial
+* [man gittutorial](https://www.kernel.org/pub/software/scm/git/docs/gittutorial.html)
 
 #c++:
 * [C++ crash course](http://www.stanford.edu/class/cs193d/handouts/04-A-Crash-Course.pdf)
