@@ -4,7 +4,7 @@ Grand-Theft-Gentoo
 COLLABORATION
 =================
 #irc:
-[#GTG @ irc.p2p-irc.net](http://mibbit.com/#GTG@irc.p2p-irc.net)
+[#GTG @ irc.p2p-irc.net](http://grandtheftgentoo.host56.com/irc.html)
 
 #Website:
 http://grandtheftgentoo.host56.com
