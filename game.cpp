@@ -2,6 +2,8 @@
 #include <pthread.h> // Free and Open Source software is always better
 #include <cstdio> // Because screw iostream
 
+// this file is deprecated
+
 using namespace std;
 
 int main()
@@ -10,7 +12,7 @@ int main()
 		"\n########intro#########"
 		"\n*RMS (you) are working at MIT, you give speeches about the use of free and open software. Ballmer is looking for a new supervisor. He claims that he supports the open source movement. "
 		"\n*The uni begins to loose money due to new product and (you) begin to worry that people will not be able to hear your talks and therefore not be able to spread you believes about 'FOSS'."
-		"\n*(you) are back in the lab, sulking over this tragic set back. Errors start appearing on your terminal, NVIDIA. you try to desperately to fix them. coding as fast as you can but to no avail." 
+		"\n*(you) are back in the lab, sulking over this tragic set back. Errors start appearing on your terminal, NVIDIA. you try to desperately to fix them. coding as fast as you can but to no avail."
 		"\n*Falling over from exhaustion, drenched in sweat, you see a figure in the door way but, you cannot see who it is. your vision is blurry and you begin to black out."
 		"\n*There is a laugh coming from some where but you cannot place it. #black out#"
 		"\n*You wake up in a hospital bed with wires and tubes sticking out of you."
@@ -51,7 +53,7 @@ int main()
   // sleep(2);
   // cout << "You then spend the next 3 hours checking emails, while shota-Linus tugs on your beard." << endl;
   // sleep(2);
-  // cout << "The constant tugging on your beard eventually annoys you, and you" << endl; 
+  // cout << "The constant tugging on your beard eventually annoys you, and you" << endl;
 	//
 	// ==================================================================================================================================================================================
 	//
@@ -70,7 +72,7 @@ int main()
 	sleep(2);
 	printf("\n'What the hell! I'm not supposed to wake up for another 2 hours and twenty minutes, this better be fucking important!' You say.");
 	sleep(2);
-	printf("\n>you shift over to look at shota-linus who woke you up."); 
+	printf("\n>you shift over to look at shota-linus who woke you up.");
 	sleep(2);
 	printf("\n'IT IS IMPORTANT! Ubuntu's gone proprietary.' He says");
 	sleep(2);
@@ -97,7 +99,7 @@ int main()
 	sleep(2);
 	printf("\nshota-linus tugs your beard.");
 	sleep(2);
-	printf("\n'They're uploading the proprietary version in an hour!' He says"); 
+	printf("\n'They're uploading the proprietary version in an hour!' He says");
 	sleep(2);
 	printf("\nYou look at your inbox and, despite the fact that you still have over 300 unread e-mails, you nod your head.");
 	sleep(2);
