@@ -1,13 +1,8 @@
 #include <iostream>
-// #include <Windows.h>
-// We do not endorse proprietary operating systems.
 #include <pthread.h> // Free and Open Source software is always better
 #include <cstdio> // Because screw iostream
 
-using std::cout;
-using std::printf;
-// using std::cin; // What cin?
-using std::endl;
+using namespace std;
 
 int main()
 {
@@ -16,12 +11,17 @@ int main()
 		"\n*RMS (you) are working at MIT, you give speeches about the use of free and open software. Ballmer is looking for a new supervisor. He claims that he supports the open source movement. "
 		"\n*The uni begins to loose money due to new product and (you) begin to worry that people will not be able to hear your talks and therefore not be able to spread you believes about 'FOSS'."
 		"\n*(you) are back in the lab, sulking over this tragic set back. Errors start appearing on your terminal, NVIDIA. you try to desperately to fix them. coding as fast as you can but to no avail." 
-		"\n*falling over from exhaustion, drenched in sweat, you see a figure in the door way but, you cannot see who it is. your vision is blurry and you begin to black out. there is a laugh coming from some where but you cannot place it. #black out#"
-		"\n*you wake up in a hospital bed with wires and tubes sticking out of you. A cyborg joke crosses your mind but there are more important things to think about. who was that person you saw? who was laughing? why were there so many errors?"
-		"\n*knowing what failed (the NVIDIA (what ever we decides that failed)) you decide that you will get to the bottom of it. even if you have to go all the way to the top of NVIDIA."
-		"\n*several calls and emails later (and talking to people in your lab) you discover that it was not NVIDIA's fault. Maybe its their rivals ATI who are to blame."
-		"\n*while working in the lab again you hear the subtle buzz or a pager by the door and once again see the shadowy figure. you quickly look up and shout 'who is it?!'. realizing they have been spotted the figure darts out of the door way. you quickly get up and chase after them but they disappear before you make it out of the hallway. walking back to the lab you notice a key card on the ground it reads 'ATI HQ' across the top."
-		"\n*you decide to check it out and while at there you meet Logan from teksyndicate. after talking to some people you discover that ballmer has turned to proprietary software. after more research you find that he has bought out ATI.";
+		"\n*Falling over from exhaustion, drenched in sweat, you see a figure in the door way but, you cannot see who it is. your vision is blurry and you begin to black out."
+		"\n*There is a laugh coming from some where but you cannot place it. #black out#"
+		"\n*You wake up in a hospital bed with wires and tubes sticking out of you."
+		"\n*A cyborg joke crosses your mind but there are more important things to think about. who was that person you saw? who was laughing? why were there so many errors?"
+		"\n*Knowing what failed (the NVIDIA (what ever we decides that failed)) you decide that you will get to the bottom of it. even if you have to go all the way to the top of NVIDIA."
+		"\n*Several calls and emails later (and talking to people in your lab) you discover that it was not NVIDIA's fault. Maybe its their rivals ATI who are to blame."
+		"\n*While working in the lab again you hear the subtle buzz or a pager by the door and once again see the shadowy figure. you quickly look up and shout 'who is it?!'."
+		"\n*Realizing they have been spotted the figure darts out of the door way."
+		"\n*You quickly get up and chase after them but they disappear before you make it out of the hallway. walking back to the lab you notice a key card on the ground it reads 'ATI HQ' across the top."
+		"\n*You decide to check it out and while at there you meet Logan from teksyndicate."
+		"\n*After talking to some people you discover that ballmer has turned to proprietary software. after more research you find that he has bought out ATI.\n";
 
 	// printf("%s\n\n", intro);
   // sleep(2);
@@ -57,9 +57,10 @@ int main()
 	//
 	// New script
 	//
-	printf("%s\n", intro);
-	sleep(2);
-	printf("Stallman, wake up!");
+	printf("%s", intro);
+	printf("\nPress return to continue.");
+	cin;
+	printf("\nStallman, wake up!");
 	sleep(2);
 	printf("\n>you wakes up");
 	sleep(2);
