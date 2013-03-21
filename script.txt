@@ -29,3 +29,38 @@
 >You open it. It looks okay.
 Who was that? You know him, but from where?
         >fade out on “but from where?”
+
+######start of game#######
+ 
+        >Location: Your apartment
+        >It's dim, there are soda cans and bags from various chips every where
+        >You're passed out in your bed from a night of coding
+        >Your laptop is blinking and beeping
+Slowly, you open your eyes and look over at the screen.
+“What is this about?” you think.
+Sitting down at the desk, you see that its an Email from Eric Raymond
+>contents of Email
+ 
+                Hey RMS,
+                        Hows GNU (GUH-NEW) coming? I've heard some good things about it and can't wait to
+                        see it for my self. Keep me posted and let me know if you need any help.
+ 
+                                                                                        Eric
+That was nice of him but, this is something I need to do my self.
+ 
+>cut scene of RMS coding madly
+>He finishes and gets up.
+>There's a ringing on the phone, it's Richard Greenblatt
+ 
+RMS: “Hello?”
+Richard: “Hey, It's me.”
+RMS: “Oh, how have you been?”
+Richard: “Good, and you? I've heard good stuff about GNU (GUH-NEW).”
+>You remain silent.
+Richard: “Ok, fair enough, you don't have to tell me about it.” he chuckles “Why don't you come down to the lab today. Some of the guys got a hold of one of those “Apple lisa” machines and we’re going to give it a run, see what we can do with it.”
+RMS: “Really? Neat, I’ll be there soon.”
+ 
+*****this is where you start controlling RMS*****
+        >you can access the computer
+        >book shelf with several books
+        >
