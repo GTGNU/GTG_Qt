@@ -1,10 +1,31 @@
 #include <iostream>
+#include <Windows.h>
+
 using std::cout;
+using std::cin;
 using std::endl;
 
-int main() {
-    
-    cout << "Stallman, wake up!" << endl;
-    cout << "You wake up covered in stale cheetoes from the a long night of checking troll emails from /g/." << endl;
-    return 0;
+int main()
+{
+  cout << "Stallman, wake up!" << endl;
+  Sleep(500);
+  cout << "You wake up covered in stale cheetos from the a long night of checking troll emails from /g/." << endl;
+  Sleep(500);
+  cout << "You look at the clock, it's 2 in the afternoon." << endl;
+  Sleep(500);
+  cout << "You blink twice to clear your vision and shota-Linus appears in your field of view." << endl;
+  Sleep(500);
+  cout << "\"What is it now, Linus? This better be fucking important! You know I need my beardy sleep!\"" << endl;
+  Sleep(500);
+  cout << "\"THIS IS IMPORTANT! Ubuntu has gone proprietary!\" shota-Linus' girly voice rang in your ears." << endl;
+  Sleep(500);
+  cout << "\"WHAT!?\" you exclaim, suddenly fully awake, \"THAT\'S AGAINST THE LICENSE!\"" << endl;
+  Sleep(500);
+  cout << "\"I couldn't believe it either,\" shota-Linus squeaked, \"but it's true! They found a loophole! They're distributing proprietary Linux to the masses!\"" << endl;
+  Sleep(500);
+  cout << "\"GNU...plus...Linux. Anyways, what the hell do they think this is? BSD!?\" You said" << endl;
+  Sleep(500);
+
+  
+  return 0;
 }
