@@ -1,8 +1,7 @@
 Programmers:
 Carrot
-xvc_
+xcv_
 mcjew
-PhiLL
 treehow
 axujen
 eurotech
