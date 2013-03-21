@@ -8,11 +8,8 @@ OP IS A FAG
 MUH COLLABORATION
 =================
 
-irc:
-#GTG @ irc.p2p-irc.net
+#irc:
+\#GTG @ irc.p2p-irc.net
 
-website:
+#website:
 http://grandtheftgentoo.host56.com
-
->host56
->lel
