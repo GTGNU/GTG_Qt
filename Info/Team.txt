@@ -1,6 +1,5 @@
 Programmers:
-Carrot
-xcv_
+xcv_ (lead)
 mcjew
 treehow
 axujen
@@ -8,7 +7,7 @@ eletile
 eurotech
 
 Writers:
-bweze
+bweze (lead)
 Carrot
 nathan
 
