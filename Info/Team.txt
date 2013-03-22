@@ -1,19 +1,20 @@
 Programmers:
 xcv_ (lead)
-mcjew
-treehow
-axujen
-eletile
+mcjew *
+treehow *
+axujen 
+eletile *
 eurotech
+Dylan
 
 Writers:
-bweze (lead)
-Carrot
-nathan
+Bweeze086 (lead)
+Carrot *
+nathan *
 
 Artists:
-root
+root*
 faggot
 
 Sound:
-wutweeaboo
+wutweeaboo *
