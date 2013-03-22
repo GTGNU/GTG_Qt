@@ -4,7 +4,7 @@ Image {
 	id: window
 	source: resDir + 'Artwork/Wallpaper.jpg'
 
-	property string resDir: '../../'
+	property string resDir: '../../../Info/'
 
 	width: 1300
 	height: 700
