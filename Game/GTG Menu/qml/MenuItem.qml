@@ -2,46 +2,64 @@ import QtQuick 1.1
 
 Item {
 	id: container
-	signal clicked()
+	signal chosen()
 
 	property alias text: label.text
 
 	width: label.width
 	height: label.height
 
+	property variant gentooPos: label.mapToItem(
+			null,
+			-(gentoo.width + menu.gentooSpacing),
+			(container.height - gentoo.height) / 2)
+
 	Text {
 		id: label
 
-		x: 0
-		y: 0
-
 		font.family: titleScreenFont.name
-		font.pointSize: textTable.fontSize
+		font.pointSize: menu.fontSize
 		color: "white"
+
+		Behavior on color { ColorAnimation  { duration: 100 } }
 
 		states: [
 			State {
 				name: "hovered"
-				when: mouseArea.containsMouse && textTable.focusedItem == null
+				when: mouseArea.containsMouse && menu.focusedItem == null
 
 				PropertyChanges {
 					target: label
-					font.pointSize: textTable.fontSize+10
+					font.pointSize: menu.fontSize+10
 					color: "red"
+				}
+
+				PropertyChanges {
+					target: gentoo
+					state: "fixed"
+					x: gentooPos.x
+					y: gentooPos.y
 				}
 			},
 			State {
 				name: "focused"
+				when: menu.focusedItem == label
 
 				PropertyChanges {
 					target: label
-					font.pointSize: textTable.fontSize+10
+					font.pointSize: menu.fontSize+10
 					color: "blue"
 				}
 
 				PropertyChanges {
-					target: textTable
-					focusedItem: label
+					restoreEntryValues: false
+					target: gentoo
+					x: gentooPos.x
+					y: gentooPos.y
+				}
+
+				StateChangeScript {
+					script: container.chosen()
 				}
 			}
 		]
@@ -52,62 +70,16 @@ Item {
 			hoverEnabled: true
 
 			onClicked: {
-				var prevFocusedItem = textTable.focusedItem
-
-				if (textTable.focusedItem != null) {
-					textTable.focusedItem.state = ""
-					textTable.focusedItem = null
-				}
-
-				positionChanged(mouseX, mouseY)
-
-				if (prevFocusedItem != label) {
-					textTable.focusedItem = label
-					textTable.focusedItem.state = "focused"
-				}
-
-				container.clicked()
-			}
-
-			onEntered: {
-				if (textTable.focusedItem == null) {
-					gentooTimer.running = false
-					gentoo.resetSize()
-				}
-			}
-			onExited: {
-				if (textTable.focusedItem == null) {
-					gentooTimer.running = true
-				}
-			}
-
-			onPositionChanged: {
-				if (textTable.focusedItem == null) {
-					var obj = label.mapToItem(
-							null,
-							-(gentoo.height + 10),
-							(label.height-gentoo.height) / 2)
-
-					gentoo.x = obj.x
-					gentoo.y = obj.y
-				}
-			}
-		}
-
-		transitions: Transition {
-			from: ""
-			to: "hovered"
-
-			ParallelAnimation {
-				NumberAnimation { properties: "font.pointSize"; duration: 100 }
-				ColorAnimation { properties: "color"; duration: 100 }
-
-				SequentialAnimation {
-					PauseAnimation { duration: 800 }
-					PropertyAction { target: gentoo; property: "mirror"; value: false }
+				if (label.state == "focused") {
+					gentoo.state = ""
+					menu.focusedItem = null
+				} else {
+					menu.focusedItem = label
+					gentoo.state = "fixed"
 				}
 			}
 		}
 	}
 }
 
+// vim: ft=javascript :

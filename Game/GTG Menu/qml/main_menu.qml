@@ -10,89 +10,56 @@ Image {
 	height: 700
 
 	FontLoader {
-		id: cutSceneFont
-		source: resDir + 'Fonts/Cutscene Font/PixelCarnageMonoCodeTall.fon'
-	}
-
-	FontLoader {
 		id: titleScreenFont
 		source: resDir + 'Fonts/Title Screen Font/mizufalp.ttf'
 	}
 
-	Image {
+	Gentoo {
 		id: gentoo
-		source: resDir + 'Artwork/gentoo.png'
-
-		width: textTable.minRowHeight
-		height: textTable.minRowHeight
-		mirror: true
-
-		Behavior on x      { SmoothedAnimation { velocity: 500 } }
-		Behavior on y      { SmoothedAnimation { velocity: 500 } }
-		Behavior on width  { SmoothedAnimation { velocity: 500 } }
-		Behavior on height { SmoothedAnimation { velocity: 500 } }
-
-		Timer {
-			id: gentooTimer
-
-			interval: 100
-			running: true
-			repeat: true
-
-			onTriggered: {
-				var nextX = (Math.random() + 1) * (window.width - gentoo.width) / 2
-				var nextY = Math.random() * (window.height - gentoo.height)
-
-				gentoo.mirror = gentoo.x > nextX
-
-				gentoo.x = nextX
-				gentoo.y = nextY
-
-				gentoo.width = Math.random() * 50 + textTable.minRowHeight
-				gentoo.height = Math.random() * 50 + textTable.minRowHeight
-			}
-		}
-
-		function resetSize() {
-			width = textTable.minRowHeight
-			height = textTable.minRowHeight
-		}
+		small: menu.minRowHeight
 	}
 
 	Grid {
-		id: textTable
+		id: menu
 		columns: 1
+
+		property variant focusedItem: null
 
 		property int fontSize: 20
 
-		property int minRowHeight: Math.min(itemPlay.height, itemLoad.height)
-		property variant focusedItem: null
+		property variant gentooSpacing: gentoo.small / 2
 
-		x: window.width / 20 + 2*minRowHeight
+		property int minRowHeight: Math.min(
+				itemPlay.height,
+				itemLoad.height,
+				itemSettings.height,
+				itemQuit.height)
+
+		x: window.width / 20 + gentoo.small + gentooSpacing
 		y: window.height / 2
 
 		MenuItem {
 			id: itemPlay
 			text: "PLAY"
-			onClicked: window.state = window.state == "play"? "" : "play"
+			onChosen: console.log(text) // placeholder
 		}
 
 		MenuItem {
 			id: itemLoad
 			text: "LOAD"
-			onClicked: window.state = window.state == "load"? "" : "load"
+			onChosen: console.log(text) // placeholder
 		}
 
 		MenuItem {
 			id: itemSettings
 			text: "SETTINGS"
-			onClicked: window.state = window.state == ""? "settings" : "play"
+			onChosen: console.log(text) // placeholder
 		}
 
 		MenuItem {
 			id: itemQuit
 			text: "QUIT"
-			onClicked: Qt.quit()
+			onChosen: Qt.quit()
 		}
 	}
 
@@ -104,9 +71,11 @@ Image {
 		anchors.right: window.right
 		anchors.rightMargin: 10
 
-		text: "v 0.1 pre-alpha"
+		text: "v 0.1.2 pre-alpha"
 		font.family: titleScreenFont.name
 		font.pointSize: 15
 		color: "white"
 	}
 }
+
+// vim: ft=javascript :
