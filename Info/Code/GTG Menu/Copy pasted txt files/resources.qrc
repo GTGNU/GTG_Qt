@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/new/prefix1">
-        <file>mizufalp.ttf</file>
-        <file>Grand-Theft-Gentoo-master/Info/Artwork/new menu.jpg</file>
-        <file>Grand-Theft-Gentoo-master/Info/Artwork/Wallpaper2.jpg</file>
-        <file>Grand-Theft-Gentoo-master/Info/Artwork/1363806067285.jpg</file>
-        <file>Grand-Theft-Gentoo-master/Info/Artwork/Wallpaper.jpg</file>
-    </qresource>
-</RCC>
