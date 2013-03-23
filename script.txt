@@ -1,27 +1,29 @@
 ######background######
 
- RMS is a programmer and hobbyist hacker whose only love in life is freedom. He dreams of a world in witch the user has control and is able to change software to fit his needs. What stands in his way is the large and evil Corps such as Microshaft and, Crapple. People such as Billy Fence (the owner of Microshaft), Stephen Works (of Crapple), Mark Rocketvalue (of ubongo) and, Steven Sphearmor (also from Microshaft) are out to stop our hero RMS. In this game the goal is to free the world and take down the large corps. You team up with people such as Richard Greenblatt, Tom Knight, Bill Gosper, Eric S. Raymond and, Linus Torvalds just to name a few.
+Richard Stallman (RMS) is a programmer and hobbyist hacker whose only love in life is freedom. He dreams of a world in which the user has control and is able to change software to fit his needs. What stands in his way is the large and evil Corps such as Microshaft and, Crapple. People such as Billy Fence (the owner of Microshaft), Stephen Works (of Crapple), Mark Rocketvalue (of Ubongo) and, Steven Sphearmor (also from Microshaft) are out to stop our hero RMS. In this game the goal is to free the world and take down the large corps. You team up with people such as Richard Greenblatt, Tom Knight, Bill Gosper, Eric S. Raymond and, Linus Torvalds just to name a few.
 
-	In this top view action packed you will fight off waves of code monkies, fight bosses and, hack into systems all while defending the rights of the user and hackers every where. YOU’LL BE FREE HACKERS! YOU’LL BE FREE!
+In this frantic top view action game, you will be fighting off waves of code monkeys, proprietary bosses and hack into systems all while defending the rights of the user and hackers everywhere. YOU’LL BE FREE HACKERS! YOU’LL BE FREE!
 
 ######opening######
  
         >Location: Behind Intell HQ
         >Piles of old towers stacked up against the back of the building
-        >A car pulls up, you cant see who steps out because of the head lights
+        >An old Mercedes pulls up...
+	>A Mysterious figure emerges from in front of its glaring headlights 
 >RMS: “Are you who I’m meeting?”
 >man: “I’m the only one here, am I not?”
 >RMS: “Where is it?”
 >man: “It's right here”
->You can see the out line of a case. A thought occurs to you, this man sounds familiar.
->man: “where is the code that we talked about?”
+>You can see the outline of a case...(dramatic pause)
+>this man sounds familiar.
+>man: “The code we talked about, where is it?”
 >You hold up the flash drive.
 >RMS: “It's right here. How do you suppose we do this?”
->man: “I'll set the case down over here and then you toss me the drive”
+>man: “I'll set the case down over here and you can toss me the drive”
 >WHERE THE HELL DO I KNOW HIM FROM?!?!
 >RMS: “Sounds good to me.”
 >The man walks a few feet away from the car and sets the case down, he walks back and motions for you to throw the drive. You toss it to him.
->RMS: “that better be all there”
+>RMS: “You better hold up your part of the deal!”
 >man: “Don' worry, Mr. Stallman. You have more reason to trust us then we do you.”
 >He gets back in the car and drives off.
 >You wait until he's out of the lot to retrieve the case.
@@ -32,16 +34,16 @@ Who was that? You know him, but from where?
 ######start of game#######
  
         >Location: Your apartment
-        >It's dim, there are soda cans and bags from various chips everywhere
+        >It's dim, soda cans and potato chips litter the dark room
         >You're passed out in your bed from a night of coding
-        >Your laptop is blinking and beeping
+        >A laptop is blinking and beeping
 Slowly, you open your eyes and look over at the screen.
 “What is this about?” you think.
 Sitting down at the desk, you see that its an Email from Eric Raymond
 >contents of Email
  
                 Hey RMS,
-                        Hows GNU (GUH-NEW) coming? I've heard some good things about it and can't wait to
+                        Hows GNU (GUH-NEW) coming? I've heard some great things about it and can't wait to
                         see it for my self. Keep me posted and let me know if you need any help.
  
                                                                                         Eric
@@ -56,7 +58,7 @@ Richard: “Hey, It's me.”
 RMS: “Oh, how have you been?”
 Richard: “Good, and you? I've heard good stuff about GNU (GUH-NEW).”
 >You remain silent.
-Richard: “Ok, fair enough, you don't have to tell me about it.” he chuckles “Why don't you come down to the lab today. Some of the guys got a hold of one of those “Apple lisa” machines and we’re going to give it a run, see what we can do with it.”
+Richard: “Ok, fair enough, you don't have to tell me about it.” he chuckles “Why don't you come down to the lab today. Some of the guys got a hold of one of those “Apple Lisa” machines and we’re going to give it a run, see what we can do with it.”
 RMS: “Really? Neat, I’ll be there soon.”
  
 *****this is where you start controlling RMS*****
