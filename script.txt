@@ -10,16 +10,15 @@
         >Piles of old towers stacked up against the back of the building
         >A car pulls up, you cant see who steps out because of the head lights
 >RMS: “Are you who I’m meeting?”
->man: “I’m the only one here aren’t I?”
+>man: “I’m the only one here, am I not?”
 >RMS: “Where is it?”
 >man: “It's right here”
 >You can see the out line of a case. A thought occurs to you, this man sounds familiar.
 >man: “where is the code that we talked about?”
->"Where do I know this voice from?" You think.
 >You hold up the flash drive.
 >RMS: “It's right here. How do you suppose we do this?”
 >man: “I'll set the case down over here and then you toss me the drive”
->WHERETHE HELL DO I KNOW HIM FROM?!?!
+>WHERE THE HELL DO I KNOW HIM FROM?!?!
 >RMS: “Sounds good to me.”
 >The man walks a few feet away from the car and sets the case down, he walks back and motions for you to throw the drive. You toss it to him.
 >RMS: “that better be all there”
@@ -33,7 +32,7 @@ Who was that? You know him, but from where?
 ######start of game#######
  
         >Location: Your apartment
-        >It's dim, there are soda cans and bags from various chips every where
+        >It's dim, there are soda cans and bags from various chips everywhere
         >You're passed out in your bed from a night of coding
         >Your laptop is blinking and beeping
 Slowly, you open your eyes and look over at the screen.
@@ -88,5 +87,5 @@ correctly if you cancel the operation. We’ll see what they do about it.”
 >>Tom Knight speaks up<<
 >Tom: “Over all its nice. I could use something like this in my lab.”
 >Richard: “Too bad it costs 10k.”
->RMS: “I wouldnt but one of these if I was the richest man in the world. What is the point of all      of that “innovation” if the source is locked up in a vault some where. We might be able to fix the bugs if we could see how it ran.”
+>RMS: “I wouldnt but one of these if I was the richest man in the world. What is the point of all that “innovation” if the source is locked up in a vault some where. We might be able to fix the bugs if we could see how it ran.”
 >>everyone looks at RMS<<
