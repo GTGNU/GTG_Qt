@@ -95,4 +95,18 @@ Image {
 			onClicked: Qt.quit()
 		}
 	}
+
+	Text {
+		id: versionNumber
+
+		anchors.bottom: window.bottom
+		anchors.bottomMargin: 10
+		anchors.right: window.right
+		anchors.rightMargin: 10
+
+		text: "v 0.1 pre-alpha"
+		font.family: titleScreenFont.name
+		font.pointSize: 15
+		color: "white"
+	}
 }
