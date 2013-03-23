@@ -20,5 +20,4 @@ RESOURCES
 #c++:
 * [C++ crash course](http://www.stanford.edu/class/cs193d/handouts/04-A-Crash-Course.pdf)
 * [C++ reference](http://www.cplusplus.com/)
-* [C++ reference](http://www.cppreference.com/)
-* [The botnet](http://www.google.com)
+* [Another C++ reference](http://www.cppreference.com/)
