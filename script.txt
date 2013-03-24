@@ -78,16 +78,97 @@ RMS: “Really? Neat, I’ll be there soon.”
 ####### Lab #######
  
 >>starts auto pilot<<
-theres a group of people huddled around a computer, you walk over to take a look
+Theres a group of people huddled around a computer, you walk over to take a look
 you see Tom Knight, Eric Raymond, Bil Gosper and Richard.
  
->Richard: “Oh good you’re here Stallman. Take a look at this! Protected memory, cooperative multitasking, more sophisticated hard disk, a built-in screensaver, an advanced calculator with a paper tape and RPN, support for up to 2 megabytes of RAM, expansion slots, a numeric keypad, data corruption protection, non-physical file names, high res display. It’s not bad.But, we’re better.”
+>Richard: “Oh, good. You’re here, Stallman. Take a look at this! Protected memory, cooperative multitasking, more sophisticated hard disk, a built-in screen saver, an advanced calculator with a paper tape and RPN, support for up to 2 megabytes of RAM, expansion slots, a numeric keypad, data corruption protection, non-physical file names, high-res display. It’s not bad, but we're better.”
 >>everyone chuckels<<
->RMS: “what have you done to it so far?”
+>RMS: “What have you done with it so far?”
 >Richard: “Nothing yet but, we’ve found some bugs. The LisaClac doesn’t restore the the cell
 correctly if you cancel the operation. We’ll see what they do about it.”
 >>Tom Knight speaks up<<
->Tom: “Over all its nice. I could use something like this in my lab.”
->Richard: “Too bad it costs 10k.”
->RMS: “I wouldnt but one of these if I was the richest man in the world. What is the point of all that “innovation” if the source is locked up in a vault some where. We might be able to fix the bugs if we could see how it ran.”
->>everyone looks at RMS<<
+>Tom: “Over all, it's nice. I could use something like this in my lab.”
+>Richard: “Too bad it costs ten grand.”
+>RMS: “I wouldn’t buy one of these if I were the richest man in the world. What is the point of all of that 
+“innovation” if the source is locked up in a vault some where. We might be able to fix the bugs if we could see how it ran.”
+>>everyone nods in agreement<<
+
+
+####cut scene####
+ 
+        >Dark room, large desk at one end.
+        >There is a large chair with its back turned, we can see        
+        hands of the man in the chair.
+        >An intern comes into the room with a file in his hands.
+>Intern: “S-sir?”
+>>the man presses a button on the intercom<<
+>CEO: “Sarah.”
+>>secretary answers<<
+>Sarah: “Yes, sir?”
+>CEO: “I do believe that I told you I did not wish to be disturbed.”
+>Sarah: “Yes sir, but...”
+>>she is cut off by the man<<
+>CEO: “Sarah...”
+>Sarah: “Yes sir.”
+>CEO: “Don’t ever let it happen again.”
+>Sarah: “Yes sir.”
+>>the man motions for the intern to come closer<<
+>CEO: “What is it?”
+>Intern: “I- uh, I thought...”
+>CEO: “What did you think? I hope you didn't think too hard. You could hurt your self. 
+Tell me what you want and get out.”
+>Intern: “I- I have the information that you requested, sir.”
+>CEO: “And? What does it say?”
+>Intern: “Here's the file sir.”
+>CEO: “Is that what I asked? Did I say “Give me the file"? I told you to tell me what it says.”
+>Intern: “I- it... Well...”
+>>the man slams his fist on the desk<<
+>CEO: “DO NOT WASTE MY TIME!! WHAT DOES IT SAY?!?”
+>Intern: “There's been rumors that there is a man working on a “free” software. We don’t have all the data-”
+>>the man spins around in the chair, his face obscured by shadow<<
+>CEO: “GET OUT OF MY OFFICE! IF YOU ARE NOT ABLE TO TELL ME WHAT IS HAPPENING WITH IT THEN LEAVE NOW! FOREVER! 
+GET A BOX AND LEAVE! YOU DO NOT WASTE MY TIME! YOU DO NOT WASTE YOUR TIME COMING UP HERE TO TELL ME THAT YOU HEARD 
+“RUMORS” AND DON'T KNOW ANYTHING ELSE! GET OUT NOW”
+>>he picks up the lamp on the desk and throws it at the intern missing him slightly. It smashes on the wall. The intern 
+flees the room.<<
+>CEO: “Sarah, Get me Will Fence.”
+
+
+####MIT####
+ 
+        >You're back at the computer lab.
+        >RMS is sitting in front of the Apple, staring, deep in
+        thought
+        >a CLI is working away at some commands in front of him
+>>A person walks in to the lab and up to RMS<<
+>Eric Raymond: “Still playing with that slave machine?”
+>RMS: “It's like being told what you can and can't do. It’s just wrong. I feel like I’m in a jail cell just looking at this code.”
+>Eric: “Well, forget about that. There's something you need to see.”
+>RMS: “What is it?”
+>Eric: “Meet me in the library. You’ll see.”
+ 
+#######Free play again######
+        >You're at MIT.
+        >Go into the library to advance the story.
+
+
+######library######
+   ###auto pilot###    
+        >Eric is sitting at a desk with his laptop working on
+        some code.
+        >You walk up to Eric.
+>RMS: “So what is it that you wanted to-”
+>>you look down at the screen and see what he is doing<<
+>RMS: “What do you have there?”
+>Eric: “Just a little WAR dial script. I wanted you to look over it for me. Just to see if there is anything wrong with it.”
+>>short pause<<
+>RMS: “It looks okay to me.”
+>Eric: “Feel free to use it if you want. Also, there are a lot of books here in the Library. You should take a look at them some time.”
+ 
+>>Free roam<<
+        >readable programming books (maybe. I think that it would
+        be cool)
+        >other books (small and short)
+        >hidden objects like weapons and power-ups
+ 
+>>going home advances the game<< (make something obvious like an announcement that you have to leave the school or w/e)
