@@ -4,7 +4,7 @@ Grand-Theft-Gentoo
 COLLABORATION
 =================
 #irc:
-[#GTG @ irc.p2p-irc.net](http:///mibbit.com/$GTG@irc.p2p-irc.net)
+[#GTG @ irc.p2p-irc.net](http:///mibbit.com/#GTG@irc.p2p-irc.net)
 
 #Website:
 ~~http://grandtheftgentoo.host56.com~~ CPU limit reached, someone can design  a new website? I think firecheese can host it on his server.
