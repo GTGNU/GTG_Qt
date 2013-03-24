@@ -93,9 +93,8 @@ int GTGTileSet::Load(const char *root){
       pos++;
     }
     line[pos] = 0;
-    lineCount++;
-    if(pos == 0)continue;
-    if(lineCount == 1){
+    if(pos==0)continue;
+    if(lineCount == 0){
       int num = 0;
       if((sscanf(line,"%d",&num) != 1)||(num <= 0)){
         sprintf(error,"First line in tiles.txt to be a positive number");
@@ -104,8 +103,9 @@ int GTGTileSet::Load(const char *root){
       }
       tiles.resize(num);
       for(size_t n = 0; n<tiles.size(); n++)tiles.at(n).Construct();
+      lineCount++;
     }else{
-      if(lineCount - 2 >= tiles.size()){
+      if(lineCount - 1 >= tiles.size()){
         Free();
         sprintf(error,"Too much tiles in tiles.txt. Edit the first line.");
         fclose(file);
@@ -124,7 +124,7 @@ int GTGTileSet::Load(const char *root){
             fclose(file);
             return -1;
           }
-          tiles.at(lineCount - 2).AddFrame(surf,num);
+          tiles.at(lineCount - 1).AddFrame(surf,num);
           surf = NULL;
         }else{
           sprintf(path,"%s/%s",root,line + last);
@@ -141,7 +141,8 @@ int GTGTileSet::Load(const char *root){
         if(pos >= size)break;
         last = pos;
       }
-      if(surf != NULL)tiles.at(lineCount - 2).AddFrame(surf,0);
+      if(surf != NULL)tiles.at(lineCount - 1).AddFrame(surf,0);
+      lineCount++;
     }
   }
   fclose(file);
