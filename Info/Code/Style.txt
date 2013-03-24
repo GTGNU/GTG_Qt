@@ -16,6 +16,10 @@ GENERAL:
 	really need to write some coordinate, give it a proper name and declare it
 	as a constant in some file such as constants.h
 
+- Platform-dependent code an libraries are not allowed
+
+- Unix EOL for consistency.
+
 
 C++ STYLE:
 
