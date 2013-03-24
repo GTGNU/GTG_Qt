@@ -7,7 +7,7 @@ COLLABORATION
 [#GTG @ irc.p2p-irc.net](http://grandtheftgentoo.host56.com/irc.html)
 
 #Website:
-http://grandtheftgentoo.host56.com
+~~http://grandtheftgentoo.host56.com~~ CPU limit reached, someone can design  a new website? I think firecheese can host it on his server.
 
 RESOURCES
 =========
