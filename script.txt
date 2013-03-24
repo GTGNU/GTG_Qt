@@ -170,5 +170,6 @@ flees the room.<<
         be cool)
         >other books (small and short)
         >hidden objects like weapons and power-ups
+        >killable kids
  
 >>going home advances the game<< (make something obvious like an announcement that you have to leave the school or w/e)
