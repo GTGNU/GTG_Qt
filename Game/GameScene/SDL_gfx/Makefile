@@ -3,7 +3,7 @@ CSRC = *.c
 CC = gcc
 
 build:
-	$(CC) $(CSRC) -lSDL -shared -o $(OFILE)
+	$(CC) $(CSRC) -fPIC -shared -o $(OFILE)
 
 clean:
 	rm $(OFILE)
