@@ -184,4 +184,17 @@ flees the room.<<
 >(300 unread emails in corner) 
 >the first email comes up with a message from eric s. raymond
 >"richard, I hope you get this in time, I have bad news.
->
+>meet me in the park this afternoon, this email is bugged"
+>rms: fucking gmail
+
+(player must then go to park, and meet eric)
+
+####in park####
+>eric: did you see anyone follow you?
+>rms: I don't think so
+>eric: good.
+>rms: what'd you want to tell me?
+>eric: drive to my apartment, and i'll explain
+
+>driving level
+####at apartment####
