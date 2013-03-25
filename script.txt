@@ -173,3 +173,13 @@ flees the room.<<
         >killable kids
  
 >>going home advances the game<< (make something obvious like an announcement that you have to leave the school or w/e)
+
+#####next day#####
+(player has control)
+>rms wakes up
+>clock shows 5:00pm
+
+>some form of action icon above the yeelong
+>on interaction, an email alert pops up
+>(300 unread emails in corner) 
+>the first email comes up with a message from ers
