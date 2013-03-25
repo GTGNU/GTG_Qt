@@ -182,4 +182,6 @@ flees the room.<<
 >some form of action icon above the yeelong
 >on interaction, an email alert pops up
 >(300 unread emails in corner) 
->the first email comes up with a message from ers
+>the first email comes up with a message from eric s. raymond
+>"richard, I hope you get this in time, I have bad news.
+>
