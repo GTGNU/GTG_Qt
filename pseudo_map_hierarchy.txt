@@ -1,0 +1,32 @@
+MapHandler
+{
+    Area areas[];
+    MapResources mr;
+}
+MapResources
+{
+    Tile tiles[];
+    ?Image tileGraphics[];
+    ?Audio environmentAudio[];
+}
+Area
+{
+    int tiles[][];          //index to MapResources.tiles
+    EnvSound envSounds[];   //index to MapResources.environmentAudio
+    
+    Tile getTile(int x, int y);//Return individual tile
+    Tile[][] getTiles(int x1, int y1);
+}
+EnvSound //Could do something alternativley linking sound to tiles, or have a bunch of extensions of the EnvSound interf which provide different shapes
+{
+    int centerX, centerY;
+    double radius;  //Rad audio affects around centre
+    int sound;      //index to MapResources.environmentAudio
+    
+    boolean inArea(int x, int y);
+}
+Tile
+{
+    int graphics;    //index to MapResources.tileGraphics
+    //More features e.g. portals, powerups etc
+}
