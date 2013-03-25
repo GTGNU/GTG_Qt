@@ -230,10 +230,33 @@ glorious DAWS open operating system
 >dennis: i have amassed an elite team of hackers, and tonight we will strike a blow.
 >rms: what'll we be doing?
 >dennis: we're going to destroy their major factory, right here in rice city.
->dennis: meet us at the back of the facility tonight, at 12:00 sharp
+>dennis: meet us at the back of the lintell facility tonight, at 12:00 sharp, bring me a program to take down the server
 >rms: ok, why--
 (phone call ends)
 
 
+####behind microshaft warehouse#####
 
->
+ >An old Mercedes pulls up...
+	>A Mysterious figure emerges from in front of its glaring headlights 
+>RMS: “Are you who I’m meeting?”
+>man: “I’m the only one here, am I not?”
+>RMS: “Where is it?”
+>man: “It's right here”
+>You can see the outline of a case...(dramatic pause)
+>this man sounds familiar.
+>man: “The code we talked about, where is it?”
+>You hold up the flash drive.
+>RMS: “It's right here. How do you suppose we do this?”
+>man: “I'll set the case down over here and you can toss me the drive”
+>WHERE THE HELL DO I KNOW HIM FROM?!?!
+>RMS: “Sounds good to me.”
+>The man walks a few feet away from the car and sets the case down, he walks back and motions for you to throw the drive. You toss it to him.
+>RMS: “You better hold up your part of the deal!”
+>man: “Don' worry, Mr. Stallman. You have more reason to trust us then we do you.”
+>He gets back in the car and drives off.
+>You wait until he's out of the lot to retrieve the case.
+>You open it. It looks okay.
+
+
+
