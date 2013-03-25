@@ -1,3 +1,5 @@
+// ROBADOB
+
 MapHandler
 {
     Area areas[];
@@ -13,7 +15,7 @@ Area
 {
     int tiles[][];          //index to MapResources.tiles
     EnvSound envSounds[];   //index to MapResources.environmentAudio
-    
+
     Tile getTile(int x, int y);//Return individual tile
     Tile[][] getTiles(int x1, int y1);
 }
@@ -22,7 +24,7 @@ EnvSound //Could do something alternativley linking sound to tiles, or have a bu
     int centerX, centerY;
     double radius;  //Rad audio affects around centre
     int sound;      //index to MapResources.environmentAudio
-    
+
     boolean inArea(int x, int y);
 }
 Tile
@@ -30,3 +32,32 @@ Tile
     int graphics;    //index to MapResources.tileGraphics
     //More features e.g. portals, powerups etc
 }
+
+
+
+
+
+// XCV_
+
+- EnvLoader
+	- Loads tiles somehow specified in QML
+		- Default sound specified in each tile
+		- C++ doesn't care about animations
+		- Event handling through signal/slot system
+
+	- Loads the map into a matrix of tile keys
+
+- GameController
+	- Handles screen switching (menu / conversation / game / loading...)
+		- GameScene (QGraphicsView)
+			- Builds the map into an actual visual representation on screen
+			  using QGraphicsScene and instantiating the map as specified
+
+			- Players' and bots' actions. Where do they belong, C++ or JavaScript?
+
+		- Menu (QQtQuickView or similar)
+			- Choice sent through a signal
+
+		- Conversation (QQtQuickView or similar)
+			- Fully in QML and JavaScript to allow for easy animations
+			  and eye candy
