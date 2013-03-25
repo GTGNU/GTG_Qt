@@ -197,4 +197,15 @@ flees the room.<<
 >eric: drive to my apartment, and i'll explain
 
 >driving level
+
 ####at apartment####
+
+>eric: I have some very bad news
+>eric: those bastard at microshaft have come up with another way to spread their proprietary filth
+>eric:they're planning on releasing this new program called "(insert funny name)", to compete with our
+glorious DAWS open operating system
+>rms: they must be stopped!
+>eric: they must. and I know someone who can. 
+(hands rms a business card)
+>eric just call that number, and ----
+>eric shot by an unknown source, dies
