@@ -1,16 +1,13 @@
 Programmers:
 xcv_ (lead)
-mcjew *
-treehow *
 axujen 
-eletile *
-eurotech
-Dylan
+firecheese
+Robadob
 
 Writers:
 Bweeze086 (lead)
-Carrot *
-nathan *
+reindeernix
+root
 
 Artists:
 root*
@@ -18,3 +15,8 @@ faggot
 
 Sound:
 wutweeaboo *
+
+Management/Organization:
+tophalf01 (lead)
+xcv_
+Bweeze086
