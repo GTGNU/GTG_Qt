@@ -300,11 +300,57 @@ glorious DAWS open operating system
 >Bill: “I wouldn’t expect any thing else,”
 >>he leaves<<
 
+####Lab####
+ 
+>>cut scene<<
+        -talking to some people in the lab
+        -one of the machines starts bugging out
+        -errors every where
+        -you are coding like mad
+        -you start to get woozy, drenched in sweat
+        -you see a figure in the door way
+>>GET HIM!<<
+        -player must chase the mysterious figure
+        -you loose him in a crowd at the propiastore
+>RMS: “DAMN! I lost him... wait, whats this?”
+        -you notice a flash drive that he dropped
+>RMS: “I should go back to the lab to analyze this...”
+ 
+***return to MIT lab to analyze USB***
+ 
+####LAB####
+        -go to a computer and decode the USB
+>>you find building plans for even more Propaisoft stores and a new HQ<<
+>RMS: “This needs looking into. I’ll check out the sites some time”
+        -locations are shown on a map in the usb
+        -when you leave there are sites that are under construction
+ 
+***Go check out the new developments and check them out***
+ 
+###construction office###
+        -night time
+        -there are 2 guards that you have to avoid
+        -2 file cabinets, there are files in one of them
+                -files contain information about who is behind it all
+        -on interaction with files
+        >rms: I'll take these home
+     
+     -loud siren
+     -guards rush in
+     -have to run and gun way out
+
+ (mission ends when you get back to house)
+
+//possible car chase level? 
+    
+
 ####HOME####
 
->on entrance there's a small peice of paper on the ground
->note from the agents
->on interaction shows
+looking at the files
+
+boring stuff, numbers, sales ETC
+
+note in one~~
 
  we will begin operation "RM -RF ./FREEDOM" tonight
 take out the leaders of gahnoo start with richard.
