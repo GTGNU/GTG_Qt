@@ -22,3 +22,4 @@ Random Stranger: >"Wow thanks mister"
 Random Dialogue at MIT:
 >"C is a pretty nice language, I wrote my own editor with it!"
 >"IUNIKS will always be the most used OS"
+>"who would use QML? it's such an ugly language"
