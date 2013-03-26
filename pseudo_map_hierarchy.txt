@@ -1,38 +1,94 @@
 // ROBADOB
-
-MapHandler
+//This is a hypothetical psuedo-c class hierarchy to use for storing and accessing the environment/map
+EnvLoader
 {
     Area areas[];
-    MapResources mr;
+    MapResources mr; 
+    bool serialise();   //Protocol buffer, serialise method
+    bool deserialise(); //Protocol buffer, deserialise method
+    bool toXML();       //xcv_'s xml/js interface
+    bool fromXML();     //xcv_'s xml/js interface
 }
-MapResources
-{
-    Tile tiles[];
-    ?Image tileGraphics[];
-    ?Audio environmentAudio[];
+EnvResources
+{//This static class acts as a loader and manager of resources to prevent wasting memory by double loading the same resource
+//Undecided on whether to use the resources path as its key to the hashmap, or to store loaded resource paths in a seperate map and return an integer key on load (this would further reduce multiple objects holding possible long paths)
+//A further possiblity would be the use of smart pointers managed by this class
+    public:
+        static bool loadAudio(QString path);//Checks the audio isn't already loaded and adds to propertyAudio
+        static bool loadGraphic(QString path);//Checks the graphic isn't already loaded and adds to tileGraphics
+        static ?Audio getAudio(QString path);//Getter for loaded resources
+        static ?Image getGraphic(QString path);//Getter for loaded resources
+    private:
+        static  QVarLengthArray<Tile>  tiles;
+        static  QHash<QString, ?Image> tileGraphics;
+        static  QHash<QString, ?Audio> propertyAudio;
 }
 Area
-{
-    int tiles[][];          //index to MapResources.tiles
-    EnvSound envSounds[];   //index to MapResources.environmentAudio
+{//Need to decide the preferred method for accessing tiles for render etc.
+    int tiles[][];          //index to MapResources.tiles, allows us to repeat usage of tiles
 
     Tile getTile(int x, int y);//Return individual tile
     Tile[][] getTiles(int x1, int y1);
 }
-EnvSound //Could do something alternativley linking sound to tiles, or have a bunch of extensions of the EnvSound interf which provide different shapes
-{
-    int centerX, centerY;
-    double radius;  //Rad audio affects around centre
-    int sound;      //index to MapResources.environmentAudio
-
-    boolean inArea(int x, int y);
-}
 Tile
 {
-    int graphics;    //index to MapResources.tileGraphics
-    //More features e.g. portals, powerups etc
+    QString graphics;             //index to MapResources.tileGraphics
+    QVarLengthArray<TileProperty> properties;//Holds all tile properties, instanced, properties executed in order they are added to the array, use a 'delay' property if you want multiple things with delays
+    
+}
+TileProperty//Features e.g. portals, powerups, environment sounds etc
+{//In theory this should be a fairly complete abstract for tile properties, although its clearly missing the serial methods and would need to be split into .h and .cpp
+    private :
+        const int DEFAULT_HEAP_SIZE = 0;
+	public :
+        TileProperty()
+        {
+            QVarLengthArray<PropertyFilter> filters(DEFAULT_HEAP_SIZE);
+        }
+        bool pass()
+        {//Checks whether all filters can be passed
+            for (int i = 0; i < filters.size(); ++i)
+                if(!filters[i].pass())
+                    return false;
+            return true;
+        }
+        bool execute()
+        {//If pass succeeds, calls runEffect
+            if(pass())
+                return runEffect();
+            return false;
+        }
+    protected :
+        void addFilter(PropertyFilter pf)
+        {//This should be called by the subclasses constructor to add filters
+            filters.append(pf);
+        }
+        virtual boolean runEffect() = 0;//This should be called by the subclass to execute the properties effect
+        QVarLengthArray<PropertyFilter> filters;//Holds all filters, instanced
+}
+PropertyFilter
+{
+    virtual boolean pass() = 0;//Returns true if the filter passes (true cont, false exit)
 }
 
+//this enables us to create properties such as
+EnvSoundProperty : public TileProperty
+{
+    private :
+        QString envSound;
+	public :
+        EnvSoundProperty(QString path)
+        {//Preloads the audio and sets the filters
+            envSound=path;
+            MapResources.loadAudio(path);
+            addFilter(AudioNotAlreadyPlayingFilter());
+            addFilter(StallmanStandingOnTileFilter());
+        }
+        void runEffect()
+        {//Plays the audio, it might be better for MapResources to play the audio so that it can be used as a global tracker for whether audio is playing or not for the above 'AudioNotAlreadyPlayingFilter'
+            ?QPlayer.play(MapResources.getAudio(envSound));
+        }
+}
 
 
 
