@@ -1,5 +1,8 @@
 Grand-Theft-Gentoo
 ==================
+Richard Stallman (RMS) is a programmer and hobbyist hacker whose only love in life is freedom. He dreams of a world in which the user has control and is able to change software to fit his needs. What stands in his way is the large and evil Corps such as Microshaft and, Crapple. People such as Billy Fence (the owner of Microshaft), Stephen Works (of Crapple), Mark Rocketvalue (of Ubongo) and, Steven Sphearmor (also from Microshaft) are out to stop our hero RMS. In this game the goal is to free the world and take down the large corps. You team up with people such as Richard Greenblatt, Tom Knight, Bill Gosper, Eric S. Raymond and, Linus Torvalds just to name a few.
+
+In this frantic top view action game, you will be fighting off waves of code monkeys, proprietary bosses and hack into systems all while defending the rights of the user and hackers everywhere. YOU’LL BE FREE HACKERS! YOU’LL BE FREE!
 
 Communications
 ==============
