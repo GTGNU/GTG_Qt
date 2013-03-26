@@ -78,7 +78,7 @@ typedef struct {
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param color The color value of the pixel to draw. 
+\param color The color value of the pixel to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -88,12 +88,12 @@ int fastPixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	Uint8 *p;
 
 	/*
-	* Honor clipping setup at pixel level 
+	* Honor clipping setup at pixel level
 	*/
 	if ((x >= clip_xmin(dst)) && (x <= clip_xmax(dst)) && (y >= clip_ymin(dst)) && (y <= clip_ymax(dst))) {
 
 		/*
-		* Get destination format 
+		* Get destination format
 		*/
 		bpp = dst->format->BytesPerPixel;
 		p = (Uint8 *) dst->pixels + y * dst->pitch + x * bpp;
@@ -135,7 +135,7 @@ Code needs to make sure we stay in surface bounds before calling.
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param color The color value of the pixel to draw. 
+\param color The color value of the pixel to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -145,7 +145,7 @@ int fastPixelColorNolockNoclip(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 col
 	Uint8 *p;
 
 	/*
-	* Get destination format 
+	* Get destination format
 	*/
 	bpp = dst->format->BytesPerPixel;
 	p = (Uint8 *) dst->pixels + y * dst->pitch + x * bpp;
@@ -181,7 +181,7 @@ int fastPixelColorNolockNoclip(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 col
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param color The color value of the pixel to draw. 
+\param color The color value of the pixel to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -190,7 +190,7 @@ int fastPixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	int result;
 
 	/*
-	* Lock the surface 
+	* Lock the surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		if (SDL_LockSurface(dst) < 0) {
@@ -201,7 +201,7 @@ int fastPixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	result = fastPixelColorNolock(dst, x, y, color);
 
 	/*
-	* Unlock surface 
+	* Unlock surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		SDL_UnlockSurface(dst);
@@ -216,10 +216,10 @@ int fastPixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param r The red value of the pixel to draw. 
-\param g The green value of the pixel to draw. 
-\param b The blue value of the pixel to draw. 
-\param a The alpha value of the pixel to draw. 
+\param r The red value of the pixel to draw.
+\param g The green value of the pixel to draw.
+\param b The blue value of the pixel to draw.
+\param a The alpha value of the pixel to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -228,12 +228,12 @@ int fastPixelRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8
 	Uint32 color;
 
 	/*
-	* Setup color 
+	* Setup color
 	*/
 	color = SDL_MapRGBA(dst->format, r, g, b, a);
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (fastPixelColor(dst, x, y, color));
 }
@@ -244,10 +244,10 @@ int fastPixelRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param r The red value of the pixel to draw. 
-\param g The green value of the pixel to draw. 
-\param b The blue value of the pixel to draw. 
-\param a The alpha value of the pixel to draw. 
+\param r The red value of the pixel to draw.
+\param g The green value of the pixel to draw.
+\param b The blue value of the pixel to draw.
+\param a The alpha value of the pixel to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -256,12 +256,12 @@ int fastPixelRGBANolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint8 r, Uint8 g,
 	Uint32 color;
 
 	/*
-	* Setup color 
+	* Setup color
 	*/
 	color = SDL_MapRGBA(dst->format, r, g, b, a);
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (fastPixelColorNolock(dst, x, y, color));
 }
@@ -276,7 +276,7 @@ Only the bits up to the surface depth are significant in the color value.
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param color The color value of the pixel to draw. 
+\param color The color value of the pixel to draw.
 \param alpha The blend factor to apply while drawing.
 
 \returns Returns 0 on success, -1 on failure.
@@ -294,8 +294,8 @@ int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Uint8 alp
 		return (-1);
 	}
 
-	if (x >= clip_xmin(dst) && x <= clip_xmax(dst) && 
-		y >= clip_ymin(dst) && y <= clip_ymax(dst)) 
+	if (x >= clip_xmin(dst) && x <= clip_xmax(dst) &&
+		y >= clip_ymin(dst) && y <= clip_ymax(dst))
 	{
 
 		format = dst->format;
@@ -359,7 +359,7 @@ int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Uint8 alp
 			}
 			break;
 
-		case 3: 
+		case 3:
 			{		/* Slow 24-bpp mode, usually not used */
 				Uint8 R, G, B;
 				Uint8 Rshift8, Gshift8, Bshift8;
@@ -500,7 +500,7 @@ int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Uint8 alp
 \param dst The surface to draw on.
 \param x X (horizontal) coordinate of the pixel.
 \param y Y (vertical) coordinate of the pixel.
-\param color The color value of the pixel to draw (0xRRGGBBAA). 
+\param color The color value of the pixel to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -511,7 +511,7 @@ int pixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	int result = 0;
 
 	/*
-	* Lock the surface 
+	* Lock the surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		if (SDL_LockSurface(dst) < 0) {
@@ -520,7 +520,7 @@ int pixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	}
 
 	/*
-	* Setup color 
+	* Setup color
 	*/
 	alpha = color & 0x000000ff;
 	mcolor =
@@ -528,12 +528,12 @@ int pixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 		(color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = _putPixelAlpha(dst, x, y, mcolor, alpha);
 
 	/*
-	* Unlock the surface 
+	* Unlock the surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		SDL_UnlockSurface(dst);
@@ -548,7 +548,7 @@ int pixelColor(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 \param dst The surface to draw on.
 \param x X (horizontal) coordinate of the pixel.
 \param y Y (vertical) coordinate of the pixel.
-\param color The color value of the pixel to draw (0xRRGGBBAA). 
+\param color The color value of the pixel to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -559,7 +559,7 @@ int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 	int result = 0;
 
 	/*
-	* Setup color 
+	* Setup color
 	*/
 	alpha = color & 0x000000ff;
 	mcolor =
@@ -567,7 +567,7 @@ int pixelColorNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color)
 		(color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = _putPixelAlpha(dst, x, y, mcolor, alpha);
 
@@ -585,7 +585,7 @@ Assumes color is in destination format.
 \param y1 Y coordinate of the first corner (upper left) of the rectangle.
 \param x2 X coordinate of the second corner (lower right) of the rectangle.
 \param y2 Y coordinate of the second corner (lower right) of the rectangle.
-\param color The color value of the rectangle to draw (0xRRGGBBAA). 
+\param color The color value of the rectangle to draw (0xRRGGBBAA).
 \param alpha Alpha blending amount for pixels.
 
 \returns Returns 0 on success, -1 on failure.
@@ -650,7 +650,7 @@ int _filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 			Bmask = format->Bmask;
 			Amask = format->Amask;
 
-			sR = (color & Rmask); 
+			sR = (color & Rmask);
 			sG = (color & Gmask);
 			sB = (color & Bmask);
 			sA = (color & Amask);
@@ -676,7 +676,7 @@ int _filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 							dA = (dc & Amask);
 							A = (dA + ((sA - dA) * alpha >> 8)) & Amask;
 							*pixel |= A;
-						} 
+						}
 					}
 				}
 			}
@@ -847,7 +847,7 @@ int _filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 \param y1 Y coordinate of the first corner (upper left) of the rectangle.
 \param x2 X coordinate of the second corner (lower right) of the rectangle.
 \param y2 Y coordinate of the second corner (lower right) of the rectangle.
-\param color The color value of the rectangle to draw (0xRRGGBBAA). 
+\param color The color value of the rectangle to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -858,7 +858,7 @@ int filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	int result = 0;
 
 	/*
-	* Lock the surface 
+	* Lock the surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		if (SDL_LockSurface(dst) < 0) {
@@ -867,7 +867,7 @@ int filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	}
 
 	/*
-	* Setup color 
+	* Setup color
 	*/
 	alpha = color & 0x000000ff;
 	mcolor =
@@ -875,12 +875,12 @@ int filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 		(color & 0x00ff0000) >> 16, (color & 0x0000ff00) >> 8, alpha);
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = _filledRectAlpha(dst, x1, y1, x2, y2, mcolor, alpha);
 
 	/*
-	* Unlock the surface 
+	* Unlock the surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		SDL_UnlockSurface(dst);
@@ -896,7 +896,7 @@ int filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 \param x1 X coordinate of the first point (i.e. left) of the line.
 \param x2 X coordinate of the second point (i.e. right) of the line.
 \param y Y coordinate of the points of the line.
-\param color The color value of the line to draw (0xRRGGBBAA). 
+\param color The color value of the line to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -912,7 +912,7 @@ int _HLineAlpha(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 \param x X coordinate of the points of the line.
 \param y1 Y coordinate of the first point (top) of the line.
 \param y2 Y coordinate of the second point (bottom) of the line.
-\param color The color value of the line to draw (0xRRGGBBAA). 
+\param color The color value of the line to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -927,7 +927,7 @@ int _VLineAlpha(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param color The color value of the pixel to draw (0xRRGGBBAA). 
+\param color The color value of the pixel to draw (0xRRGGBBAA).
 \param weight The weight multiplied into the alpha value of the pixel.
 
 \returns Returns 0 on success, -1 on failure.
@@ -937,12 +937,12 @@ int pixelColorWeight(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, Uint32
 	Uint32 a;
 
 	/*
-	* Get alpha 
+	* Get alpha
 	*/
 	a = (color & (Uint32) 0x000000ff);
 
 	/*
-	* Modify Alpha by weight 
+	* Modify Alpha by weight
 	*/
 	a = ((a * weight) >> 8);
 
@@ -955,7 +955,7 @@ int pixelColorWeight(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, Uint32
 \param dst The surface to draw on.
 \param x The horizontal coordinate of the pixel.
 \param y The vertical position of the pixel.
-\param color The color value of the pixel to draw (0xRRGGBBAA). 
+\param color The color value of the pixel to draw (0xRRGGBBAA).
 \param weight The weight multiplied into the alpha value of the pixel.
 
 \returns Returns 0 on success, -1 on failure.
@@ -965,12 +965,12 @@ int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, 
 	Uint32 a;
 
 	/*
-	* Get alpha 
+	* Get alpha
 	*/
 	a = (color & (Uint32) 0x000000ff);
 
 	/*
-	* Modify Alpha by weight 
+	* Modify Alpha by weight
 	*/
 	a = ((a * weight) >> 8);
 
@@ -983,7 +983,7 @@ int pixelColorWeightNolock(SDL_Surface * dst, Sint16 x, Sint16 y, Uint32 color, 
 \param dst The surface to draw on.
 \param x X (horizontal) coordinate of the pixel.
 \param y Y (vertical) coordinate of the pixel.
-\param r The red color value of the pixel to draw. 
+\param r The red color value of the pixel to draw.
 \param g The green color value of the pixel to draw.
 \param b The blue color value of the pixel to draw.
 \param a The alpha value of the pixel to draw.
@@ -995,26 +995,26 @@ int pixelRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Uint8 r, Uint8 g, Uint8 b, 
 	Uint32 color;
 
 	/*
-	* Check Alpha 
+	* Check Alpha
 	*/
 	if (a == 255) {
 		/*
-		* No alpha blending required 
+		* No alpha blending required
 		*/
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		color = SDL_MapRGBA(dst->format, r, g, b, a);
 		/*
-		* Draw 
+		* Draw
 		*/
 		return (fastPixelColor(dst, x, y, color));
 	} else {
 		/*
-		* Alpha blending required 
+		* Alpha blending required
 		*/
 		/*
-		* Draw 
+		* Draw
 		*/
 		return (pixelColor(dst, x, y, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 	}
@@ -1032,7 +1032,7 @@ from the input color value.
 \param x1 X coordinate of the first point (i.e. left) of the line.
 \param x2 X coordinate of the second point (i.e. right) of the line.
 \param y Y coordinate of the points of the line.
-\param color The color value of the line to draw. 
+\param color The color value of the line to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1064,7 +1064,7 @@ int hlineColorStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 co
 
 	/*
 	* Get clipping boundary and
-	* check visibility of hline 
+	* check visibility of hline
 	*/
 	left = dst->clip_rect.x;
 	if (x2<left) {
@@ -1081,7 +1081,7 @@ int hlineColorStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 co
 	}
 
 	/*
-	* Clip x 
+	* Clip x
 	*/
 	if (x1 < left) {
 		x1 = left;
@@ -1091,12 +1091,12 @@ int hlineColorStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 co
 	}
 
 	/*
-	* Calculate width 
+	* Calculate width
 	*/
 	w = x2 - x1;
 
 	/*
-	* Lock the surface 
+	* Lock the surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		if (SDL_LockSurface(dst) < 0) {
@@ -1105,7 +1105,7 @@ int hlineColorStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 co
 	}
 
 	/*
-	* More variable setup 
+	* More variable setup
 	*/
 	dx = w;
 	pixx = dst->format->BytesPerPixel;
@@ -1113,7 +1113,7 @@ int hlineColorStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 co
 	pixel = ((Uint8 *) dst->pixels) + pixx * (int) x1 + pixy * (int) y;
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	switch (dst->format->BytesPerPixel) {
 	case 1:
@@ -1148,15 +1148,15 @@ int hlineColorStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 co
 		break;
 	}
 
-	/* 
-	* Unlock surface 
+	/*
+	* Unlock surface
 	*/
 	if (SDL_MUSTLOCK(dst)) {
 		SDL_UnlockSurface(dst);
 	}
 
 	/*
-	* Set result code 
+	* Set result code
 	*/
 	result = 0;
 
@@ -1173,17 +1173,17 @@ Function should only be used for 32 bit target surfaces.
 \param x1 X coordinate of the first point (i.e. left) of the line.
 \param x2 X coordinate of the second point (i.e. right) of the line.
 \param y Y coordinate of the points of the line.
-\param r The red value of the line to draw. 
-\param g The green value of the line to draw. 
-\param b The blue value of the line to draw. 
-\param a The alpha value of the line to draw. 
+\param r The red value of the line to draw.
+\param g The green value of the line to draw.
+\param b The blue value of the line to draw.
+\param a The alpha value of the line to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
 int hlineRGBAStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (hlineColorStore(dst, x1, x2, y, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -1195,7 +1195,7 @@ int hlineRGBAStore(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, U
 \param x1 X coordinate of the first point (i.e. left) of the line.
 \param x2 X coordinate of the second point (i.e. right) of the line.
 \param y Y coordinate of the points of the line.
-\param color The color value of the line to draw (0xRRGGBBAA). 
+\param color The color value of the line to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1228,7 +1228,7 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 
 	/*
 	* Get clipping boundary and
-	* check visibility of hline 
+	* check visibility of hline
 	*/
 	left = dst->clip_rect.x;
 	if (x2<left) {
@@ -1245,7 +1245,7 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 	}
 
 	/*
-	* Clip x 
+	* Clip x
 	*/
 	if (x1 < left) {
 		x1 = left;
@@ -1260,16 +1260,16 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 	dx = x2 - x1;
 
 	/*
-	* Alpha check 
+	* Alpha check
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No alpha-blending required 
+		* No alpha-blending required
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -1279,7 +1279,7 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 		}
 
 		/*
-		* Lock the surface 
+		* Lock the surface
 		*/
 		if (SDL_MUSTLOCK(dst)) {
 			if (SDL_LockSurface(dst) < 0) {
@@ -1288,14 +1288,14 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 		}
 
 		/*
-		* More variable setup 
+		* More variable setup
 		*/
 		pixx = dst->format->BytesPerPixel;
 		pixy = dst->pitch;
 		pixel = ((Uint8 *) dst->pixels) + pixx * (int) x1 + pixy * (int) y;
 
 		/*
-		* Draw 
+		* Draw
 		*/
 		switch (dst->format->BytesPerPixel) {
 		case 1:
@@ -1331,22 +1331,22 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 			break;
 		}
 
-		/* 
-		* Unlock surface 
+		/*
+		* Unlock surface
 		*/
 		if (SDL_MUSTLOCK(dst)) {
 			SDL_UnlockSurface(dst);
 		}
 
 		/*
-		* Set result code 
+		* Set result code
 		*/
 		result = 0;
 
 	} else {
 
 		/*
-		* Alpha blending blit 
+		* Alpha blending blit
 		*/
 		result = _HLineAlpha(dst, x1, x1 + dx, y, color);
 	}
@@ -1361,17 +1361,17 @@ int hlineColor(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint32 color)
 \param x1 X coordinate of the first point (i.e. left) of the line.
 \param x2 X coordinate of the second point (i.e. right) of the line.
 \param y Y coordinate of the points of the line.
-\param r The red value of the line to draw. 
-\param g The green value of the line to draw. 
-\param b The blue value of the line to draw. 
-\param a The alpha value of the line to draw. 
+\param r The red value of the line to draw.
+\param g The green value of the line to draw.
+\param b The blue value of the line to draw.
+\param a The alpha value of the line to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
 int hlineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (hlineColor(dst, x1, x2, y, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -1383,7 +1383,7 @@ int hlineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, Uint8 r, Uint8 
 \param x X coordinate of the points of the line.
 \param y1 Y coordinate of the first point (i.e. top) of the line.
 \param y2 Y coordinate of the second point (i.e. bottom) of the line.
-\param color The color value of the line to draw (0xRRGGBBAA). 
+\param color The color value of the line to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1416,13 +1416,13 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 
 	/*
 	* Get clipping boundary and
-	* check visibility of vline 
+	* check visibility of vline
 	*/
 	left = dst->clip_rect.x;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if ((x<left) || (x>right)) {
 		return (0);
-	}    
+	}
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
@@ -1433,7 +1433,7 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 	}
 
 	/*
-	* Clip x 
+	* Clip x
 	*/
 	if (y1 < top) {
 		y1 = top;
@@ -1448,16 +1448,16 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 	h = y2 - y1;
 
 	/*
-	* Alpha check 
+	* Alpha check
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No alpha-blending required 
+		* No alpha-blending required
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -1467,7 +1467,7 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 		}
 
 		/*
-		* Lock the surface 
+		* Lock the surface
 		*/
 		if (SDL_MUSTLOCK(dst)) {
 			if (SDL_LockSurface(dst) < 0) {
@@ -1476,7 +1476,7 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 		}
 
 		/*
-		* More variable setup 
+		* More variable setup
 		*/
 		dy = h;
 		pixx = dst->format->BytesPerPixel;
@@ -1485,7 +1485,7 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 		pixellast = pixel + pixy * dy;
 
 		/*
-		* Draw 
+		* Draw
 		*/
 		switch (dst->format->BytesPerPixel) {
 		case 1:
@@ -1524,14 +1524,14 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 		}
 
 		/*
-		* Set result code 
+		* Set result code
 		*/
 		result = 0;
 
 	} else {
 
 		/*
-		* Alpha blending blit 
+		* Alpha blending blit
 		*/
 
 		result = _VLineAlpha(dst, x, y1, y1 + h, color);
@@ -1548,17 +1548,17 @@ int vlineColor(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint32 color)
 \param x X coordinate of the points of the line.
 \param y1 Y coordinate of the first point (i.e. top) of the line.
 \param y2 Y coordinate of the second point (i.e. bottom) of the line.
-\param r The red value of the line to draw. 
-\param g The green value of the line to draw. 
-\param b The blue value of the line to draw. 
-\param a The alpha value of the line to draw. 
+\param r The red value of the line to draw.
+\param g The green value of the line to draw.
+\param b The blue value of the line to draw.
+\param a The alpha value of the line to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
 int vlineRGBA(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (vlineColor(dst, x, y1, y2, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -1571,7 +1571,7 @@ int vlineRGBA(SDL_Surface * dst, Sint16 x, Sint16 y1, Sint16 y2, Uint8 r, Uint8 
 \param y1 Y coordinate of the first point (i.e. top right) of the rectangle.
 \param x2 X coordinate of the second point (i.e. bottom left) of the rectangle.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the rectangle.
-\param color The color value of the rectangle to draw (0xRRGGBBAA). 
+\param color The color value of the rectangle to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1594,7 +1594,7 @@ int rectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 	}
 
 	/*
-	* Test for special cases of straight lines or single point 
+	* Test for special cases of straight lines or single point
 	*/
 	if (x1 == x2) {
 		if (y1 == y2) {
@@ -1609,7 +1609,7 @@ int rectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 	}
 
 	/*
-	* Swap x1, x2 if required 
+	* Swap x1, x2 if required
 	*/
 	if (x1 > x2) {
 		tmp = x1;
@@ -1618,7 +1618,7 @@ int rectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 	}
 
 	/*
-	* Swap y1, y2 if required 
+	* Swap y1, y2 if required
 	*/
 	if (y1 > y2) {
 		tmp = y1;
@@ -1627,7 +1627,7 @@ int rectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 	}
 
 	/*
-	* Draw rectangle 
+	* Draw rectangle
 	*/
 	result = 0;
 	result |= hlineColor(dst, x1, x2, y1, color);
@@ -1651,17 +1651,17 @@ int rectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 \param y1 Y coordinate of the first point (i.e. top right) of the rectangle.
 \param x2 X coordinate of the second point (i.e. bottom left) of the rectangle.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the rectangle.
-\param r The red value of the rectangle to draw. 
-\param g The green value of the rectangle to draw. 
-\param b The blue value of the rectangle to draw. 
-\param a The alpha value of the rectangle to draw. 
+\param r The red value of the rectangle to draw.
+\param g The green value of the rectangle to draw.
+\param b The blue value of the rectangle to draw.
+\param a The alpha value of the rectangle to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
 int rectangleRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (rectangleColor
 		(dst, x1, y1, x2, y2, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -1676,7 +1676,7 @@ int rectangleRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
 \param x2 X coordinate of the second point (i.e. bottom left) of the rectangle.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the rectangle.
 \param rad The radius of the corner arc.
-\param color The color value of the rectangle to draw (0xRRGGBBAA). 
+\param color The color value of the rectangle to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1686,8 +1686,8 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	Sint16 w, h, tmp;
 	Sint16 xx1, xx2, yy1, yy2;
 
-	/* 
-	* Check destination surface 
+	/*
+	* Check destination surface
 	*/
 	if (dst == NULL)
 	{
@@ -1716,7 +1716,7 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	}
 
 	/*
-	* Test for special cases of straight lines or single point 
+	* Test for special cases of straight lines or single point
 	*/
 	if (x1 == x2) {
 		if (y1 == y2) {
@@ -1731,7 +1731,7 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	}
 
 	/*
-	* Swap x1, x2 if required 
+	* Swap x1, x2 if required
 	*/
 	if (x1 > x2) {
 		tmp = x1;
@@ -1740,7 +1740,7 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	}
 
 	/*
-	* Swap y1, y2 if required 
+	* Swap y1, y2 if required
 	*/
 	if (y1 > y2) {
 		tmp = y1;
@@ -1749,7 +1749,7 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	}
 
 	/*
-	* Calculate width&height 
+	* Calculate width&height
 	*/
 	w = x2 - x1;
 	h = y2 - y1;
@@ -1757,7 +1757,7 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	/*
 	* Maybe adjust radius
 	*/
-	if ((rad * 2) > w)  
+	if ((rad * 2) > w)
 	{
 		rad = w / 2;
 	}
@@ -1803,17 +1803,17 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 \param x2 X coordinate of the second point (i.e. bottom left) of the rectangle.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the rectangle.
 \param rad The radius of the corner arc.
-\param r The red value of the rectangle to draw. 
-\param g The green value of the rectangle to draw. 
-\param b The blue value of the rectangle to draw. 
-\param a The alpha value of the rectangle to draw. 
+\param r The red value of the rectangle to draw.
+\param g The green value of the rectangle to draw.
+\param b The blue value of the rectangle to draw.
+\param a The alpha value of the rectangle to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
 int roundedRectangleRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (roundedRectangleColor
 		(dst, x1, y1, x2, y2, rad, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -1828,7 +1828,7 @@ int roundedRectangleRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sin
 \param x2 X coordinate of the second point (i.e. bottom left) of the box.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the box.
 \param rad The radius of the corner arcs of the box.
-\param color The color value of the box to draw (0xRRGGBBAA). 
+\param color The color value of the box to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1838,8 +1838,8 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	Sint16 w, h, tmp;
 	Sint16 xx1, xx2, yy1, yy2;
 
-	/* 
-	* Check destination surface 
+	/*
+	* Check destination surface
 	*/
 	if (dst == NULL)
 	{
@@ -1868,7 +1868,7 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	}
 
 	/*
-	* Test for special cases of straight lines or single point 
+	* Test for special cases of straight lines or single point
 	*/
 	if (x1 == x2) {
 		if (y1 == y2) {
@@ -1883,7 +1883,7 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	}
 
 	/*
-	* Swap x1, x2 if required 
+	* Swap x1, x2 if required
 	*/
 	if (x1 > x2) {
 		tmp = x1;
@@ -1892,7 +1892,7 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	}
 
 	/*
-	* Swap y1, y2 if required 
+	* Swap y1, y2 if required
 	*/
 	if (y1 > y2) {
 		tmp = y1;
@@ -1901,7 +1901,7 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	}
 
 	/*
-	* Calculate width&height 
+	* Calculate width&height
 	*/
 	w = x2 - x1;
 	h = y2 - y1;
@@ -1909,7 +1909,7 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	/*
 	* Maybe adjust radius
 	*/
-	if ((rad * 2) > w)  
+	if ((rad * 2) > w)
 	{
 		rad = w / 2;
 	}
@@ -1958,10 +1958,10 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 \param x2 X coordinate of the second point (i.e. bottom left) of the box.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the box.
 \param rad The radius of the corner arcs of the box.
-\param r The red value of the box to draw. 
-\param g The green value of the box to draw. 
-\param b The blue value of the box to draw. 
-\param a The alpha value of the box to draw. 
+\param r The red value of the box to draw.
+\param g The green value of the box to draw.
+\param b The blue value of the box to draw.
+\param a The alpha value of the box to draw.
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -1969,7 +1969,7 @@ int roundedBoxRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2,
 	Sint16 y2, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (roundedBoxColor
 		(dst, x1, y1, x2, y2, rad, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -2035,7 +2035,7 @@ static int _clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, S
 	float m;
 
 	/*
-	* Get clipping boundary 
+	* Get clipping boundary
 	*/
 	left = dst->clip_rect.x;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
@@ -2098,7 +2098,7 @@ static int _clipLine(SDL_Surface * dst, Sint16 * x1, Sint16 * y1, Sint16 * x2, S
 \param y1 Y coordinate of the first point (i.e. top right) of the box.
 \param x2 X coordinate of the second point (i.e. bottom left) of the box.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the box.
-\param color The color value of the box to draw (0xRRGGBBAA). 
+\param color The color value of the box to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -2122,7 +2122,7 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 
 	/*
 	* Order coordinates to ensure that
-	* x1<=x2 and y1<=y2 
+	* x1<=x2 and y1<=y2
 	*/
 	if (x1 > x2) {
 		tmp = x1;
@@ -2135,9 +2135,9 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 		y2 = tmp;
 	}
 
-	/* 
-	* Get clipping boundary and 
-	* check visibility 
+	/*
+	* Get clipping boundary and
+	* check visibility
 	*/
 	left = dst->clip_rect.x;
 	if (x2<left) {
@@ -2157,34 +2157,34 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 	}
 
 	/* Clip all points */
-	if (x1<left) { 
-		x1=left; 
+	if (x1<left) {
+		x1=left;
 	} else if (x1>right) {
 		x1=right;
 	}
-	if (x2<left) { 
-		x2=left; 
+	if (x2<left) {
+		x2=left;
 	} else if (x2>right) {
 		x2=right;
 	}
-	if (y1<top) { 
-		y1=top; 
+	if (y1<top) {
+		y1=top;
 	} else if (y1>bottom) {
 		y1=bottom;
 	}
-	if (y2<top) { 
-		y2=top; 
+	if (y2<top) {
+		y2=top;
 	} else if (y2>bottom) {
 		y2=bottom;
 	}
 
 	/*
-	* Test for special cases of straight line or single point 
+	* Test for special cases of straight line or single point
 	*/
 	if (x1 == x2) {
 		if (y1 == y2) {
 			return (pixelColor(dst, x1, y1, color));
-		} else { 
+		} else {
 			return (vlineColor(dst, x1, y1, y2, color));
 		}
 	}
@@ -2193,22 +2193,22 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 	}
 
 	/*
-	* Calculate width&height 
+	* Calculate width&height
 	*/
 	w = x2 - x1;
 	h = y2 - y1;
 
 	/*
-	* Alpha check 
+	* Alpha check
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No alpha-blending required 
+		* No alpha-blending required
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -2218,7 +2218,7 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 		}
 
 		/*
-		* Lock the surface 
+		* Lock the surface
 		*/
 		if (SDL_MUSTLOCK(dst)) {
 			if (SDL_LockSurface(dst) < 0) {
@@ -2227,7 +2227,7 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 		}
 
 		/*
-		* More variable setup 
+		* More variable setup
 		*/
 		dx = w;
 		dy = h;
@@ -2238,7 +2238,7 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 		dx++;
 
 		/*
-		* Draw 
+		* Draw
 		*/
 		switch (dst->format->BytesPerPixel) {
 		case 1:
@@ -2307,9 +2307,9 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 \param y1 Y coordinate of the first point (i.e. top right) of the box.
 \param x2 X coordinate of the second point (i.e. bottom left) of the box.
 \param y2 Y coordinate of the second point (i.e. bottom left) of the box.
-\param r The red value of the box to draw. 
-\param g The green value of the box to draw. 
-\param b The blue value of the box to draw. 
+\param r The red value of the box to draw.
+\param g The green value of the box to draw.
+\param b The blue value of the box to draw.
 \param a The alpha value of the box to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -2317,7 +2317,7 @@ int boxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint
 int boxRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (boxColor(dst, x1, y1, x2, y2, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -2338,7 +2338,7 @@ int boxRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8
 \param y1 Y coordinate of the first point of the line.
 \param x2 X coordinate of the second point of the line.
 \param y2 Y coordinate of the second point of the line.
-\param color The color value of the line to draw (0xRRGGBBAA). 
+\param color The color value of the line to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -2354,14 +2354,14 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 	Uint8 *colorptr;
 
 	/*
-	* Clip line and test if we have to draw 
+	* Clip line and test if we have to draw
 	*/
 	if (!(_clipLine(dst, &x1, &y1, &x2, &y2))) {
 		return (0);
 	}
 
 	/*
-	* Test for special cases of straight lines or single point 
+	* Test for special cases of straight lines or single point
 	*/
 	if (x1 == x2) {
 		if (y1 < y2) {
@@ -2381,7 +2381,7 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 	}
 
 	/*
-	* Variable setup 
+	* Variable setup
 	*/
 	dx = x2 - x1;
 	dy = y2 - y1;
@@ -2396,16 +2396,16 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 	}
 
 	/*
-	* Check for alpha blending 
+	* Check for alpha blending
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No alpha blending - use fast pixel routines 
+		* No alpha blending - use fast pixel routines
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -2415,7 +2415,7 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 		}
 
 		/*
-		* More variable setup 
+		* More variable setup
 		*/
 		dx = sx * dx + 1;
 		dy = sy * dy + 1;
@@ -2434,7 +2434,7 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 		}
 
 		/*
-		* Draw 
+		* Draw
 		*/
 		x = 0;
 		y = 0;
@@ -2492,7 +2492,7 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 	} else {
 
 		/*
-		* Alpha blending required - use single-pixel blits 
+		* Alpha blending required - use single-pixel blits
 		*/
 
 		ax = ABS(dx) << 1;
@@ -2544,9 +2544,9 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 \param y1 Y coordinate of the first point of the line.
 \param x2 X coordinate of the second point of the line.
 \param y2 Y coordinate of the second point of the line.
-\param r The red value of the line to draw. 
-\param g The green value of the line to draw. 
-\param b The blue value of the line to draw. 
+\param r The red value of the line to draw.
+\param g The green value of the line to draw.
+\param b The blue value of the line to draw.
 \param a The alpha value of the line to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -2554,7 +2554,7 @@ int lineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uin
 int lineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (lineColor(dst, x1, y1, x2, y2, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -2600,14 +2600,14 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	}
 
 	/*
-	* Clip line and test if we have to draw 
+	* Clip line and test if we have to draw
 	*/
 	if (!(_clipLine(dst, &x1, &y1, &x2, &y2))) {
 		return (0);
 	}
 
 	/*
-	* Keep on working with 32bit numbers 
+	* Keep on working with 32bit numbers
 	*/
 	xx0 = x1;
 	yy0 = y1;
@@ -2615,7 +2615,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	yy1 = y2;
 
 	/*
-	* Reorder points if required 
+	* Reorder points if required
 	*/
 	if (yy0 > yy1) {
 		tmp = yy0;
@@ -2627,17 +2627,17 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	}
 
 	/*
-	* Calculate distance 
+	* Calculate distance
 	*/
 	dx = xx1 - xx0;
 	dy = yy1 - yy0;
 
 	/*
-	* Check for special cases 
+	* Check for special cases
 	*/
 	if (dx == 0) {
 		/*
-		* Vertical line 
+		* Vertical line
 		*/
 		if (draw_endpoint)
 		{
@@ -2651,7 +2651,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 		}
 	} else if (dy == 0) {
 		/*
-		* Horizontal line 
+		* Horizontal line
 		*/
 		if (draw_endpoint)
 		{
@@ -2671,7 +2671,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	}
 
 	/*
-	* Adjust for negative dx and set xdir 
+	* Adjust for negative dx and set xdir
 	*/
 	if (dx >= 0) {
 		xdir = 1;
@@ -2686,12 +2686,12 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	result = 0;
 
 	/*
-	* Zero accumulator 
+	* Zero accumulator
 	*/
 	erracc = 0;
 
 	/*
-	* # of bits by which to shift erracc to get intensity level 
+	* # of bits by which to shift erracc to get intensity level
 	*/
 	intshift = 32 - AAbits;
 
@@ -2703,27 +2703,27 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	}
 
 	/*
-	* Draw the initial pixel in the foreground color 
+	* Draw the initial pixel in the foreground color
 	*/
 	result |= pixelColorNolock(dst, x1, y1, color);
 
 	/*
-	* x-major or y-major? 
+	* x-major or y-major?
 	*/
 	if (dy > dx) {
 
 		/*
 		* y-major.  Calculate 16-bit fixed point fractional part of a pixel that
 		* X advances every time Y advances 1 pixel, truncating the result so that
-		* we won't overrun the endpoint along the X axis 
+		* we won't overrun the endpoint along the X axis
 		*/
 		/*
-		* Not-so-portable version: erradj = ((Uint64)dx << 32) / (Uint64)dy; 
+		* Not-so-portable version: erradj = ((Uint64)dx << 32) / (Uint64)dy;
 		*/
 		erradj = ((dx << 16) / dy) << 16;
 
 		/*
-		* draw all pixels other than the first and last 
+		* draw all pixels other than the first and last
 		*/
 		x0pxdir = xx0 + xdir;
 		while (--dy) {
@@ -2731,7 +2731,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 			erracc += erradj;
 			if (erracc <= erracctmp) {
 				/*
-				* rollover in error accumulator, x coord advances 
+				* rollover in error accumulator, x coord advances
 				*/
 				xx0 = x0pxdir;
 				x0pxdir += xdir;
@@ -2741,7 +2741,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 			/*
 			* the AAbits most significant bits of erracc give us the intensity
 			* weighting for this pixel, and the complement of the weighting for
-			* the paired pixel. 
+			* the paired pixel.
 			*/
 			wgt = (erracc >> intshift) & 255;
 			result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
@@ -2753,15 +2753,15 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 		/*
 		* x-major line.  Calculate 16-bit fixed-point fractional part of a pixel
 		* that Y advances each time X advances 1 pixel, truncating the result so
-		* that we won't overrun the endpoint along the X axis. 
+		* that we won't overrun the endpoint along the X axis.
 		*/
 		/*
-		* Not-so-portable version: erradj = ((Uint64)dy << 32) / (Uint64)dx; 
+		* Not-so-portable version: erradj = ((Uint64)dy << 32) / (Uint64)dx;
 		*/
 		erradj = ((dy << 16) / dx) << 16;
 
 		/*
-		* draw all pixels other than the first and last 
+		* draw all pixels other than the first and last
 		*/
 		y0p1 = yy0 + 1;
 		while (--dx) {
@@ -2770,7 +2770,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 			erracc += erradj;
 			if (erracc <= erracctmp) {
 				/*
-				* Accumulator turned over, advance y 
+				* Accumulator turned over, advance y
 				*/
 				yy0 = y0p1;
 				y0p1++;
@@ -2779,7 +2779,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 			/*
 			* the AAbits most significant bits of erracc give us the intensity
 			* weighting for this pixel, and the complement of the weighting for
-			* the paired pixel. 
+			* the paired pixel.
 			*/
 			wgt = (erracc >> intshift) & 255;
 			result |= pixelColorWeightNolock (dst, xx0, yy0, color, 255 - wgt);
@@ -2788,12 +2788,12 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	}
 
 	/*
-	* Do we have to draw the endpoint 
+	* Do we have to draw the endpoint
 	*/
 	if (draw_endpoint) {
 		/*
 		* Draw final pixel, always exactly intersected by the line and doesn't
-		* need to be weighted. 
+		* need to be weighted.
 		*/
 		result |= pixelColorNolock (dst, x2, y2, color);
 	}
@@ -2831,9 +2831,9 @@ int aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, U
 \param y1 Y coordinate of the first point of the aa-line.
 \param x2 X coordinate of the second point of the aa-line.
 \param y2 Y coordinate of the second point of the aa-line.
-\param r The red value of the aa-line to draw. 
-\param g The green value of the aa-line to draw. 
-\param b The blue value of the aa-line to draw. 
+\param r The red value of the aa-line to draw.
+\param g The green value of the aa-line to draw.
+\param b The blue value of the aa-line to draw.
 \param a The alpha value of the aa-line to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -2850,15 +2850,15 @@ int aalineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Ui
 /*!
 \brief Draw circle with blending.
 
-Note: Circle drawing routine is based on an algorithms from the sge library, 
-but modified by A. Schiffler for multiple pixel-draw removal and other 
+Note: Circle drawing routine is based on an algorithms from the sge library,
+but modified by A. Schiffler for multiple pixel-draw removal and other
 minor speedup changes.
 
 \param dst The surface to draw on.
 \param x X coordinate of the center of the circle.
 \param y Y coordinate of the center of the circle.
 \param rad Radius in pixels of the circle.
-\param color The color value of the circle to draw (0xRRGGBBAA). 
+\param color The color value of the circle to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -2884,46 +2884,46 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 	}
 
 	/*
-	* Sanity check radius 
+	* Sanity check radius
 	*/
 	if (rad < 0) {
 		return (-1);
 	}
 
 	/*
-	* Special case for rad=0 - draw a point 
+	* Special case for rad=0 - draw a point
 	*/
 	if (rad == 0) {
 		return (pixelColor(dst, x, y, color));
 	}
 
 	/*
-	* Get circle and clipping boundary and 
-	* test if bounding box of circle is visible 
+	* Get circle and clipping boundary and
+	* test if bounding box of circle is visible
 	*/
 	x2 = x + rad;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rad;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + rad;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - rad;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/*
-	* Draw circle 
+	* Draw circle
 	*/
 	result = 0;
 
@@ -2935,16 +2935,16 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 	}
 
 	/*
-	* Alpha Check 
+	* Alpha Check
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No Alpha - direct memory writes 
+		* No Alpha - direct memory writes
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -2954,7 +2954,7 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 		}
 
 		/*
-		* Draw 
+		* Draw
 		*/
 		do {
 			ypcy = y + cy;
@@ -2984,7 +2984,7 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 				result |= fastPixelColorNolock(dst, xpcy, y, color);
 			}
 			/*
-			* Update 
+			* Update
 			*/
 			if (df < 0) {
 				df += d_e;
@@ -3000,19 +3000,19 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 		} while (cx <= cy);
 
 		/*
-		* Unlock surface 
+		* Unlock surface
 		*/
 		SDL_UnlockSurface(dst);
 
 	} else {
 
 		/*
-		* Using Alpha - blended pixel blits 
+		* Using Alpha - blended pixel blits
 		*/
 
 		do {
 			/*
-			* Draw 
+			* Draw
 			*/
 			ypcy = y + cy;
 			ymcy = y - cy;
@@ -3041,7 +3041,7 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 				result |= pixelColorNolock (dst, xpcy, y, color);
 			}
 			/*
-			* Update 
+			* Update
 			*/
 			if (df < 0) {
 				df += d_e;
@@ -3073,9 +3073,9 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 \param x X coordinate of the center of the circle.
 \param y Y coordinate of the center of the circle.
 \param rad Radius in pixels of the circle.
-\param r The red value of the circle to draw. 
-\param g The green value of the circle to draw. 
-\param b The blue value of the circle to draw. 
+\param r The red value of the circle to draw.
+\param g The green value of the circle to draw.
+\param b The blue value of the circle to draw.
 \param a The alpha value of the circle to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -3083,7 +3083,7 @@ int circleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 color)
 int circleRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (circleColor(dst, x, y, rad, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -3093,8 +3093,8 @@ int circleRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8
 /*!
 \brief Arc with blending.
 
-Note Arc drawing is based on circle algorithm by A. Schiffler and 
-written by D. Raber. Calculates which octants arc goes through and 
+Note Arc drawing is based on circle algorithm by A. Schiffler and
+written by D. Raber. Calculates which octants arc goes through and
 renders pixels accordingly.
 
 \param dst The surface to draw on.
@@ -3103,7 +3103,7 @@ renders pixels accordingly.
 \param rad Radius in pixels of the arc.
 \param start Starting radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.
 \param end Ending radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.
-\param color The color value of the arc to draw (0xRRGGBBAA). 
+\param color The color value of the arc to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -3132,43 +3132,43 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 	}
 
 	/*
-	* Sanity check radius 
+	* Sanity check radius
 	*/
 	if (rad < 0) {
 		return (-1);
 	}
 
 	/*
-	* Special case for rad=0 - draw a point 
+	* Special case for rad=0 - draw a point
 	*/
 	if (rad == 0) {
 		return (pixelColor(dst, x, y, color));
 	}
 
 	/*
-	* Get arc's circle and clipping boundary and 
-	* test if bounding box of circle is visible 
+	* Get arc's circle and clipping boundary and
+	* test if bounding box of circle is visible
 	*/
 	x2 = x + rad;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rad;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + rad;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - rad;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	}  
+	}
 
 	/* Octant labelling
 	 *
@@ -3187,7 +3187,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 	// Initially reset bitmask to 0x00000000
 	// the set whether or not to keep drawing a given octant.
 	// For example: 0x00111100 means we're drawing in octants 2-5
-	drawoct = 0; 
+	drawoct = 0;
 
 	/*
 	* Fixup angles
@@ -3205,7 +3205,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 	endoct = end / 45;
 	oct = startoct - 1; // we increment as first step in loop
 
-	// stopval_start, stopval_end; 
+	// stopval_start, stopval_end;
 	// what values of cx to stop at.
 	do {
 		oct = (oct + 1) % 8;
@@ -3213,7 +3213,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 		if (oct == startoct) {
 			// need to compute stopval_start for this octant.  Look at picture above if this is unclear
 			dstart = (double)start;
-			switch (oct) 
+			switch (oct)
 			{
 			case 0:
 			case 3:
@@ -3272,13 +3272,13 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 				// note:      we start drawing, stop, then start again in this case
 				// otherwise: we only draw in this octant, so initialize it to false, it will get set back to true
 				if (start > end) {
-					// unfortunately, if we're in the same octant and need to draw over the whole circle, 
+					// unfortunately, if we're in the same octant and need to draw over the whole circle,
 					// we need to set the rest to true, because the while loop will end at the bottom.
 					drawoct = 255;
 				} else {
 					drawoct &= 255 - (1 << oct);
 				}
-			} 
+			}
 			else if (oct % 2) drawoct &= 255 - (1 << oct);
 			else			  drawoct |= (1 << oct);
 		} else if (oct != startoct) { // already verified that it's != endoct
@@ -3296,21 +3296,21 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 	}
 
 	/*
-	* Draw arc 
+	* Draw arc
 	*/
 	result = 0;
 
 	/*
-	* Alpha Check 
+	* Alpha Check
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No Alpha - direct memory writes 
+		* No Alpha - direct memory writes
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -3320,7 +3320,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 		}
 
 		/*
-		* Draw 
+		* Draw
 		*/
 		do {
 			ypcy = y + cy;
@@ -3357,7 +3357,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 			*/
 			if (stopval_start == cx) {
 				// works like an on-off switch because start & end may be in the same octant.
-				if (drawoct & (1 << startoct)) drawoct &= 255 - (1 << startoct);		
+				if (drawoct & (1 << startoct)) drawoct &= 255 - (1 << startoct);
 				else drawoct |= (1 << startoct);
 			}
 			if (stopval_end == cx) {
@@ -3382,14 +3382,14 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 		} while (cx <= cy);
 
 		/*
-		* Unlock surface 
+		* Unlock surface
 		*/
 		SDL_UnlockSurface(dst);
 
 	} else {
 
 		/*
-		* Using Alpha - blended pixel blits 
+		* Using Alpha - blended pixel blits
 		*/
 
 		do {
@@ -3427,9 +3427,9 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 			* Update whether we're drawing an octant
 			*/
 			if (stopval_start == cx) {
-				// works like an on-off switch.  
+				// works like an on-off switch.
 				// This is just in case start & end are in the same octant.
-				if (drawoct & (1 << startoct)) drawoct &= 255 - (1 << startoct);		
+				if (drawoct & (1 << startoct)) drawoct &= 255 - (1 << startoct);
 				else						   drawoct |= (1 << startoct);
 			}
 			if (stopval_end == cx) {
@@ -3472,9 +3472,9 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 \param rad Radius in pixels of the arc.
 \param start Starting radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.
 \param end Ending radius in degrees of the arc. 0 degrees is down, increasing counterclockwise.
-\param r The red value of the arc to draw. 
-\param g The green value of the arc to draw. 
-\param b The blue value of the arc to draw. 
+\param r The red value of the arc to draw.
+\param g The green value of the arc to draw.
+\param b The blue value of the arc to draw.
 \param a The alpha value of the arc to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -3482,7 +3482,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 int arcRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (arcColor(dst, x, y, rad, start, end, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -3499,7 +3499,7 @@ Note: The AA-circle routine is based on AA-ellipse with identical radii.
 \param x X coordinate of the center of the aa-circle.
 \param y Y coordinate of the center of the aa-circle.
 \param rad Radius in pixels of the aa-circle.
-\param color The color value of the aa-circle to draw (0xRRGGBBAA). 
+\param color The color value of the aa-circle to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -3515,9 +3515,9 @@ int aacircleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 colo
 \param x X coordinate of the center of the aa-circle.
 \param y Y coordinate of the center of the aa-circle.
 \param rad Radius in pixels of the aa-circle.
-\param r The red value of the aa-circle to draw. 
-\param g The green value of the aa-circle to draw. 
-\param b The blue value of the aa-circle to draw. 
+\param r The red value of the aa-circle to draw.
+\param g The green value of the aa-circle to draw.
+\param b The blue value of the aa-circle to draw.
 \param a The alpha value of the aa-circle to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -3525,7 +3525,7 @@ int aacircleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 colo
 int aacircleRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (aaellipseColor
 		(dst, x, y, rad, rad, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -3543,7 +3543,7 @@ multiple-hline draw removal and other minor speedup changes.
 \param x X coordinate of the center of the filled circle.
 \param y Y coordinate of the center of the filled circle.
 \param rad Radius in pixels of the filled circle.
-\param color The color value of the filled circle to draw (0xRRGGBBAA). 
+\param color The color value of the filled circle to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -3570,46 +3570,46 @@ int filledCircleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 
 	}
 
 	/*
-	* Sanity check radius 
+	* Sanity check radius
 	*/
 	if (rad < 0) {
 		return (-1);
 	}
 
 	/*
-	* Special case for rad=0 - draw a point 
+	* Special case for rad=0 - draw a point
 	*/
 	if (rad == 0) {
 		return (pixelColor(dst, x, y, color));
 	}
 
 	/*
-	* Get circle and clipping boundary and 
-	* test if bounding box of circle is visible 
+	* Get circle and clipping boundary and
+	* test if bounding box of circle is visible
 	*/
 	x2 = x + rad;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rad;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + rad;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - rad;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = 0;
 	do {
@@ -3642,7 +3642,7 @@ int filledCircleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 
 			ocx = cx;
 		}
 		/*
-		* Update 
+		* Update
 		*/
 		if (df < 0) {
 			df += d_e;
@@ -3667,9 +3667,9 @@ int filledCircleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 
 \param x X coordinate of the center of the filled circle.
 \param y Y coordinate of the center of the filled circle.
 \param rad Radius in pixels of the filled circle.
-\param r The red value of the filled circle to draw. 
-\param g The green value of the filled circle to draw. 
-\param b The blue value of the filled circle to draw. 
+\param r The red value of the filled circle to draw.
+\param g The green value of the filled circle to draw.
+\param b The blue value of the filled circle to draw.
 \param a The alpha value of the filled circle to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -3677,7 +3677,7 @@ int filledCircleColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint32 
 int filledCircleRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (filledCircleColor
 		(dst, x, y, rad, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -3696,7 +3696,7 @@ multiple-pixel draw removal and other minor speedup changes.
 \param y Y coordinate of the center of the ellipse.
 \param rx Horizontal radius in pixels of the ellipse.
 \param ry Vertical radius in pixels of the ellipse.
-\param color The color value of the ellipse to draw (0xRRGGBBAA). 
+\param color The color value of the ellipse to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -3722,57 +3722,57 @@ int ellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Ui
 	}
 
 	/*
-	* Sanity check radii 
+	* Sanity check radii
 	*/
 	if ((rx < 0) || (ry < 0)) {
 		return (-1);
 	}
 
 	/*
-	* Special case for rx=0 - draw a vline 
+	* Special case for rx=0 - draw a vline
 	*/
 	if (rx == 0) {
 		return (vlineColor(dst, x, y - ry, y + ry, color));
 	}
 	/*
-	* Special case for ry=0 - draw a hline 
+	* Special case for ry=0 - draw a hline
 	*/
 	if (ry == 0) {
 		return (hlineColor(dst, x - rx, x + rx, y, color));
 	}
 
 	/*
-	* Get circle and clipping boundary and 
-	* test if bounding box of circle is visible 
+	* Get circle and clipping boundary and
+	* test if bounding box of circle is visible
 	*/
 	x2 = x + rx;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rx;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + ry;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - ry;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/*
-	* Init vars 
+	* Init vars
 	*/
 	oh = oi = oj = ok = 0xFFFF;
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = 0;
 
@@ -3784,16 +3784,16 @@ int ellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Ui
 	}
 
 	/*
-	* Check alpha 
+	* Check alpha
 	*/
 	if ((color & 255) == 255) {
 
 		/*
-		* No Alpha - direct memory writes 
+		* No Alpha - direct memory writes
 		*/
 
 		/*
-		* Setup color 
+		* Setup color
 		*/
 		colorptr = (Uint8 *) & color;
 		if (SDL_BYTEORDER == SDL_BIG_ENDIAN) {
@@ -4007,9 +4007,9 @@ int ellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Ui
 \param y Y coordinate of the center of the ellipse.
 \param rx Horizontal radius in pixels of the ellipse.
 \param ry Vertical radius in pixels of the ellipse.
-\param r The red value of the ellipse to draw. 
-\param g The green value of the ellipse to draw. 
-\param b The blue value of the ellipse to draw. 
+\param r The red value of the ellipse to draw.
+\param g The green value of the ellipse to draw.
+\param b The blue value of the ellipse to draw.
 \param a The alpha value of the ellipse to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4017,7 +4017,7 @@ int ellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Ui
 int ellipseRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (ellipseColor(dst, x, y, rx, ry, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -4029,15 +4029,15 @@ int ellipseRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uin
 /* Detect 64bit and use intrinsic version */
 #ifdef _M_X64
 #include <emmintrin.h>
-static __inline long 
-	lrint(float f) 
+static __inline long
+	lrint(float f)
 {
 	return _mm_cvtss_si32(_mm_load_ss(&f));
 }
 #elif defined(_M_IX86)
 __inline long int
 	lrint (double flt)
-{	
+{
 	int intgr;
 	_asm
 	{
@@ -4067,7 +4067,7 @@ __declspec(naked) long int
 /*!
 \brief Draw anti-aliased ellipse with blending.
 
-Note: Based on code from Anders Lindstroem, which is based on code from sge library, 
+Note: Based on code from Anders Lindstroem, which is based on code from sge library,
 which is based on code from TwinLib.
 
 \param dst The surface to draw on.
@@ -4075,7 +4075,7 @@ which is based on code from TwinLib.
 \param y Y coordinate of the center of the aa-ellipse.
 \param rx Horizontal radius in pixels of the aa-ellipse.
 \param ry Vertical radius in pixels of the aa-ellipse.
-\param color The color value of the aa-ellipse to draw (0xRRGGBBAA). 
+\param color The color value of the aa-ellipse to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -4099,49 +4099,49 @@ int aaellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, 
 	}
 
 	/*
-	* Sanity check radii 
+	* Sanity check radii
 	*/
 	if ((rx < 0) || (ry < 0)) {
 		return (-1);
 	}
 
 	/*
-	* Special case for rx=0 - draw a vline 
+	* Special case for rx=0 - draw a vline
 	*/
 	if (rx == 0) {
 		return (vlineColor(dst, x, y - ry, y + ry, color));
 	}
 	/*
-	* Special case for ry=0 - draw an hline 
+	* Special case for ry=0 - draw an hline
 	*/
 	if (ry == 0) {
 		return (hlineColor(dst, x - rx, x + rx, y, color));
 	}
 
 	/*
-	* Get circle and clipping boundary and 
-	* test if bounding box of circle is visible 
+	* Get circle and clipping boundary and
+	* test if bounding box of circle is visible
 	*/
 	x2 = x + rx;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rx;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + ry;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - ry;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/* Variable setup */
 	a2 = rx * rx;
@@ -4237,7 +4237,7 @@ int aaellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, 
 	}
 
 	/* Replaces original approximation code dyt = abs(yp - yc); */
-	dyt = (Sint16)lrint((double)b2 / sab ) + od;    
+	dyt = (Sint16)lrint((double)b2 / sab ) + od;
 
 	for (i = 1; i <= dyt; i++) {
 		yp++;
@@ -4312,9 +4312,9 @@ int aaellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, 
 \param y Y coordinate of the center of the aa-ellipse.
 \param rx Horizontal radius in pixels of the aa-ellipse.
 \param ry Vertical radius in pixels of the aa-ellipse.
-\param r The red value of the aa-ellipse to draw. 
-\param g The green value of the aa-ellipse to draw. 
-\param b The blue value of the aa-ellipse to draw. 
+\param r The red value of the aa-ellipse to draw.
+\param g The green value of the aa-ellipse to draw.
+\param b The blue value of the aa-ellipse to draw.
 \param a The alpha value of the aa-ellipse to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4322,7 +4322,7 @@ int aaellipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, 
 int aaellipseRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (aaellipseColor
 		(dst, x, y, rx, ry, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -4345,7 +4345,7 @@ and other speedup changes.
 \param y Y coordinate of the center of the filled ellipse.
 \param rx Horizontal radius in pixels of the filled ellipse.
 \param ry Vertical radius in pixels of the filled ellipse.
-\param color The color value of the filled ellipse to draw (0xRRGGBBAA). 
+\param color The color value of the filled ellipse to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -4370,57 +4370,57 @@ int filledEllipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 
 	}
 
 	/*
-	* Sanity check radii 
+	* Sanity check radii
 	*/
 	if ((rx < 0) || (ry < 0)) {
 		return (-1);
 	}
 
 	/*
-	* Special case for rx=0 - draw a vline 
+	* Special case for rx=0 - draw a vline
 	*/
 	if (rx == 0) {
 		return (vlineColor(dst, x, y - ry, y + ry, color));
 	}
 	/*
-	* Special case for ry=0 - draw a hline 
+	* Special case for ry=0 - draw a hline
 	*/
 	if (ry == 0) {
 		return (hlineColor(dst, x - rx, x + rx, y, color));
 	}
 
 	/*
-	* Get circle and clipping boundary and 
-	* test if bounding box of circle is visible 
+	* Get circle and clipping boundary and
+	* test if bounding box of circle is visible
 	*/
 	x2 = x + rx;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rx;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + ry;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - ry;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/*
-	* Init vars 
+	* Init vars
 	*/
 	oh = oi = oj = ok = 0xFFFF;
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = 0;
 	if (rx > ry) {
@@ -4510,9 +4510,9 @@ int filledEllipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 
 \param y Y coordinate of the center of the filled ellipse.
 \param rx Horizontal radius in pixels of the filled ellipse.
 \param ry Vertical radius in pixels of the filled ellipse.
-\param r The red value of the filled ellipse to draw. 
-\param g The green value of the filled ellipse to draw. 
-\param b The blue value of the filled ellipse to draw. 
+\param r The red value of the filled ellipse to draw.
+\param g The green value of the filled ellipse to draw.
+\param b The blue value of the filled ellipse to draw.
 \param a The alpha value of the filled ellipse to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4520,7 +4520,7 @@ int filledEllipseColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 
 int filledEllipseRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rx, Sint16 ry, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (filledEllipseColor
 		(dst, x, y, rx, ry, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
@@ -4539,7 +4539,7 @@ Note: Determines vertex array and uses polygon or filledPolygon drawing routines
 \param rad Radius in pixels of the pie.
 \param start Starting radius in degrees of the pie.
 \param end Ending radius in degrees of the pie.
-\param color The color value of the pie to draw (0xRRGGBBAA). 
+\param color The color value of the pie to draw (0xRRGGBBAA).
 \param filled Flag indicating if the pie should be filled (=1) or not (=0).
 
 \returns Returns 0 on success, -1 on failure.
@@ -4563,7 +4563,7 @@ int _pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, S
 	}
 
 	/*
-	* Sanity check radii 
+	* Sanity check radii
 	*/
 	if (rad < 0) {
 		return (-1);
@@ -4576,7 +4576,7 @@ int _pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, S
 	end = end % 360;
 
 	/*
-	* Special case for rad=0 - draw a point 
+	* Special case for rad=0 - draw a point
 	*/
 	if (rad == 0) {
 		return (pixelColor(dst, x, y, color));
@@ -4584,32 +4584,32 @@ int _pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, S
 
 	/*
 	* Clip against circle, not pie (not 100% optimal).
-	* Get pie's circle and clipping boundary and 
+	* Get pie's circle and clipping boundary and
 	* test if bounding box of circle is visible
 	*/
 	x2 = x + rad;
 	left = dst->clip_rect.x;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	x1 = x - rad;
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	y2 = y + rad;
 	top = dst->clip_rect.y;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	y1 = y - rad;
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/*
-	* Variable setup 
+	* Variable setup
 	*/
 	dr = (double) rad;
 	deltaAngle = 3.0 / dr;
@@ -4690,12 +4690,12 @@ int _pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, S
 \param rad Radius in pixels of the pie.
 \param start Starting radius in degrees of the pie.
 \param end Ending radius in degrees of the pie.
-\param color The color value of the pie to draw (0xRRGGBBAA). 
+\param color The color value of the pie to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
-int pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, 
-	Sint16 start, Sint16 end, Uint32 color) 
+int pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad,
+	Sint16 start, Sint16 end, Uint32 color)
 {
 	return (_pieColor(dst, x, y, rad, start, end, color, 0));
 
@@ -4710,9 +4710,9 @@ int pieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad,
 \param rad Radius in pixels of the pie.
 \param start Starting radius in degrees of the pie.
 \param end Ending radius in degrees of the pie.
-\param r The red value of the pie to draw. 
-\param g The green value of the pie to draw. 
-\param b The blue value of the pie to draw. 
+\param r The red value of the pie to draw.
+\param g The green value of the pie to draw.
+\param b The blue value of the pie to draw.
 \param a The alpha value of the pie to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4734,7 +4734,7 @@ int pieRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad,
 \param rad Radius in pixels of the filled pie.
 \param start Starting radius in degrees of the filled pie.
 \param end Ending radius in degrees of the filled pie.
-\param color The color value of the filled pie to draw (0xRRGGBBAA). 
+\param color The color value of the filled pie to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -4752,9 +4752,9 @@ int filledPieColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 sta
 \param rad Radius in pixels of the filled pie.
 \param start Starting radius in degrees of the filled pie.
 \param end Ending radius in degrees of the filled pie.
-\param r The red value of the filled pie to draw. 
-\param g The green value of the filled pie to draw. 
-\param b The blue value of the filled pie to draw. 
+\param r The red value of the filled pie to draw.
+\param g The green value of the filled pie to draw.
+\param b The blue value of the filled pie to draw.
 \param a The alpha value of the filled pie to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4780,13 +4780,13 @@ Note: Creates vertex array and uses polygon routine to render.
 \param y2 Y coordinate of the second point of the trigon.
 \param x3 X coordinate of the third point of the trigon.
 \param y3 Y coordinate of the third point of the trigon.
-\param color The color value of the trigon to draw (0xRRGGBBAA). 
+\param color The color value of the trigon to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
 int trigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color)
 {
-	Sint16 vx[3]; 
+	Sint16 vx[3];
 	Sint16 vy[3];
 
 	vx[0]=x1;
@@ -4809,9 +4809,9 @@ int trigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, S
 \param y2 Y coordinate of the second point of the trigon.
 \param x3 X coordinate of the third point of the trigon.
 \param y3 Y coordinate of the third point of the trigon.
-\param r The red value of the trigon to draw. 
-\param g The green value of the trigon to draw. 
-\param b The blue value of the trigon to draw. 
+\param r The red value of the trigon to draw.
+\param g The green value of the trigon to draw.
+\param b The blue value of the trigon to draw.
 \param a The alpha value of the trigon to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4819,7 +4819,7 @@ int trigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, S
 int trigonRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	Sint16 vx[3]; 
+	Sint16 vx[3];
 	Sint16 vy[3];
 
 	vx[0]=x1;
@@ -4830,7 +4830,7 @@ int trigonRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Si
 	vy[2]=y3;
 
 	return(polygonRGBA(dst,vx,vy,3,r,g,b,a));
-}				 
+}
 
 /* ------ AA-Trigon */
 
@@ -4846,13 +4846,13 @@ Note: Creates vertex array and uses aapolygon routine to render.
 \param y2 Y coordinate of the second point of the aa-trigon.
 \param x3 X coordinate of the third point of the aa-trigon.
 \param y3 Y coordinate of the third point of the aa-trigon.
-\param color The color value of the aa-trigon to draw (0xRRGGBBAA). 
+\param color The color value of the aa-trigon to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
 int aatrigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color)
 {
-	Sint16 vx[3]; 
+	Sint16 vx[3];
 	Sint16 vy[3];
 
 	vx[0]=x1;
@@ -4875,9 +4875,9 @@ int aatrigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
 \param y2 Y coordinate of the second point of the aa-trigon.
 \param x3 X coordinate of the third point of the aa-trigon.
 \param y3 Y coordinate of the third point of the aa-trigon.
-\param r The red value of the aa-trigon to draw. 
-\param g The green value of the aa-trigon to draw. 
-\param b The blue value of the aa-trigon to draw. 
+\param r The red value of the aa-trigon to draw.
+\param g The green value of the aa-trigon to draw.
+\param b The blue value of the aa-trigon to draw.
 \param a The alpha value of the aa-trigon to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4885,7 +4885,7 @@ int aatrigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
 int aatrigonRGBA(SDL_Surface * dst,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	Sint16 vx[3]; 
+	Sint16 vx[3];
 	Sint16 vy[3];
 
 	vx[0]=x1;
@@ -4896,7 +4896,7 @@ int aatrigonRGBA(SDL_Surface * dst,  Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
 	vy[2]=y3;
 
 	return(aapolygonRGBA(dst,vx,vy,3,r,g,b,a));
-}				   
+}
 
 /* ------ Filled Trigon */
 
@@ -4912,13 +4912,13 @@ Note: Creates vertex array and uses aapolygon routine to render.
 \param y2 Y coordinate of the second point of the filled trigon.
 \param x3 X coordinate of the third point of the filled trigon.
 \param y3 Y coordinate of the third point of the filled trigon.
-\param color The color value of the filled trigon to draw (0xRRGGBBAA). 
+\param color The color value of the filled trigon to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
 int filledTrigonColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3, Uint32 color)
 {
-	Sint16 vx[3]; 
+	Sint16 vx[3];
 	Sint16 vy[3];
 
 	vx[0]=x1;
@@ -4943,9 +4943,9 @@ Note: Creates vertex array and uses aapolygon routine to render.
 \param y2 Y coordinate of the second point of the filled trigon.
 \param x3 X coordinate of the third point of the filled trigon.
 \param y3 Y coordinate of the third point of the filled trigon.
-\param r The red value of the filled trigon to draw. 
-\param g The green value of the filled trigon to draw. 
-\param b The blue value of the filled trigon to draw. 
+\param r The red value of the filled trigon to draw.
+\param g The green value of the filled trigon to draw.
+\param b The blue value of the filled trigon to draw.
 \param a The alpha value of the filled trigon to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -4953,7 +4953,7 @@ Note: Creates vertex array and uses aapolygon routine to render.
 int filledTrigonRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Sint16 x3, Sint16 y3,
 	Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	Sint16 vx[3]; 
+	Sint16 vx[3];
 	Sint16 vy[3];
 
 	vx[0]=x1;
@@ -4975,7 +4975,7 @@ int filledTrigonRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 \param vx Vertex array containing X coordinates of the points of the polygon.
 \param vy Vertex array containing Y coordinates of the points of the polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param color The color value of the polygon to draw (0xRRGGBBAA). 
+\param color The color value of the polygon to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -4993,7 +4993,7 @@ int polygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n,
 	}
 
 	/*
-	* Vertex array NULL check 
+	* Vertex array NULL check
 	*/
 	if (vx == NULL) {
 		return (-1);
@@ -5003,14 +5003,14 @@ int polygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n,
 	}
 
 	/*
-	* Sanity check 
+	* Sanity check
 	*/
 	if (n < 3) {
 		return (-1);
 	}
 
 	/*
-	* Pointer setup 
+	* Pointer setup
 	*/
 	x1 = x2 = vx;
 	y1 = y2 = vy;
@@ -5018,7 +5018,7 @@ int polygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n,
 	y2++;
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = 0;
 	for (i = 1; i < n; i++) {
@@ -5040,9 +5040,9 @@ int polygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n,
 \param vx Vertex array containing X coordinates of the points of the polygon.
 \param vy Vertex array containing Y coordinates of the points of the polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param r The red value of the polygon to draw. 
-\param g The green value of the polygon to draw. 
-\param b The blue value of the polygon to draw. 
+\param r The red value of the polygon to draw.
+\param g The green value of the polygon to draw.
+\param b The blue value of the polygon to draw.
 \param a The alpha value of the polygon to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -5050,7 +5050,7 @@ int polygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n,
 int polygonRGBA(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (polygonColor(dst, vx, vy, n, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -5064,7 +5064,7 @@ int polygonRGBA(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
 \param vx Vertex array containing X coordinates of the points of the aa-polygon.
 \param vy Vertex array containing Y coordinates of the points of the aa-polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param color The color value of the aa-polygon to draw (0xRRGGBBAA). 
+\param color The color value of the aa-polygon to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -5082,7 +5082,7 @@ int aapolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int 
 	}
 
 	/*
-	* Vertex array NULL check 
+	* Vertex array NULL check
 	*/
 	if (vx == NULL) {
 		return (-1);
@@ -5092,14 +5092,14 @@ int aapolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int 
 	}
 
 	/*
-	* Sanity check 
+	* Sanity check
 	*/
 	if (n < 3) {
 		return (-1);
 	}
 
 	/*
-	* Pointer setup 
+	* Pointer setup
 	*/
 	x1 = x2 = vx;
 	y1 = y2 = vy;
@@ -5107,7 +5107,7 @@ int aapolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int 
 	y2++;
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = 0;
 	for (i = 1; i < n; i++) {
@@ -5129,9 +5129,9 @@ int aapolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int 
 \param vx Vertex array containing X coordinates of the points of the aa-polygon.
 \param vy Vertex array containing Y coordinates of the points of the aa-polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param r The red value of the aa-polygon to draw. 
-\param g The green value of the aa-polygon to draw. 
-\param b The blue value of the aa-polygon to draw. 
+\param r The red value of the aa-polygon to draw.
+\param g The green value of the aa-polygon to draw.
+\param b The blue value of the aa-polygon to draw.
 \param a The alpha value of the aa-polygon to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -5139,7 +5139,7 @@ int aapolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int 
 int aapolygonRGBA(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (aapolygonColor(dst, vx, vy, n, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -5176,13 +5176,13 @@ static int gfxPrimitivesPolyAllocatedGlobal = 0;
 /*!
 \brief Draw filled polygon with alpha blending (multi-threaded capable).
 
-Note: The last two parameters are optional; but are required for multithreaded operation.  
+Note: The last two parameters are optional; but are required for multithreaded operation.
 
 \param dst The surface to draw on.
 \param vx Vertex array containing X coordinates of the points of the filled polygon.
 \param vy Vertex array containing Y coordinates of the points of the filled polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param color The color value of the filled polygon to draw (0xRRGGBBAA). 
+\param color The color value of the filled polygon to draw (0xRRGGBBAA).
 \param polyInts Preallocated, temporary vertex array used for sorting vertices. Required for multithreaded operation; set to NULL otherwise.
 \param polyAllocated Flag indicating if temporary vertex array was allocated. Required for multithreaded operation; set to NULL otherwise.
 
@@ -5210,7 +5210,7 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 	}
 
 	/*
-	* Vertex array NULL check 
+	* Vertex array NULL check
 	*/
 	if (vx == NULL) {
 		return (-1);
@@ -5227,7 +5227,7 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 	}
 
 	/*
-	* Map polygon cache  
+	* Map polygon cache
 	*/
 	if ((polyInts==NULL) || (polyAllocated==NULL)) {
 		/* Use global cache */
@@ -5240,7 +5240,7 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 	}
 
 	/*
-	* Allocate temp array, only grow array 
+	* Allocate temp array, only grow array
 	*/
 	if (!gfxPrimitivesPolyAllocated) {
 		gfxPrimitivesPolyInts = (int *) malloc(sizeof(int) * n);
@@ -5264,14 +5264,14 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 	/*
 	* Check temp array
 	*/
-	if (gfxPrimitivesPolyInts==NULL) {        
+	if (gfxPrimitivesPolyInts==NULL) {
 		gfxPrimitivesPolyAllocated = 0;
 	}
 
 	/*
 	* Update cache variables
 	*/
-	if ((polyInts==NULL) || (polyAllocated==NULL)) { 
+	if ((polyInts==NULL) || (polyAllocated==NULL)) {
 		gfxPrimitivesPolyIntsGlobal =  gfxPrimitivesPolyInts;
 		gfxPrimitivesPolyAllocatedGlobal = gfxPrimitivesPolyAllocated;
 	} else {
@@ -5282,12 +5282,12 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 	/*
 	* Check temp array again
 	*/
-	if (gfxPrimitivesPolyInts==NULL) {        
+	if (gfxPrimitivesPolyInts==NULL) {
 		return(-1);
 	}
 
 	/*
-	* Determine Y maxima 
+	* Determine Y maxima
 	*/
 	miny = vy[0];
 	maxy = vy[0];
@@ -5300,7 +5300,7 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 	}
 
 	/*
-	* Draw, scanning y 
+	* Draw, scanning y
 	*/
 	result = 0;
 	for (y = miny; (y <= maxy); y++) {
@@ -5328,7 +5328,7 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 			}
 			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
 				gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
-			} 	    
+			}
 		}
 
 		qsort(gfxPrimitivesPolyInts, ints, sizeof(int), _gfxPrimitivesCompareInt);
@@ -5348,15 +5348,15 @@ int filledPolygonColorMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy
 /*!
 \brief Draw filled polygon with alpha blending (multi-threaded capable).
 
-Note: The last two parameters are optional; but are required for multithreaded operation.  
+Note: The last two parameters are optional; but are required for multithreaded operation.
 
 \param dst The surface to draw on.
 \param vx Vertex array containing X coordinates of the points of the filled polygon.
 \param vy Vertex array containing Y coordinates of the points of the filled polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param r The red value of the filled polygon to draw. 
-\param g The green value of the filled polygon to draw. 
-\param b The blue value of the filed polygon to draw. 
+\param r The red value of the filled polygon to draw.
+\param g The green value of the filled polygon to draw.
+\param b The blue value of the filed polygon to draw.
 \param a The alpha value of the filled polygon to draw.
 \param polyInts Preallocated, temporary vertex array used for sorting vertices. Required for multithreaded operation; set to NULL otherwise.
 \param polyAllocated Flag indicating if temporary vertex array was allocated. Required for multithreaded operation; set to NULL otherwise.
@@ -5366,7 +5366,7 @@ Note: The last two parameters are optional; but are required for multithreaded o
 int filledPolygonRGBAMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a, int **polyInts, int *polyAllocated)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (filledPolygonColorMT(dst, vx, vy, n, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a, polyInts, polyAllocated));
 }
@@ -5381,14 +5381,14 @@ to use the global vertex cache.
 \param vx Vertex array containing X coordinates of the points of the filled polygon.
 \param vy Vertex array containing Y coordinates of the points of the filled polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param color The color value of the filled polygon to draw (0xRRGGBBAA). 
+\param color The color value of the filled polygon to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
 int filledPolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, Uint32 color)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (filledPolygonColorMT(dst, vx, vy, n, color, NULL, NULL));
 }
@@ -5400,9 +5400,9 @@ int filledPolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, 
 \param vx Vertex array containing X coordinates of the points of the filled polygon.
 \param vy Vertex array containing Y coordinates of the points of the filled polygon.
 \param n Number of points in the vertex array. Minimum number is 3.
-\param r The red value of the filled polygon to draw. 
-\param g The green value of the filled polygon to draw. 
-\param b The blue value of the filed polygon to draw. 
+\param r The red value of the filled polygon to draw.
+\param g The green value of the filled polygon to draw.
+\param b The blue value of the filed polygon to draw.
 \param a The alpha value of the filled polygon to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -5410,7 +5410,7 @@ int filledPolygonColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, 
 int filledPolygonRGBA(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (filledPolygonColorMT(dst, vx, vy, n, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a, NULL, NULL));
 }
@@ -5434,8 +5434,8 @@ int _HLineTextured(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, SDL_Surfac
 	Sint16 w;
 	Sint16 xtmp;
 	int result = 0;
-	int texture_x_walker;    
-	int texture_y_start;    
+	int texture_x_walker;
+	int texture_y_start;
 	SDL_Rect source_rect,dst_rect;
 	int pixels_written,write_width;
 
@@ -5457,7 +5457,7 @@ int _HLineTextured(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, SDL_Surfac
 
 	/*
 	* Get clipping boundary and
-	* check visibility of hline 
+	* check visibility of hline
 	*/
 	left = dst->clip_rect.x;
 	if (x2<left) {
@@ -5474,7 +5474,7 @@ int _HLineTextured(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, SDL_Surfac
 	}
 
 	/*
-	* Clip x 
+	* Clip x
 	*/
 	if (x1 < left) {
 		x1 = left;
@@ -5543,7 +5543,7 @@ int _HLineTextured(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, SDL_Surfac
 }
 
 /*!
-\brief Draws a polygon filled with the given texture (Multi-Threading Capable). 
+\brief Draws a polygon filled with the given texture (Multi-Threading Capable).
 
 This operation use internally SDL_BlitSurface for lines of the source texture. It supports
 alpha drawing.
@@ -5552,12 +5552,12 @@ To get the best performance of this operation you need to make sure the texture 
 (see  http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/sdlblitsurface.html).
 The last two parameters are optional, but required for multithreaded operation. When set to NULL, uses global static temp array.
 
-\param dst the destination surface, 
+\param dst the destination surface,
 \param vx array of x vector components
 \param vy array of x vector components
 \param n the amount of vectors in the vx and vy array
 \param texture the sdl surface to use to fill the polygon
-\param texture_dx the offset of the texture relative to the screeen. if you move the polygon 10 pixels 
+\param texture_dx the offset of the texture relative to the screeen. if you move the polygon 10 pixels
 to the left and want the texture to apear the same you need to increase the texture_dx value
 \param texture_dy see texture_dx
 \param polyInts preallocated temp array storage for vertex sorting (used for multi-threaded operation)
@@ -5565,7 +5565,7 @@ to the left and want the texture to apear the same you need to increase the text
 
 \returns Returns 0 on success, -1 on failure.
 */
-int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
+int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n,
 	SDL_Surface * texture, int texture_dx, int texture_dy, int **polyInts, int *polyAllocated)
 {
 	int result;
@@ -5594,7 +5594,7 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 	}
 
 	/*
-	* Map polygon cache  
+	* Map polygon cache
 	*/
 	if ((polyInts==NULL) || (polyAllocated==NULL)) {
 		/* Use global cache */
@@ -5607,7 +5607,7 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 	}
 
 	/*
-	* Allocate temp array, only grow array 
+	* Allocate temp array, only grow array
 	*/
 	if (!gfxPrimitivesPolyAllocated) {
 		gfxPrimitivesPolyInts = (int *) malloc(sizeof(int) * n);
@@ -5622,14 +5622,14 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 	/*
 	* Check temp array
 	*/
-	if (gfxPrimitivesPolyInts==NULL) {        
+	if (gfxPrimitivesPolyInts==NULL) {
 		gfxPrimitivesPolyAllocated = 0;
 	}
 
 	/*
 	* Update cache variables
 	*/
-	if ((polyInts==NULL) || (polyAllocated==NULL)) { 
+	if ((polyInts==NULL) || (polyAllocated==NULL)) {
 		gfxPrimitivesPolyIntsGlobal =  gfxPrimitivesPolyInts;
 		gfxPrimitivesPolyAllocatedGlobal = gfxPrimitivesPolyAllocated;
 	} else {
@@ -5640,12 +5640,12 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 	/*
 	* Check temp array again
 	*/
-	if (gfxPrimitivesPolyInts==NULL) {        
+	if (gfxPrimitivesPolyInts==NULL) {
 		return(-1);
 	}
 
 	/*
-	* Determine X,Y minima,maxima 
+	* Determine X,Y minima,maxima
 	*/
 	miny = vy[0];
 	maxy = vy[0];
@@ -5671,7 +5671,7 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 	}
 
 	/*
-	* Draw, scanning y 
+	* Draw, scanning y
 	*/
 	result = 0;
 	for (y = miny; (y <= maxy); y++) {
@@ -5699,7 +5699,7 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 			}
 			if ( ((y >= y1) && (y < y2)) || ((y == maxy) && (y > y1) && (y <= y2)) ) {
 				gfxPrimitivesPolyInts[ints++] = ((65536 * (y - y1)) / (y2 - y1)) * (x2 - x1) + (65536 * x1);
-			} 
+			}
 		}
 
 		qsort(gfxPrimitivesPolyInts, ints, sizeof(int), _gfxPrimitivesCompareInt);
@@ -5717,16 +5717,16 @@ int texturedPolygonMT(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, i
 }
 
 /*!
-\brief Draws a polygon filled with the given texture. 
+\brief Draws a polygon filled with the given texture.
 
 This standard version is calling multithreaded versions with NULL cache parameters.
 
-\param dst the destination surface, 
+\param dst the destination surface,
 \param vx array of x vector components
 \param vy array of x vector components
 \param n the amount of vectors in the vx and vy array
 \param texture the sdl surface to use to fill the polygon
-\param texture_dx the offset of the texture relative to the screeen. if you move the polygon 10 pixels 
+\param texture_dx the offset of the texture relative to the screeen. if you move the polygon 10 pixels
 to the left and want the texture to apear the same you need to increase the texture_dx value
 \param texture_dy see texture_dx
 
@@ -5754,17 +5754,17 @@ static SDL_Surface *gfxPrimitivesFont[256];
 static Uint32 gfxPrimitivesFontColor[256];
 
 /*!
-\brief Pointer to the current font data. Default is a 8x8 pixel internal font. 
+\brief Pointer to the current font data. Default is a 8x8 pixel internal font.
 */
 static const unsigned char *currentFontdata = gfxPrimitivesFontdata;
 
 /*!
-\brief Width of the current font. Default is 8. 
+\brief Width of the current font. Default is 8.
 */
 static Uint32 charWidth = 8;
 
 /*!
-\brief Height of the current font. Default is 8. 
+\brief Height of the current font. Default is 8.
 */
 static Uint32 charHeight = 8;
 
@@ -5779,22 +5779,22 @@ static Uint32 charWidthLocal = 8;
 static Uint32 charHeightLocal = 8;
 
 /*!
-\brief Pitch of the current font in bytes. Default is 1. 
+\brief Pitch of the current font in bytes. Default is 1.
 */
 static Uint32 charPitch = 1;
 
 /*!
-\brief Character data size in bytes of the current font. Default is 8. 
+\brief Character data size in bytes of the current font. Default is 8.
 */
 static Uint32 charSize = 8;
 
 /*!
 \brief Sets or resets the current global font data.
 
-The font data array is organized in follows: 
+The font data array is organized in follows:
 [fontdata] = [character 0][character 1]...[character 255] where
 [character n] = [byte 1 row 1][byte 2 row 1]...[byte {pitch} row 1][byte 1 row 2] ...[byte {pitch} row height] where
-[byte n] = [bit 0]...[bit 7] where 
+[byte n] = [bit 0]...[bit 7] where
 [bit n] = [0 for transparent pixel|1 for colored pixel]
 
 \param fontdata Pointer to array of font data. Set to NULL, to reset global font to the default 8x8 font.
@@ -5806,7 +5806,7 @@ void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch)
 	int i;
 
 	if ((fontdata) && (cw) && (ch)) {
-		currentFontdata = fontdata;
+		currentFontdata = (unsigned char*)fontdata;
 		charWidth = cw;
 		charHeight = ch;
 	} else {
@@ -5834,14 +5834,14 @@ void gfxPrimitivesSetFont(const void *fontdata, Uint32 cw, Uint32 ch)
 \brief Draw a character of the currently set font.
 
 On first call for a particular character and color combination, the function needs to
-generate the character surface (slower. Subsequent calls blit a cached surface (fast). 
+generate the character surface (slower. Subsequent calls blit a cached surface (fast).
 Uses alpha blending if A<255 in color.
 
 \param dst The surface to draw on.
 \param x X (horizontal) coordinate of the upper left corner of the character.
 \param y Y (vertical) coordinate of the upper left corner of the character.
 \param c The character to draw.
-\param color The color value of the character to draw (0xRRGGBBAA). 
+\param color The color value of the character to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -5870,29 +5870,29 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 
 	/*
 	* Get text and clipping boundary and
-	* test if bounding box of character is visible 
+	* test if bounding box of character is visible
 	*/
 
 	left = dst->clip_rect.x;
 	x2 = x + charWidthLocal;
 	if (x2<left) {
 		return(0);
-	} 
+	}
 	right = dst->clip_rect.x + dst->clip_rect.w - 1;
 	x1 = x;
 	if (x1>right) {
 		return(0);
-	} 
+	}
 	top = dst->clip_rect.y;
 	y2 = y + charHeightLocal;
 	if (y2<top) {
 		return(0);
-	} 
+	}
 	bottom = dst->clip_rect.y + dst->clip_rect.h - 1;
 	y1 = y;
 	if (y1>bottom) {
 		return(0);
-	} 
+	}
 
 	/*
 	* Setup source rectangle
@@ -5923,13 +5923,13 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 			charWidth, charHeight, 32,
 			0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
 		/*
-		* Check pointer 
+		* Check pointer
 		*/
 		if (gfxPrimitivesFont[ci] == NULL) {
 			return (-1);
 		}
 		/*
-		* Definitely redraw 
+		* Definitely redraw
 		*/
 		forced_redraw = 1;
 	} else {
@@ -5937,11 +5937,11 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 	}
 
 	/*
-	* Check if color has changed 
+	* Check if color has changed
 	*/
 	if ((gfxPrimitivesFontColor[ci] != color) || (forced_redraw)) {
 		/*
-		* Redraw character 
+		* Redraw character
 		*/
 		SDL_SetAlpha(gfxPrimitivesFont[ci], SDL_SRCALPHA, 255);
 		gfxPrimitivesFontColor[ci] = color;
@@ -5951,14 +5951,14 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 			return (-1);
 
 		/*
-		* Variable setup 
+		* Variable setup
 		*/
 		charpos = currentFontdata + ci * charSize;
 		linepos = (Uint8 *) gfxPrimitivesFont[ci]->pixels;
 		pitch = gfxPrimitivesFont[ci]->pitch;
 
 		/*
-		* Drawing loop 
+		* Drawing loop
 		*/
 		patt = 0;
 		for (iy = 0; iy < charHeight; iy++) {
@@ -5985,7 +5985,7 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 	}
 
 	/*
-	* Draw bitmap onto destination surface 
+	* Draw bitmap onto destination surface
 	*/
 	result = SDL_BlitSurface(gfxPrimitivesFont[ci], &srect, dst, &drect);
 
@@ -5999,9 +5999,9 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 \param x X (horizontal) coordinate of the upper left corner of the character.
 \param y Y (vertical) coordinate of the upper left corner of the character.
 \param c The character to draw.
-\param r The red value of the character to draw. 
-\param g The green value of the character to draw. 
-\param b The blue value of the character to draw. 
+\param r The red value of the character to draw.
+\param g The green value of the character to draw.
+\param b The blue value of the character to draw.
 \param a The alpha value of the character to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -6009,7 +6009,7 @@ int characterColor(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint32 color)
 int characterRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (characterColor(dst, x, y, c, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -6017,14 +6017,14 @@ int characterRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, char c, Uint8 r, Uint8 
 /*!
 \brief Draw a string in the currently set font.
 
-The spacing between consequtive characters in the string is the fixed number of pixels 
+The spacing between consequtive characters in the string is the fixed number of pixels
 of the character width of the current global font.
 
 \param dst The surface to draw on.
 \param x X (horizontal) coordinate of the upper left corner of the string.
 \param y Y (vertical) coordinate of the upper left corner of the string.
 \param s The string to draw.
-\param color The color value of the string to draw (0xRRGGBBAA). 
+\param color The color value of the string to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -6051,9 +6051,9 @@ int stringColor(SDL_Surface * dst, Sint16 x, Sint16 y, const char *s, Uint32 col
 \param x X (horizontal) coordinate of the upper left corner of the string.
 \param y Y (vertical) coordinate of the upper left corner of the string.
 \param s The string to draw.
-\param r The red value of the string to draw. 
-\param g The green value of the string to draw. 
-\param b The blue value of the string to draw. 
+\param r The red value of the string to draw.
+\param g The green value of the string to draw.
+\param b The blue value of the string to draw.
 \param a The alpha value of the string to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -6061,7 +6061,7 @@ int stringColor(SDL_Surface * dst, Sint16 x, Sint16 y, const char *s, Uint32 col
 int stringRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, const char *s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (stringColor(dst, x, y, s, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -6077,7 +6077,7 @@ int stringRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, const char *s, Uint8 r, Ui
 
 \returns Interpolated value at position t, value[0] when t<0, value[n-1] when t>n.
 */
-double _evaluateBezier (double *data, int ndata, double t) 
+double _evaluateBezier (double *data, int ndata, double t)
 {
 	double mu, result;
 	int n,k,kn,nn,nkn;
@@ -6091,7 +6091,7 @@ double _evaluateBezier (double *data, int ndata, double t)
 		return(data[ndata-1]);
 	}
 
-	/* Adjust t to the range 0.0 to 1.0 */ 
+	/* Adjust t to the range 0.0 to 1.0 */
 	mu=t/(double)ndata;
 
 	/* Calculate interpolate */
@@ -6132,7 +6132,7 @@ double _evaluateBezier (double *data, int ndata, double t)
 \param vy Vertex array containing Y coordinates of the points of the bezier curve.
 \param n Number of points in the vertex array. Minimum number is 3.
 \param s Number of steps for the interpolation. Minimum number is 2.
-\param color The color value of the bezier curve to draw (0xRRGGBBAA). 
+\param color The color value of the bezier curve to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
@@ -6144,7 +6144,7 @@ int bezierColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
 	Sint16 x1, y1, x2, y2;
 
 	/*
-	* Sanity check 
+	* Sanity check
 	*/
 	if (n < 3) {
 		return (-1);
@@ -6154,7 +6154,7 @@ int bezierColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
 	}
 
 	/*
-	* Variable setup 
+	* Variable setup
 	*/
 	stepsize=(double)1.0/(double)s;
 
@@ -6165,16 +6165,16 @@ int bezierColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
 	if ((y=(double *)malloc(sizeof(double)*(n+1)))==NULL) {
 		free(x);
 		return(-1);
-	}    
+	}
 	for (i=0; i<n; i++) {
 		x[i]=(double)vx[i];
 		y[i]=(double)vy[i];
-	}      
+	}
 	x[n]=(double)vx[0];
 	y[n]=(double)vy[0];
 
 	/*
-	* Draw 
+	* Draw
 	*/
 	result = 0;
 	t=0.0;
@@ -6204,9 +6204,9 @@ int bezierColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
 \param vy Vertex array containing Y coordinates of the points of the bezier curve.
 \param n Number of points in the vertex array. Minimum number is 3.
 \param s Number of steps for the interpolation. Minimum number is 2.
-\param r The red value of the bezier curve to draw. 
-\param g The green value of the bezier curve to draw. 
-\param b The blue value of the bezier curve to draw. 
+\param r The red value of the bezier curve to draw.
+\param g The green value of the bezier curve to draw.
+\param b The blue value of the bezier curve to draw.
 \param a The alpha value of the bezier curve to draw.
 
 \returns Returns 0 on success, -1 on failure.
@@ -6214,7 +6214,7 @@ int bezierColor(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, 
 int bezierRGBA(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, int s, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	/*
-	* Draw 
+	* Draw
 	*/
 	return (bezierColor(dst, vx, vy, n, s, ((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
@@ -6226,9 +6226,9 @@ int bezierRGBA(SDL_Surface * dst, const Sint16 * vx, const Sint16 * vy, int n, i
 Example of use:
 SDL_gfxBresenhamIterator b;
 _bresenhamInitialize (&b, x1, y1, x2, y2);
-do { 
-plot(b.x, b.y); 
-} while (_bresenhamIterate(&b)==0); 
+do {
+plot(b.x, b.y);
+} while (_bresenhamIterate(&b)==0);
 
 \param b Pointer to struct for bresenham line drawing state.
 \param x1 X coordinate of the first point of the line.
@@ -6258,7 +6258,7 @@ int _bresenhamInitialize(SDL_gfxBresenhamIterator *b, Sint16 x1, Sint16 y1, Sint
 			b->s1 = 1;
 		}
 	} else {
-		b->s1 = 0;	
+		b->s1 = 0;
 	}
 
 	/* dy = abs(y2-y1), s2 = sign(y2-y1)    */
@@ -6270,7 +6270,7 @@ int _bresenhamInitialize(SDL_gfxBresenhamIterator *b, Sint16 x1, Sint16 y1, Sint
 			b->s2 = 1;
 		}
 	} else {
-		b->s2 = 0;	
+		b->s2 = 0;
 	}
 
 	if (b->dy > b->dx) {
@@ -6285,7 +6285,7 @@ int _bresenhamInitialize(SDL_gfxBresenhamIterator *b, Sint16 x1, Sint16 y1, Sint
 	b->count = (b->dx<0) ? 0 : (unsigned int)b->dx;
 	b->dy <<= 1;
 	b->error = b->dy - b->dx;
-	b->dx <<= 1;	
+	b->dx <<= 1;
 
 	return(0);
 }
@@ -6301,7 +6301,7 @@ Maybe updates the x and y coordinates of the iterator struct.
 \returns Returns 0 on success, 1 if last point was reached, 2 if moving past end-of-line, -1 on failure.
 */
 int _bresenhamIterate(SDL_gfxBresenhamIterator *b)
-{	
+{
 	if (b==NULL) {
 		return (-1);
 	}
@@ -6327,8 +6327,8 @@ int _bresenhamIterate(SDL_gfxBresenhamIterator *b)
 		b->x += b->s1;
 	}
 
-	b->error += b->dy;	
-	b->count--;		
+	b->error += b->dy;
+	b->count--;
 
 	/* count==0 indicates "end-of-line" */
 	return ((b->count) ? 0 : 1);
@@ -6349,7 +6349,7 @@ void _murphyParaline(SDL_gfxMurphyIterator *m, Sint16 x, Sint16 y, int d1)
 	d1 = -d1;
 
 	/*
-	* Lock the surface 
+	* Lock the surface
 	*/
 	if (SDL_MUSTLOCK(m->dst)) {
 		SDL_LockSurface(m->dst);
@@ -6370,7 +6370,7 @@ void _murphyParaline(SDL_gfxMurphyIterator *m, Sint16 x, Sint16 y, int d1)
 				}
 			}
 			d1 += m->kv;
-		} else {	
+		} else {
 			x++;
 			if (m->quad4 == 0) {
 				y++;
@@ -6405,13 +6405,13 @@ void _murphyParaline(SDL_gfxMurphyIterator *m, Sint16 x, Sint16 y, int d1)
 \param ml2y Y coordinate of a point.
 
 */
-void _murphyIteration(SDL_gfxMurphyIterator *m, Uint8 miter, 
-	Uint16 ml1bx, Uint16 ml1by, Uint16 ml2bx, Uint16 ml2by, 
+void _murphyIteration(SDL_gfxMurphyIterator *m, Uint8 miter,
+	Uint16 ml1bx, Uint16 ml1by, Uint16 ml2bx, Uint16 ml2by,
 	Uint16 ml1x, Uint16 ml1y, Uint16 ml2x, Uint16 ml2y)
 {
 	int atemp1, atemp2;
 	int ftmp1, ftmp2;
-	Uint16 m1x, m1y, m2x, m2y;	
+	Uint16 m1x, m1y, m2x, m2y;
 	Uint16 fix, fiy, lax, lay, curx, cury;
 	Sint16 px[4], py[4];
 	SDL_gfxBresenhamIterator b;
@@ -6467,7 +6467,7 @@ void _murphyIteration(SDL_gfxMurphyIterator *m, Uint8 miter,
 			}
 
 			/*
-			* Lock the surface 
+			* Lock the surface
 			*/
 			if (SDL_MUSTLOCK(m->dst)) {
 				SDL_LockSurface(m->dst);
@@ -6505,8 +6505,8 @@ void _murphyIteration(SDL_gfxMurphyIterator *m, Uint8 miter,
 			py[0] = m1y;
 			py[1] = m2y;
 			py[2] = ml1by;
-			py[3] = ml2by;			
-			polygonColor(m->dst, px, py, 4, m->color);						
+			py[3] = ml2by;
+			polygonColor(m->dst, px, py, 4, m->color);
 		}
 	}
 
@@ -6521,7 +6521,7 @@ void _murphyIteration(SDL_gfxMurphyIterator *m, Uint8 miter,
 }
 
 
-#define HYPOT(x,y) sqrt((double)(x)*(double)(x)+(double)(y)*(double)(y)) 
+#define HYPOT(x,y) sqrt((double)(x)*(double)(x)+(double)(y)*(double)(y))
 
 /*!
 \brief Internal function to to draw wide lines with Murphy algorithm.
@@ -6538,7 +6538,7 @@ Draws lines parallel to ideal line.
 
 */
 void _murphyWideline(SDL_gfxMurphyIterator *m, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint8 miter)
-{	
+{
 	float offset = (float)width / 2.f;
 
 	Sint16 temp;
@@ -6564,7 +6564,7 @@ void _murphyWideline(SDL_gfxMurphyIterator *m, Sint16 x1, Sint16 y1, Sint16 x2, 
 		x2 = temp;
 		temp = y1;
 		y1 = y2;
-		y2 = temp;		
+		y2 = temp;
 		m->u *= -1;
 		m->v *= -1;
 	}
@@ -6594,7 +6594,7 @@ void _murphyWideline(SDL_gfxMurphyIterator *m, Sint16 x1, Sint16 y1, Sint16 x2, 
 	d1 = 0;
 	dd = 0;
 
-	ang = atan((double) m->v / (double) m->u);	/* calc new initial point - offset both sides of ideal */	
+	ang = atan((double) m->v / (double) m->u);	/* calc new initial point - offset both sides of ideal */
 	sang = sin(ang);
 	cang = cos(ang);
 
@@ -6717,12 +6717,12 @@ void _murphyWideline(SDL_gfxMurphyIterator *m, Sint16 x1, Sint16 y1, Sint16 x2, 
 \param x2 X coordinate of the second point of the line.
 \param y2 Y coordinate of the second point of the line.
 \param width Width of the line in pixels. Must be >0.
-\param color The color value of the line to draw (0xRRGGBBAA). 
+\param color The color value of the line to draw (0xRRGGBBAA).
 
 \returns Returns 0 on success, -1 on failure.
 */
 int thickLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint32 color)
-{	
+{
 	int wh;
 	SDL_gfxMurphyIterator m;
 
@@ -6732,7 +6732,7 @@ int thickLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 	/* Special case: thick "point" */
 	if ((x1 == x2) && (y1 == y2)) {
 		wh = width / 2;
-		return boxColor(dst, x1 - wh, y1 - wh, x2 + width, y2 + width, color);		
+		return boxColor(dst, x1 - wh, y1 - wh, x2 + width, y2 + width, color);
 	}
 
 	m.dst = dst;
@@ -6753,16 +6753,16 @@ int thickLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2
 \param x2 X coordinate of the second point of the line.
 \param y2 Y coordinate of the second point of the line.
 \param width Width of the line in pixels. Must be >0.
-\param r The red value of the character to draw. 
-\param g The green value of the character to draw. 
-\param b The blue value of the character to draw. 
+\param r The red value of the character to draw.
+\param g The green value of the character to draw.
+\param b The blue value of the character to draw.
 \param a The alpha value of the character to draw.
 
 \returns Returns 0 on success, -1 on failure.
-*/	
+*/
 int thickLineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
-	return (thickLineColor(dst, x1, y1, x2, y2, width, 
+	return (thickLineColor(dst, x1, y1, x2, y2, width,
 		((Uint32) r << 24) | ((Uint32) g << 16) | ((Uint32) b << 8) | (Uint32) a));
 }
 
