@@ -1,13 +1,11 @@
 Grand-Theft-Gentoo
 ==================
 
-COLLABORATION
-=================
-#irc:
-[#GTG @ irc.p2p-irc.net](http:///mibbit.com/#GTG@irc.p2p-irc.net)
-
-#Website:
-[Website](http://grandtheftgentoo.github.com/Grand-Theft-Gentoo/)
+Communications
+==============
+* [#GTG @ irc.p2p-irc.net](http:///mibbit.com/#GTG@irc.p2p-irc.net)
+* [Website](http://grandtheftgentoo.github.com/Grand-Theft-Gentoo/)
+* [WIKI](https://github.com/GrandTheftGentoo/Grand-Theft-Gentoo/wiki)
 
 RESOURCES
 =========
