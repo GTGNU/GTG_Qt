@@ -22,3 +22,7 @@ RESOURCES
 * [C++ crash course](http://www.stanford.edu/class/cs193d/handouts/04-A-Crash-Course.pdf)
 * [C++ reference](http://www.cplusplus.com/)
 * [Another C++ reference](http://www.cppreference.com/)
+
+#Qt
+* [Documentation](http://qt-project.org/doc/qt-5.0/qtdoc/index.html)
+* [Reference](http://qt-project.org/doc/qt-5.0/qtdoc/reference-overview.html)
