@@ -228,16 +228,18 @@ glorious DAWS open operating system
 >dennis: what we need to do now is deal with microshaft.
 >rms: do you have any plans?
 >dennis: i have amassed an elite team of hackers, and tonight we will strike a blow.
->rms: what'll we be doing?
+>dennis: “We need something from you."
+>RMS: “...What do you need?"
+>Dennis: “this wont exactly be easy as you know. We're going to need some data from you..."
+>Denniss: “you may know that before he died eric was working on a war dail script. Thats not all it did. There is a part of it that we need to complete our code."
 >dennis: we're going to destroy their major factory, right here in rice city.
->dennis: meet us at the back of the lintell facility tonight, at 12:00 sharp, bring me a program to take down the server
+>dennis: meet us at the back of the facility tonight, at 12:00 sharp
 >rms: ok, why--
 (phone call ends)
-
+﻿
 
 ####behind microshaft warehouse#####
-
- >An old Mercedes pulls up...
+ >An old Mercedes pulls up...
 	>A Mysterious figure emerges from in front of its glaring headlights 
 >RMS: “Are you who I’m meeting?”
 >man: “I’m the only one here, am I not?”
@@ -257,6 +259,46 @@ glorious DAWS open operating system
 >He gets back in the car and drives off.
 >You wait until he's out of the lot to retrieve the case.
 >You open it. It looks okay.
+
+>>return to the apartment<<
+
+######apartment#####
+
+	-there is a car out side of the building	
+	-2 men in the hall
+	-your door is open
+	-the room trashed
+>RMS: “What happened here?! What is the reason behind this!! I know my rights!
+>Man In Black: “We don’t believe in rights. Take this as a warning.”
+>>fight breaks out<<
+>>you loose<<
+	-spawn at the hospital and retry
+>>you win<<
+	-agents drop a gun as they leave
+>>all the “agents” leave, the room is a mess<<
+>RMS: “This is crazy! What is going on?! Something has to be done this about!”
+>>you return to MIT<<
+
+#####down town#####
+	-on the way there
+		-people out side of “corp” on the street
+>>a man runs up to you<<
+>Man: “are you getting it too? I am so excited!”
+>>man runs off<<
+>>over hear a woman<<
+>Woman: “I’ve read some reviews on it that say you need to get other programs from the ”corp“store”
+>Second woman: “thats ok with me. I take comfort in buying big name software.”
+
+>>go to MIT<<
+
+#####MIT####
+>>Bill Gosper comes up to you<<
+>Bill: “STALLMAN! Am I glad that you’re O.K.. I heard about what happened to Eric, its tragic. Who could do such a thing?!”
+>RMS: “I dont know, thats what Im going to find out... even if I die trying.”
+>Bill: “good luck my friend. I am willing to help, all you need to do is ask,”
+>Rms: “Thank you. I may hold you to that one day soon.”
+>Bill: “I wouldn’t expect any thing else,”
+>>he leaves<<
 
 
 
