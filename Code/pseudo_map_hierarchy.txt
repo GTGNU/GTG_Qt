@@ -117,3 +117,30 @@ EnvSoundProperty : public TileProperty
 		- Conversation (QQtQuickView or similar)
 			- Fully in QML and JavaScript to allow for easy animations
 			  and eye candy
+
+              
+//firecheese's opinion on implementation of tile storage
+GTGTile
+    int index - tile index the maps use
+    array of images, each image:
+        string - filename
+        unsigned int duration - duration in miliseconds (0 = infinite)
+        unsigned int x1 - x coordinate of the start of the image
+        unsigned int y1 - y coordinate of the start of the image
+        unsigned int x2 - x coordinate of the end of the image
+        unsigned int y2 - y coordinate of the end of the image
+        
+GTGMap
+    int tileIndexes[][]
+    bool isSolid[][]
+    
+GTGPlayer
+    int x,y
+    int tileIndexLeft, tileIndexRight, ...
+    
+GTG
+    GTGMap map
+    GTGPlayer player
+
+//baldwin(irc name, idk who he his on git)
+Use an mvc architecture to attatch properties to the world, it will remove inefficiency of detecting activation
