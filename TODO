@@ -1,0 +1,48 @@
+#####things to be done in the game#####
+
+>Graphics
+    -Maps
+        -Levels
+            -city
+                -buildings
+                    -rooms
+    -Textures~~basically done~
+    -Sprites~started~
+    -Cut scenes
+>Sound
+    -Music
+        -In game
+             -Ambient free roam
+             -Fighting
+             -Cut scenes
+             -Various boss battles
+        -Main menu
+            -Its been decided as the free software song sung by RMS him self
+    -FX
+        - Attacking
+        - Receiving damage
+        - Footsteps
+        - Opening doors and various similar actions
+
+>Story
+    -Script
+    -Story line
+
+>Coding
+    - Engine design (abstract, no GUI concepts or dependency)
+        - Base Actor class
+        - Base Action class
+        - Stage class with Viewport support
+        - Event listener base classes (std::function support is a must)
+        (see libgdx.scene2d wiki for an explaination on this)
+
+    - Game-specific implementation
+        - In-game actors
+        - Drawing (QGraphicsScene)
+
+    - Input
+
+    - Animation
+        - Movement // using actors + actions
+        - Attacking // using actors + actions
+        - Cut scenes // QML, replace game scene with a QDeclarativeView
