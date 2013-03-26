@@ -1,0 +1,24 @@
+Currently the installation is very simple. The examples in here are directed at linux users.
+For other platforms you would have to figure how to compile using makefiles.
+
+REQUIREMENTS:
+gcc
+sdl
+sdl_image
+sdl_ttf (for the editor only)
+
+To install the game:
+
+cd Game/GTG/
+make
+
+Thats it you should get a file named game, copy that to a directory with a res folder (you can find one
+in Binaries/res) and run it.
+
+To install the editor: (make sure you have sdl_ttf installed)
+
+cd Game/GTGEditor/
+make
+
+You will get the editor binary.
+Same thing as you did for the game, you also need the res folder.

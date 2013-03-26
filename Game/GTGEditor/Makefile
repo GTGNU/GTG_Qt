@@ -27,5 +27,5 @@ SDLGui.o : SDLGui.cpp SDLGui.h
 main.o :  main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
-editor : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o
+% : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o
 	${CC} ${CFLAGS} ${SDLFLAGS} main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o -o editor

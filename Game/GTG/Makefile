@@ -23,5 +23,5 @@ SDL_gfxPrimitives.o :  SDL_gfxPrimitives.c SDL_gfxPrimitives.h
 main.o :  main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
-game : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o
+% : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o
 	${CC} ${CFLAGS} ${SDLFLAGS} main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o -o game
