@@ -7,7 +7,9 @@ Random Citizen Lines:
 
 >"watch out for that stallman guy, I heard he supports communism"
 
->"that billy fence kid can jump over a chair!"
+>"that will fence kid can jump over a chair!"
+
+>"eww, aren't you that creep who likes parrots?"
 
 >"why do you guys care so much about freedom? get a life you nerd"
 
@@ -23,3 +25,9 @@ Random Dialogue at MIT:
 >"C is a pretty nice language, I wrote my own editor with it!"
 >"IUNIKS will always be the most used OS"
 >"who would use QML? it's such an ugly language"
+
+MIT Student 1: >"Wow IUNIKS is swell I love how functional and modular it is"
+MIT Student 2: >"Yeah I'm pretty satisfied with it, I don't really care if they made it free or not since it just werks"
+RMS: >"Let me just interject there but IUNIKS being proprietary means that it's limiting your freedom and what if you ran into a bug AD&D wouldn't solve? In a free program you could fix the bug"
+
+>"Drokk it, can't make my assembly code work, I am so gonna fail"
