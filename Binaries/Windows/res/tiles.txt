@@ -1,0 +1,13 @@
+12
+tiles/char_left_1.png 200 tiles/char_left_2.png 200
+tiles/char_right_1.png 200 tiles/char_right_2.png 200
+tiles/char_up_1.png 200 tiles/char_up_2.png 200
+tiles/char_down_1.png 200 tiles/char_down_2.png 200
+tiles/char_idle_left.gif
+tiles/char_idle_right.gif
+tiles/char_idle_up.gif
+tiles/char_idle_down.gif
+tiles/grass.png
+tiles/wall.png
+tiles/finish.png
+tiles/nope.png
