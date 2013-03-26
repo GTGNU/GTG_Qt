@@ -144,3 +144,78 @@ GTG
 
 //baldwin(irc name, idk who he his on git)
 Use an mvc architecture to attatch properties to the world, it will remove inefficiency of detecting activation
+<baldwin> Look, I'm not sure how useful it'll be - It's basically an example taken from a much more complex and detailed engine plan.
+<baldwin> but that engine relies on garbage collection, as it uses a lot of functional programming.
+/**
+ * Represents a generic component which can be added to game objects at runtime.
+ *
+ *
+ *
+ */
+interface Component {
+ 
+ 
+        /**
+         * @return a deep copy of this component.
+         */
+        Component copy();
+ 
+        /**
+         * @return a unique identifier associated with this component.
+         */
+        String getIdentifier();
+ 
+}
+ 
+/**
+ * Skeleton example of a specialized component interface. Implementations of this can differ.
+ */
+interface Drawable : Component {
+ 
+        /**
+         * performs the actual drawing of this component.
+         * @param draw the render object to make calls to draw with.
+         */
+        void draw(Drawer draw);
+}
+ 
+/**
+ * The basic game object. Provides a store for components.
+ */
+class GameObject {
+ 
+        Map<component, string> componentMap;
+ 
+        /**
+         * Returns the component matching the identifier in this object.
+         *
+         * Only one component can ever exist for a given identifier on a game object.
+         */
+        Component getComponent(String identifier) {
+                return componentMap.get(identifier);
+        }
+}
+ 
+/**
+ * Skeleton example class of something using a component.
+ */
+class DrawingManager {
+ 
+        Drawer drawer;
+ 
+        const String IDENTIFIER = "DRAWING";
+ 
+        /**
+         * Performs the drawing of all game objects that can be drawn.
+         *
+         *
+         */
+        draw(List<GameObject> gameobjects) {
+                foreach gameobject in gameobjects {
+                        Drawable drawable = gameObjects.get(this.identifier);
+                        if (drawable != NULL) {
+                                drawable.draw(this.drawer);
+                        }
+                }
+        }
+}
