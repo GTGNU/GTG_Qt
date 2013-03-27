@@ -22,8 +22,11 @@ Random Stranger: >"Wow thanks mister"
 >"Wow my iBeM Personal Computer is really neat, it even uses Proprietarydows 1.0"
 
 Random Dialogue at MIT:
+
 >"C is a pretty nice language, I wrote my own editor with it!"
+
 >"IUNIKS will always be the most used OS"
+
 >"who would use QML? it's such an ugly language"
 
 MIT Student 1: >"Wow IUNIKS is swell I love how functional and modular it is"
