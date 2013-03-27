@@ -10,7 +10,7 @@ sdl_ttf (for the editor only)
 To install the game:
 
 cd Code/GTG/
-make
+make clean
 
 Thats it you should get a file named game, copy that to a directory with a res folder (you can find one
 in Binaries/res) and run it.
