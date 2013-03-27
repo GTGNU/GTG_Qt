@@ -377,6 +377,29 @@ dial tone
 >rms: turns out those propreitary bastards are planning on taking us out.
 >rms: and what's worse, will fence is head of this.
 >bill: that slimy bastard.
+>rms: I think they'll be coming for you next. we've got to get you someplace safe.
+>bill: i have my shotgun right here. i'm ready for those creeps.
+>rms: great, i'll be right over. 
+>bill: fuck, i hear a car. I think they're here!
+*gunshots*
+*a scream just out of earshot*
+>bill: got one! hurry up, I can't hold this for long...
+
+//timed race to MIT
+
+on fail, must restart
+
+###MIT###
+
+//fight with small ammount of microshill agents
+
+>bill: glad you got here, any longer, and i don't think i'd be alive
+>rms: we've got to get you out of here before more of them show up
+>bill: where do we need to go?
+>rms: there's a bomb shelter in the basement of our research lab.
+>rms: I prepared for this.
+
+
 
 
 
