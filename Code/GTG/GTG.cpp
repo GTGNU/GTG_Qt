@@ -32,7 +32,9 @@ int GTG::Run(){
   int offX = screen->w/2 - (map.width *map.spaceX*0.5);
   int offY = screen->h/2 - (map.height*map.spaceY*0.5);
 
-  float cameraX, cameraY, cameraTargetX, cameraTargetY, cameraFromX, cameraFromY; Uint32 cameraTime = 0;
+  //cameraTargetTemp variables are used for manual camera control with the arrow keys
+  //changing the cameraTarget variables directly causes glitches
+  float cameraX, cameraY, cameraTargetX, cameraTargetY, cameraTargetTempX, cameraTargetTempY, cameraFromX, cameraFromY; Uint32 cameraTime = 0;
   cameraX = 0; cameraTargetX = 0; cameraFromX = 0;
   cameraY = 0; cameraTargetY = 0; cameraFromY = 0;
 
@@ -56,7 +58,6 @@ int GTG::Run(){
     tileset.Frame();
     map.Frame(&timer);
     map.player.Frame(&timer,events.keys[SDLK_a],events.keys[SDLK_d],events.keys[SDLK_w],events.keys[SDLK_s],&map);
-
     int px, py;
     boxColor(screen,0,0,screen->w,screen->h,map.backgroundColor);
     for(size_t x = 0; x<map.backTiles.size(); x++){
@@ -70,17 +71,25 @@ int GTG::Run(){
     }
     px = map.player.drawX*map.spaceX + offX + cameraTargetX;
     py = map.player.drawY*map.spaceX + offY + cameraTargetY;
-    if(px<(int)map.spaceX){ cameraTargetX += map.spaceX*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; } if(px>screen->w-(int)map.spaceX){ cameraTargetX -= map.spaceX*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; }
-    if(py<(int)map.spaceY){ cameraTargetY += map.spaceY*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; } if(py>screen->h-(int)map.spaceY){ cameraTargetY -= map.spaceY*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; }
+    if(px<(int)map.spaceX){ cameraTargetX += map.spaceX*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; cameraTargetTempX = cameraTargetX;} if(px>screen->w-(int)map.spaceX){ cameraTargetX -= map.spaceX*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; cameraTargetTempX = cameraTargetX; }
+    if(py<(int)map.spaceY){ cameraTargetY += map.spaceY*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; cameraTargetTempY = cameraTargetY;} if(py>screen->h-(int)map.spaceY){ cameraTargetY -= map.spaceY*2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY; cameraTargetTempY = cameraTargetY; }
+    //different speed for moving camera camera manually
+	if(events.keys[SDLK_LEFT]) {cameraTargetTempX += map.spaceX/2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY;}
+	if(events.keys[SDLK_UP]) {cameraTargetTempY += map.spaceX/2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY;}
+	if(events.keys[SDLK_RIGHT]) {cameraTargetTempX -= map.spaceX/2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY;}
+	if(events.keys[SDLK_DOWN]) {cameraTargetTempY -= map.spaceX/2; cameraTime = timer.now; cameraFromX = cameraX; cameraFromY = cameraY;}
     SDLBlit(map.player.currentTile->GetSurface(),screen,px-cameraTargetX+cameraX,py-cameraTargetY+cameraY);
 
     if(timer.now - cameraTime > cameraMoveSpeed){
-      cameraX = cameraTargetX; cameraY = cameraTargetY;
+      cameraX = cameraTargetTempX; cameraY = cameraTargetTempY;
+	  //bounces camera back once player starts moving
+	  if (map.player.is_moving())
+		cameraTargetX = cameraTargetTempX; cameraTargetY = cameraTargetTempY;
     }else{
       float d = (float)(timer.now - cameraTime)/cameraMoveSpeed;
       if(d > 1.)d = 1.;
-      cameraX = cameraFromX + (cameraTargetX - cameraFromX)*d;
-      cameraY = cameraFromY + (cameraTargetY - cameraFromY)*d;
+      cameraX = cameraFromX + (cameraTargetTempX - cameraFromX)*d;
+      cameraY = cameraFromY + (cameraTargetTempY - cameraFromY)*d;
     }
 
     char txt[255]; sprintf(txt,"FPS %.2f",timer.fps); stringColor(screen,2,screen->h-10,txt,0xFF0000FF);
