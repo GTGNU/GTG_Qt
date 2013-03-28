@@ -26,3 +26,4 @@ RESOURCES
 #Qt
 * [Documentation](http://qt-project.org/doc/qt-5.0/qtdoc/index.html)
 * [Reference](http://qt-project.org/doc/qt-5.0/qtdoc/reference-overview.html)
+* [Qt Script documentation (Qt4)](http://harmattan-dev.nokia.com/docs/library/html/qt4/scripting.html)
