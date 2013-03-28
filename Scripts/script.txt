@@ -400,6 +400,66 @@ on fail, must restart
 >rms: I prepared for this.
 
 
-
-
-
+###Call to Richard Greenblatt###
+>>dial tone/ringing/pick up<<
+>RG: "Hello, this is Richard"
+>RMS: "Hi Richard its me, Richard."
+>RG: "Oh, hello. Hey, I'm glad you called, i have a favor to ask of you."
+>RMS: "Well see thats the reason I called you. I need something from you too."
+>RG: "OK, tell me what you need and then I'll tell you what I need you to do."
+>RMS: "I need you to help me take down Microshaft. They're after us and need to be stopped."
+>RG: "Do you want to take off the foil hat for a minuet? what do you mean..."
+>RMS: "LISTEN TO ME! They shot Eric! They killed him right in front of me man! This isn't a delusion!"
+>RG: "Take it easy Richard. OK OK, I believe you, I do."
+>RMS: "So will you help me?"
+>RG: "...tell you what, I need that new graphics card that AND just put out. Go get me that and I'll give you my answer when you get here."
+>RMS: "But-"
+>>call ends<<
+***Go get that card!***
+ 
+###downtown in front of the AND store###
+       -a few people out side
+>>go inside<<
+   -go up to the counter and ask for the card
+>Shopkeep: "Can I help you find something?"
+>RMS: "I need one of those new graphics cards."
+>Shopkeep: "......and who are you?"
+>RMS: "The name is Stallman, why do you ask?"
+>Shopkeep: "..no reason, no reason. Theres just been a lot of strange people coming in here as of late. One can never be to careful."
+>RMS: "I see... can I get that card now?"
+>>the shopkeep goes into the back of the store<<
+     -suddenly a group of people come into the store
+     -they have weapons
+>Thug: "What are you doing in here?"
+>RMS: "..."
+>Thug: "HEY! Are you deaf or dumb?"
+>Thug 2: "He asked you a question punk!"
+>RMS: "I'm sorry. Can you repeat that?"
+>Thug 2: "He asked you what you were doing here."
+>RMS: "Making cupcakes for the picnic. You want some?"
+>Thug: "What did you just say to me you little punk? I'll have you know that..."
+>RMS: "Oh wow, haven't heard that before! Did you come up with it all by your self? Because seriously, thats some good stuff. I should write that down..."
+>>RMS uses sarcasm. It's super effective!<<
+>Thug: "...understand this you little creep, you dont talk to me like that. Do you even know who I am?"
+>RMS: "hhmmm, looks like robinhood and his merry men."
+>Thug: "GET HIM!!!"
+>>have to fight off the Nvideo gang<<
+  -new weapon obtained in fight "5 1/2" shurikins"
+###wining the fight###
+    -breathing heavily
+    -the shopkeep comes out
+>Shopkeep: "Hey, are you OK?"
+>RMS: "Who the fuck were they?"
+>Shopkeep: "That was the Nvideo gang. We've been having a lot of problems with them. I would have helped you but the rest of my boys arn't here."
+>RMS: "You were back there the whole time and you wern't going to help me?"
+>Shopkeep: "Well I wasn't about to tangle with those guys. You have more guts than I. Here tell you what, I'll Give you the card for free."
+>RMS: "Ya, great, thanks."
+***Go to RG's apartment***
+>>RG opens the door<<
+>RG: "Jesus man! What happened to you?!"
+>RMS: "There was a fight at the AND store. From what I understand it was the Nvideo gang. The rivalry between the two is getting heated."
+>RG: "Damn, well if you had this much trouble just getting a GC then I dont think that I want to get involved with your war. Sorry about Eric."
+>RMS: "WAI..."
+>>door closes<<
+>RMS: "T.., you flaky bastard!!"
+***Go home and make more calls***
