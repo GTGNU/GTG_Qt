@@ -24,7 +24,7 @@ In this frantic top view action game, you will be fighting off waves of code mon
 >RMS: “Sounds good to me.”
 >The man walks a few feet away from the car and sets the case down, he walks back and motions for you to throw the drive. You toss it to him.
 >RMS: “You better hold up your part of the deal!”
->man: “Don' worry, Mr. Stallman. You have more reason to trust us then we do you.”
+>man: “Don' worry, Mr. Stallman. You have more reason to trust us than we do you.”
 >He gets back in the car and drives off.
 >You wait until he's out of the lot to retrieve the case.
 >You open it. It looks okay.
