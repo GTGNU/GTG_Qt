@@ -445,6 +445,7 @@ on fail, must restart
 >Thug: "GET HIM!!!"
 >>have to fight off the Nvideo gang<<
   -new weapon obtained in fight "5 1/2" shurikins"
+
 ###wining the fight###
     -breathing heavily
     -the shopkeep comes out
@@ -487,18 +488,39 @@ on fail, must restart
 >RMS: "Wait are you serious?"
 >Marc: "Yes... *stops call*"
 
+(adds quest marker)
+
+//teslas tomb is below a large building, similar to washington monument or something like that
+
 ###Tesla's Tomb###
+
+similar to egyptian tomb, cobwebs, deprecated pc equipment, etc...
+
+//reminiscent of indiana jones? (possibly?)
+
 	-fight some undeads
+        -logic puzzles
+
 	-RMS walking towards the coffin
+
 	-RMS sees the SICP lying on top of the coffin
+
+//large, grand. model of tesla sleeping on top
+
 >RMS: "I'll just grab that, sorry Tesla"
-	-Tesla appears from a lightning bolt
+
+-Tesla appears from a lightning bolt
 >Tesla: "What do you think you are doing?"
 >RMS: "T-t-tesla, you are alive?!"
 >Tesla: "Of course I am. I invented a machine which can make you immortal before I died"
->RMS: "Tesla I'm sorry I took the book but I need it for defending the world against patent trolls and people who are stopping free as in freedom software"
->Tesla: "I see, that reminds me about my arch nemesis Edison who didn't want me to make electricity freely available to everyone... Hah Edison I guess you couldn't steal your way out of death"
->Tesla: "Very well, I will give you this book in the name of freedom, may you complete your goal and free the world from people stopping freedom... Edison's kin"
+>RMS: "Tesla I'm sorry I took the book,
+but I need it for defending the world against patent trolls and people who are stopping free as in freedom software"
+>Tesla: "I see, that reminds me about my arch nemesis Edison, 
+who didn't want me to make electricity freely available to everyone... 
+(aside)
+Hah Edison I guess you couldn't steal your way out of death!"
+>Tesla: "Very well, I will give you this book in the name of freedom, 
+may you complete your goal and free the world from people stopping freedom... Edison's kin"
 >RMS: "Thank you very much Tesla, I'll never forget!"
 	-Tesla disappears in a lightning bolt
 ***leave tomb***
