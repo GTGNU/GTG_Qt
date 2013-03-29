@@ -463,6 +463,7 @@ on fail, must restart
 >RMS: "WAI..."
 >>door closes<<
 >RMS: "T.., you flaky bastard!!"
+	//RG comes to the rescue later though
 ***Go home and make more calls***
 
 ###Downtown on RMS' way to his apartment###
@@ -531,3 +532,20 @@ may you complete your goal and free the world from people stopping freedom... Ed
 >RMS: "Can I count on your support for the sake of free software"
 >ME: "For all the hassle you have been though you will not be able not to count on my support! For free software!"
 ***leave apartment***
+
+###At apartment###
+>action icon above phone
+(on call)
+--dial tone--
+>Dennis: "I heard you gathered a team"
+>RMS: "Yeah"
+>Dennis: "For a person like you to have such a team is too much"
+>RMS: "Why?"
+>Dennis: "To control such a team and take down proprietary software you must find a greybeard fedora"
+>RMS: "A greybeard fedora?! Where can I find such a thing, I thought they were only a myth"
+>Dennis: "No, every 400 years a neckbeard turns into a true greybeard and when that happens the universe creates a greybeard fedora which is harder than spacetime itself.
+To obtain such an item without becoming a true greybeard you have to find the last one which was made."
+>RMS: "Where can I find the last one which was made?"
+>Dennis: "It can be found in the bowels of Chris-chan's house... Which also means deep into the bowels of hell! Good luck retrieving it. Hackspeed Richard, hackspeed."
+>RMS: "My body is ready for this I'll do it"
+--phone hangs up--
