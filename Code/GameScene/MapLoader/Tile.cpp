@@ -68,6 +68,7 @@ void gtg::Tile::setTextureFilename(const QString& textureFilename)
 {
 	m_textureFilename = textureFilename;
 	m_texture = QImage(texturePath + m_textureFilename);
+	update();
 }
 
 
