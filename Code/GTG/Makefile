@@ -2,6 +2,9 @@ CC = g++
 CFLAGS = -Wall -g
 SDLFLAGS = `sdl-config --libs` -lSDL_image
 
+all : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o
+	${CC} ${CFLAGS} main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o ${SDLFLAGS} -o game
+
 GTG.o : GTG.cpp GTG.h
 	${CC} ${CFLAGS} -c GTG.cpp
 
@@ -23,5 +26,7 @@ SDL_gfxPrimitives.o :  SDL_gfxPrimitives.c SDL_gfxPrimitives.h
 main.o :  main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
-% : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o
-	${CC} ${CFLAGS} main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o ${SDLFLAGS} -o game
+clean:
+	rm -f main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o GTG.o game
+
+.PHONY: clean

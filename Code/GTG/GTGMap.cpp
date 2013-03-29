@@ -101,12 +101,12 @@ bool GTGMap::Load(const char *root, const char *filename, GTGTileSet *tileSet){
         int tileID, tileSolid, ret = sscanf(line+last,"%d:%d",&tileID,&tileSolid);
         if(ret == 1){ ret = 2; tileSolid = 0; }
         if(ret != 2){
-          sprintf(error,"map %s line %d: Invalid line segment [%s]",path,lineCount,line+last);
+          sprintf(error,"map %s line %lu: Invalid line segment [%s]",path,lineCount,line+last);
           fclose(file);
           Clear();
           return false;
         }else if((tileID < 0)||(tileID >= (int)tileSet->tiles.size())||(tileSolid < 0)||(tileSolid > 1)){
-          sprintf(error,"map %s line %d: Tile %d:%d is invalid",path,lineCount,tileID,tileSolid);
+          sprintf(error,"map %s line %lu: Tile %d:%d is invalid",path,lineCount,tileID,tileSolid);
           fclose(file);
           Clear();
           return false;
@@ -119,7 +119,7 @@ bool GTGMap::Load(const char *root, const char *filename, GTGTileSet *tileSet){
         if(pos >= lineSize)break;
         last = pos;
         if(count >= width){
-          sprintf(error,"map %s line %d: Too many line segments. Width is %d",path,lineCount,width);
+          sprintf(error,"map %s line %lu: Too many line segments. Width is %d",path,lineCount,width);
           fclose(file);
           Clear();
           return false;
@@ -132,12 +132,12 @@ bool GTGMap::Load(const char *root, const char *filename, GTGTileSet *tileSet){
     }else if(handle == 2){
       int sx,sy;
       if(sscanf(line,"%d %d",&sx,&sy) != 2){
-        sprintf(error,"map %s line %d: Expected 2 numbers - spawn location",path,lineCount);
+        sprintf(error,"map %s line %lu: Expected 2 numbers - spawn location",path,lineCount);
         fclose(file);
         Clear();
         return false;
       }else if((sx<0)||(sx>=(int)width)||(sy<0)||(sx>=(int)height)){
-        sprintf(error,"map %s line %d: Spawn location %d %d is off the map",path,lineCount,sx,sy);
+        sprintf(error,"map %s line %lu: Spawn location %d %d is off the map",path,lineCount,sx,sy);
         fclose(file);
         Clear();
         return false;
@@ -148,7 +148,7 @@ bool GTGMap::Load(const char *root, const char *filename, GTGTileSet *tileSet){
     }else if(handle == 3){
       int wl,wr,wu,wd,il,ir,iu,id;
       if(sscanf(line,"%d %d %d %d %d %d %d %d",&wl,&wr,&wu,&wd,&il,&ir,&iu,&id) != 8){
-        sprintf(error,"map %s line %d: Expected 8 numbers - player sprites",path,lineCount);
+        sprintf(error,"map %s line %lu: Expected 8 numbers - player sprites",path,lineCount);
         fclose(file);
         Clear();
         return false;
@@ -156,7 +156,7 @@ bool GTGMap::Load(const char *root, const char *filename, GTGTileSet *tileSet){
              ||(!tileSet->IsValidID(wu))||(!tileSet->IsValidID(wd))
              ||(!tileSet->IsValidID(il))||(!tileSet->IsValidID(ir))
              ||(!tileSet->IsValidID(iu))||(!tileSet->IsValidID(id))){
-        sprintf(error,"map %s line %d: Some player sprite id's are invalid",path,lineCount);
+        sprintf(error,"map %s line %lu: Some player sprite id's are invalid",path,lineCount);
         fclose(file);
         Clear();
         return false;
@@ -201,7 +201,7 @@ bool GTGMap::Load(const char *root, const char *filename, GTGTileSet *tileSet){
   for(size_t x = 0; x<backTiles.size(); x++){
     for(size_t y = 0; y<backTiles.at(x).size(); y++){
       if(backTiles.at(x).at(y).tile == NULL){
-        sprintf(error,"map %s: Tile [%d][%d] unknown",path,x,y);
+        sprintf(error,"map %s: Tile [%lu][%lu] unknown",path,x,y);
         Clear();
         return false;
       }
