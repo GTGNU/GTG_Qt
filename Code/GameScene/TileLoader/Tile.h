@@ -16,17 +16,27 @@ namespace gtg
 	{
 		Q_OBJECT
 		Q_PROPERTY(QString type READ type WRITE setType)
+
+		Q_PROPERTY(int mapX READ mapX)
+		Q_PROPERTY(int mapY READ mapY)
+
 		Q_PROPERTY(bool trespassable READ isTrespassable WRITE setTrespassable)
 		Q_PROPERTY(QString texture READ textureFilename WRITE setTextureFilename)
 
+
 		private:
 			QString m_type;
+
+			int m_mapX;
+			int m_mapY;
+
 			bool m_trespassable;
 			QString m_textureFilename;
-			Player* m_player;
 
 			QSGTexture* m_texture;
 			void loadTexture();
+
+			Player* m_player;
 			void setPlayer(Player* player);
 
 		public:
@@ -43,6 +53,9 @@ namespace gtg
 
 			QString textureFilename() const;
 			void setTextureFilename(const QString& textureFilename);
+
+			int mapX() const;
+			int mapY() const;
 
 			friend class Player;
 
