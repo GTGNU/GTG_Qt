@@ -1,12 +1,12 @@
 import GTG 1.0
 
-Tile {
-	type: 'sand'
+TileClass {
+	name: 'sand'
 
 	trespassable: true
 
 	texture: 'sand.png'
 
-	onPlayerEntered: { player.speed /= 2 }
-	onPlayerExited: { player.speed *= 2 }
+	onPlayerEnteredArea: { player.speed /= 2 }
+	onPlayerExitedArea: { player.speed *= 2 }
 }

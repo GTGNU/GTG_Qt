@@ -1,9 +1,8 @@
 import GTG 1.0
 
-Tile {
-	type: 'concrete'
+TileClass {
+	name: 'concrete'
 
 	trespassable: true
-
 	texture: 'concrete.png'
 }

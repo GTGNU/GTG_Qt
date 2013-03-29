@@ -1,20 +1,41 @@
+import QtQuick 2.0
 import GTG 1.0
 
+Rectangle {
+	width: map.width
+	height: map.height
 
-Map {
-	tileSize: 192
+	Map {
+		id: map
+		tileSize: 192
 
-	Row {
-		Tile { texture: 'water.png' }
-		Tile { texture: 'concrete.png' }
+		Row {
+			Tile {
+				id: tile
+				texture: 'water'+currentFrame+'.png'
+
+				property int currentFrame: 0
+			}
+			Tile { texture: 'concrete.png' }
+		}
+
+		Row {
+			Tile { texture: 'grass-tall.png' }
+			Tile { texture: 'sand.png' }
+		}
 	}
 
-	Row {
-		Tile { texture: 'grass-tall.png' }
-		Tile { texture: 'sand.png' }
+	Timer {
+		interval: 100
+		running: true
+		repeat: true
+
+		onTriggered: {
+			tile.currentFrame = (tile.currentFrame+1) % 2
+			console.log("currentFrame changed to " + tile.currentFrame)
+		}
 	}
 }
-
 /*
 This is more or less how the final version should actually be defined
 scheme:
