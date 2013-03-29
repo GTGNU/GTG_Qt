@@ -1,5 +1,6 @@
+import GTG 1.0
 
-TileDef {
+Tile {
 	type: 'grass_tall'
 
 	trespassable: true

@@ -1,5 +1,4 @@
 #include "Tile.h"
-
 #include "Row.h"
 
 #include <QtGui/QImage>
@@ -14,10 +13,6 @@ gtg::Tile::Tile(QQuickItem* parent)
 	: QQuickItem(parent)
 {
 	setFlag(QQuickItem::ItemHasContents);
-
-	Row* row = qobject_cast<Row*>(parent);
-	m_mapX = row->indexOf(this);
-	m_mapY = row->mapY();
 }
 
 gtg::Tile::~Tile()
@@ -38,12 +33,12 @@ void gtg::Tile::setType(const QString& type)
 
 int gtg::Tile::mapX() const
 {
-	return m_mapX;
+	return qobject_cast<const Row*>(parentItem())->indexOf(this);
 }
 
 int gtg::Tile::mapY() const
 {
-	return m_mapY;
+	return qobject_cast<const Row*>(parentItem())->mapY();
 }
 
 
@@ -66,16 +61,22 @@ QString gtg::Tile::textureFilename() const
 void gtg::Tile::setTextureFilename(const QString& textureFilename)
 {
 	m_textureFilename = textureFilename;
-	loadTexture();
 }
 
 
-void gtg::Tile::loadTexture()
+QSGNode* gtg::Tile::updatePaintNode(QSGNode* node,
+		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
-	if (m_texture)
-		delete m_texture;
+	QSGSimpleTextureNode* n = static_cast<QSGSimpleTextureNode*>(node);
 
-	m_texture = window()->createTextureFromImage(QImage(texturePath + m_textureFilename));
+	if (!n) n = new QSGSimpleTextureNode;
+
+	n->setTexture(window()->createTextureFromImage(QImage(texturePath + m_textureFilename)));
+	n->setRect(boundingRect());
+
+	qDebug() << "bounding rect: " << boundingRect();
+
+	return n;
 }
 
 void gtg::Tile::setPlayer(Player* player)
