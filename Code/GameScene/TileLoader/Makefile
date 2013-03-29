@@ -1,7 +1,7 @@
 QTLIBS = -lQt5Core -lQt5Gui -lQt5Quick -lQt5Qml
 INCLUDES = -I/usr/include/qt5 -I/usr/include/qt5/QtCore -I/usr/include/qt5/QtGui
 
-CXX = g++
+CXX = clang++
 MOC = moc
 
 SRC = *.cpp

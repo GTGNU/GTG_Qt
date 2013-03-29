@@ -2,14 +2,32 @@
 #include "Map.h"
 #include "Tile.h"
 
-#include "ListFunctions.h"
-
 #include <QtQuick/QQuickWindow>
 
 #include <QtQuick/QSGSimpleRectNode>
 
+QDebug& operator<<(QDebug& dbg, gtg::Row* row)
+{
+	dbg.nospace()
+		<< "Map { parentItem:"
+			<< QString(row->parentItem()->metaObject()->className())
+			+ "(" + QString::number((uint)row->parentItem(), 16) + ")"
+
+		<< ", tiles:" << row->tiles().size()
+
+		<< ", window:"
+			<< QString(row->window()->metaObject()->className())
+			+ "(" + QString::number((uint)row->window(), 16) + ")"
+
+		<< "}";
+
+	return dbg.space();
+}
+
+
 gtg::Row::Row(QQuickItem* parent)
 	: QQuickItem(parent)
+	, m_tiles(this)
 {
 	setFlag(QQuickItem::ItemHasContents);
 }
@@ -19,20 +37,51 @@ gtg::Row::~Row()
 }
 
 
-int gtg::Row::mapY() const
+int gtg::Row::x() const
 {
-	return qobject_cast<Map*>(parentItem())->indexOf(this);
+	return 0;
+}
+
+int gtg::Row::y() const
+{
+	return mapY() * map()->tileSize();
+}
+
+int gtg::Row::width() const
+{
+	return m_tiles.size() * map()->tileSize();
+}
+
+int gtg::Row::height() const
+{
+	return m_tiles.size() ? m_tiles.at(0)->height() : 0;
+}
+
+QRectF gtg::Row::boundingRect() const
+{
+	return QRect(x(), y(), width(), height());
 }
 
 
+int gtg::Row::mapY() const
+{
+	return map()->indexOf(this);
+}
+
+gtg::Map* gtg::Row::map() const
+{
+	return qobject_cast<Map*>(parentItem());
+}
+
+
+gtg::ChildList<gtg::Tile> gtg::Row::tiles() const
+{
+	return m_tiles;
+}
+
 QQmlListProperty<gtg::Tile> gtg::Row::qmlTiles()
 {
-	return QQmlListProperty<Tile>(this,
-			&m_tiles,
-			qqmllistproperty_append<Tile>,
-			qqmllistproperty_count<Tile>,
-			qqmllistproperty_at<Tile>,
-			qqmllistproperty_clear<Tile>);
+	return m_tiles.toQmlListProperty();
 }
 
 
@@ -40,7 +89,7 @@ int gtg::Row::indexOf(const Tile* object) const
 {
 	int i = 0;
 
-	for (Tile* tile : m_tiles) {
+	for (QQuickItem* tile : m_tiles) {
 		if (tile == object)
 			return i;
 		else
@@ -54,13 +103,22 @@ int gtg::Row::indexOf(const Tile* object) const
 QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
+	qDebug() << "----------------------------------------";
+	qDebug() << "Drawing " << this;
+	qDebug() << "Bounding rect: " << boundingRect();
+	qDebug() << "Children:";
+
+	for (auto child : childItems()) {
+		child->update();
+		qDebug() << child;
+	}
+
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 
-	if (!n) n = new QSGSimpleRectNode;
+	if (!n)
+		n = new QSGSimpleRectNode;
 
 	n->setRect(boundingRect());
-
-	qDebug() << "bounding rect: " << boundingRect();
 
 	return n;
 }

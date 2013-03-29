@@ -11,6 +11,8 @@
 namespace gtg
 {
 	class Player;
+	class Row;
+	class Map;
 
 	class Tile
 		: public QQuickItem
@@ -19,12 +21,14 @@ namespace gtg
 		Q_PROPERTY(QString type READ type WRITE setType)
 		Q_PROPERTY(QString behavior READ behavior WRITE setBehavior)
 
-		Q_PROPERTY(int mapX READ mapX)
-		Q_PROPERTY(int mapY READ mapY)
-
 		Q_PROPERTY(bool trespassable READ isTrespassable WRITE setTrespassable)
 		Q_PROPERTY(QString texture READ textureFilename WRITE setTextureFilename)
 
+		Q_PROPERTY(int mapX READ mapX)
+		Q_PROPERTY(int mapY READ mapY)
+
+		Q_PROPERTY(gtg::Row* row READ row)
+		Q_PROPERTY(gtg::Map* map READ map)
 
 		private:
 			QString m_type;
@@ -34,12 +38,13 @@ namespace gtg
 
 			bool m_trespassable;
 			QString m_textureFilename;
-
-			QSGNode* updatePaintNode(QSGNode* node,
-					QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
+			QImage m_texture;
 
 			Player* m_player;
 			void setPlayer(Player* player);
+
+			QSGNode* updatePaintNode(QSGNode* node,
+					QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 		public:
 			Tile(QQuickItem* parent = nullptr);
@@ -61,6 +66,9 @@ namespace gtg
 
 			int mapX() const;
 			int mapY() const;
+
+			gtg::Row* row() const;
+			gtg::Map* map() const;
 
 			friend class Player;
 
