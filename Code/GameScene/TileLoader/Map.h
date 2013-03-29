@@ -5,7 +5,7 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "ListFunctions.h"
+#include "ChildList.h"
 
 namespace gtg
 {
@@ -16,16 +16,26 @@ namespace gtg
 	: public QQuickItem
 	{
 		Q_OBJECT
+		Q_PROPERTY(QQuickItem* parentItem READ parentItem)
+		Q_PROPERTY(unsigned int tileSize READ tileSize WRITE setTileSize)
 		Q_PROPERTY(QQmlListProperty<gtg::Row> rows READ qmlRows)
 		Q_CLASSINFO("DefaultProperty", "rows")
 
 		private:
-			QQmlListPropertyHelper<Row*> m_rows;
+			unsigned int m_tileSize;
+			ChildList<Row> m_rows;
+
+			QSGNode* updatePaintNode(QSGNode* node,
+					QQuickItem::UpdatePaintNodeData* updatePaintNodeData) override;
 
 		public:
 			Map(QQuickItem* parent = nullptr);
 			~Map();
 
+			unsigned int tileSize() const;
+			void setTileSize(unsigned int tileSize);
+
+			ChildList<gtg::Row> rows() const;
 			QQmlListProperty<gtg::Row> qmlRows();
 
 			int indexOf(const Row* object) const;

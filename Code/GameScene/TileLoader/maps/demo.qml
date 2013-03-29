@@ -1,68 +1,70 @@
 import GTG 1.0
 
+
+Map {
+	tileSize: 192
+
+	Row {
+		Tile { texture: 'water.png' }
+		Tile { texture: 'concrete.png' }
+	}
+
+	Row {
+		Tile { texture: 'grass-tall.png' }
+		Tile { texture: 'sand.png' }
+	}
+}
+
 /*
+This is more or less how the final version should actually be defined
 scheme:
 
 	WWWW|G|C
 	WWW/GG|C
 	--'GGG|C
 	GGGGGG|C
-*/
 
 
-Row {
-	id: lel
-	width: 500
-	height: 500
-
-	Tile {
-		width: lel.width
-		height: lel.height
-		texture: 'water.png'
-	}
-}
-
-/*
 Map {
 	Row {
-			Tile { texture: 'water.png'; width: 50; height: 60; type: 'water'                         }
-			Tile { texture: 'water.png'; type: 'water'                         }
-			Tile { texture: 'water.png'; type: 'water'                         }
-			Tile { texture: 'water.png'; type: 'water'                         }
-			Tile { texture: 'water.png'; type: 'overlap'; behavior: 'sand'     }
-			Tile { texture: 'water.png'; type: 'sand'                          }
-			Tile { texture: 'water.png'; type: 'overlap'; behavior: 'concrete' }
-			Tile { texture: 'water.png'; type: 'concrete'                      }
+			Tile    { type: 'water'        }
+			Tile    { type: 'water'        }
+			Tile    { type: 'water'        }
+			Tile    { type: 'water'        }
+			Overlap { behavior: 'sand'     }
+			Tile    { type: 'sand'         }
+			Overlap { behavior: 'concrete' }
+			Tile    { type: 'concrete'     }
 	}
 	Row {
-			Tile { type: 'water'                         }
-			Tile { type: 'water'                         }
-			Tile { type: 'water'                         }
-			Tile { type: 'overlap'; behavior: 'sand'     }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'overlap'; behavior: 'concrete' }
-			Tile { type: 'concrete'                      }
+			Tile    { type: 'water'        }
+			Tile    { type: 'water'        }
+			Tile    { type: 'water'        }
+			Overlap { behavior: 'sand'     }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Overlap { behavior: 'concrete' }
+			Tile    { type: 'concrete'     }
 	}
 	Row {
-			Tile { type: 'overlap'; behavior: 'sand'     }
-			Tile { type: 'overlap'; behavior: 'sand'     }
-			Tile { type: 'overlap'; behavior: 'sand'     }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'overlap'; behavior: 'concrete' }
-			Tile { type: 'concrete'                      }
+			Overlap { behavior: 'sand'     }
+			Overlap { behavior: 'sand'     }
+			Overlap { behavior: 'sand'     }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Overlap { behavior: 'concrete' }
+			Tile    { type: 'concrete'     }
 	}
 	Row {
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'sand'                          }
-			Tile { type: 'overlap'; behavior: 'concrete' }
-			Tile { type: 'concrete'                      }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Tile    { type: 'sand'         }
+			Overlap { behavior: 'concrete' }
+			Tile    { type: 'concrete'     }
 	}
 }
 */
