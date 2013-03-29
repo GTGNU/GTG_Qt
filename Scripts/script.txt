@@ -463,3 +463,49 @@ on fail, must restart
 >>door closes<<
 >RMS: "T.., you flaky bastard!!"
 ***Go home and make more calls***
+
+###Downtown on RMS' way to his apartment###
+	-a mob of people gathered outside Chapel store
+	-People are screaming
+>Mob: "It's happening! It's happening now!"
+>RMS: "What's happening?"
+>Guy from mob: "Our dear leader Stephen Works will announce a new Chapel product"
+// ^ pleb
+	-RMS watches the mob in awe and moves on.
+
+###Call to Marc Ewing###
+>RMS: "Hey Marc it's me Richard"
+>ME: "Hey Richard, haven't spoken with you in a while, how's everything going?"
+>RMS: "No time for chit-chat right now, Eric's been shot by Microshaft agents dammit"
+>ME: "Wait dead?! Are you sure it was Microshaft agents?"
+>RMS: "Yes they also attacked Bill Gosper and I at MIT!"
+>Marc "This sounds dangerous, if I have to get mixed into this I need you to do something for me first"
+>RMS: "*sigh~~* yes what do you need?"
+>Marc: "Well there is this new book called SICP being printed at MIT and I want to have the first ever printed edition"
+>RMS: "Do you know where I can find the book?"
+>Marc: "... Yes... It lies in Tesla's tomb"
+>RMS: "Wait are you serious?"
+>Marc: "Yes... *stops call*"
+
+###Tesla's Tomb###
+	-fight some undeads
+	-RMS walking towards the coffin
+	-RMS sees the SICP lying on top of the coffin
+>RMS: "I'll just grab that, sorry Tesla"
+	-Tesla appears from a lightning bolt
+>Tesla: "What do you think you are doing?"
+>RMS: "T-t-tesla, you are alive?!"
+>Tesla: "Of course I am. I invented a machine which can make you immortal before I died"
+>RMS: "Tesla I'm sorry I took the book but I need it for defending the world against patent trolls and people who are stopping free as in freedom software"
+>Tesla: "I see, that reminds me about my arch nemesis Edison who didn't want me to make electricity freely available to everyone... Hah Edison I guess you couldn't steal your way out of death"
+>Tesla: "Very well, I will give you this book in the name of freedom, may you complete your goal and free the world from people stopping freedom... Edison's kin"
+>RMS: "Thank you very much Tesla, I'll never forget!"
+	-Tesla disappears in a lightning bolt
+***leave tomb***
+
+###Marc Ewing's apartment###
+>RMS: "Here is the book"
+>ME: "Great, thanks a lot Richard"
+>RMS: "Can I count on your support for the sake of free software"
+>ME: "For all the hassle you have been though you will not be able not to count on my support! For free software!"
+***leave apartment***
