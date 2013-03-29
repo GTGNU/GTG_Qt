@@ -2,6 +2,8 @@ CC = g++
 CFLAGS = -Wall -g
 SDLFLAGS = -lSDL -lSDL_image -lSDL_ttf
 
+all : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o
+	${CC} ${CFLAGS} ${SDLFLAGS} main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o -o editor
 
 GTGMap.o : GTGMap.cpp GTGMap.h
 	${CC} ${CFLAGS} -c GTGMap.cpp
@@ -27,5 +29,7 @@ SDLGui.o : SDLGui.cpp SDLGui.h
 main.o :  main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
-% : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o
-	${CC} ${CFLAGS} ${SDLFLAGS} main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o -o editor
+clean:
+	rm -f main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGMap.o SDLGuiStyle.o SDLGui.o editor
+
+.PHONY: clean
