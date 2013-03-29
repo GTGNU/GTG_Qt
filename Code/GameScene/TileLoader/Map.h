@@ -1,6 +1,8 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <QtQml/QQmlListProperty>
+
 #include <QtQuick/QQuickItem>
 
 namespace gtg
@@ -19,11 +21,17 @@ namespace gtg
 			QQmlListProperty<Row*> m_rows;
 
 		public:
-			Map(QQuickItem* parent);
+			Map(QQuickItem* parent = nullptr);
 			~Map();
 
-			QQmlListProperty<Tile*> rows();
+			QQmlListProperty<Row*> rows() const;
+
+			int indexOf(const Row* object);
+
+			Tile* tileAt(int x, int y);
 	};
 }
+
+QML_DECLARE_TYPE(gtg::Map)
 
 #endif

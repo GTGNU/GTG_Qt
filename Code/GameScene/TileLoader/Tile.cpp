@@ -1,5 +1,7 @@
 #include "Tile.h"
 
+#include "Row.h"
+
 #include <QtGui/QImage>
 
 #include <QtQuick/QSGNode>
@@ -11,8 +13,11 @@ const QString gtg::Tile::texturePath = "assets/";
 gtg::Tile::Tile(QQuickItem* parent)
 	: QQuickItem(parent)
 {
-	setFlag(ItemHasContents);
+	setFlag(QQuickItem::ItemHasContents);
 
+	Row* row = qobject_cast<Row*>(parent);
+	m_mapX = row->indexOf(this);
+	m_mapY = row->mapY();
 }
 
 gtg::Tile::~Tile()
@@ -28,6 +33,17 @@ QString gtg::Tile::type() const
 void gtg::Tile::setType(const QString& type)
 {
 	m_type = type;
+}
+
+
+int gtg::Tile::mapX() const
+{
+	return m_mapX;
+}
+
+int gtg::Tile::mapY() const
+{
+	return m_mapY;
 }
 
 
