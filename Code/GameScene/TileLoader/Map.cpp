@@ -1,5 +1,4 @@
 #include "Map.h"
-
 #include "Row.h"
 
 gtg::Map::Map(QQuickItem* parent)
@@ -13,19 +12,25 @@ gtg::Map::~Map()
 }
 
 
-QQmlListProperty<gtg::Row*> gtg::Map::rows() const
+QQmlListProperty<gtg::Row> gtg::Map::qmlRows()
 {
-	return m_rows;
+	return QQmlListProperty<Row>(this,
+			&m_rows,
+			qqmllistproperty_append<Row>,
+			qqmllistproperty_count<Row>,
+			qqmllistproperty_at<Row>,
+			qqmllistproperty_clear<Row>);
 }
 
 
-int gtg::Map::indexOf(const Row* object)
+int gtg::Map::indexOf(const Row* object) const
 {
-	int count = m_rows.count(&m_rows);
-
-	for (int i = 0; i < count; i++) {
-		if (*m_rows.at(&m_rows, i) == object)
+	int i = 0;
+	for (Row* row : m_rows) {
+		if (row == object)
 			return i;
+		else
+			i++;
 	}
 
 	return -1;
@@ -34,7 +39,6 @@ int gtg::Map::indexOf(const Row* object)
 
 gtg::Tile* gtg::Map::tileAt(int x, int y)
 {
-	Row* row = *m_rows.at(&m_rows, y);
-	return *row->m_tiles.at(&row->m_tiles, x);
+	return m_rows.at(y)->m_tiles.at(x);
 }
 

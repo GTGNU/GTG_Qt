@@ -1,13 +1,17 @@
 #include "Row.h"
-
 #include "Map.h"
+#include "Tile.h"
+
+#include "ListFunctions.h"
+
+#include <QtQuick/QQuickWindow>
+
+#include <QtQuick/QSGSimpleRectNode>
 
 gtg::Row::Row(QQuickItem* parent)
 	: QQuickItem(parent)
 {
 	setFlag(QQuickItem::ItemHasContents);
-
-	m_mapY = qobject_cast<Map*>(parent)->indexOf(this);
 }
 
 gtg::Row::~Row()
@@ -17,24 +21,46 @@ gtg::Row::~Row()
 
 int gtg::Row::mapY() const
 {
-	return m_mapY;
+	return qobject_cast<Map*>(parentItem())->indexOf(this);
 }
 
 
-QQmlListProperty<gtg::Tile*> gtg::Row::tiles() const
+QQmlListProperty<gtg::Tile> gtg::Row::qmlTiles()
 {
-	return m_tiles;
+	return QQmlListProperty<Tile>(this,
+			&m_tiles,
+			qqmllistproperty_append<Tile>,
+			qqmllistproperty_count<Tile>,
+			qqmllistproperty_at<Tile>,
+			qqmllistproperty_clear<Tile>);
 }
 
 
-int gtg::Row::indexOf(Tile* object)
+int gtg::Row::indexOf(const Tile* object) const
 {
-	int count = m_tiles.count(&m_tiles);
+	int i = 0;
 
-	for (int i = 0; i < count; i++) {
-		if (*m_tiles.at(&m_tiles, i) == object)
+	for (Tile* tile : m_tiles) {
+		if (tile == object)
 			return i;
+		else
+			i++;
 	}
 
 	return -1;
+}
+
+
+QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
+		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
+{
+	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
+
+	if (!n) n = new QSGSimpleRectNode;
+
+	n->setRect(boundingRect());
+
+	qDebug() << "bounding rect: " << boundingRect();
+
+	return n;
 }

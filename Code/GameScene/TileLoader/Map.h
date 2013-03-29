@@ -5,30 +5,32 @@
 
 #include <QtQuick/QQuickItem>
 
+#include "ListFunctions.h"
+
 namespace gtg
 {
-	class Row;
 	class Tile;
+	class Row;
 
 	class Map
-		: public QQuickItem
+	: public QQuickItem
 	{
 		Q_OBJECT
-		Q_PROPERTY(QQmlListProperty<gtg::Row*> rows READ rows)
+		Q_PROPERTY(QQmlListProperty<gtg::Row> rows READ qmlRows)
 		Q_CLASSINFO("DefaultProperty", "rows")
 
 		private:
-			QQmlListProperty<Row*> m_rows;
+			QQmlListPropertyHelper<Row*> m_rows;
 
 		public:
 			Map(QQuickItem* parent = nullptr);
 			~Map();
 
-			QQmlListProperty<Row*> rows() const;
+			QQmlListProperty<gtg::Row> qmlRows();
 
-			int indexOf(const Row* object);
+			int indexOf(const Row* object) const;
 
-			Tile* tileAt(int x, int y);
+			Q_INVOKABLE Tile* tileAt(int x, int y);
 	};
 }
 

@@ -11,12 +11,12 @@ namespace gtg
 	class Tile;
 
 	class Player
-		: public QQuickItem
+	: public QQuickItem
 	{
 		Q_OBJECT
 		Q_PROPERTY(Map* map READ map)
 		Q_PROPERTY(double speed READ speed WRITE setSpeed)
-		Q_PROPERTY(const Tile* currentTile READ currentTile WRITE moveTo);
+		Q_PROPERTY(Tile* currentTile READ currentTile WRITE moveTo);
 		Q_ENUMS(Direction)
 
 		public:

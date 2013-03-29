@@ -15,7 +15,7 @@ moc:
 	$(foreach header, $(HEADERS), $(MOC) $(header) -o $(header:%.h=moc_%.cpp);)
 
 build:
-	$(CXX) -std=c++11 -fPIC \
+	$(CXX) -g -std=c++11 -fPIC \
 		$(INCLUDES) $(QTLIBS) \
 		$(SRC) -o $(OFILE)
 

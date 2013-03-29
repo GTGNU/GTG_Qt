@@ -5,6 +5,8 @@
 
 #include <QtQuick/QQuickItem>
 
+#include "ListFunctions.h"
+
 namespace gtg
 {
 	class Tile;
@@ -14,13 +16,16 @@ namespace gtg
 	{
 		Q_OBJECT
 		Q_PROPERTY(int mapY READ mapY)
-		Q_PROPERTY(QQmlListProperty<gtg::Tile*> tiles READ tiles)
+		Q_PROPERTY(QQmlListProperty<gtg::Tile> tiles READ qmlTiles)
 		Q_CLASSINFO("DefaultProperty", "tiles")
 
 		private:
-			QQmlListProperty<Tile*> m_tiles;
+			QQmlListPropertyHelper<Tile*> m_tiles;
 
 			int m_mapY;
+
+			QSGNode* updatePaintNode(QSGNode* node,
+					QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 		public:
 			Row(QQuickItem* parent = nullptr);
@@ -28,9 +33,9 @@ namespace gtg
 
 			int mapY() const;
 
-			QQmlListProperty<Tile*> tiles() const;
+			QQmlListProperty<gtg::Tile> qmlTiles();
 
-			int indexOf(Tile* object);
+			int indexOf(const Tile* object) const;
 
 			friend class Map;
 	};

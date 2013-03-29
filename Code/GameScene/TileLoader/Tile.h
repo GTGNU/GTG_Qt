@@ -5,6 +5,7 @@
 #include <QtCore/QString>
 
 #include <QtQuick/QQuickItem>
+#include <QtQuick/QSGSimpleTextureNode>
 #include <QtQuick/QSGTexture>
 
 namespace gtg
@@ -16,6 +17,7 @@ namespace gtg
 	{
 		Q_OBJECT
 		Q_PROPERTY(QString type READ type WRITE setType)
+		Q_PROPERTY(QString behavior READ behavior WRITE setBehavior)
 
 		Q_PROPERTY(int mapX READ mapX)
 		Q_PROPERTY(int mapY READ mapY)
@@ -33,8 +35,8 @@ namespace gtg
 			bool m_trespassable;
 			QString m_textureFilename;
 
-			QSGTexture* m_texture;
-			void loadTexture();
+			QSGNode* updatePaintNode(QSGNode* node,
+					QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			Player* m_player;
 			void setPlayer(Player* player);
@@ -47,6 +49,9 @@ namespace gtg
 
 			QString type() const;
 			void setType(const QString& type);
+
+			QString behavior() const { return "lel"; }
+			void setBehavior(const QString&) {}
 
 			bool isTrespassable() const;
 			void setTrespassable(bool trespassable);
@@ -63,7 +68,6 @@ namespace gtg
 			void playerEntered(Player*);
 			void playerExited(Player*);
 	};
-
 }
 
 QML_DECLARE_TYPE(gtg::Tile)
