@@ -1,2 +1,7 @@
 moc_*.cpp
 *.o
+*.so
+*.a
+*.dll
+*.dylib
+build/

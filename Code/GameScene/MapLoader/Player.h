@@ -16,7 +16,7 @@ namespace gtg
 		Q_OBJECT
 		Q_PROPERTY(Map* map READ map)
 		Q_PROPERTY(double speed READ speed WRITE setSpeed)
-		Q_PROPERTY(Tile* currentTile READ currentTile WRITE moveTo);
+		Q_PROPERTY(Tile* currentTile READ currentTile WRITE moveTo)
 		Q_ENUMS(Direction)
 
 		public:
