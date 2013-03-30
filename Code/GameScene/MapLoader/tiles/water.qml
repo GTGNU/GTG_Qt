@@ -1,24 +1,30 @@
 import QtQuick 2.0
 import GTG 1.0
 
-TileClass {
+TileType {
 	id: tile
+	name: 'water'
 
-	type: 'water'
+	view: TileView {
+		name: 'water.view'
+		texture: 'water' + timer.currentFrame + '.png'
 
-	trespassable: false
 
-	texture: 'water' + currentFrame + '.png'
+		property var timer: Timer {
+			interval: 100
+			running: true
+			repeat: true
 
-	property int currentFrame: 0
-	property int numFrames: 2
+			property int currentFrame: 0
+			property int numFrames: 2
 
-	Timer {
-		interval: 100
-		running: true
-
-		onTriggered: {
-			tile.currentFrame = (tile.currentFrame + 1) % numFrames
+			onTriggered: {
+				currentFrame = (currentFrame + 1) % numFrames }
 		}
+	}
+
+	behavior: TileBehavior {
+		name: 'water.behavior'
+		trespassable: false
 	}
 }

@@ -20,4 +20,4 @@ build:
 		$(SRC) -o $(OFILE)
 
 clean:
-	rm moc_*.cpp $(OFILE)
+	rm moc_*.cpp

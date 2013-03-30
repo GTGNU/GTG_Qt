@@ -1,5 +1,6 @@
 #include "Player.h"
 
+#include "TileBehavior.h"
 #include "Tile.h"
 #include "Row.h"
 #include "Map.h"
@@ -49,9 +50,17 @@ void gtg::Player::moveBy(int dx, int dy)
 
 void gtg::Player::moveTo(Tile* tile)
 {
+	bool differentBehavior = tile->behavior() != m_currentTile->behavior();
+
 	m_currentTile->setPlayer(nullptr);
+	if (differentBehavior)
+		m_currentTile->behavior()->emitPlayerExitedArea(this);
+
 	m_currentTile = tile;
+
 	m_currentTile->setPlayer(this);
+	if (differentBehavior)
+		m_currentTile->behavior()->emitPlayerEnteredArea(this);
 }
 
 

@@ -1,6 +1,7 @@
 #include "Map.h"
 #include "Row.h"
 #include "Tile.h"
+#include "TileView.h"
 
 #include <QtQuick/QSGNode>
 #include <QtQuick/QSGSimpleRectNode>
@@ -82,7 +83,6 @@ QSGNode* gtg::Map::updatePaintNode(QSGNode* node,
 {
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
-	qDebug() << "Bounding rect: " << boundingRect();
 	qDebug() << "Children:";
 
 	for (auto child : childItems()) {
@@ -97,6 +97,8 @@ QSGNode* gtg::Map::updatePaintNode(QSGNode* node,
 
 	setWidth(m_rows.at(0)->width());
 	setHeight(m_rows.size() * tileSize());
+
+	qDebug() << "Bounding rect: " << boundingRect();
 
 	n->setRect(boundingRect());
 

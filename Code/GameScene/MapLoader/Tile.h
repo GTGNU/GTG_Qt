@@ -1,12 +1,9 @@
 #ifndef TILE_H
 #define TILE_H
 
-#include <QtCore/QObject>
 #include <QtCore/QString>
 
 #include <QtQuick/QQuickItem>
-#include <QtQuick/QSGSimpleTextureNode>
-#include <QtQuick/QSGTexture>
 
 namespace gtg
 {
@@ -14,15 +11,22 @@ namespace gtg
 	class Row;
 	class Map;
 
+	class TileView;
+	class TileBehavior;
+	class TileType;
+
 	class Tile
 		: public QQuickItem
 	{
 		Q_OBJECT
-		Q_PROPERTY(QString type READ type WRITE setType)
-		Q_PROPERTY(QString behavior READ behavior WRITE setBehavior)
 
-		Q_PROPERTY(bool trespassable READ isTrespassable WRITE setTrespassable)
-		Q_PROPERTY(QString texture READ textureFilename WRITE setTextureFilename)
+		Q_PROPERTY(QString type READ typeName WRITE setTypeName)
+
+		Q_PROPERTY(gtg::TileView* view READ view)
+		Q_PROPERTY(QString viewName READ viewName WRITE setViewName)
+
+		Q_PROPERTY(gtg::TileBehavior* behavior READ behavior)
+		Q_PROPERTY(QString behaviorName READ behaviorName WRITE setBehaviorName)
 
 		Q_PROPERTY(int mapX READ mapX)
 		Q_PROPERTY(int mapY READ mapY)
@@ -31,14 +35,8 @@ namespace gtg
 		Q_PROPERTY(gtg::Map* map READ map)
 
 		private:
-			QString m_type;
-
-			int m_mapX;
-			int m_mapY;
-
-			bool m_trespassable;
-			QString m_textureFilename;
-			QImage m_texture;
+			TileView* m_view;
+			TileBehavior* m_behavior;
 
 			Player* m_player;
 			void setPlayer(Player* player);
@@ -50,19 +48,17 @@ namespace gtg
 			Tile(QQuickItem* parent = nullptr);
 			~Tile();
 
-			static const QString texturePath;
+			//gtg::TileType* type() const;
+			QString typeName() const;
+			void setTypeName(const QString& typeName);
 
-			QString type() const;
-			void setType(const QString& type);
+			gtg::TileView* view() const;
+			QString viewName() const;
+			void setViewName(const QString& viewName);
 
-			QString behavior() const { return "lel"; }
-			void setBehavior(const QString&) {}
-
-			bool isTrespassable() const;
-			void setTrespassable(bool trespassable);
-
-			QString textureFilename() const;
-			void setTextureFilename(const QString& textureFilename);
+			gtg::TileBehavior* behavior() const;
+			QString behaviorName() const;
+			void setBehaviorName(const QString& behaviorName);
 
 			int mapX() const;
 			int mapY() const;
@@ -73,6 +69,9 @@ namespace gtg
 			friend class Player;
 
 		signals:
+			void viewChanged(TileView*, TileView*);
+			void behaviorChanged(TileBehavior*, TileBehavior*);
+
 			void playerEntered(Player*);
 			void playerExited(Player*);
 	};
