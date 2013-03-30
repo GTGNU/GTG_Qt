@@ -37,9 +37,13 @@
         (see libgdx.scene2d wiki for an explaination on this)
 
     - Game-specific implementation
-        - In-game actors
+        - NPCs
         - Drawing (QGraphicsScene)
-
+        - Projectiles
+        - Health
+        - Respawn points
+        - Check points
+        - Currency
     - Input
 
     - Animation
