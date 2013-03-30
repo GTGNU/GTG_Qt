@@ -37,7 +37,7 @@
         (see libgdx.scene2d wiki for an explaination on this)
 
     - Game-specific implementation
-        - NPCs
+        - NPC AI
         - Drawing (QGraphicsScene)
         - Projectiles
         - Health
