@@ -16,8 +16,8 @@ namespace gtg
 	: public QQuickItem
 	{
 		Q_OBJECT
-		Q_PROPERTY(QQuickItem* parentItem READ parentItem)
 		Q_PROPERTY(unsigned int tileSize READ tileSize WRITE setTileSize)
+
 		Q_PROPERTY(QQmlListProperty<gtg::Row> rows READ qmlRows)
 		Q_CLASSINFO("DefaultProperty", "rows")
 

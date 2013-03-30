@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import GTG 1.0
 
+/*
 Rectangle {
 	width: map.width
 	height: map.height
@@ -36,6 +37,33 @@ Rectangle {
 		}
 	}
 }
+*/
+
+Map {
+	tileSize: 192
+
+	Row {
+		Tile { type: 'sand' }
+		Tile { type: 'concrete' }
+		Tile { type: 'grass_tall' }
+		Tile { type: 'water' }
+	}
+
+	Row {
+		Tile { type: 'water' }
+		Tile { type: 'sand' }
+		Tile { type: 'concrete' }
+		Tile { type: 'grass_tall' }
+	}
+
+	Row {
+		Tile { type: 'grass_tall' }
+		Tile { type: 'water' }
+		Tile { type: 'sand' }
+		Tile { type: 'concrete' }
+	}
+}
+
 /*
 This is more or less how the final version should actually be defined
 scheme:
@@ -44,8 +72,8 @@ scheme:
 	WWW/GG|C
 	--'GGG|C
 	GGGGGG|C
-
-
+*/
+/*
 Map {
 	Row {
 			Tile    { type: 'water'        }
@@ -89,5 +117,4 @@ Map {
 	}
 }
 */
-
 // vim: ft=javascript :

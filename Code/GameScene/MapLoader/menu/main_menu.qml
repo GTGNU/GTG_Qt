@@ -1,17 +1,20 @@
-import QtQuick 1.1
+import QtQuick 2.0
 
 Image {
 	id: window
-	source: resDir + 'Artwork/Wallpaper.jpg'
+	source: resDir + 'images/background.jpg'
 
-	property string resDir: '../../../Info/'
+	signal play()
+	signal quit()
+
+	property string resDir: ''
 
 	width: 1300
 	height: 700
 
 	FontLoader {
 		id: titleScreenFont
-		source: resDir + 'Fonts/Title Screen Font/mizufalp.ttf'
+		source: resDir + 'fonts/mizufalp.ttf'
 	}
 
 	Gentoo {
@@ -41,7 +44,7 @@ Image {
 		MenuItem {
 			id: itemPlay
 			text: "PLAY"
-			onChosen: console.log(text) // placeholder
+			onChosen: play()
 		}
 
 		MenuItem {
@@ -59,7 +62,7 @@ Image {
 		MenuItem {
 			id: itemQuit
 			text: "QUIT"
-			onChosen: Qt.quit()
+			onChosen: quit()
 		}
 	}
 

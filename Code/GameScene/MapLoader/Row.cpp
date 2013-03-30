@@ -9,11 +9,9 @@
 QDebug& operator<<(QDebug& dbg, gtg::Row* row)
 {
 	dbg.nospace()
-		<< "Map { parentItem:"
+		<< "Row { parentItem:"
 			<< QString(row->parentItem()->metaObject()->className())
 			+ "(" + QString::number((uint)row->parentItem(), 16) + ")"
-
-		<< ", tiles:" << row->tiles().size()
 
 		<< ", window:"
 			<< QString(row->window()->metaObject()->className())
@@ -105,7 +103,6 @@ QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
 {
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
-	qDebug() << "Bounding rect: " << boundingRect();
 	qDebug() << "Children:";
 
 	for (auto child : childItems()) {
@@ -115,8 +112,17 @@ QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
 
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 
-	if (!n)
+	if (!n) {
 		n = new QSGSimpleRectNode;
+
+		int tileSize = map()->tileSize();
+		setX(0);
+		setY(mapY() * tileSize);
+		setWidth(m_tiles.size() * tileSize);
+		setHeight(tileSize);
+	}
+
+	qDebug() << "Bounding rect: " << boundingRect();
 
 	n->setRect(boundingRect());
 

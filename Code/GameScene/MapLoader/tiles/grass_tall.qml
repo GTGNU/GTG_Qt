@@ -1,11 +1,19 @@
 import GTG 1.0
 
-TileClass {
+TileType {
 	name: 'grass_tall'
 
-	trespassable: true
-	texture: 'grass_tall.png'
+	view: TileView {
+		name: 'grass_tall.view'
+		texture: 'grass_tall.png'
+	}
 
-	onPlayerEnteredArea: { player.speed /= 3 }
-	onPlayerExitedArea:  { player.speed *= 3 }
+	behavior: TileBehavior {
+		name: 'grass_tall.behavior'
+
+		trespassable: true
+
+		onPlayerEnteredArea: { player.speed /= 3 }
+		onPlayerExitedArea:  { player.speed *= 3 }
+	}
 }

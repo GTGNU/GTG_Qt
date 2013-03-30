@@ -1,8 +1,8 @@
-import QtQuick 1.1
+import QtQuick 2.0
 
 Image {
 	id: image
-	source: resDir + 'Artwork/gentoo.png'
+	source: resDir + 'images/gentoo.png'
 
 	property int small
 

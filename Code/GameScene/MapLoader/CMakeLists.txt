@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 2.8.8)
 project(MapLoader CXX)
 
 set($ENV{LANG} en_US.UTF-8) # fuck localized errors
-set(CMAKE_CXX_FLAGS "-std=c++11 -O2 -Wall -Wpointer-arith -pedantic")
+set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wpointer-arith -pedantic")
 
 # (un)comment to switch between gcc and clang
-#set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang.*")
 	set(CMAKE_CXX_COMPILER_IS_CLANG 1)
@@ -21,7 +21,8 @@ if (CMAKE_CXX_COMPILER MATCHES ".*/g(cc|\\+\\+).*")
 	message("GCC detected")
 endif (CMAKE_CXX_COMPILER MATCHES ".*/g(cc|\\+\\+).*")
 
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAE_CXX_FLAGS} -g")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
