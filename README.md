@@ -6,7 +6,7 @@ In this frantic top view action game, you will be fighting off waves of code mon
 
 Communications
 ==============
-* [#GTG @ irc.p2p-irc.net](http:///mibbit.com/#GTG@irc.p2p-irc.net)
+* #GTG @ irc.p2p-irc.net
 * [Website](http://grandtheftgentoo.github.com/Grand-Theft-Gentoo/)
 * [WIKI](https://github.com/GrandTheftGentoo/Grand-Theft-Gentoo/wiki)
 
