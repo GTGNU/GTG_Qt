@@ -10,18 +10,18 @@
 
 class GTG{
 
-  GTGTileSet tileset;
-  GTGMap map;
+	GTGTileSet tileset;
+	GTGMap map;
 
-  char error[128];
+	char error[128];
 
 public:
-  GTG(); ~GTG();
-  void Construct(); void Destruct();
-  bool Load(const char *root);
-  void Free();
-  int Run(); //-1 = error, 0 = no error, 1 = force quit
-  const char *GetLastError();
+	GTG(); ~GTG();
+	void Construct(); void Destruct();
+	bool Load(const char *root);
+	void Free();
+	int Run(); //-1 = error, 0 = no error, 1 = force quit
+	const char *GetLastError();
 };
 
 #endif

@@ -26,7 +26,7 @@ SDLGuiStyle.o : SDLGuiStyle.cpp
 SDLGui.o : SDLGui.cpp SDLGui.h
 	${CC} ${CFLAGS} -c SDLGui.cpp
 
-main.o :  main.cpp
+main.o :	main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
 clean:

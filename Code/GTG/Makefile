@@ -23,7 +23,7 @@ SDLHelper.o :  SDLHelper.cpp SDLHelper.h
 SDL_gfxPrimitives.o :  SDL_gfxPrimitives.c SDL_gfxPrimitives.h
 	${CC} ${CFLAGS} -c SDL_gfxPrimitives.c
 
-main.o :  main.cpp
+main.o :	main.cpp
 	${CC} ${CFLAGS} -c main.cpp
 
 clean:
