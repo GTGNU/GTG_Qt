@@ -16,11 +16,11 @@ QDebug& operator<<(QDebug& dbg, gtg::Tile* tile)
 	dbg
 		<< "Tile { parentItem:"
 			<< QString(tile->parentItem()->metaObject()->className())
-			+ "(" + QString::number((uint)tile->parentItem(), 16) + ")"
+			+ "(" + QString::number((int)tile->parentItem(), 16) + ")"
 
 		<< ", window:"
 			<< QString(tile->window()->metaObject()->className())
-			+ "(" + QString::number((uint)tile->window(), 16) + ")"
+			+ "(" + QString::number((int)tile->window(), 16) + ")"
 
 		<< ", texture:" << tile->view()->textureFilename()
 		<< "}";

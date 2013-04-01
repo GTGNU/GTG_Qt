@@ -5,7 +5,7 @@ set($ENV{LANG} en_US.UTF-8) # fuck localized errors
 set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wpointer-arith -pedantic")
 
 # (un)comment to switch between gcc and clang
-set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
+#set(CMAKE_CXX_COMPILER "/usr/bin/clang++")
 
 if (CMAKE_CXX_COMPILER MATCHES ".*clang.*")
 	set(CMAKE_CXX_COMPILER_IS_CLANG 1)

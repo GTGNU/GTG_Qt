@@ -11,11 +11,11 @@ QDebug& operator<<(QDebug& dbg, gtg::Row* row)
 	dbg.nospace()
 		<< "Row { parentItem:"
 			<< QString(row->parentItem()->metaObject()->className())
-			+ "(" + QString::number((uint)row->parentItem(), 16) + ")"
+			+ "(" + QString::number((int)row->parentItem(), 16) + ")"
 
 		<< ", window:"
 			<< QString(row->window()->metaObject()->className())
-			+ "(" + QString::number((uint)row->window(), 16) + ")"
+			+ "(" + QString::number((int)row->window(), 16) + ")"
 
 		<< "}";
 
