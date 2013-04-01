@@ -11,13 +11,13 @@ QDebug& operator<<(QDebug& dbg, gtg::Map* map)
 	dbg
 		<< "Map { parentItem:"
 			<< QString(map->parentItem()->metaObject()->className())
-			+ "(" + QString::number((uint)map->parentItem(), 16) + ")"
+			+ "(" + QString::number((int)map->parentItem(), 16) + ")"
 
 		<< ", rows:" << map->rows().size()
 
 		<< ", window:"
 			<< QString(map->window()->metaObject()->className())
-			+ "(" + QString::number((uint)map->window(), 16) + ")"
+			+ "(" + QString::number((int)map->window(), 16) + ")"
 
 		<< "}";
 
