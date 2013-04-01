@@ -54,11 +54,11 @@ extern const unsigned int GFX_ALPHA_ADJUST_ARRAY[256];
 
 #ifdef _MSC_VER
 #  if defined(DLL_EXPORT) && !defined(LIBSDL_GFX_DLL_IMPORT)
-#    define SDL_GFXPRIMITIVES_SCOPE __declspec(dllexport)
+#		 define SDL_GFXPRIMITIVES_SCOPE __declspec(dllexport)
 #  else
-#    ifdef LIBSDL_GFX_DLL_IMPORT
-#      define SDL_GFXPRIMITIVES_SCOPE __declspec(dllimport)
-#    endif
+#		 ifdef LIBSDL_GFX_DLL_IMPORT
+#			 define SDL_GFXPRIMITIVES_SCOPE __declspec(dllimport)
+#		 endif
 #  endif
 #endif
 #ifndef SDL_GFXPRIMITIVES_SCOPE
@@ -119,9 +119,9 @@ extern const unsigned int GFX_ALPHA_ADJUST_ARRAY[256];
 		Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Thick Line */
-	SDL_GFXPRIMITIVES_SCOPE int thickLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
+	SDL_GFXPRIMITIVES_SCOPE int thickLineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
 		Uint8 width, Uint32 color);
-	SDL_GFXPRIMITIVES_SCOPE int thickLineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
+	SDL_GFXPRIMITIVES_SCOPE int thickLineRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2,
 		Uint8 width, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* Circle */
@@ -132,7 +132,7 @@ extern const unsigned int GFX_ALPHA_ADJUST_ARRAY[256];
 	/* Arc */
 
 	SDL_GFXPRIMITIVES_SCOPE int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, Uint32 color);
-	SDL_GFXPRIMITIVES_SCOPE int arcRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end, 
+	SDL_GFXPRIMITIVES_SCOPE int arcRGBA(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Sint16 end,
 		Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
 	/* AA Circle */

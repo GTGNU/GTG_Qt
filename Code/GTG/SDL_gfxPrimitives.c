@@ -485,8 +485,8 @@ int _putPixelAlpha(SDL_Surface *dst, Sint16 x, Sint16 y, Uint32 color, Uint8 alp
 				*pixel = R | G | B | (A << Ashift & Amask);
 
 			}
-			   }
-			   break;
+				 }
+				 break;
 #endif
 		}
 	}
@@ -830,8 +830,8 @@ int _filledRectAlpha(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 
 				}
 			}
 		}
-		   }
-		   break;
+			 }
+			 break;
 #endif
 
 	}
@@ -1776,8 +1776,8 @@ int roundedRectangleColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Si
 	yy2 = y2 - rad;
 	result |= arcColor(dst, xx1, yy1, rad, 180, 270, color);
 	result |= arcColor(dst, xx2, yy1, rad, 270, 360, color);
-	result |= arcColor(dst, xx1, yy2, rad,  90, 180, color);
-	result |= arcColor(dst, xx2, yy2, rad,   0,  90, color);
+	result |= arcColor(dst, xx1, yy2, rad,	90, 180, color);
+	result |= arcColor(dst, xx2, yy2, rad,	 0,  90, color);
 
 	/*
 	* Draw lines
@@ -1928,8 +1928,8 @@ int roundedBoxColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y
 	yy2 = y2 - rad;
 	result |= filledPieColor(dst, xx1, yy1, rad, 180, 270, color);
 	result |= filledPieColor(dst, xx2, yy1, rad, 270, 360, color);
-	result |= filledPieColor(dst, xx1, yy2, rad,  90, 180, color);
-	result |= filledPieColor(dst, xx2, yy2, rad,   0,  90, color);
+	result |= filledPieColor(dst, xx1, yy2, rad,	90, 180, color);
+	result |= filledPieColor(dst, xx2, yy2, rad,	 0,  90, color);
 
 	/*
 	* Draw body
@@ -1977,14 +1977,14 @@ int roundedBoxRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2,
 
 /* --------- Clipping routines for line */
 
-/* Clipping based heavily on code from                       */
-/* http://www.ncsa.uiuc.edu/Vis/Graphics/src/clipCohSuth.c   */
+/* Clipping based heavily on code from											 */
+/* http://www.ncsa.uiuc.edu/Vis/Graphics/src/clipCohSuth.c	 */
 
-#define CLIP_LEFT_EDGE   0x1
+#define CLIP_LEFT_EDGE	 0x1
 #define CLIP_RIGHT_EDGE  0x2
 #define CLIP_BOTTOM_EDGE 0x4
-#define CLIP_TOP_EDGE    0x8
-#define CLIP_INSIDE(a)   (!a)
+#define CLIP_TOP_EDGE		 0x8
+#define CLIP_INSIDE(a)	 (!a)
 #define CLIP_REJECT(a,b) (a&b)
 #define CLIP_ACCEPT(a,b) (!(a|b))
 
@@ -2324,9 +2324,9 @@ int boxRGBA(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8
 
 /* ----- Line */
 
-/* Non-alpha line drawing code adapted from routine          */
-/* by Pete Shinners, pete@shinners.org                       */
-/* Originally from pygame, http://pygame.seul.org            */
+/* Non-alpha line drawing code adapted from routine					 */
+/* by Pete Shinners, pete@shinners.org											 */
+/* Originally from pygame, http://pygame.seul.org						 */
 
 #define ABS(a) (((a)<0) ? -(a) : (a))
 
@@ -2713,7 +2713,7 @@ int _aalineColor(SDL_Surface * dst, Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, 
 	if (dy > dx) {
 
 		/*
-		* y-major.  Calculate 16-bit fixed point fractional part of a pixel that
+		* y-major.	Calculate 16-bit fixed point fractional part of a pixel that
 		* X advances every time Y advances 1 pixel, truncating the result so that
 		* we won't overrun the endpoint along the X axis
 		*/
@@ -3172,16 +3172,16 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 
 	/* Octant labelling
 	 *
-	 *  \ 5 | 6 /
-	 *   \  |  /
-	 *  4 \ | / 7
-	 *     \|/
+	 *	\ 5 | 6 /
+	 *	 \	|  /
+	 *	4 \ | / 7
+	 *		 \|/
 	 *------+------ +x
-	 *     /|\
-	 *  3 / | \ 0
-	 *   /  |  \
-	 *  / 2 | 1 \
-	 *      +y
+	 *		 /|\
+	 *	3 / | \ 0
+	 *	 /	|  \
+	 *	/ 2 | 1 \
+	 *			+y
 	 */
 
 	// Initially reset bitmask to 0x00000000
@@ -3269,7 +3269,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 
 			// and whether to draw in this octant initially
 			if (startoct == endoct)	{
-				// note:      we start drawing, stop, then start again in this case
+				// note:			we start drawing, stop, then start again in this case
 				// otherwise: we only draw in this octant, so initialize it to false, it will get set back to true
 				if (start > end) {
 					// unfortunately, if we're in the same octant and need to draw over the whole circle,
@@ -3280,7 +3280,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 				}
 			}
 			else if (oct % 2) drawoct &= 255 - (1 << oct);
-			else			  drawoct |= (1 << oct);
+			else				drawoct |= (1 << oct);
 		} else if (oct != startoct) { // already verified that it's != endoct
 			drawoct |= (1 << oct); // draw this entire segment
 		}
@@ -3329,12 +3329,12 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 				xpcx = x + cx;
 				xmcx = x - cx;
 				// always check if we're drawing a certain octant before adding a pixel to that octant.
-				if (drawoct & 4)  result |= fastPixelColorNolock(dst, xmcx, ypcy, color); // drawoct & 4 = 22; drawoct[2]
-				if (drawoct & 2)  result |= fastPixelColorNolock(dst, xpcx, ypcy, color);
+				if (drawoct & 4)	result |= fastPixelColorNolock(dst, xmcx, ypcy, color); // drawoct & 4 = 22; drawoct[2]
+				if (drawoct & 2)	result |= fastPixelColorNolock(dst, xpcx, ypcy, color);
 				if (drawoct & 32) result |= fastPixelColorNolock(dst, xmcx, ymcy, color);
 				if (drawoct & 64) result |= fastPixelColorNolock(dst, xpcx, ymcy, color);
 			} else {
-				if (drawoct & 6)  result |= fastPixelColorNolock(dst, x, ypcy, color); // 4 + 2; drawoct[2] || drawoct[1]
+				if (drawoct & 6)	result |= fastPixelColorNolock(dst, x, ypcy, color); // 4 + 2; drawoct[2] || drawoct[1]
 				if (drawoct & 96) result |= fastPixelColorNolock(dst, x, ymcy, color); // 32 + 64
 			}
 
@@ -3343,8 +3343,8 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 			if (cx > 0 && cx != cy) {
 				ypcx = y + cx;
 				ymcx = y - cx;
-				if (drawoct & 8)   result |= fastPixelColorNolock(dst, xmcy, ypcx, color);
-				if (drawoct & 1)   result |= fastPixelColorNolock(dst, xpcy, ypcx, color);
+				if (drawoct & 8)	 result |= fastPixelColorNolock(dst, xmcy, ypcx, color);
+				if (drawoct & 1)	 result |= fastPixelColorNolock(dst, xpcy, ypcx, color);
 				if (drawoct & 16)  result |= fastPixelColorNolock(dst, xmcy, ymcx, color);
 				if (drawoct & 128) result |= fastPixelColorNolock(dst, xpcy, ymcx, color);
 			} else if (cx == 0) {
@@ -3400,13 +3400,13 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 				xmcx = x - cx;
 
 				// always check if we're drawing a certain octant before adding a pixel to that octant.
-				if (drawoct & 4)  result |= pixelColorNolock(dst, xmcx, ypcy, color);
-				if (drawoct & 2)  result |= pixelColorNolock(dst, xpcx, ypcy, color);
+				if (drawoct & 4)	result |= pixelColorNolock(dst, xmcx, ypcy, color);
+				if (drawoct & 2)	result |= pixelColorNolock(dst, xpcx, ypcy, color);
 				if (drawoct & 32) result |= pixelColorNolock(dst, xmcx, ymcy, color);
 				if (drawoct & 64) result |= pixelColorNolock(dst, xpcx, ymcy, color);
 			} else {
 				if (drawoct & 96) result |= pixelColorNolock(dst, x, ymcy, color);
-				if (drawoct & 6)  result |= pixelColorNolock(dst, x, ypcy, color);
+				if (drawoct & 6)	result |= pixelColorNolock(dst, x, ypcy, color);
 			}
 
 			xpcy = x + cy;
@@ -3414,8 +3414,8 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 			if (cx > 0 && cx != cy) {
 				ypcx = y + cx;
 				ymcx = y - cx;
-				if (drawoct & 8)   result |= pixelColorNolock(dst, xmcy, ypcx, color);
-				if (drawoct & 1)   result |= pixelColorNolock(dst, xpcy, ypcx, color);
+				if (drawoct & 8)	 result |= pixelColorNolock(dst, xmcy, ypcx, color);
+				if (drawoct & 1)	 result |= pixelColorNolock(dst, xpcy, ypcx, color);
 				if (drawoct & 16)  result |= pixelColorNolock(dst, xmcy, ymcx, color);
 				if (drawoct & 128) result |= pixelColorNolock(dst, xpcy, ymcx, color);
 			} else if (cx == 0) {
@@ -3430,7 +3430,7 @@ int arcColor(SDL_Surface * dst, Sint16 x, Sint16 y, Sint16 rad, Sint16 start, Si
 				// works like an on-off switch.
 				// This is just in case start & end are in the same octant.
 				if (drawoct & (1 << startoct)) drawoct &= 255 - (1 << startoct);
-				else						   drawoct |= (1 << startoct);
+				else							 drawoct |= (1 << startoct);
 			}
 			if (stopval_end == cx) {
 				if (drawoct & (1 << endoct)) drawoct &= 255 - (1 << endoct);
@@ -4053,10 +4053,10 @@ __inline long int
 __declspec(naked) long int
 	lrint (double flt)
 {
-	__emit(0xEC410B10); // fmdrr  d0, r0, r1
+	__emit(0xEC410B10); // fmdrr	d0, r0, r1
 	__emit(0xEEBD0B40); // ftosid s0, d0
-	__emit(0xEE100A10); // fmrs   r0, s0
-	__emit(0xE12FFF1E); // bx     lr
+	__emit(0xEE100A10); // fmrs		r0, s0
+	__emit(0xE12FFF1E); // bx			lr
 }
 #pragma warning(pop)
 #else
@@ -5491,7 +5491,7 @@ int _HLineTextured(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, SDL_Surfac
 	/*
 	* Determine where in the texture we start drawing
 	*/
-	texture_x_walker =   (x1 - texture_dx)  % texture->w;
+	texture_x_walker =	 (x1 - texture_dx)	% texture->w;
 	if (texture_x_walker < 0){
 		texture_x_walker = texture->w + texture_x_walker ;
 	}
@@ -5534,7 +5534,7 @@ int _HLineTextured(SDL_Surface * dst, Sint16 x1, Sint16 x2, Sint16 y, SDL_Surfac
 			}
 			source_rect.w = write_width;
 			dst_rect.x = x1 + pixels_written;
-			result  |= (SDL_BlitSurface  (texture,&source_rect , dst, &dst_rect) == 0);
+			result	|= (SDL_BlitSurface  (texture,&source_rect , dst, &dst_rect) == 0);
 			pixels_written += write_width;
 		}
 	}
@@ -5549,7 +5549,7 @@ This operation use internally SDL_BlitSurface for lines of the source texture. I
 alpha drawing.
 
 To get the best performance of this operation you need to make sure the texture and the dst surface have the same format
-(see  http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/sdlblitsurface.html).
+(see	http://docs.mandragor.org/files/Common_libs_documentation/SDL/SDL_Documentation_project_en/sdlblitsurface.html).
 The last two parameters are optional, but required for multithreaded operation. When set to NULL, uses global static temp array.
 
 \param dst the destination surface,
@@ -6261,7 +6261,7 @@ int _bresenhamInitialize(SDL_gfxBresenhamIterator *b, Sint16 x1, Sint16 y1, Sint
 		b->s1 = 0;
 	}
 
-	/* dy = abs(y2-y1), s2 = sign(y2-y1)    */
+	/* dy = abs(y2-y1), s2 = sign(y2-y1)		*/
 	if ((b->dy = y2 - y1) != 0) {
 		if (b->dy < 0) {
 			b->dy = -b->dy;
@@ -6314,7 +6314,7 @@ int _bresenhamIterate(SDL_gfxBresenhamIterator *b)
 	while (b->error >= 0) {
 		if (b->swapdir) {
 			b->x += b->s1;
-		} else  {
+		} else	{
 			b->y += b->s2;
 		}
 
@@ -6775,7 +6775,7 @@ transfer function which maintain brightness.
 
 */
 const unsigned int GFX_ALPHA_ADJUST_ARRAY[256] = {
-	0,  /* 0 */
+	0,	/* 0 */
 	15,  /* 1 */
 	22,  /* 2 */
 	27,  /* 3 */
@@ -6815,220 +6815,220 @@ const unsigned int GFX_ALPHA_ADJUST_ARRAY[256] = {
 	97,  /* 37 */
 	98,  /* 38 */
 	99,  /* 39 */
-	100,  /* 40 */
-	102,  /* 41 */
-	103,  /* 42 */
-	104,  /* 43 */
-	105,  /* 44 */
-	107,  /* 45 */
-	108,  /* 46 */
-	109,  /* 47 */
-	110,  /* 48 */
-	111,  /* 49 */
-	112,  /* 50 */
-	114,  /* 51 */
-	115,  /* 52 */
-	116,  /* 53 */
-	117,  /* 54 */
-	118,  /* 55 */
-	119,  /* 56 */
-	120,  /* 57 */
-	121,  /* 58 */
-	122,  /* 59 */
-	123,  /* 60 */
-	124,  /* 61 */
-	125,  /* 62 */
-	126,  /* 63 */
-	127,  /* 64 */
-	128,  /* 65 */
-	129,  /* 66 */
-	130,  /* 67 */
-	131,  /* 68 */
-	132,  /* 69 */
-	133,  /* 70 */
-	134,  /* 71 */
-	135,  /* 72 */
-	136,  /* 73 */
-	137,  /* 74 */
-	138,  /* 75 */
-	139,  /* 76 */
-	140,  /* 77 */
-	141,  /* 78 */
-	141,  /* 79 */
-	142,  /* 80 */
-	143,  /* 81 */
-	144,  /* 82 */
-	145,  /* 83 */
-	146,  /* 84 */
-	147,  /* 85 */
-	148,  /* 86 */
-	148,  /* 87 */
-	149,  /* 88 */
-	150,  /* 89 */
-	151,  /* 90 */
-	152,  /* 91 */
-	153,  /* 92 */
-	153,  /* 93 */
-	154,  /* 94 */
-	155,  /* 95 */
-	156,  /* 96 */
-	157,  /* 97 */
-	158,  /* 98 */
-	158,  /* 99 */
-	159,  /* 100 */
-	160,  /* 101 */
-	161,  /* 102 */
-	162,  /* 103 */
-	162,  /* 104 */
-	163,  /* 105 */
-	164,  /* 106 */
-	165,  /* 107 */
-	165,  /* 108 */
-	166,  /* 109 */
-	167,  /* 110 */
-	168,  /* 111 */
-	168,  /* 112 */
-	169,  /* 113 */
-	170,  /* 114 */
-	171,  /* 115 */
-	171,  /* 116 */
-	172,  /* 117 */
-	173,  /* 118 */
-	174,  /* 119 */
-	174,  /* 120 */
-	175,  /* 121 */
-	176,  /* 122 */
-	177,  /* 123 */
-	177,  /* 124 */
-	178,  /* 125 */
-	179,  /* 126 */
-	179,  /* 127 */
-	180,  /* 128 */
-	181,  /* 129 */
-	182,  /* 130 */
-	182,  /* 131 */
-	183,  /* 132 */
-	184,  /* 133 */
-	184,  /* 134 */
-	185,  /* 135 */
-	186,  /* 136 */
-	186,  /* 137 */
-	187,  /* 138 */
-	188,  /* 139 */
-	188,  /* 140 */
-	189,  /* 141 */
-	190,  /* 142 */
-	190,  /* 143 */
-	191,  /* 144 */
-	192,  /* 145 */
-	192,  /* 146 */
-	193,  /* 147 */
-	194,  /* 148 */
-	194,  /* 149 */
-	195,  /* 150 */
-	196,  /* 151 */
-	196,  /* 152 */
-	197,  /* 153 */
-	198,  /* 154 */
-	198,  /* 155 */
-	199,  /* 156 */
-	200,  /* 157 */
-	200,  /* 158 */
-	201,  /* 159 */
-	201,  /* 160 */
-	202,  /* 161 */
-	203,  /* 162 */
-	203,  /* 163 */
-	204,  /* 164 */
-	205,  /* 165 */
-	205,  /* 166 */
-	206,  /* 167 */
-	206,  /* 168 */
-	207,  /* 169 */
-	208,  /* 170 */
-	208,  /* 171 */
-	209,  /* 172 */
-	210,  /* 173 */
-	210,  /* 174 */
-	211,  /* 175 */
-	211,  /* 176 */
-	212,  /* 177 */
-	213,  /* 178 */
-	213,  /* 179 */
-	214,  /* 180 */
-	214,  /* 181 */
-	215,  /* 182 */
-	216,  /* 183 */
-	216,  /* 184 */
-	217,  /* 185 */
-	217,  /* 186 */
-	218,  /* 187 */
-	218,  /* 188 */
-	219,  /* 189 */
-	220,  /* 190 */
-	220,  /* 191 */
-	221,  /* 192 */
-	221,  /* 193 */
-	222,  /* 194 */
-	222,  /* 195 */
-	223,  /* 196 */
-	224,  /* 197 */
-	224,  /* 198 */
-	225,  /* 199 */
-	225,  /* 200 */
-	226,  /* 201 */
-	226,  /* 202 */
-	227,  /* 203 */
-	228,  /* 204 */
-	228,  /* 205 */
-	229,  /* 206 */
-	229,  /* 207 */
-	230,  /* 208 */
-	230,  /* 209 */
-	231,  /* 210 */
-	231,  /* 211 */
-	232,  /* 212 */
-	233,  /* 213 */
-	233,  /* 214 */
-	234,  /* 215 */
-	234,  /* 216 */
-	235,  /* 217 */
-	235,  /* 218 */
-	236,  /* 219 */
-	236,  /* 220 */
-	237,  /* 221 */
-	237,  /* 222 */
-	238,  /* 223 */
-	238,  /* 224 */
-	239,  /* 225 */
-	240,  /* 226 */
-	240,  /* 227 */
-	241,  /* 228 */
-	241,  /* 229 */
-	242,  /* 230 */
-	242,  /* 231 */
-	243,  /* 232 */
-	243,  /* 233 */
-	244,  /* 234 */
-	244,  /* 235 */
-	245,  /* 236 */
-	245,  /* 237 */
-	246,  /* 238 */
-	246,  /* 239 */
-	247,  /* 240 */
-	247,  /* 241 */
-	248,  /* 242 */
-	248,  /* 243 */
-	249,  /* 244 */
-	249,  /* 245 */
-	250,  /* 246 */
-	250,  /* 247 */
-	251,  /* 248 */
-	251,  /* 249 */
-	252,  /* 250 */
-	252,  /* 251 */
-	253,  /* 252 */
-	253,  /* 253 */
-	254,  /* 254 */
-	255   /* 255 */
+	100,	/* 40 */
+	102,	/* 41 */
+	103,	/* 42 */
+	104,	/* 43 */
+	105,	/* 44 */
+	107,	/* 45 */
+	108,	/* 46 */
+	109,	/* 47 */
+	110,	/* 48 */
+	111,	/* 49 */
+	112,	/* 50 */
+	114,	/* 51 */
+	115,	/* 52 */
+	116,	/* 53 */
+	117,	/* 54 */
+	118,	/* 55 */
+	119,	/* 56 */
+	120,	/* 57 */
+	121,	/* 58 */
+	122,	/* 59 */
+	123,	/* 60 */
+	124,	/* 61 */
+	125,	/* 62 */
+	126,	/* 63 */
+	127,	/* 64 */
+	128,	/* 65 */
+	129,	/* 66 */
+	130,	/* 67 */
+	131,	/* 68 */
+	132,	/* 69 */
+	133,	/* 70 */
+	134,	/* 71 */
+	135,	/* 72 */
+	136,	/* 73 */
+	137,	/* 74 */
+	138,	/* 75 */
+	139,	/* 76 */
+	140,	/* 77 */
+	141,	/* 78 */
+	141,	/* 79 */
+	142,	/* 80 */
+	143,	/* 81 */
+	144,	/* 82 */
+	145,	/* 83 */
+	146,	/* 84 */
+	147,	/* 85 */
+	148,	/* 86 */
+	148,	/* 87 */
+	149,	/* 88 */
+	150,	/* 89 */
+	151,	/* 90 */
+	152,	/* 91 */
+	153,	/* 92 */
+	153,	/* 93 */
+	154,	/* 94 */
+	155,	/* 95 */
+	156,	/* 96 */
+	157,	/* 97 */
+	158,	/* 98 */
+	158,	/* 99 */
+	159,	/* 100 */
+	160,	/* 101 */
+	161,	/* 102 */
+	162,	/* 103 */
+	162,	/* 104 */
+	163,	/* 105 */
+	164,	/* 106 */
+	165,	/* 107 */
+	165,	/* 108 */
+	166,	/* 109 */
+	167,	/* 110 */
+	168,	/* 111 */
+	168,	/* 112 */
+	169,	/* 113 */
+	170,	/* 114 */
+	171,	/* 115 */
+	171,	/* 116 */
+	172,	/* 117 */
+	173,	/* 118 */
+	174,	/* 119 */
+	174,	/* 120 */
+	175,	/* 121 */
+	176,	/* 122 */
+	177,	/* 123 */
+	177,	/* 124 */
+	178,	/* 125 */
+	179,	/* 126 */
+	179,	/* 127 */
+	180,	/* 128 */
+	181,	/* 129 */
+	182,	/* 130 */
+	182,	/* 131 */
+	183,	/* 132 */
+	184,	/* 133 */
+	184,	/* 134 */
+	185,	/* 135 */
+	186,	/* 136 */
+	186,	/* 137 */
+	187,	/* 138 */
+	188,	/* 139 */
+	188,	/* 140 */
+	189,	/* 141 */
+	190,	/* 142 */
+	190,	/* 143 */
+	191,	/* 144 */
+	192,	/* 145 */
+	192,	/* 146 */
+	193,	/* 147 */
+	194,	/* 148 */
+	194,	/* 149 */
+	195,	/* 150 */
+	196,	/* 151 */
+	196,	/* 152 */
+	197,	/* 153 */
+	198,	/* 154 */
+	198,	/* 155 */
+	199,	/* 156 */
+	200,	/* 157 */
+	200,	/* 158 */
+	201,	/* 159 */
+	201,	/* 160 */
+	202,	/* 161 */
+	203,	/* 162 */
+	203,	/* 163 */
+	204,	/* 164 */
+	205,	/* 165 */
+	205,	/* 166 */
+	206,	/* 167 */
+	206,	/* 168 */
+	207,	/* 169 */
+	208,	/* 170 */
+	208,	/* 171 */
+	209,	/* 172 */
+	210,	/* 173 */
+	210,	/* 174 */
+	211,	/* 175 */
+	211,	/* 176 */
+	212,	/* 177 */
+	213,	/* 178 */
+	213,	/* 179 */
+	214,	/* 180 */
+	214,	/* 181 */
+	215,	/* 182 */
+	216,	/* 183 */
+	216,	/* 184 */
+	217,	/* 185 */
+	217,	/* 186 */
+	218,	/* 187 */
+	218,	/* 188 */
+	219,	/* 189 */
+	220,	/* 190 */
+	220,	/* 191 */
+	221,	/* 192 */
+	221,	/* 193 */
+	222,	/* 194 */
+	222,	/* 195 */
+	223,	/* 196 */
+	224,	/* 197 */
+	224,	/* 198 */
+	225,	/* 199 */
+	225,	/* 200 */
+	226,	/* 201 */
+	226,	/* 202 */
+	227,	/* 203 */
+	228,	/* 204 */
+	228,	/* 205 */
+	229,	/* 206 */
+	229,	/* 207 */
+	230,	/* 208 */
+	230,	/* 209 */
+	231,	/* 210 */
+	231,	/* 211 */
+	232,	/* 212 */
+	233,	/* 213 */
+	233,	/* 214 */
+	234,	/* 215 */
+	234,	/* 216 */
+	235,	/* 217 */
+	235,	/* 218 */
+	236,	/* 219 */
+	236,	/* 220 */
+	237,	/* 221 */
+	237,	/* 222 */
+	238,	/* 223 */
+	238,	/* 224 */
+	239,	/* 225 */
+	240,	/* 226 */
+	240,	/* 227 */
+	241,	/* 228 */
+	241,	/* 229 */
+	242,	/* 230 */
+	242,	/* 231 */
+	243,	/* 232 */
+	243,	/* 233 */
+	244,	/* 234 */
+	244,	/* 235 */
+	245,	/* 236 */
+	245,	/* 237 */
+	246,	/* 238 */
+	246,	/* 239 */
+	247,	/* 240 */
+	247,	/* 241 */
+	248,	/* 242 */
+	248,	/* 243 */
+	249,	/* 244 */
+	249,	/* 245 */
+	250,	/* 246 */
+	250,	/* 247 */
+	251,	/* 248 */
+	251,	/* 249 */
+	252,	/* 250 */
+	252,	/* 251 */
+	253,	/* 252 */
+	253,	/* 253 */
+	254,	/* 254 */
+	255		/* 255 */
 };
