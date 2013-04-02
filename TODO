@@ -29,24 +29,27 @@
     -Story line
 
 >Coding
-    - Engine design (abstract, no GUI concepts or dependency)
-        - Base Actor class
-        - Base Action class
-        - Stage class with Viewport support
-        - Event listener base classes (std::function support is a must)
-        (see libgdx.scene2d wiki for an explaination on this)
+    [x] Engine design {Qt Scene Graph: OpenGL, QML}
 
-    - Game-specific implementation
-        - NPC AI
-        - Drawing (QGraphicsScene)
-        - Projectiles
-        - Health
-        - Respawn points
-        - Check points
-        - Currency
-    - Input
+    [ ] Game-specific implementation
+        [ ] NPC AI
+        [x] Drawing (QtQuick)
+        [_] Projectiles
+        [_] Health
+        [ ] Respawn points
+        [ ] Check points
+        [ ] Currency
 
-    - Animation
-        - Movement // using actors + actions
-        - Attacking // using actors + actions
-        - Cut scenes // QML, replace game scene with a QDeclarativeView
+    [_] Input
+
+    [x] Animation
+        [_] Movement {Timers and QML animations}
+        [_] Attacking {Timers and QML animations}
+        [_] QML Cut scenes
+
+
+LEGEND:
+    [x] done
+    [_] needs to be implemented
+    [ ] not even planned
+
