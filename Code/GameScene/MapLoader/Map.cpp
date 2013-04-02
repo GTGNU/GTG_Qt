@@ -8,7 +8,7 @@
 
 QDebug& operator<<(QDebug& dbg, gtg::Map* map)
 {
-	dbg
+	return dbg
 		<< "Map { parentItem:"
 			<< QString(map->parentItem()->metaObject()->className())
 			+ "(" + QString::number((int)map->parentItem(), 16) + ")"
@@ -20,8 +20,6 @@ QDebug& operator<<(QDebug& dbg, gtg::Map* map)
 			+ "(" + QString::number((int)map->window(), 16) + ")"
 
 		<< "}";
-
-	return dbg.space();
 }
 
 gtg::Map::Map(QQuickItem* parent)

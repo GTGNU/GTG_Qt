@@ -4,12 +4,10 @@ TileType {
 	name: 'sand'
 
 	view: TileView {
-		name: 'sand.view'
 		texture: 'sand.png'
 	}
 
 	behavior: TileBehavior {
-		name: 'sand.behavior'
 		trespassable: true
 
 		onPlayerEnteredArea: { player.speed /= 2 }

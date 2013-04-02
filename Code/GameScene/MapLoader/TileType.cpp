@@ -20,7 +20,9 @@ gtg::TileView* gtg::TileType::view() const
 
 void gtg::TileType::setView(gtg::TileView* view)
 {
+	auto prev = m_view;
 	m_view = view;
+	emit viewChanged(prev, m_view);
 }
 
 
@@ -31,5 +33,7 @@ gtg::TileBehavior* gtg::TileType::behavior() const
 
 void gtg::TileType::setBehavior(gtg::TileBehavior* behavior)
 {
+	auto prev = m_behavior;
 	m_behavior = behavior;
+	emit behaviorChanged(prev, m_behavior);
 }

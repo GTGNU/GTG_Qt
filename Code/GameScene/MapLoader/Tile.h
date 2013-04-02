@@ -1,9 +1,14 @@
 #ifndef TILE_H
 #define TILE_H
 
+#include <QtCore/QList>
 #include <QtCore/QString>
 
+#include <QtQml/QQmlListProperty>
+
 #include <QtQuick/QQuickItem>
+
+#include "ViewList.h"
 
 namespace gtg
 {
@@ -20,13 +25,8 @@ namespace gtg
 	{
 		Q_OBJECT
 
-		Q_PROPERTY(QString type READ typeName WRITE setTypeName)
-
-		Q_PROPERTY(gtg::TileView* view READ view)
-		Q_PROPERTY(QString viewName READ viewName WRITE setViewName)
-
-		Q_PROPERTY(gtg::TileBehavior* behavior READ behavior)
-		Q_PROPERTY(QString behaviorName READ behaviorName WRITE setBehaviorName)
+		Q_PROPERTY(QQmlListProperty<gtg::ViewListEntry> views READ viewsQml)
+		Q_PROPERTY(gtg::TileBehavior* behavior READ behavior WRITE setBehavior NOTIFY behaviorChanged)
 
 		Q_PROPERTY(int mapX READ mapX)
 		Q_PROPERTY(int mapY READ mapY)
@@ -35,7 +35,8 @@ namespace gtg
 		Q_PROPERTY(gtg::Map* map READ map)
 
 		private:
-			TileView* m_view;
+			ViewList m_views;
+
 			TileBehavior* m_behavior;
 
 			Player* m_player;
@@ -48,17 +49,10 @@ namespace gtg
 			Tile(QQuickItem* parent = nullptr);
 			~Tile();
 
-			//gtg::TileType* type() const;
-			QString typeName() const;
-			void setTypeName(const QString& typeName);
-
-			gtg::TileView* view() const;
-			QString viewName() const;
-			void setViewName(const QString& viewName);
+			QQmlListProperty<ViewListEntry> viewsQml();
 
 			gtg::TileBehavior* behavior() const;
-			QString behaviorName() const;
-			void setBehaviorName(const QString& behaviorName);
+			void setBehavior(gtg::TileBehavior* behavior);
 
 			int mapX() const;
 			int mapY() const;
@@ -67,13 +61,16 @@ namespace gtg
 			gtg::Map* map() const;
 
 			friend class Player;
+			friend class ViewList;
 
 		signals:
-			void viewChanged(TileView*, TileView*);
-			void behaviorChanged(TileBehavior*, TileBehavior*);
+			void viewAdded(TileView* newTile);
+			void viewRemoved(TileView* removedTile);
+			void behaviorChanged(TileBehavior* previousBehavior,
+					TileBehavior* newBehavior);
 
-			void playerEntered(Player*);
-			void playerExited(Player*);
+			void playerEntered(Player* player);
+			void playerExited(Player* player);
 	};
 }
 

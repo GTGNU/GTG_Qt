@@ -2,7 +2,9 @@
 #define TILEVIEW_H
 
 #include <QtCore/QHash>
+#include <QtCore/QMap>
 #include <QtCore/QObject>
+#include <QtCore/QPair>
 #include <QtCore/QString>
 
 #include <QtGui/QImage>
@@ -11,56 +13,45 @@
 #include <QtQuick/QSGSimpleTextureNode>
 #include <QtQuick/QSGTexture>
 
-#include "NamedObject.h"
 #include "TileDef.h"
+#include "TextureCache.h"
 
 namespace gtg
 {
 	class Player;
+	class Tile;
 
 	class TileView
 		: public TileDef<TileView>
 	{
 		Q_OBJECT
 		Q_PROPERTY(QString texture READ textureFilename WRITE setTextureFilename NOTIFY textureChanged)
-
-		Q_PROPERTY(QQuickItem* misc READ misc WRITE setMisc NOTIFY miscChanged) // allow using stuff like Timers
+		Q_ENUMS(Area)
 
 		private:
-			QString m_textureFilename;
+			static TextureCache m_cache;
 
-			QImage m_textureImage;
-
-			QSGTexture* m_texture;
-			bool m_textureUpdated;
-
-			void updateTexture(QQuickWindow* window);
-			void update(QQuickWindow* window);
-
-			QQuickItem* m_misc;
-
-			static QSet<TileView*> m_toUpdate;
+			bool m_imageInitialized;
+			TextureCache::pointer m_image;
 
 		public:
-			static const QString texturePath;
-
-			static void forceUpdate();
+			enum Area : uint {
+				TOPLEFT=0, TOP,    TOPRIGHT,
+				LEFT,      MIDDLE, RIGHT,
+				BOTLEFT,   BOTTOM, BOTRIGHT
+			};
 
 			TileView(QObject* parent = nullptr);
 			~TileView();
 
-			QImage textureImage() const;
 			QString textureFilename() const;
 			void setTextureFilename(const QString& textureFilename);
 
-			QQuickItem* misc() const;
-			void setMisc(QQuickItem* item);
-
-			void updateTextureOf(QQuickItem* target, QSGSimpleTextureNode* n);
+			void updateTextureOf(QSGSimpleTextureNode* node,
+					QQuickWindow* window, Area area);
 
 		signals:
-			void textureChanged(QString);
-			void miscChanged(QQuickItem*);
+			void textureChanged();
 	};
 }
 

@@ -1,5 +1,5 @@
-#ifndef LISTFUNCTIONS_H
-#define LISTFUNCTIONS_H
+#ifndef CHILDLIST_H
+#define CHILDLIST_H
 
 #include <QtCore/QDebug>
 #include <QtCore/QList>

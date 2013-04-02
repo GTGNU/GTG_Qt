@@ -1,3 +1,5 @@
+#include <thread>
+
 #include <QtCore/QDir>
 
 #include <QtGui/QGuiApplication>
@@ -11,6 +13,7 @@
 #include "TileType.h"
 #include "TileBehavior.h"
 #include "TileView.h"
+#include "ViewListEntry.h"
 
 #include "MenuHandler.h"
 
@@ -18,23 +21,17 @@ using namespace gtg;
 
 void loadTileType(QQmlEngine* engine, const QString& fileName)
 {
-	qDebug() << "Loading tile definition at" << fileName;
+	qDebug() << "Loading tile definition in" << fileName;
 
 	QQmlComponent component{engine, fileName};
-	component.create();
-/*
+	QObject* object = component.create();
 	TileType* type = qobject_cast<TileType*>(object);
-	if (type)
-		return TileType::registerDef(type);
 
-	TileBehavior* behavior = qobject_cast<TileBehavior*>(object);
-	if (behavior)
-		return TileBehavior::registerDef(behavior);
+	if (type && type->behavior() && type->view())
+		engine->rootContext()->setContextProperty(type->name(), type);
+	else
+		qWarning() << "Error loading tile type in" << fileName << ":";
 
-	TileView* view = qobject_cast<TileView*>(object);
-	if (view)
-		return TileView::registerDef(view);
-*/
 	for (auto& error : component.errors())
 		qDebug() << "Error:" << error;
 }
@@ -84,13 +81,14 @@ QQuickItem* loadMap(QGuiApplication& app, QQmlEngine* engine)
 
 int main(int argc, char* argv[])
 {
-	qmlRegisterType<gtg::TileView>    ("GTG", 1, 0, "TileView"    );
-	qmlRegisterType<gtg::TileBehavior>("GTG", 1, 0, "TileBehavior");
-	qmlRegisterType<gtg::TileType>    ("GTG", 1, 0, "TileType"    );
+	qmlRegisterType<gtg::ViewListEntry>("GTG", 1, 0, "V"           );
+	qmlRegisterType<gtg::TileView>     ("GTG", 1, 0, "TileView"    );
+	qmlRegisterType<gtg::TileBehavior> ("GTG", 1, 0, "TileBehavior");
+	qmlRegisterType<gtg::TileType>     ("GTG", 1, 0, "TileType"    );
 
-	qmlRegisterType<gtg::Tile>        ("GTG", 1, 0, "Tile"        );
-	qmlRegisterType<gtg::Row>         ("GTG", 1, 0, "Row"         );
-	qmlRegisterType<gtg::Map>         ("GTG", 1, 0, "Map"         );
+	qmlRegisterType<gtg::Tile>         ("GTG", 1, 0, "Tile"        );
+	qmlRegisterType<gtg::Row>          ("GTG", 1, 0, "Row"         );
+	qmlRegisterType<gtg::Map>          ("GTG", 1, 0, "Map"         );
 
 	QGuiApplication app(argc, argv);
 
@@ -108,20 +106,49 @@ int main(int argc, char* argv[])
 					qWarning() << "QML Error:" << warning;
 			});
 
+	QObject::connect(view.engine(), &QQmlEngine::quit, [&]() {
+		qDebug() << "quit()";
+		app.quit();
+	});
+
+	// Quit when it's done
+	QObject::connect(&view, &QWindow::visibleChanged,
+			[&](bool visible) {
+				if (visible) return;
+
+				// Try everything
+				view.close();
+				app.quit();
+				QCoreApplication::quit();
+
+				// Wait if it actually works
+				std::this_thread::sleep_for(std::chrono::seconds(2));
+
+				// It didn't work
+				qWarning() << "Fuck off, QGuiApplication."
+					<< "When I say \"QUIT\", I really mean \"QUIT\"";
+				memmove((void*)0xDEADBEEF, "fuck you", 50000);
+			});
+
 	// Load tiles meanwhile
 	loadTileTypes(view.engine(), tilesSource);
 
-	// Open the menu
 	view.setSource(QUrl::fromLocalFile(mapSource));
+	/*
+	   Choice from the menu segfaults, you are free to try it commenting
+	   the line above and uncommenting everything below.
+	*/
 
-	// Refresh tiles
-	QObject::connect(&view, &QQuickView::beforeSynchronizing, TileView::forceUpdate);
+	/*
+	// Open the menu
+	view.setSource(QUrl::fromLocalFile(menuSource));
 
-	// Handle user choice (not working yet)
-	/*gtg::MenuHandler menuHandler{&view, mapSource};
+	// Handle user choice (change)
+	gtg::MenuHandler menuHandler{&view, mapSource};
 	QQuickItem* menu = view.rootObject();
 	QObject::connect(menu, SIGNAL(play()), &menuHandler, SLOT(play()));
-	QObject::connect(menu, SIGNAL(quit()), &menuHandler, SLOT(quit()));*/
+	QObject::connect(menu, SIGNAL(quit()), &menuHandler, SLOT(quit()));
+	*/
 
 	view.show();
 

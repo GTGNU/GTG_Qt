@@ -1,9 +1,12 @@
 #include "Tile.h"
 #include "Row.h"
 #include "Map.h"
+
 #include "TileType.h"
 #include "TileView.h"
 #include "TileBehavior.h"
+
+#include "QmlListAdapter.h"
 
 #include <QtGui/QImage>
 
@@ -13,7 +16,7 @@
 
 QDebug& operator<<(QDebug& dbg, gtg::Tile* tile)
 {
-	dbg
+	return dbg
 		<< "Tile { parentItem:"
 			<< QString(tile->parentItem()->metaObject()->className())
 			+ "(" + QString::number((int)tile->parentItem(), 16) + ")"
@@ -22,15 +25,12 @@ QDebug& operator<<(QDebug& dbg, gtg::Tile* tile)
 			<< QString(tile->window()->metaObject()->className())
 			+ "(" + QString::number((int)tile->window(), 16) + ")"
 
-		<< ", texture:" << tile->view()->textureFilename()
 		<< "}";
-
-	return dbg.space();
 }
 
 gtg::Tile::Tile(QQuickItem* parent)
 	: QQuickItem(parent)
-	, m_view(nullptr)
+	, m_views(this)
 	, m_behavior(nullptr)
 {
 	setFlag(QQuickItem::ItemHasContents);
@@ -41,43 +41,9 @@ gtg::Tile::~Tile()
 }
 
 
-QString gtg::Tile::typeName() const
+QQmlListProperty<gtg::ViewListEntry> gtg::Tile::viewsQml()
 {
-	QString sv = viewName().split('.')[0];
-	QString sb = behaviorName().split('.')[0];
-
-	return sv == sb? sv : "";
-}
-
-void gtg::Tile::setTypeName(const QString& typeName)
-{
-	setViewName(typeName + ".view");
-	setBehaviorName(typeName + ".behavior");
-}
-
-
-gtg::TileView* gtg::Tile::view() const
-{
-	return m_view;
-}
-
-QString gtg::Tile::viewName() const
-{
-	return m_view->name();
-}
-
-void gtg::Tile::setViewName(const QString& viewName)
-{
-	TileView* prev = m_view;
-	m_view = TileView::find(viewName);
-
-	if (prev != m_view) {
-		disconnect(m_view, SIGNAL(textureChanged(QString)), this, SLOT(update()));
-		connect(m_view, SIGNAL(textureChanged(QString)), this, SLOT(update()));
-
-		update();
-		emit viewChanged(prev, m_view);
-	}
+	return adapt<ViewListEntry>(m_views, this);
 }
 
 
@@ -86,18 +52,13 @@ gtg::TileBehavior* gtg::Tile::behavior() const
 	return m_behavior;
 }
 
-QString gtg::Tile::behaviorName() const
+void gtg::Tile::setBehavior(TileBehavior* behavior)
 {
-	return m_behavior->name();
-}
-
-void gtg::Tile::setBehaviorName(const QString& behaviorName)
-{
-	TileBehavior* prev = m_behavior;
-	m_behavior = TileBehavior::find(behaviorName);
-
-	if (prev != m_behavior)
+	if (m_behavior != behavior) {
+		TileBehavior* prev = m_behavior;
+		m_behavior = behavior;
 		emit behaviorChanged(prev, m_behavior);
+	}
 }
 
 
@@ -140,12 +101,8 @@ QSGNode* gtg::Tile::updatePaintNode(QSGNode* node,
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
 
-	QSGSimpleTextureNode* n = static_cast<QSGSimpleTextureNode*>(node);
-
-	if (!n) {
-		qDebug() << "Initializing node";
-
-		n = new QSGSimpleTextureNode;
+	if (!node) {
+		node = new QSGNode;
 
 		int tileSize = map()->tileSize();
 		setX(mapX() * tileSize);
@@ -154,11 +111,11 @@ QSGNode* gtg::Tile::updatePaintNode(QSGNode* node,
 		setHeight(tileSize);
 	}
 
-	n->setRect(boundingRect());
-
 	qDebug() << "Bounding rect: " << boundingRect();
 
-	view()->updateTextureOf(this, n);
-	return n;
+	m_views.applyChanges(node);
+	m_views.updateTextures(node);
+
+	return node;
 }
 

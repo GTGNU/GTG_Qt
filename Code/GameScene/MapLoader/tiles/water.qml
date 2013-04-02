@@ -6,9 +6,7 @@ TileType {
 	name: 'water'
 
 	view: TileView {
-		name: 'water.view'
 		texture: 'water' + timer.currentFrame + '.png'
-
 
 		property var timer: Timer {
 			interval: 100
@@ -19,12 +17,12 @@ TileType {
 			property int numFrames: 2
 
 			onTriggered: {
-				currentFrame = (currentFrame + 1) % numFrames }
+				currentFrame = (currentFrame + 1) % numFrames
+			}
 		}
 	}
 
 	behavior: TileBehavior {
-		name: 'water.behavior'
 		trespassable: false
 	}
 }

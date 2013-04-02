@@ -43,24 +43,96 @@ Map {
 	tileSize: 192
 
 	Row {
-		Tile { type: 'sand' }
-		Tile { type: 'concrete' }
-		Tile { type: 'grass_tall' }
-		Tile { type: 'water' }
+		Tile {
+			views: [
+				V{ view: sand.view },
+				V{ view: water.view; area: TileView.TOP }
+			]
+			behavior: sand.behavior
+		}
+
+		Tile {
+			views: [
+				V{ view: concrete.view },
+				V{ view: water.view; area: TileView.TOPRIGHT }
+			]
+			behavior: concrete.behavior
+		}
+
+		Tile {
+			views: [
+				V{ view: grass_tall.view },
+				V{ view: water.view; area: TileView.LEFT }
+			]
+			behavior: grass_tall.behavior
+		}
+
+		Tile {
+			views: V{ view: water.view }
+			behavior: water.behavior
+		}
 	}
 
 	Row {
-		Tile { type: 'water' }
-		Tile { type: 'sand' }
-		Tile { type: 'concrete' }
-		Tile { type: 'grass_tall' }
+		Tile {
+			views: V{ view: water.view }
+			behavior: water.behavior
+		}
+
+		Tile {
+			views: [
+				V{ view: sand.view },
+				V{ view: water.view; area: TileView.RIGHT },
+				V{ view: water.view; area: TileView.TOP }
+			]
+			behavior: sand.behavior
+		}
+
+		Tile {
+			views: [
+				V{ view: concrete.view },
+				V{ view: water.view; area: TileView.TOPRIGHT },
+				V{ view: water.view; area: TileView.BOTLEFT }
+			]
+			behavior: concrete.behavior
+		}
+
+		Tile {
+			views: [
+				V{ view: grass_tall.view },
+				V{ view: water.view; area: TileView.BOTTOM }
+			]
+			behavior: grass_tall.behavior
+		}
 	}
 
 	Row {
-		Tile { type: 'grass_tall' }
-		Tile { type: 'water' }
-		Tile { type: 'sand' }
-		Tile { type: 'concrete' }
+		Tile {
+			views: [
+				V{ view: grass_tall.view },
+				V{ view: water.view; area: TileView.BOTTOM },
+				V{ view: water.view; area: TileView.LEFT }
+			]
+			behavior: grass_tall.behavior
+		}
+
+		Tile {
+			views: V{ view: water.view }
+			behavior: water.behavior
+		}
+
+		Tile {
+			views: [
+				V{ view: sand.view },
+				V{ view: water.view; area: TileView.RIGHT }
+			]
+			behavior: sand.behavior
+		}
+
+		Tile {
+			views: V{ view: concrete.view }
+			behavior: concrete.behavior
+		}
 	}
 }
 

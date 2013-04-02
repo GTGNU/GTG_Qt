@@ -46,7 +46,6 @@ gtg::TileDef<Def>::~TileDef()
 template <class Def>
 void gtg::TileDef<Def>::setName(const QString& name)
 {
-	qDebug() << "TileDef<" << this << "> setName(" << name << ")";
 	if (name != m_name) {
 		if (m_nameSet)
 			unregisterDef(static_cast<Def*>(this));
@@ -68,7 +67,7 @@ void gtg::TileDef<Def>::registerDef(Def* def)
 {
 	if (!m_defs.contains(def->name())) {
 		m_defs.insert(def->name(), def);
-		qDebug() << "Registered " << def << def->name();
+		qDebug() << "Registered" << def << "as" << def->name();
 	} else {
 		qWarning() << "Could not register" << def << def->name()
 			<< ": already exists";

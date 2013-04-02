@@ -6,7 +6,7 @@
 #include <QtQml>
 
 #include "TileDef.h"
-#include "NamedObject.h"
+#include "ViewList.h"
 
 namespace gtg
 {
@@ -17,8 +17,8 @@ namespace gtg
 		: public TileDef<TileType>
 	{
 		Q_OBJECT
-		Q_PROPERTY(gtg::TileView* view READ view WRITE setView)
-		Q_PROPERTY(gtg::TileBehavior* behavior READ behavior WRITE setBehavior)
+		Q_PROPERTY(gtg::TileView* view READ view WRITE setView NOTIFY viewChanged)
+		Q_PROPERTY(gtg::TileBehavior* behavior READ behavior WRITE setBehavior NOTIFY behaviorChanged)
 
 		private:
 			TileView* m_view;
@@ -33,6 +33,13 @@ namespace gtg
 
 			gtg::TileBehavior* behavior() const;
 			void setBehavior(gtg::TileBehavior* behavior);
+
+		signals:
+			void viewChanged(gtg::TileView* oldView,
+					gtg::TileView* newView);
+
+			void behaviorChanged(gtg::TileBehavior* oldBehavior,
+					gtg::TileBehavior* newBehavior);
 	};
 }
 
