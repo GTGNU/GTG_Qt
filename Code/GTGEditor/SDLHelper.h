@@ -22,7 +22,8 @@ LINKER: -lmingw32 -lSDLmain -lSDL + additional (-lSDL_image -lSDL_Net, -lSDL_ttf
 /********** Do not change anything below **********/
 
 /** Initializes/Exits SDL and extensions if included **/
-void SDLInit(); void SDLExit();
+void SDLInit();
+void SDLExit();
 
 /** Creates/changes the SDL window for drawing **/
 bool SDLSetVideo(int width, int height, bool resizable = false, bool fullscreen = false, bool noframe = false, bool useOpenGL = false);
@@ -52,31 +53,38 @@ extern SDL_Surface* screen; //Screen surface
 extern int SDLResolutionX, SDLResolutionY; //Screen resolution set by SDLInit()
 
 /** Timer class **/
-class SDLTimer{ public:
-	SDLTimer(); ~SDLTimer();
-	void Construct(); void Destruct();
-	void Reset();
-	void Frame(Uint32 minDelay = 1);
-	void SetFPSUpdateTime(Uint32 updateTime); //Sets how often fps gets updated (default 1000)
+class SDLTimer
+{
+public:
+    SDLTimer();
+    ~SDLTimer();
+    void Construct();
+    void Destruct();
+    void Reset();
+    void Frame(Uint32 minDelay = 1);
+    void SetFPSUpdateTime(Uint32 updateTime); //Sets how often fps gets updated (default 1000)
 
-	float fps; //Frames per second
-	Uint32 time; //Milliseconds between last 2 calls to Frame()
-	Uint32 total; //Milliseconds since last call to Reset()
-	Uint32 now; //Ticks at last call to Frame()
+    float fps; //Frames per second
+    Uint32 time; //Milliseconds between last 2 calls to Frame()
+    Uint32 total; //Milliseconds since last call to Reset()
+    Uint32 now; //Ticks at last call to Frame()
 private:
-	Uint32 lastFrame, lastFpsUpdate, fpsUpdateTime, frameCount;
+    Uint32 lastFrame, lastFpsUpdate, fpsUpdateTime, frameCount;
 };
 
 /** Events struct **/
-struct SDLEvents{
-	SDLEvents(); ~SDLEvents();
-	void Construct(); void Destruct();
-	void HandleEvent(SDL_Event *event);
+struct SDLEvents
+{
+    SDLEvents();
+    ~SDLEvents();
+    void Construct();
+    void Destruct();
+    void HandleEvent(SDL_Event *event);
 
-	bool keys[323];
-	Uint16 mouseX, mouseY;
-	bool mouse_l, mouse_r, mouse_m, mouse_x1, mouse_x2;
-	bool quit, appMouseFocus, appInputFocus, appActive;
+    bool keys[323];
+    Uint16 mouseX, mouseY;
+    bool mouse_l, mouse_r, mouse_m, mouse_x1, mouse_x2;
+    bool quit, appMouseFocus, appInputFocus, appActive;
 };
 
 #endif
