@@ -52,5 +52,5 @@
 
     [ ] Known issues
         [ ] Memory management (scoped + shared + qobject pointers)
-        [ ] QGuiApplication::quit() (it won't quit currently)
+        [x] QGuiApplication::quit() (it won't quit currently)
         [ ] QQuickWindow::setSource() segfaults
