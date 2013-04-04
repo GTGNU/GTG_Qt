@@ -37,11 +37,11 @@ QDebug& operator<<(QDebug& dbg, gtg::Tile* tile)
 	return dbg
 		<< "Tile { parentItem:"
 			<< QString(tile->parentItem()->metaObject()->className())
-			+ "(" + QString::number((int)tile->parentItem(), 16) + ")"
+			+ "(" + QString::number((uintptr_t)tile->parentItem(), 16) + ")"
 
 		<< ", window:"
 			<< QString(tile->window()->metaObject()->className())
-			+ "(" + QString::number((int)tile->window(), 16) + ")"
+			+ "(" + QString::number((uintptr_t)tile->window(), 16) + ")"
 
 		<< "}";
 }

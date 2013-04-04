@@ -7,7 +7,7 @@ In this frantic top view action game, you will be fighting off waves of code mon
 Communications
 ==============
 * #GTG @ irc.p2p-irc.net
-* [Website](http://grandtheftgentoo.github.com/Grand-Theft-Gentoo/)
+* [Website](http://gtg.installgentoo.com)
 * [WIKI](https://github.com/GrandTheftGentoo/Grand-Theft-Gentoo/wiki)
 
 RESOURCES
@@ -26,4 +26,3 @@ RESOURCES
 #Qt
 * [Documentation](http://qt-project.org/doc/qt-5.0/qtdoc/index.html)
 * [Reference](http://qt-project.org/doc/qt-5.0/qtdoc/reference-overview.html)
-* [Qt Script documentation (Qt4)](http://harmattan-dev.nokia.com/docs/library/html/qt4/scripting.html)

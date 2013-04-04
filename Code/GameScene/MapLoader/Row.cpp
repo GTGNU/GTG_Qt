@@ -29,13 +29,13 @@ QDebug& operator<<(QDebug& dbg, gtg::Row* row)
 	return dbg
 		<< "Row { parentItem:"
 			<< QString(row->parentItem()->metaObject()->className())
-			+ "(" + QString::number((int)row->parentItem(), 16) + ")"
+			+ "(" + QString::number((uintptr_t)row->parentItem(), 16) + ")"
 
 		<< ", tiles:" << row->tiles().size()
 
 		<< ", window:"
 			<< QString(row->window()->metaObject()->className())
-			+ "(" + QString::number((int)row->window(), 16) + ")"
+			+ "(" + QString::number((uintptr_t)row->window(), 16) + ")"
 
 		<< "}";
 }
