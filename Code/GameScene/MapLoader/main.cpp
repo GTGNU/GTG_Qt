@@ -124,29 +124,12 @@ int main(int argc, char* argv[])
 					qWarning() << "QML Error:" << warning;
 			});
 
+	// Quit when Qt.quit() is called
 	QObject::connect(view.engine(), &QQmlEngine::quit, [&]() {
 		qDebug() << "quit()";
 		app.quit();
 	});
 
-	// Quit when it's done
-	QObject::connect(&view, &QWindow::visibleChanged,
-			[&](bool visible) {
-				if (visible) return;
-
-				// Try everything
-				view.close();
-				app.quit();
-				QCoreApplication::quit();
-
-				// Wait if it actually works
-				std::this_thread::sleep_for(std::chrono::seconds(2));
-
-				// It didn't work
-				qWarning() << "Fuck off, QGuiApplication."
-					<< "When I say \"QUIT\", I really mean \"QUIT\"";
-				memmove((void*)0xDEADBEEF, "fuck you", 50000);
-			});
 
 	// Load tiles meanwhile
 	loadTileTypes(view.engine(), tilesSource);
