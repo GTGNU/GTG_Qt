@@ -13,9 +13,11 @@ public:
 			int x,
 			int y,
 			int damage = 1,
-			int speed = 1,
-			int acceleration = 0,
-			int frameDelay = 50 );
+			float xSpeed = 10,
+			float ySpeed = 0,
+			float xAcceleration = 0,
+			float yAcceleration = 0,
+			int frameDelay = 10 );
 
 	void Draw();
 
@@ -26,18 +28,25 @@ protected:
 	float xOffset;
 	float yOffset;
 	int damage;
-	int speed; // Pixels per frame delay
-	double acceleration;
+	float xSpeed; // Pixels per frame delay
+	float ySpeed;
+	float xAcceleration;
+	float yAcceleration;
 	int frameDrawCount; // Number of times the current frame has been drawn
 	int frameDelay;
 	int frameIndex;
 	std::vector<SDL_Surface*> frameList;
 
-	int GetDamage();
-	int GetSpeed();
-	int GetAcceleration();
+	// Accessors
+	int GetX();
+	int GetY();
 	int GetXOffset();
 	int GetYOffset();
+	int GetDamage();
+	int GetXSpeed();
+	int GetYSpeed();
+	int GetXAcceleration();
+	int GetYAcceleration();
 };
 
 #endif
