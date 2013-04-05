@@ -20,9 +20,11 @@ public:
 			int frameDelay = 10 );
 
 	void Draw();
+	void Fire();
 
 protected:
 	SDL_Surface* screen;
+	bool fired;
 	int x;
 	int y;
 	float xOffset;

@@ -148,28 +148,35 @@ int GTG::Run()
 			cameraFromX = cameraX;
 			cameraFromY = cameraY;
 		}
-		SDLBlit(map.player.currentTile->GetSurface(),screen,px-cameraTargetX+cameraX,py-cameraTargetY+cameraY);
 
 		// Test projectile
 		GTGProjectile* projectile;
 
-		if(projectile == NULL)
+		if(events.keys[SDLK_SPACE])
 		{
-			SDL_Surface* frame0 = SDLLoad("res/tiles/char_right_1.png");
-			SDL_Surface* frame1 = SDLLoad("res/tiles/char_right_2.png");
+			if(!projectile)
+			{
+				SDL_Surface* frame0 = SDLLoad("res/tiles/char_right_1.png");
+				SDL_Surface* frame1 = SDLLoad("res/tiles/char_right_2.png");
 
-			std::vector<SDL_Surface*> frameList;
+				std::vector<SDL_Surface*> frameList;
 
-			frameList.push_back(frame0);
-			frameList.push_back(frame1);
+				frameList.push_back(frame0);
+				frameList.push_back(frame1);
 
-			projectile = new GTGProjectile(	screen,
-							frameList,
-							50,
-							50 );
+				projectile = new GTGProjectile(	screen,
+								frameList,
+								px-cameraTargetX+cameraX,
+								py-cameraTargetY+cameraY );
+
+				projectile->Fire();
+			}
 		}
 
-		projectile->Draw();
+		SDLBlit(map.player.currentTile->GetSurface(),screen,px-cameraTargetX+cameraX,py-cameraTargetY+cameraY);
+
+		if(projectile)
+			projectile->Draw();
 
 		if(timer.now - cameraTime > cameraMoveSpeed) {
 			cameraX = cameraTargetTempX;

@@ -29,24 +29,34 @@ GTGProjectile::GTGProjectile(	SDL_Surface* screen,
 
 void GTGProjectile::Draw()
 {
-	this->xOffset += this->xSpeed;
-	this->yOffset += this->ySpeed;
-
-	this->xSpeed += this->xAcceleration;
-	this->ySpeed += this->yAcceleration;
-
-	if(++(this->frameDrawCount) >= this->frameDelay)
+	if(this->fired)
 	{
-		this->frameIndex = (this->frameIndex+1)%this->frameList.size();
+		this->xOffset += this->xSpeed;
+		this->yOffset += this->ySpeed;
 
-		this->frameDrawCount = 0;
+		this->xSpeed += this->xAcceleration;
+		this->ySpeed += this->yAcceleration;
+
+		if(++(this->frameDrawCount) >= this->frameDelay)
+		{
+			this->frameIndex =	(this->frameIndex+1)%
+						this->frameList.size();
+
+			this->frameDrawCount = 0;
+		}
+
+
+		SDLBlit(	this->frameList[this->frameIndex],
+				this->screen,
+				this->x+this->xOffset,
+				this->y+this->yOffset );
 	}
+}
 
-
-	SDLBlit(	this->frameList[this->frameIndex],
-			this->screen,
-			this->x+this->xOffset,
-			this->y+this->yOffset );
+void GTGProjectile::Fire()
+{
+	if(!this->fired)
+		this->fired = true;
 }
 
 // Accessors
