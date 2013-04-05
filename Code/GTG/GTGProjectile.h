@@ -27,6 +27,14 @@ public:
 
 	void Draw();
 	void Fire();
+
+	// Accessors
+	bool GetFired();
+	int GetXOffset();
+	int GetYOffset();
+	int GetDamage();
+	int GetXAcceleration();
+	int GetYAcceleration();
 protected:
 	SDL_Surface* screen;
 	bool fired;
@@ -45,13 +53,6 @@ protected:
 	std::vector<SDL_Surface*> frameList;
 
 	void Reset();
-
-	// Accessors
-	int GetXOffset();
-	int GetYOffset();
-	int GetDamage();
-	int GetXAcceleration();
-	int GetYAcceleration();
 };
 
 #endif

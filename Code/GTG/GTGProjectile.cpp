@@ -71,14 +71,19 @@ void GTGProjectile::Reset()
 	this->fired = false;
 	this->xOffset = 0;
 	this->yOffset = 0;
-	this->xSpeedOffset = xSpeed;
-	this->ySpeedOffset = ySpeed;
+	this->xSpeedOffset = 0;
+	this->ySpeedOffset = 0;
 	this->cooldownCount = 0;
 	this->frameDrawCount = 0;
 	this->frameIndex = 0;
 }
 
 // Accessors
+bool GTGProjectile::GetFired()
+{
+	return this->fired;
+}
+
 int GTGProjectile::GetXOffset()
 {
 	return this->xOffset;

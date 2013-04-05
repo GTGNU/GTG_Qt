@@ -183,7 +183,7 @@ int GTG::Run()
 							cameraY );
 		}
 
-		if(events.keys[SDLK_SPACE])
+		if(events.keys[SDLK_SPACE] && !projectile->GetFired())
 		{
 			const int speed = 10;
 
