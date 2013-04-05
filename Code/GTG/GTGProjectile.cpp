@@ -13,6 +13,7 @@ GTGProjectile::GTGProjectile(	SDL_Surface* screen,
 				int frameDelay )
 
 :	fired(false),
+	ready(true),
 	xSpeedOffset(0),
 	ySpeedOffset(0),
 	frameDrawCount(0),
@@ -49,26 +50,31 @@ void GTGProjectile::Draw()
 			this->frameDrawCount = 0;
 		}
 
-
 		SDLBlit(	this->frameList[this->frameIndex],
 				this->screen,
 				this->x+this->xOffset,
 				this->y+this->yOffset );
 
 		if(++(this->cooldownCount) >= this->cooldown)
-			this->Reset();
+			this->ready = true;
 	}
 }
 
 void GTGProjectile::Fire()
 {
-	if(!this->fired)
+	if(this->ready)
+	{
+		this->Reset();
+
 		this->fired = true;
+		this->ready = false;
+	}
 }
 
 void GTGProjectile::Reset()
 {
 	this->fired = false;
+	this->ready = true;
 	this->xOffset = 0;
 	this->yOffset = 0;
 	this->xSpeedOffset = 0;
@@ -79,9 +85,9 @@ void GTGProjectile::Reset()
 }
 
 // Accessors
-bool GTGProjectile::GetFired()
+bool GTGProjectile::GetReady()
 {
-	return this->fired;
+	return this->ready;
 }
 
 int GTGProjectile::GetXOffset()

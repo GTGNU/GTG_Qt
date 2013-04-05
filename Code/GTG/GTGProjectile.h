@@ -17,7 +17,7 @@ public:
 			std::vector<SDL_Surface*> frameList,
 			int x,
 			int y,
-			int cooldown = 30,
+			int cooldown = 60,
 			int damage = 1,
 			float xSpeed = 10,
 			float ySpeed = 0,
@@ -29,7 +29,7 @@ public:
 	void Fire();
 
 	// Accessors
-	bool GetFired();
+	bool GetReady();
 	int GetXOffset();
 	int GetYOffset();
 	int GetDamage();
@@ -38,6 +38,7 @@ public:
 protected:
 	SDL_Surface* screen;
 	bool fired;
+	bool ready;
 	float xOffset;
 	float yOffset;
 	int cooldownCount;
