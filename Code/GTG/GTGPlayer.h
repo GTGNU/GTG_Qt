@@ -2,7 +2,9 @@
 #ifndef _GTGPLAYER_H_
 #define _GTGPLAYER_H_
 
+#include "GTGProjectile.h"
 #include "SDLHelper.h"
+#include <vector>
 #include <math.h>
 
 class GTGMap;

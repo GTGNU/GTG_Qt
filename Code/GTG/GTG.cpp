@@ -150,6 +150,22 @@ int GTG::Run()
 		}
 		SDLBlit(map.player.currentTile->GetSurface(),screen,px-cameraTargetX+cameraX,py-cameraTargetY+cameraY);
 
+		// Test projectile
+		SDL_Surface* frame0 = SDLLoad("res/tiles/char_right_1.png");
+		SDL_Surface* frame1 = SDLLoad("res/tiles/char_right_2.png");
+
+		std::vector<SDL_Surface*> frameList;
+
+		frameList.push_back(frame0);
+		frameList.push_back(frame1);
+
+		GTGProjectile projectile(	screen,
+						frameList,
+						50,
+						50 );
+
+		projectile.Draw();
+
 		if(timer.now - cameraTime > cameraMoveSpeed) {
 			cameraX = cameraTargetTempX;
 			cameraY = cameraTargetTempY;
