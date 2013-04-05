@@ -10,6 +10,8 @@ class GTGProjectile
 public:
 	int x;
 	int y;
+	float xSpeed; // Pixels per frame delay
+	float ySpeed;
 
 	GTGProjectile(	SDL_Surface* screen,
 			std::vector<SDL_Surface*> frameList,
@@ -31,8 +33,6 @@ protected:
 	float xOffset;
 	float yOffset;
 	int damage;
-	float xSpeed; // Pixels per frame delay
-	float ySpeed;
 	float xSpeedOffset;
 	float ySpeedOffset;
 	float xAcceleration;
@@ -46,8 +46,6 @@ protected:
 	int GetXOffset();
 	int GetYOffset();
 	int GetDamage();
-	int GetXSpeed();
-	int GetYSpeed();
 	int GetXAcceleration();
 	int GetYAcceleration();
 };

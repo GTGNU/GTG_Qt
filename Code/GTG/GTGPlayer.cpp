@@ -97,3 +97,23 @@ void GTGPlayer::Spawn(int px, int py)
 	moveTime = 0;
 	isMoving = false;
 }
+
+GTGPlayer::Orientation GTGPlayer::GetOrientation()
+{
+	Orientation result;
+
+	if(this->currentTile == this->tileWalkLeft
+	|| this->currentTile == this->tileIdleLeft)
+		result = LEFT;
+	else if(this->currentTile == this->tileWalkRight
+	|| this->currentTile == this->tileIdleRight)
+		result = RIGHT;
+	else if(this->currentTile == this->tileWalkUp
+	|| this->currentTile == this->tileIdleUp)
+		result = UP;
+	else if(this->currentTile == this->tileWalkDown
+	|| this->currentTile == this->tileIdleDown)
+		result = DOWN;
+
+	return result;
+}

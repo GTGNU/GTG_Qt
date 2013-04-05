@@ -11,6 +11,14 @@ class GTGMap;
 class GTGTile;
 class GTGPlayer
 {
+	enum Orientation
+	{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT
+	};
+
 	GTGTile *tileWalkLeft, *tileWalkRight, *tileWalkUp, *tileWalkDown;
 	GTGTile *tileIdleLeft, *tileIdleRight, *tileIdleUp, *tileIdleDown;
 
@@ -36,6 +44,7 @@ public:
 		return isMoving;
 	}
 
+	Orientation GetOrientation();
 };
 
 #endif

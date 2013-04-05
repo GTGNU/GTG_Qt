@@ -170,6 +170,32 @@ int GTG::Run()
 								py-cameraTargetY+cameraY );
 			}
 
+			const int speed = 10;
+
+			GTGPlayer::Orientation orientation
+				= map.player.GetOrientation();
+
+			if(orientation == GTGPlayer::UP)
+			{
+				projectile->xSpeed = 0;
+				projectile->ySpeed = speed*(-1);
+			}
+			else if(orientation == GTGPlayer::DOWN)
+			{
+				projectile->xSpeed = 0;
+				projectile->ySpeed = speed;
+			}
+			else if(orientation == GTGPlayer::LEFT)
+			{
+				projectile->xSpeed = speed*(-1);
+				projectile->ySpeed = 0;
+			}
+			else if(orientation == GTGPlayer::RIGHT)
+			{
+				projectile->xSpeed = speed;
+				projectile->ySpeed = 0;
+			}
+
 			projectile->x = px-cameraTargetX+cameraX;
 			projectile->y = py-cameraTargetY+cameraY;
 

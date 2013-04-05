@@ -90,16 +90,6 @@ int GTGProjectile::GetDamage()
 	return this->damage;
 }
 
-int GTGProjectile::GetXSpeed()
-{
-	return this->xSpeed;
-}
-
-int GTGProjectile::GetYSpeed()
-{
-	return this->ySpeed;
-}
-
 int GTGProjectile::GetXAcceleration()
 {
 	return this->xAcceleration;
