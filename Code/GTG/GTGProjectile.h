@@ -21,6 +21,7 @@ public:
 
 	void Draw();
 	void Fire();
+	void Reset();
 
 protected:
 	SDL_Surface* screen;
@@ -32,6 +33,8 @@ protected:
 	int damage;
 	float xSpeed; // Pixels per frame delay
 	float ySpeed;
+	float xSpeedOffset;
+	float ySpeedOffset;
 	float xAcceleration;
 	float yAcceleration;
 	int frameDrawCount; // Number of times the current frame has been drawn

@@ -13,7 +13,11 @@ GTGProjectile::GTGProjectile(	SDL_Surface* screen,
 				float yAcceleration,
 				int frameDelay )
 
-:frameDrawCount(0), frameIndex(0)
+:	fired(false),
+	xSpeedOffset(0),
+	ySpeedOffset(0),
+	frameDrawCount(0),
+	frameIndex(0)
 {
 	this->screen = screen;
 	this->frameList = frameList;
@@ -31,11 +35,11 @@ void GTGProjectile::Draw()
 {
 	if(this->fired)
 	{
-		this->xOffset += this->xSpeed;
-		this->yOffset += this->ySpeed;
+		this->xOffset += this->xSpeed+this->xSpeedOffset;
+		this->yOffset += this->ySpeed+this->ySpeedOffset;
 
-		this->xSpeed += this->xAcceleration;
-		this->ySpeed += this->yAcceleration;
+		this->xSpeedOffset += this->xAcceleration;
+		this->ySpeedOffset += this->yAcceleration;
 
 		if(++(this->frameDrawCount) >= this->frameDelay)
 		{
@@ -57,6 +61,17 @@ void GTGProjectile::Fire()
 {
 	if(!this->fired)
 		this->fired = true;
+}
+
+void GTGProjectile::Reset()
+{
+	this->fired = false;
+	this->xOffset = 0;
+	this->yOffset = 0;
+	this->xSpeedOffset = xSpeed;
+	this->ySpeedOffset = ySpeed;
+	this->frameDrawCount = 0;
+	this->frameIndex = 0;
 }
 
 // Accessors

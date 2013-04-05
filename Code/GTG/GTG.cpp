@@ -168,9 +168,10 @@ int GTG::Run()
 								frameList,
 								px-cameraTargetX+cameraX,
 								py-cameraTargetY+cameraY );
-
-				projectile->Fire();
 			}
+
+			projectile->Reset();
+			projectile->Fire();
 		}
 
 		SDLBlit(map.player.currentTile->GetSurface(),screen,px-cameraTargetX+cameraX,py-cameraTargetY+cameraY);
