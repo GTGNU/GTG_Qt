@@ -75,16 +75,6 @@ void GTGProjectile::Reset()
 }
 
 // Accessors
-int GTGProjectile::GetX()
-{
-	return this->x;
-}
-
-int GTGProjectile::GetY()
-{
-	return this->y;
-}
-
 int GTGProjectile::GetXOffset()
 {
 	return this->xOffset;

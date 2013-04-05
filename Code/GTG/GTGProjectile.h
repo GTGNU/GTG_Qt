@@ -8,6 +8,9 @@
 class GTGProjectile
 {
 public:
+	int x;
+	int y;
+
 	GTGProjectile(	SDL_Surface* screen,
 			std::vector<SDL_Surface*> frameList,
 			int x,
@@ -22,12 +25,9 @@ public:
 	void Draw();
 	void Fire();
 	void Reset();
-
 protected:
 	SDL_Surface* screen;
 	bool fired;
-	int x;
-	int y;
 	float xOffset;
 	float yOffset;
 	int damage;
@@ -43,8 +43,6 @@ protected:
 	std::vector<SDL_Surface*> frameList;
 
 	// Accessors
-	int GetX();
-	int GetY();
 	int GetXOffset();
 	int GetYOffset();
 	int GetDamage();

@@ -170,6 +170,9 @@ int GTG::Run()
 								py-cameraTargetY+cameraY );
 			}
 
+			projectile->x = px-cameraTargetX+cameraX;
+			projectile->y = py-cameraTargetY+cameraY;
+
 			projectile->Reset();
 			projectile->Fire();
 		}
