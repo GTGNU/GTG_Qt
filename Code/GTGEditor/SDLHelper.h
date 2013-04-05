@@ -56,35 +56,35 @@ extern int SDLResolutionX, SDLResolutionY; //Screen resolution set by SDLInit()
 class SDLTimer
 {
 public:
-    SDLTimer();
-    ~SDLTimer();
-    void Construct();
-    void Destruct();
-    void Reset();
-    void Frame(Uint32 minDelay = 1);
-    void SetFPSUpdateTime(Uint32 updateTime); //Sets how often fps gets updated (default 1000)
+	SDLTimer();
+	~SDLTimer();
+	void Construct();
+	void Destruct();
+	void Reset();
+	void Frame(Uint32 minDelay = 1);
+	void SetFPSUpdateTime(Uint32 updateTime); //Sets how often fps gets updated (default 1000)
 
-    float fps; //Frames per second
-    Uint32 time; //Milliseconds between last 2 calls to Frame()
-    Uint32 total; //Milliseconds since last call to Reset()
-    Uint32 now; //Ticks at last call to Frame()
+	float fps; //Frames per second
+	Uint32 time; //Milliseconds between last 2 calls to Frame()
+	Uint32 total; //Milliseconds since last call to Reset()
+	Uint32 now; //Ticks at last call to Frame()
 private:
-    Uint32 lastFrame, lastFpsUpdate, fpsUpdateTime, frameCount;
+	Uint32 lastFrame, lastFpsUpdate, fpsUpdateTime, frameCount;
 };
 
 /** Events struct **/
 struct SDLEvents
 {
-    SDLEvents();
-    ~SDLEvents();
-    void Construct();
-    void Destruct();
-    void HandleEvent(SDL_Event *event);
+	SDLEvents();
+	~SDLEvents();
+	void Construct();
+	void Destruct();
+	void HandleEvent(SDL_Event *event);
 
-    bool keys[323];
-    Uint16 mouseX, mouseY;
-    bool mouse_l, mouse_r, mouse_m, mouse_x1, mouse_x2;
-    bool quit, appMouseFocus, appInputFocus, appActive;
+	bool keys[323];
+	Uint16 mouseX, mouseY;
+	bool mouse_l, mouse_r, mouse_m, mouse_x1, mouse_x2;
+	bool quit, appMouseFocus, appInputFocus, appActive;
 };
 
 #endif
