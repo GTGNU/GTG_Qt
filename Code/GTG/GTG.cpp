@@ -152,39 +152,39 @@ int GTG::Run()
 		// Test projectile
 		GTGProjectile* projectile;
 
+		if(!projectile)
+		{
+			SDL_Surface* frame0
+				= SDLLoad("res/tiles/char_up_1.png");
+
+			SDL_Surface* frame1
+				= SDLLoad("res/tiles/char_right_1.png");
+
+			SDL_Surface* frame2
+				= SDLLoad("res/tiles/char_down_1.png");
+
+			SDL_Surface* frame3
+				= SDLLoad("res/tiles/char_left_1.png");
+
+			std::vector<SDL_Surface*> frameList;
+
+			frameList.push_back(frame0);
+			frameList.push_back(frame1);
+			frameList.push_back(frame2);
+			frameList.push_back(frame3);
+
+			projectile = new GTGProjectile(	screen,
+							frameList,
+							px-
+							cameraTargetX+
+							cameraX,
+							py-
+							cameraTargetY+
+							cameraY );
+		}
+
 		if(events.keys[SDLK_SPACE])
 		{
-			if(!projectile)
-			{
-				SDL_Surface* frame0
-					= SDLLoad("res/tiles/char_up_1.png");
-
-				SDL_Surface* frame1
-					= SDLLoad("res/tiles/char_right_1.png");
-
-				SDL_Surface* frame2
-					= SDLLoad("res/tiles/char_down_1.png");
-
-				SDL_Surface* frame3
-					= SDLLoad("res/tiles/char_left_1.png");
-
-				std::vector<SDL_Surface*> frameList;
-
-				frameList.push_back(frame0);
-				frameList.push_back(frame1);
-				frameList.push_back(frame2);
-				frameList.push_back(frame3);
-
-				projectile = new GTGProjectile(	screen,
-								frameList,
-								px-
-								cameraTargetX+
-								cameraX,
-								py-
-								cameraTargetY+
-								cameraY );
-			}
-
 			const int speed = 10;
 
 			GTGPlayer::Orientation orientation
@@ -214,7 +214,6 @@ int GTG::Run()
 			projectile->x = px-cameraTargetX+cameraX;
 			projectile->y = py-cameraTargetY+cameraY;
 
-			projectile->Reset();
 			projectile->Fire();
 		}
 

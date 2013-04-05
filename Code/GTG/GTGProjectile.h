@@ -17,6 +17,7 @@ public:
 			std::vector<SDL_Surface*> frameList,
 			int x,
 			int y,
+			int cooldown = 30,
 			int damage = 1,
 			float xSpeed = 10,
 			float ySpeed = 0,
@@ -26,12 +27,13 @@ public:
 
 	void Draw();
 	void Fire();
-	void Reset();
 protected:
 	SDL_Surface* screen;
 	bool fired;
 	float xOffset;
 	float yOffset;
+	int cooldownCount;
+	int cooldown;
 	int damage;
 	float xSpeedOffset;
 	float ySpeedOffset;
@@ -41,6 +43,8 @@ protected:
 	int frameDelay;
 	int frameIndex;
 	std::vector<SDL_Surface*> frameList;
+
+	void Reset();
 
 	// Accessors
 	int GetXOffset();

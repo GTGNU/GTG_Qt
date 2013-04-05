@@ -1,11 +1,10 @@
 #include "GTGProjectile.h"
 
-#include <iostream>
-
 GTGProjectile::GTGProjectile(	SDL_Surface* screen,
 				std::vector<SDL_Surface*> frameList,
 				int x,
 				int y,
+				int cooldown,
 				int damage,
 				float xSpeed,
 				float ySpeed,
@@ -23,6 +22,7 @@ GTGProjectile::GTGProjectile(	SDL_Surface* screen,
 	this->frameList = frameList;
 	this->x = x;
 	this->y = y;
+	this->cooldown = cooldown;
 	this->damage = damage;
 	this->xSpeed = xSpeed;
 	this->ySpeed = ySpeed;
@@ -54,6 +54,9 @@ void GTGProjectile::Draw()
 				this->screen,
 				this->x+this->xOffset,
 				this->y+this->yOffset );
+
+		if(++(this->cooldownCount) >= this->cooldown)
+			this->Reset();
 	}
 }
 
@@ -70,6 +73,7 @@ void GTGProjectile::Reset()
 	this->yOffset = 0;
 	this->xSpeedOffset = xSpeed;
 	this->ySpeedOffset = ySpeed;
+	this->cooldownCount = 0;
 	this->frameDrawCount = 0;
 	this->frameIndex = 0;
 }
