@@ -156,18 +156,33 @@ int GTG::Run()
 		{
 			if(!projectile)
 			{
-				SDL_Surface* frame0 = SDLLoad("res/tiles/char_right_1.png");
-				SDL_Surface* frame1 = SDLLoad("res/tiles/char_right_2.png");
+				SDL_Surface* frame0
+					= SDLLoad("res/tiles/char_up_1.png");
+
+				SDL_Surface* frame1
+					= SDLLoad("res/tiles/char_right_1.png");
+
+				SDL_Surface* frame2
+					= SDLLoad("res/tiles/char_down_1.png");
+
+				SDL_Surface* frame3
+					= SDLLoad("res/tiles/char_left_1.png");
 
 				std::vector<SDL_Surface*> frameList;
 
 				frameList.push_back(frame0);
 				frameList.push_back(frame1);
+				frameList.push_back(frame2);
+				frameList.push_back(frame3);
 
 				projectile = new GTGProjectile(	screen,
 								frameList,
-								px-cameraTargetX+cameraX,
-								py-cameraTargetY+cameraY );
+								px-
+								cameraTargetX+
+								cameraX,
+								py-
+								cameraTargetY+
+								cameraY );
 			}
 
 			const int speed = 10;
