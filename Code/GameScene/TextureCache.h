@@ -39,14 +39,14 @@ namespace gtg
 				private:
 					QImage m_full;
 					std::array<QSGTexture*, 9> m_textures;
-					QImage at(uint area) const;
+					QImage at(uint region) const;
 
 				public:
 					CacheEntry() = delete;
 					CacheEntry(QString filename);
 					~CacheEntry();
 
-					QSGTexture* get(QQuickWindow* w, uint area);
+					QSGTexture* get(QQuickWindow* w, uint region);
 			};
 
 			QString m_filePrefix;

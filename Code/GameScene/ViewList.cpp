@@ -37,20 +37,20 @@ gtg::ViewList::~ViewList()
 
 void gtg::ViewList::append(ViewListEntry* entry)
 {
-	QObject::connect(entry, &ViewListEntry::textureChanged,
+	QObject::connect(entry, &ViewListEntry::changed,
 			m_tile, &QQuickItem::update);
 
-	m_changes.insert(ADD, m_entries.size());
+	m_changes.insert(ADD, {m_entries.size(), entry});
 	m_entries.push_back(entry);
 }
 
 
 void gtg::ViewList::remove(ViewListEntry* entry)
 {
-	QObject::disconnect(entry, &ViewListEntry::textureChanged,
+	QObject::disconnect(entry, &ViewListEntry::changed,
 			m_tile, &QQuickItem::update);
 
-	m_changes.insert(REMOVE, m_entries.indexOf(entry));
+	m_changes.insert(REMOVE, {-1, entry}); // index not needed
 	m_entries.removeOne(entry);
 }
 
@@ -58,10 +58,10 @@ void gtg::ViewList::remove(int index)
 {
 	auto it = m_entries.begin() + index;
 
-	QObject::disconnect(*it, &ViewListEntry::textureChanged,
+	QObject::disconnect(*it, &ViewListEntry::changed,
 			m_tile, &QQuickItem::update);
 
-	m_changes.insert(REMOVE, index);
+	m_changes.insert(REMOVE, {index, *it});
 	m_entries.erase(it);
 }
 
@@ -87,23 +87,21 @@ void gtg::ViewList::clear()
 
 bool gtg::ViewList::applyChanges(QSGNode* node)
 {
-	QSGSimpleTextureNode* n;
-
 	for (auto change = m_changes.begin(); change != m_changes.end(); change++) {
 		switch (change.key()) {
 			case ADD:
-				n = new QSGSimpleTextureNode;
-				n->setRect(m_tile->boundingRect());
-				if (change.value() >= node->childCount()) {
-					node->appendChildNode(n);
+				if (change.value().index >= node->childCount()) {
+					node->appendChildNode(new QSGNode);
 				} else {
-					node->insertChildNodeBefore(n,
-							node->childAtIndex(change.value()));
+					node->insertChildNodeBefore(new QSGNode,
+							node->childAtIndex(change.value().index));
 				}
+
 				break;
 
 			case REMOVE:
-				node->removeChildNode(node->childAtIndex(change.value()));
+				node->removeChildNode(
+						node->childAtIndex(change.value().index));
 				break;
 
 			case CLEAR:
@@ -115,14 +113,19 @@ bool gtg::ViewList::applyChanges(QSGNode* node)
 	return m_changes.size() > 0;
 }
 
-void gtg::ViewList::updateTextures(QSGNode* node)
+void gtg::ViewList::updateNode(QSGNode* node)
 {
 	int i = 0;
 	for (ViewListEntry* entry : m_entries) {
-		entry->view()->updateTextureOf(
-			static_cast<QSGSimpleTextureNode*>( node->childAtIndex(i) ),
-			m_tile->window(),
-			entry->area());
+		QSGNode* child = node->childAtIndex(i);
+		QSGNode* result = entry->updateNode(child, m_tile);
+
+		if (child != result) {
+			node->insertChildNodeBefore(result, child);
+			node->removeChildNode(child);
+		}
+
+		delete child;
 		i++;
 	}
 }

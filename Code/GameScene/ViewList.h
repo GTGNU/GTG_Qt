@@ -16,41 +16,57 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VIEWLISTENTRY_H
-#define VIEWLISTENTRY_H
+#ifndef VIEWLIST_H
+#define VIEWLIST_H
 
+#include <QtCore/QList>
+#include <QtCore/QMultiMap>
 #include <QtCore/QObject>
 
-#include "TileView.h"
+class QSGNode;
 
 namespace gtg
 {
-	class ViewListEntry
-		: public QObject
-	{
-		Q_OBJECT
-		Q_PROPERTY(gtg::TileView* view READ view WRITE setView)
-		Q_PROPERTY(gtg::TileView::Area area READ area WRITE setArea)
+	class Tile;
+	class ViewListEntry;
 
+	class ViewList
+	{
 		private:
-			TileView* m_view;
-			TileView::Area m_area;
+			enum Action {
+				ADD,
+				REMOVE,
+				CLEAR
+			};
+
+			Tile* m_tile;
+			QList<ViewListEntry*> m_entries;
+
+			struct ChangeObject {
+				int index;
+				ViewListEntry* entry;
+			};
+			QMultiMap<Action, ChangeObject> m_changes;
 
 		public:
-			ViewListEntry(QObject* parent = nullptr);
-			~ViewListEntry();
+			ViewList(Tile* tile);
+			~ViewList();
 
-			gtg::TileView* view() const;
-			void setView(gtg::TileView* view);
+			void append(ViewListEntry* view);
 
-			gtg::TileView::Area area() const;
-			void setArea(gtg::TileView::Area area);
+			void remove(ViewListEntry* view);
+			void remove(int index);
 
-		signals:
-			void textureChanged();
+			int count() const;
+
+			ViewListEntry* at(int index) const;
+
+			void clear();
+
+			// call only from the rendering thread
+			bool applyChanges(QSGNode* node);
+			void updateNode(QSGNode* node);
 	};
 }
-
-QML_DECLARE_TYPE(gtg::ViewListEntry)
 
 #endif

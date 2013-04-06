@@ -51,6 +51,7 @@ gtg::Tile::Tile(QQuickItem* parent)
 	, m_views(this)
 	, m_behavior(nullptr)
 {
+	qDebug() << "Tile()";
 	setFlag(QQuickItem::ItemHasContents);
 }
 
@@ -132,7 +133,7 @@ QSGNode* gtg::Tile::updatePaintNode(QSGNode* node,
 	qDebug() << "Bounding rect: " << boundingRect();
 
 	m_views.applyChanges(node);
-	m_views.updateTextures(node);
+	m_views.updateNode(node);
 
 	return node;
 }

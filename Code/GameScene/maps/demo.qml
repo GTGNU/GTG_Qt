@@ -1,52 +1,14 @@
 import QtQuick 2.0
 import GTG 1.0
 
-/*
-Rectangle {
-	width: map.width
-	height: map.height
-
-	Map {
-		id: map
-		tileSize: 192
-
-		Row {
-			Tile {
-				id: tile
-				texture: 'water'+currentFrame+'.png'
-
-				property int currentFrame: 0
-			}
-			Tile { texture: 'concrete.png' }
-		}
-
-		Row {
-			Tile { texture: 'grass-tall.png' }
-			Tile { texture: 'sand.png' }
-		}
-	}
-
-	Timer {
-		interval: 100
-		running: true
-		repeat: true
-
-		onTriggered: {
-			tile.currentFrame = (tile.currentFrame+1) % 2
-			console.log("currentFrame changed to " + tile.currentFrame)
-		}
-	}
-}
-*/
-
 Map {
-	tileSize: 192
+	tileSize: 64
 
 	Row {
 		Tile {
 			views: [
 				V{ view: sand.view },
-				V{ view: water.view; area: TileView.TOP }
+				V{ view: water.view; region: V.TOP }
 			]
 			behavior: sand.behavior
 		}
@@ -54,7 +16,7 @@ Map {
 		Tile {
 			views: [
 				V{ view: concrete.view },
-				V{ view: water.view; area: TileView.TOPRIGHT }
+				V{ view: water.view; region: V.TOPRIGHT }
 			]
 			behavior: concrete.behavior
 		}
@@ -62,7 +24,7 @@ Map {
 		Tile {
 			views: [
 				V{ view: grass_tall.view },
-				V{ view: water.view; area: TileView.LEFT }
+				V{ view: water.view; region: V.LEFT }
 			]
 			behavior: grass_tall.behavior
 		}
@@ -82,8 +44,8 @@ Map {
 		Tile {
 			views: [
 				V{ view: sand.view },
-				V{ view: water.view; area: TileView.RIGHT },
-				V{ view: water.view; area: TileView.TOP }
+				V{ view: water.view; region: V.RIGHT },
+				V{ view: water.view; region: V.TOP }
 			]
 			behavior: sand.behavior
 		}
@@ -91,8 +53,8 @@ Map {
 		Tile {
 			views: [
 				V{ view: concrete.view },
-				V{ view: water.view; area: TileView.TOPRIGHT },
-				V{ view: water.view; area: TileView.BOTLEFT }
+				V{ view: water.view; region: V.TOPRIGHT },
+				V{ view: water.view; region: V.BOTLEFT }
 			]
 			behavior: concrete.behavior
 		}
@@ -100,7 +62,7 @@ Map {
 		Tile {
 			views: [
 				V{ view: grass_tall.view },
-				V{ view: water.view; area: TileView.BOTTOM }
+				V{ view: water.view; region: V.BOTTOM }
 			]
 			behavior: grass_tall.behavior
 		}
@@ -110,8 +72,8 @@ Map {
 		Tile {
 			views: [
 				V{ view: grass_tall.view },
-				V{ view: water.view; area: TileView.BOTTOM },
-				V{ view: water.view; area: TileView.LEFT }
+				V{ view: water.view; region: V.BOTTOM },
+				V{ view: water.view; region: V.LEFT }
 			]
 			behavior: grass_tall.behavior
 		}
@@ -124,7 +86,7 @@ Map {
 		Tile {
 			views: [
 				V{ view: sand.view },
-				V{ view: water.view; area: TileView.RIGHT }
+				V{ view: water.view; region: V.RIGHT }
 			]
 			behavior: sand.behavior
 		}

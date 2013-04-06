@@ -44,6 +44,7 @@ gtg::Map::Map(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_rows(this)
 {
+	qDebug() << "Map()";
 	setFlag(QQuickItem::ItemHasContents);
 }
 
