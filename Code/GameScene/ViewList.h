@@ -33,33 +33,35 @@ namespace gtg
 	class ViewList
 	{
 		private:
-			enum Action {
-				ADD,
-				REMOVE,
-				CLEAR
-			};
 
 			Tile* m_tile;
 			QList<ViewListEntry*> m_entries;
 
-			struct ChangeObject {
-				int index;
+			struct Change {
+				enum {
+					ADD,
+					REMOVE,
+					CLEAR
+				} action;
+
+				unsigned index;
 				ViewListEntry* entry;
 			};
-			QMultiMap<Action, ChangeObject> m_changes;
+			QList<Change> m_changes;
 
 		public:
 			ViewList(Tile* tile);
 			~ViewList();
 
 			void append(ViewListEntry* view);
+			void insert(unsigned index, ViewListEntry* view);
 
 			void remove(ViewListEntry* view);
-			void remove(int index);
+			void remove(unsigned index);
 
 			int count() const;
-
-			ViewListEntry* at(int index) const;
+			unsigned indexOf(ViewListEntry* entry) const;
+			ViewListEntry* at(unsigned index) const;
 
 			void clear();
 

@@ -18,6 +18,8 @@
 
 #include "ViewListEntry.h"
 #include "TileView.h"
+#include "Tile.h"
+#include "Map.h"
 
 #include <QtCore/qmath.h>
 
@@ -30,14 +32,13 @@ gtg::ViewListEntry::ViewListEntry(QObject* parent)
 	, m_rotation(0)
 
 	, m_viewContentChanged(true)
-	, m_rotationChanged(true)
-	, m_opacityChanged(true)
+	, m_rotationChanged(false)
+	, m_opacityChanged(false)
 
 	, m_viewNode(nullptr)
 	, m_transformNode(nullptr)
 	, m_opacityNode(nullptr)
 {
-	qDebug() << "ViewListEntry()";
 	connect(this, &ViewListEntry::opacityChanged,
 			this, &ViewListEntry::changed);
 	connect(this, &ViewListEntry::rotationChanged,
@@ -81,12 +82,12 @@ void gtg::ViewListEntry::setRegion(ViewListEntry::Region region)
 }
 
 
-unsigned char gtg::ViewListEntry::opacity() const
+unsigned gtg::ViewListEntry::opacity() const
 {
 	return m_opacity;
 }
 
-void gtg::ViewListEntry::setOpacity(unsigned char opacity)
+void gtg::ViewListEntry::setOpacity(unsigned opacity)
 {
 	if (opacity >= 0 && opacity <= 100) {
 		m_opacity = opacity;
@@ -95,19 +96,27 @@ void gtg::ViewListEntry::setOpacity(unsigned char opacity)
 }
 
 
-short gtg::ViewListEntry::rotation() const
+int gtg::ViewListEntry::rotation() const
 {
 	return m_rotation;
 }
 
-void gtg::ViewListEntry::setRotation(short rotation)
+void gtg::ViewListEntry::setRotation(int rotation)
 {
 	m_rotation = rotation;
 	setRotationChanged();
 }
 
 
-QSGNode* gtg::ViewListEntry::insertTransformNode(QSGNode* node)
+QSGNode* gtg::ViewListEntry::rootNode() const
+{
+	return m_opacityNode? m_opacityNode
+		: m_transformNode? m_transformNode
+		: m_viewNode;
+}
+
+
+void gtg::ViewListEntry::insertTransformNode()
 {
 	m_transformNode = new QSGTransformNode;
 
@@ -117,29 +126,22 @@ QSGNode* gtg::ViewListEntry::insertTransformNode(QSGNode* node)
 	}
 
 	m_transformNode->appendChildNode(m_viewNode);
-	return m_opacityNode?
-		static_cast<QSGNode*>(m_opacityNode) :
-		static_cast<QSGNode*>(m_transformNode);
 }
 
-QSGNode* gtg::ViewListEntry::insertOpacityNode(QSGNode* node)
+void gtg::ViewListEntry::insertOpacityNode()
 {
+	QSGNode* prevRoot = rootNode();
 	m_opacityNode = new QSGOpacityNode;
-	m_opacityNode->appendChildNode(node);
-	return m_opacityNode;
+	m_opacityNode->appendChildNode(prevRoot);
 }
 
 
-QMatrix4x4 gtg::ViewListEntry::transformMatrix()
+QMatrix4x4 gtg::ViewListEntry::transformMatrix(short tileSize)
 {
-	qreal cos = qCos(m_rotation);
-	qreal sin = qSin(m_rotation);
-	return {
-		cos,  sin, 0, 0,
-		-sin, cos, 0, 0,
-		0,    0,   0, 0,
-		0,    0,   0, 0
-	};
+	return QTransform()
+		.translate(tileSize/2, tileSize/2)
+		.rotate(m_rotation)
+		.translate(-tileSize/2, -tileSize/2);
 }
 
 
@@ -162,7 +164,7 @@ void gtg::ViewListEntry::setOpacityChanged()
 }
 
 
-QSGNode* gtg::ViewListEntry::updateNode(QSGNode* node, Tile* tile)
+QSGNode* gtg::ViewListEntry::updateNode(Tile* tile)
 {
 	if (m_viewContentChanged) {
 		m_viewNode = view()->updateNode(m_viewNode, tile, region());
@@ -171,19 +173,19 @@ QSGNode* gtg::ViewListEntry::updateNode(QSGNode* node, Tile* tile)
 
 	if (m_rotationChanged) {
 		if (!m_transformNode)
-			node = insertTransformNode(node);
+			insertTransformNode();
 
-		m_transformNode->setMatrix(transformMatrix());
+		m_transformNode->setMatrix(transformMatrix(tile->map()->tileSize()));
 		m_rotationChanged = false;
 	}
 
 	if (m_opacityChanged) {
 		if (!m_opacityNode)
-			node = insertOpacityNode(node);
+			insertOpacityNode();
 
 		m_opacityNode->setOpacity((qreal)m_opacity / 100.0);
 		m_opacityChanged = false;
 	}
 
-	return node;
+	return rootNode();
 }

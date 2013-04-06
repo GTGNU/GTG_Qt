@@ -58,7 +58,7 @@ namespace gtg
 
 			int indexOf(const Row* object) const;
 
-			Q_INVOKABLE Tile* tileAt(int x, int y);
+			Q_INVOKABLE gtg::Tile* tileAt(int x, int y);
 	};
 }
 

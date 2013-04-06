@@ -51,7 +51,6 @@ gtg::Tile::Tile(QQuickItem* parent)
 	, m_views(this)
 	, m_behavior(nullptr)
 {
-	qDebug() << "Tile()";
 	setFlag(QQuickItem::ItemHasContents);
 }
 
@@ -103,6 +102,46 @@ gtg::Map* gtg::Tile::map() const
 }
 
 
+void gtg::Tile::addView(ViewListEntry* entry)
+{
+	m_views.append(entry);
+}
+
+void gtg::Tile::addView(unsigned index, ViewListEntry* entry)
+{
+	m_views.insert(index, entry);
+}
+
+
+void gtg::Tile::removeView(unsigned index)
+{
+	m_views.remove(index);
+}
+
+void gtg::Tile::removeView(ViewListEntry* entry)
+{
+	m_views.remove(entry);
+}
+
+
+void gtg::Tile::replaceView(unsigned index, ViewListEntry* entry)
+{
+	removeView(index);
+	addView(index, entry);
+}
+
+void gtg::Tile::replaceView(ViewListEntry* old, ViewListEntry* entry)
+{
+	replaceView(m_views.indexOf(old), entry);
+}
+
+
+unsigned gtg::Tile::viewCount() const
+{
+	return m_views.count();
+}
+
+
 void gtg::Tile::setPlayer(Player* player)
 {
 	if (m_player)
@@ -117,7 +156,7 @@ void gtg::Tile::setPlayer(Player* player)
 QSGNode* gtg::Tile::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
-	qDebug() << "----------------------------------------";
+	qDebug() << "----------------------------------------" << m_updateCount++;
 	qDebug() << "Drawing " << this;
 
 	if (!node) {
@@ -130,7 +169,8 @@ QSGNode* gtg::Tile::updatePaintNode(QSGNode* node,
 		setHeight(tileSize);
 	}
 
-	qDebug() << "Bounding rect: " << boundingRect();
+	qDebug() << "Bounding rect:" << boundingRect();
+	qDebug() << "mapX:" << mapX() << ", mapY:" << mapY();
 
 	m_views.applyChanges(node);
 	m_views.updateNode(node);

@@ -53,6 +53,8 @@ namespace gtg
 		Q_PROPERTY(gtg::Map* map READ map)
 
 		private:
+			int m_updateCount = 0;  // number of updates (just for debugging)
+
 			ViewList m_views;
 
 			TileBehavior* m_behavior;
@@ -77,6 +79,19 @@ namespace gtg
 
 			gtg::Row* row() const;
 			gtg::Map* map() const;
+
+			Q_INVOKABLE void addView(gtg::ViewListEntry* entry);
+			Q_INVOKABLE void addView(unsigned index, gtg::ViewListEntry* entry);
+
+			Q_INVOKABLE void removeView(unsigned index);
+			Q_INVOKABLE void removeView(gtg::ViewListEntry* entry);
+
+			Q_INVOKABLE void replaceView(unsigned index,
+					gtg::ViewListEntry* entry);
+			Q_INVOKABLE void replaceView(gtg::ViewListEntry* old,
+					gtg::ViewListEntry* entry);
+
+			Q_INVOKABLE unsigned viewCount() const;
 
 			friend class Player;
 			friend class ViewList;
