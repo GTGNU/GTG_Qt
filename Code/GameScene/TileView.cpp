@@ -17,7 +17,6 @@
  */
 
 #include "TileView.h"
-
 #include "Tile.h"
 
 #include <QtQuick/QQuickWindow>
@@ -29,6 +28,9 @@ gtg::TileView::TileView(QObject* parent)
 	, m_imageInitialized(false)
 	, m_image()
 {
+	qDebug() << "TileView()";
+	/*connect(this, &TileView::textureChanged,
+			this, &TileView::changed);*/
 }
 
 gtg::TileView::~TileView()
@@ -50,9 +52,19 @@ void gtg::TileView::setTextureFilename(const QString& textureFilename)
 }
 
 
-void gtg::TileView::updateTextureOf(QSGSimpleTextureNode* node,
-		QQuickWindow* window, TileView::Area area)
+QSGNode* gtg::TileView::updateNode(QSGNode* node, Tile* tile,
+		ViewListEntry::Region region)
 {
-	node->setTexture(m_image.value().get(window, area));
+	QSGSimpleTextureNode* n;
+
+	if (!node) {
+		n = new QSGSimpleTextureNode;
+		n->setRect(tile->boundingRect());
+	} else {
+		n = static_cast<QSGSimpleTextureNode*>(node);
+	}
+
+	n->setTexture(m_image.value().get(tile->window(), region));
+	return n;
 }
 

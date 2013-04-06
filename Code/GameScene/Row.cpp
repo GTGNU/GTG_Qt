@@ -45,6 +45,7 @@ gtg::Row::Row(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_tiles(this)
 {
+	qDebug() << "Row()";
 	setFlag(QQuickItem::ItemHasContents);
 }
 

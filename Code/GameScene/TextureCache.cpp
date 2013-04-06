@@ -33,23 +33,23 @@ gtg::TextureCache::CacheEntry::~CacheEntry()
 {
 }
 
-QImage gtg::TextureCache::CacheEntry::at(uint area) const
+QImage gtg::TextureCache::CacheEntry::at(uint region) const
 {
 	uint tileSize = m_full.width() / 3;
 
 	return m_full.copy(
-		tileSize * (area % 3),
-		tileSize * (area / 3),
+		tileSize * (region % 3),
+		tileSize * (region / 3),
 		tileSize,
 		tileSize);
 }
 
-QSGTexture* gtg::TextureCache::CacheEntry::get(QQuickWindow* w, uint area)
+QSGTexture* gtg::TextureCache::CacheEntry::get(QQuickWindow* w, uint region)
 {
-	if (!m_textures[area])
-		m_textures[area] = w->createTextureFromImage(at(area));
+	if (!m_textures[region])
+		m_textures[region] = w->createTextureFromImage(at(region));
 
-	return m_textures[area];
+	return m_textures[region];
 }
 
 

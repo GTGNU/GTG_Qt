@@ -33,6 +33,7 @@
 
 #include "TileDef.h"
 #include "TextureCache.h"
+#include "ViewListEntry.h"
 
 namespace gtg
 {
@@ -44,7 +45,6 @@ namespace gtg
 	{
 		Q_OBJECT
 		Q_PROPERTY(QString texture READ textureFilename WRITE setTextureFilename NOTIFY textureChanged)
-		Q_ENUMS(Area)
 
 		private:
 			static TextureCache m_cache;
@@ -53,22 +53,18 @@ namespace gtg
 			TextureCache::pointer m_image;
 
 		public:
-			enum Area : uint {
-				TOPLEFT=0, TOP,    TOPRIGHT,
-				LEFT,      MIDDLE, RIGHT,
-				BOTLEFT,   BOTTOM, BOTRIGHT
-			};
-
 			TileView(QObject* parent = nullptr);
 			~TileView();
 
 			QString textureFilename() const;
 			void setTextureFilename(const QString& textureFilename);
 
-			void updateTextureOf(QSGSimpleTextureNode* node,
-					QQuickWindow* window, Area area);
+			QSGNode* updateNode(QSGNode* node, Tile* tile,
+					ViewListEntry::Region region);
 
 		signals:
+			void changed();
+
 			void textureChanged();
 	};
 }
