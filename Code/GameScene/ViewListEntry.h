@@ -39,8 +39,8 @@ namespace gtg
 		Q_PROPERTY(gtg::TileView* view READ view WRITE setView)
 		Q_PROPERTY(Region region READ region WRITE setRegion)
 
-		Q_PROPERTY(unsigned char opacity READ opacity WRITE setOpacity NOTIFY opacityChanged)
-		Q_PROPERTY(short rotation READ rotation WRITE setRotation NOTIFY rotationChanged)
+		Q_PROPERTY(unsigned opacity READ opacity WRITE setOpacity NOTIFY opacityChanged)
+		Q_PROPERTY(int rotation READ rotation WRITE setRotation NOTIFY rotationChanged)
 		Q_ENUMS(Region)
 
 		public:
@@ -54,8 +54,8 @@ namespace gtg
 			TileView* m_view;
 
 			Region m_region;
-			unsigned char m_opacity;
-			short m_rotation;
+			unsigned m_opacity;
+			int m_rotation;
 
 			bool m_viewContentChanged;
 			bool m_rotationChanged;
@@ -68,10 +68,12 @@ namespace gtg
 			QSGTransformNode* m_transformNode;
 			QSGOpacityNode* m_opacityNode;
 
-			QSGNode* insertTransformNode(QSGNode* node);
-			QSGNode* insertOpacityNode(QSGNode* node);
+			QSGNode* rootNode() const;
 
-			QMatrix4x4 transformMatrix();
+			void insertTransformNode();
+			void insertOpacityNode();
+
+			QMatrix4x4 transformMatrix(short tileSize);
 
 		protected slots:
 			void setViewContentChanged();
@@ -88,20 +90,20 @@ namespace gtg
 			gtg::ViewListEntry::Region region() const;
 			void setRegion(gtg::ViewListEntry::Region region);
 
-			unsigned char opacity() const;
-			void setOpacity(unsigned char opacity);
+			unsigned opacity() const;
+			void setOpacity(unsigned opacity);
 
-			short rotation() const;
-			void setRotation(short rotation);
+			int rotation() const;
+			void setRotation(int rotation);
 
-			QSGNode* updateNode(QSGNode* node, Tile* tile);
+			QSGNode* updateNode(Tile* tile);
 
 		signals:
 			void changed();
 
 			void viewContentChanged();
 			void rotationChanged(short rotation);
-			void opacityChanged(unsigned char opacity);
+			void opacityChanged(unsigned opacity);
 	};
 }
 

@@ -22,6 +22,9 @@
 #include "TileView.h"
 #include "ViewListEntry.h"
 
+#include <iterator>
+#include <algorithm>
+
 #include <QtQuick/QSGNode>
 #include <QtQuick/QSGSimpleTextureNode>
 
@@ -37,11 +40,18 @@ gtg::ViewList::~ViewList()
 
 void gtg::ViewList::append(ViewListEntry* entry)
 {
+	insert(m_entries.size(), entry);
+}
+
+void gtg::ViewList::insert(unsigned index, ViewListEntry* entry)
+{
 	QObject::connect(entry, &ViewListEntry::changed,
 			m_tile, &QQuickItem::update);
 
-	m_changes.insert(ADD, {m_entries.size(), entry});
-	m_entries.push_back(entry);
+	m_changes.push_back({Change::ADD, index, entry});
+	m_entries.insert(index, entry);
+
+	m_tile->update();
 }
 
 
@@ -50,19 +60,24 @@ void gtg::ViewList::remove(ViewListEntry* entry)
 	QObject::disconnect(entry, &ViewListEntry::changed,
 			m_tile, &QQuickItem::update);
 
-	m_changes.insert(REMOVE, {-1, entry}); // index not needed
-	m_entries.removeOne(entry);
+	auto it = std::find(m_entries.begin(), m_entries.end(), entry);
+	m_changes.push_back({Change::REMOVE, std::distance(m_entries.begin(), it), entry});
+	m_entries.erase(it);
+
+	m_tile->update();
 }
 
-void gtg::ViewList::remove(int index)
+void gtg::ViewList::remove(unsigned index)
 {
 	auto it = m_entries.begin() + index;
 
 	QObject::disconnect(*it, &ViewListEntry::changed,
 			m_tile, &QQuickItem::update);
 
-	m_changes.insert(REMOVE, {index, *it});
+	m_changes.push_back({Change::REMOVE, index, *it});
 	m_entries.erase(it);
+
+	m_tile->update();
 }
 
 
@@ -71,40 +86,53 @@ int gtg::ViewList::count() const
 	return m_entries.size();
 }
 
-
-gtg::ViewListEntry* gtg::ViewList::at(int index) const
+gtg::ViewListEntry* gtg::ViewList::at(unsigned index) const
 {
 	return m_entries.at(index);
+}
+
+unsigned gtg::ViewList::indexOf(ViewListEntry* entry) const
+{
+	return m_entries.indexOf(entry);
 }
 
 
 void gtg::ViewList::clear()
 {
-	m_changes.insert(CLEAR, {});
+	m_changes.push_back({Change::CLEAR, 0, nullptr});
 	m_entries.clear();
+
+	m_tile->update();
 }
 
 
 bool gtg::ViewList::applyChanges(QSGNode* node)
 {
-	for (auto change = m_changes.begin(); change != m_changes.end(); change++) {
-		switch (change.key()) {
-			case ADD:
-				if (change.value().index >= node->childCount()) {
-					node->appendChildNode(new QSGNode);
+	QSGNode* newNode;
+
+	for (const Change& change : m_changes) {
+		switch (change.action) {
+			case Change::ADD:
+				newNode = change.entry->updateNode(m_tile);
+
+				if (change.index == node->childCount()) {
+					node->appendChildNode(newNode);
+				} else if (change.index < node->childCount()) {
+					node->insertChildNodeBefore(newNode,
+							node->childAtIndex(change.index));
 				} else {
-					node->insertChildNodeBefore(new QSGNode,
-							node->childAtIndex(change.value().index));
+					qWarning() << "Warning: change index is greater than the number of childs of the node"
+						<< "\tin the ViewList of" << m_tile;
 				}
 
 				break;
 
-			case REMOVE:
+			case Change::REMOVE:
 				node->removeChildNode(
-						node->childAtIndex(change.value().index));
+						node->childAtIndex(change.index));
 				break;
 
-			case CLEAR:
+			case Change::CLEAR:
 				node->removeAllChildNodes();
 		}
 	}
@@ -118,14 +146,13 @@ void gtg::ViewList::updateNode(QSGNode* node)
 	int i = 0;
 	for (ViewListEntry* entry : m_entries) {
 		QSGNode* child = node->childAtIndex(i);
-		QSGNode* result = entry->updateNode(child, m_tile);
+		QSGNode* result = entry->updateNode(m_tile);
 
 		if (child != result) {
 			node->insertChildNodeBefore(result, child);
 			node->removeChildNode(child);
 		}
 
-		delete child;
 		i++;
 	}
 }

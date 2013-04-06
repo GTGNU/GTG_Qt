@@ -28,9 +28,8 @@ gtg::TileView::TileView(QObject* parent)
 	, m_imageInitialized(false)
 	, m_image()
 {
-	qDebug() << "TileView()";
-	/*connect(this, &TileView::textureChanged,
-			this, &TileView::changed);*/
+	connect(this, &TileView::textureChanged,
+			this, &TileView::changed);
 }
 
 gtg::TileView::~TileView()

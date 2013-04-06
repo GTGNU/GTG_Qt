@@ -45,7 +45,6 @@ gtg::Row::Row(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_tiles(this)
 {
-	qDebug() << "Row()";
 	setFlag(QQuickItem::ItemHasContents);
 }
 
@@ -141,7 +140,7 @@ QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
 		setHeight(tileSize);
 	}
 
-	qDebug() << "Bounding rect: " << boundingRect();
+	qDebug() << "mapY:" << mapY();
 
 	n->setRect(boundingRect());
 

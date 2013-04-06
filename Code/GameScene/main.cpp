@@ -134,22 +134,22 @@ int main(int argc, char* argv[])
 	// Load tiles meanwhile
 	loadTileTypes(view.engine(), tilesSource);
 
-	view.setSource(QUrl::fromLocalFile(mapSource));
+	//view.setSource(QUrl::fromLocalFile(mapSource));
 	/*
 	   Choice from the menu segfaults, you are free to try it commenting
 	   the line above and uncommenting everything below.
 	*/
 
-	/*
+
 	// Open the menu
 	view.setSource(QUrl::fromLocalFile(menuSource));
 
 	// Handle user choice (change)
 	gtg::MenuHandler menuHandler{&view, mapSource};
 	QQuickItem* menu = view.rootObject();
-	QObject::connect(menu, SIGNAL(play()), &menuHandler, SLOT(play()));
-	QObject::connect(menu, SIGNAL(quit()), &menuHandler, SLOT(quit()));
-	*/
+	QObject::connect(menu, SIGNAL(play()), &menuHandler, SLOT(play()), Qt::QueuedConnection);
+	QObject::connect(menu, SIGNAL(quit()), &menuHandler, SLOT(quit()), Qt::QueuedConnection);
+
 
 	view.show();
 
