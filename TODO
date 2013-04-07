@@ -62,5 +62,5 @@
         [x] QQuickWindow::setSource() segfaults
         [ ] Rename ViewList, ViewListEntry and related methods/variables to
             something more appropriate
-        [ ] Opacity and rotation in ViewListEntry make the tile disappear if
+        [x] Opacity and rotation in ViewListEntry make the tile disappear if
             the initial opacity is not set explicitly in the QML declaration
