@@ -46,7 +46,8 @@ void gtg::ViewList::append(ViewListEntry* entry)
 void gtg::ViewList::insert(unsigned index, ViewListEntry* entry)
 {
 	QObject::connect(entry, &ViewListEntry::changed,
-			m_tile, &QQuickItem::update);
+			m_tile, &QQuickItem::update,
+			Qt::DirectConnection);
 
 	m_changes.push_back({Change::ADD, index, entry});
 	m_entries.insert(index, entry);

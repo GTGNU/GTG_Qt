@@ -40,11 +40,14 @@ gtg::ViewListEntry::ViewListEntry(QObject* parent)
 	, m_opacityNode(nullptr)
 {
 	connect(this, &ViewListEntry::opacityChanged,
-			this, &ViewListEntry::changed);
+			this, &ViewListEntry::changed,
+			Qt::DirectConnection);
 	connect(this, &ViewListEntry::rotationChanged,
-			this, &ViewListEntry::changed);
+			this, &ViewListEntry::changed,
+			Qt::DirectConnection);
 	connect(this, &ViewListEntry::viewContentChanged,
-			this, &ViewListEntry::changed);
+			this, &ViewListEntry::changed,
+			Qt::DirectConnection);
 }
 
 gtg::ViewListEntry::~ViewListEntry()
@@ -66,7 +69,8 @@ void gtg::ViewListEntry::setView(TileView* view)
 
 	m_view = view;
 	connect(m_view, &TileView::changed,
-			this, &ViewListEntry::setViewContentChanged);
+			this, &ViewListEntry::setViewContentChanged,
+			Qt::DirectConnection);
 }
 
 
@@ -189,3 +193,4 @@ QSGNode* gtg::ViewListEntry::updateNode(Tile* tile)
 
 	return rootNode();
 }
+

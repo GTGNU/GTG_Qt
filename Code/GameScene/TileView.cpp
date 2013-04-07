@@ -29,7 +29,8 @@ gtg::TileView::TileView(QObject* parent)
 	, m_image()
 {
 	connect(this, &TileView::textureChanged,
-			this, &TileView::changed);
+			this, &TileView::changed,
+			Qt::DirectConnection);
 }
 
 gtg::TileView::~TileView()
