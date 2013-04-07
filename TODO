@@ -50,7 +50,17 @@
         [ ] Check points
         [ ] Currency
 
-    [ ] Known issues
-        [ ] Memory management (scoped + shared + qobject pointers)
+    [ ] Distribution
+        [ ] Windows installer
+            [ ] Script to set up compiling environment or a zip with libraries
+        [ ] GNU+Linux installer
+            [ ] Script to set up compiling environment or a zip with libraries
+
+    [ ] Known issues (GameScene)
+        [ ] Memory management using scoped pointers, shared pointers and qobject trees
         [x] QGuiApplication::quit() (it won't quit currently)
-        [ ] QQuickWindow::setSource() segfaults
+        [x] QQuickWindow::setSource() segfaults
+        [ ] Rename ViewList, ViewListEntry and related methods/variables to
+            something more appropriate
+        [ ] Opacity and rotation in ViewListEntry make the tile disappear if
+            the initial opacity is not set explicitly in the QML declaration
