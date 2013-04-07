@@ -114,7 +114,7 @@ bool gtg::ViewList::applyChanges(QSGNode* node)
 	for (const Change& change : m_changes) {
 		switch (change.action) {
 			case Change::ADD:
-				newNode = change.entry->updateNode(m_tile);
+				newNode = change.entry->updateNode(node, m_tile);
 
 				if (change.index == node->childCount()) {
 					node->appendChildNode(newNode);
@@ -144,16 +144,11 @@ bool gtg::ViewList::applyChanges(QSGNode* node)
 
 void gtg::ViewList::updateNode(QSGNode* node)
 {
-	int i = 0;
-	for (ViewListEntry* entry : m_entries) {
-		QSGNode* child = node->childAtIndex(i);
-		QSGNode* result = entry->updateNode(m_tile);
+	for (ViewListEntry* entry : m_entries)
+		QSGNode* result = entry->updateNode(node, m_tile);
 
-		if (child != result) {
+		/*if (child != result) {
 			node->insertChildNodeBefore(result, child);
 			node->removeChildNode(child);
-		}
-
-		i++;
-	}
+		}*/
 }

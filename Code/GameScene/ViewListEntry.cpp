@@ -69,12 +69,8 @@ void gtg::ViewListEntry::setView(TileView* view)
 
 	m_view = view;
 	connect(m_view, &TileView::changed,
-<<<<<<< HEAD
 			this, &ViewListEntry::setViewContentChanged,
 			Qt::DirectConnection);
-=======
-			this, &ViewListEntry::setViewContentChanged);
->>>>>>> 1e662e18f8815addaee65238ff35a961d4b615e7
 }
 
 
@@ -124,23 +120,40 @@ QSGNode* gtg::ViewListEntry::rootNode() const
 }
 
 
-void gtg::ViewListEntry::insertTransformNode()
+void gtg::ViewListEntry::insertTransformNode(QSGNode* parent)
 {
 	m_transformNode = new QSGTransformNode;
 
 	if (m_opacityNode) {
-		m_opacityNode->appendChildNode(m_transformNode);
 		m_opacityNode->removeChildNode(m_viewNode);
+		m_opacityNode->appendChildNode(m_transformNode);
+	} else {
+		QSGNode* next = m_viewNode->nextSibling();
+		parent->removeChildNode(m_viewNode);
+
+		if (!next)
+			parent->appendChildNode(m_transformNode);
+		else
+			parent->insertChildNodeBefore(m_transformNode, next);
 	}
 
 	m_transformNode->appendChildNode(m_viewNode);
 }
 
-void gtg::ViewListEntry::insertOpacityNode()
+void gtg::ViewListEntry::insertOpacityNode(QSGNode* parent)
 {
 	QSGNode* prevRoot = rootNode();
 	m_opacityNode = new QSGOpacityNode;
+
+	QSGNode* parentNext = prevRoot->nextSibling();
+	parent->removeChildNode(prevRoot);
+
 	m_opacityNode->appendChildNode(prevRoot);
+
+	if (!parentNext)
+		parent->appendChildNode(m_opacityNode);
+	else
+		parent->insertChildNodeBefore(m_opacityNode, parentNext);
 }
 
 
@@ -172,7 +185,7 @@ void gtg::ViewListEntry::setOpacityChanged()
 }
 
 
-QSGNode* gtg::ViewListEntry::updateNode(Tile* tile)
+QSGNode* gtg::ViewListEntry::updateNode(QSGNode* parent, Tile* tile)
 {
 	if (m_viewContentChanged) {
 		m_viewNode = view()->updateNode(m_viewNode, tile, region());
@@ -181,7 +194,7 @@ QSGNode* gtg::ViewListEntry::updateNode(Tile* tile)
 
 	if (m_rotationChanged) {
 		if (!m_transformNode)
-			insertTransformNode();
+			insertTransformNode(parent);
 
 		m_transformNode->setMatrix(transformMatrix(tile->map()->tileSize()));
 		m_rotationChanged = false;
@@ -189,7 +202,7 @@ QSGNode* gtg::ViewListEntry::updateNode(Tile* tile)
 
 	if (m_opacityChanged) {
 		if (!m_opacityNode)
-			insertOpacityNode();
+			insertOpacityNode(parent);
 
 		m_opacityNode->setOpacity((qreal)m_opacity / 100.0);
 		m_opacityChanged = false;

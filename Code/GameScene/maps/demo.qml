@@ -5,8 +5,6 @@ Map {
 	id: map
 	tileSize: 64
 
-	Component.onCompleted: { water.view.timer.running = false }
-
 	// 0
 	Row {
 		// 0
@@ -49,26 +47,22 @@ Map {
 		Tile {
 			views: V{ view: water.view }
 			behavior: water.behavior
+
+			property var timer: Timer {
+				interval: 100
+				repeat: true
+				running: true
+				onTriggered: {
+					var v = map.tileAt(0,1).views[0]
+					v.rotation = (v.rotation + 1) % 360
+				}
+			}
 		}
 
 		// 1
 		Tile {
 			views: [
-				V{
-					view: sand.view
-
-					property var timer: Timer {
-						interval: 100
-						repeat: true
-						running: true
-
-						onTriggered: {
-							var tile = map.tileAt(1,1);
-							var tileView = tile.views[0];
-							tileView.opacity = tileView.opacity == 0? 100 : 0;
-						}
-					}
-				},
+				V{ view: sand.view },
 				V{ view: water.view; region: V.RIGHT },
 				V{ view: water.view; region: V.TOP }
 			]

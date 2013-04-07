@@ -70,8 +70,8 @@ namespace gtg
 
 			QSGNode* rootNode() const;
 
-			void insertTransformNode();
-			void insertOpacityNode();
+			void insertTransformNode(QSGNode* parent);
+			void insertOpacityNode(QSGNode* parent);
 
 			QMatrix4x4 transformMatrix(short tileSize);
 
@@ -96,7 +96,7 @@ namespace gtg
 			int rotation() const;
 			void setRotation(int rotation);
 
-			QSGNode* updateNode(Tile* tile);
+			QSGNode* updateNode(QSGNode* parent, Tile* tile);
 
 		signals:
 			void changed();
