@@ -69,8 +69,12 @@ void gtg::ViewListEntry::setView(TileView* view)
 
 	m_view = view;
 	connect(m_view, &TileView::changed,
+<<<<<<< HEAD
 			this, &ViewListEntry::setViewContentChanged,
 			Qt::DirectConnection);
+=======
+			this, &ViewListEntry::setViewContentChanged);
+>>>>>>> 1e662e18f8815addaee65238ff35a961d4b615e7
 }
 
 
