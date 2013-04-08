@@ -42,6 +42,7 @@ void GTGProjectile::Draw()
 		this->xSpeedOffset += this->xAcceleration;
 		this->ySpeedOffset += this->yAcceleration;
 
+		// Change current frame if necessary
 		if(++(this->frameDrawCount) >= this->frameDelay)
 		{
 			this->frameIndex =	(this->frameIndex+1)%
@@ -50,11 +51,13 @@ void GTGProjectile::Draw()
 			this->frameDrawCount = 0;
 		}
 
+		// Draw projectile no screen
 		SDLBlit(	this->frameList[this->frameIndex],
 				this->screen,
 				this->x+this->xOffset,
 				this->y+this->yOffset );
 
+		// Allow firing again once cooldown elasped
 		if(++(this->cooldownCount) >= this->cooldown)
 			this->ready = true;
 	}

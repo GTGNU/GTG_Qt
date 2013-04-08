@@ -8,9 +8,9 @@
 class GTGProjectile
 {
 public:
-	int x;
+	int x; // Reference coordinates
 	int y;
-	float xSpeed; // Pixels per frame delay
+	float xSpeed; // Speed in pixels per frame delay
 	float ySpeed;
 
 	GTGProjectile(	SDL_Surface* screen,
@@ -25,32 +25,33 @@ public:
 			float yAcceleration = 0,
 			int frameDelay = 10 );
 
-	void Draw();
-	void Fire();
+	void Draw(); // Draw the projectile on screen
+	void Fire(); // Fire the projectile
 
 	// Accessors
 	bool GetReady() const;
 	int GetXOffset() const;
-	int GetYOffset() const;
+	int GetYOffset() const
 	int GetDamage() const;
 	int GetXAcceleration() const;
 	int GetYAcceleration() const;
+
 protected:
-	SDL_Surface* screen;
-	bool fired;
-	bool ready;
-	float xOffset;
+	SDL_Surface* screen; // The screen to draw on
+	bool fired; // Whether the projectile has been fired
+	bool ready; // Whether the projectile is ready to be fired (again)
+	float xOffset; // Distance from origin
 	float yOffset;
-	int cooldownCount;
-	int cooldown;
-	int damage;
-	float xSpeedOffset;
+	int cooldownCount; // Number of frames since last shot
+	int cooldown; // Number of frames before becoming ready to fire again
+	int damage; // Damage to inflict on target
+	float xSpeedOffset; // Speed offset of reference speed
 	float ySpeedOffset;
-	float xAcceleration;
+	float xAcceleration; // Acceration once fired
 	float yAcceleration;
 	int frameDrawCount; // Number of times the current frame has been drawn
-	int frameDelay;
-	int frameIndex;
+	int frameDelay; // Delay between animation frames
+	int frameIndex; // Index of the current animation frame
 	std::vector<SDL_Surface*> frameList;
 
 	void Reset();
