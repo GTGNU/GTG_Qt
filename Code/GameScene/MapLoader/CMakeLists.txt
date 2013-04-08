@@ -25,7 +25,7 @@ if (CMAKE_CXX_COMPILER MATCHES ".*/g(cc|\\+\\+).*")
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG_OUTPUT")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)

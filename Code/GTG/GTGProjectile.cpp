@@ -85,32 +85,32 @@ void GTGProjectile::Reset()
 }
 
 // Accessors
-bool GTGProjectile::GetReady()
+bool GTGProjectile::GetReady() const
 {
 	return this->ready;
 }
 
-int GTGProjectile::GetXOffset()
+int GTGProjectile::GetXOffset() const
 {
 	return this->xOffset;
 }
 
-int GTGProjectile::GetYOffset()
+int GTGProjectile::GetYOffset() const
 {
 	return this->yOffset;
 }
 
-int GTGProjectile::GetDamage()
+int GTGProjectile::GetDamage() const
 {
 	return this->damage;
 }
 
-int GTGProjectile::GetXAcceleration()
+int GTGProjectile::GetXAcceleration() const
 {
 	return this->xAcceleration;
 }
 
-int GTGProjectile::GetYAcceleration()
+int GTGProjectile::GetYAcceleration() const
 {
 	return this->yAcceleration;
 }

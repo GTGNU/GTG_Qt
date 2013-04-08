@@ -29,12 +29,12 @@ public:
 	void Fire();
 
 	// Accessors
-	bool GetReady();
-	int GetXOffset();
-	int GetYOffset();
-	int GetDamage();
-	int GetXAcceleration();
-	int GetYAcceleration();
+	bool GetReady() const;
+	int GetXOffset() const;
+	int GetYOffset() const;
+	int GetDamage() const;
+	int GetXAcceleration() const;
+	int GetYAcceleration() const;
 protected:
 	SDL_Surface* screen;
 	bool fired;
