@@ -142,11 +142,11 @@ int GTGTileSet::Load(const char *root, const char *filename)
 			int num = 0;
 			if(sscanf(line,"%d",&num) != 1) {
 				fclose(file);
-				sprintf(error,"%s line %lu: Should be a number of tiles",path,lineCount);
+				sprintf(error,"%s line %zu: Should be a number of tiles",path,lineCount);
 				return -1;
 			} else if(num <= 0) {
 				fclose(file);
-				sprintf(error,"%s line %lu: Number of tiles cannot be %d",path,lineCount,num);
+				sprintf(error,"%s line %zu: Number of tiles cannot be %d",path,lineCount,num);
 				return -1;
 			}
 			tiles.resize(num);
@@ -155,7 +155,7 @@ int GTGTileSet::Load(const char *root, const char *filename)
 		} else {
 			if(handle - 1 >= tiles.size()) {
 				fclose(file);
-				sprintf(error,"%s: Number of tiles %lu on first line is incorrect",path,tiles.size());
+				sprintf(error,"%s: Number of tiles %zu on first line is incorrect",path,tiles.size());
 				Free();
 				return -1;
 			}
@@ -176,12 +176,12 @@ int GTGTileSet::Load(const char *root, const char *filename)
 				} else {
 					int num;
 					if(sscanf(line + last,"%d",&num) != 1) {
-						sprintf(error,"%s line %lu: Duration expected, got [%s]",path,lineCount,line + last);
+						sprintf(error,"%s line %zu: Duration expected, got [%s]",path,lineCount,line + last);
 						fclose(file);
 						Free();
 						return -1;
 					} else if(num < 0) {
-						sprintf(error,"%s line %lu: Duration %d invalid",path,lineCount,num);
+						sprintf(error,"%s line %zu: Duration %d invalid",path,lineCount,num);
 						fclose(file);
 						Free();
 						return -1;
@@ -200,7 +200,7 @@ int GTGTileSet::Load(const char *root, const char *filename)
 				count++;
 			}
 			if(count == 0) {
-				sprintf(error,"%s line %lu: Invalid tile",path,lineCount);
+				sprintf(error,"%s line %zu: Invalid tile",path,lineCount);
 				fclose(file);
 				Free();
 				return -1;
@@ -216,7 +216,7 @@ int GTGTileSet::Load(const char *root, const char *filename)
 		sprintf(error,"%s: Second line should be an image filename",path);
 		return -1;
 	} else if(handle - 1 != tiles.size()) {
-		sprintf(error,"%s: Number of loaded tiles (%lu) don't match the first line (%lu)",path,handle-1,tiles.size());
+		sprintf(error,"%s: Number of loaded tiles (%zu) don't match the first line (%zu)",path,handle-1,tiles.size());
 		Free();
 		return -1;
 	}

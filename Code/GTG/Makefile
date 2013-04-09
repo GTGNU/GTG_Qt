@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -rdynamic
 SDLFLAGS = `sdl-config --libs` -lSDL_image
 
 all : main.o SDL_gfxPrimitives.o SDLHelper.o GTGTile.o GTGPlayer.o GTGProjectile.o GTGMap.o GTG.o

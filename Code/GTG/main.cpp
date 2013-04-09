@@ -1,11 +1,26 @@
 #include "GTG.h"
 #include "SDLHelper.h"
 #include "SDL_gfxPrimitives.h"
+#include <execinfo.h>
+#include <signal.h>
 
 void Popup(const char *text, Uint32 txtColor, Uint32 backColor, Uint32 time = 0);
 
+void sig_handler(int sig)
+{
+	void* array[50];
+	size_t size = backtrace(array, 50);
+
+	fprintf(stderr, "SIGNAL: %d\n", sig);
+	backtrace_symbols_fd(array, size, 2);
+
+	exit(1);
+}
+
 int main(int argc, char* args[])
 {
+	signal(SIGFPE, sig_handler);
+
 	SDLInit();
 	GTG gtg;
 	gtg.Construct();
