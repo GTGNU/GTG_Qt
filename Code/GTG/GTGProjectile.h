@@ -31,7 +31,7 @@ public:
 	// Accessors
 	bool GetReady() const;
 	int GetXOffset() const;
-	int GetYOffset() const
+	int GetYOffset() const;
 	int GetDamage() const;
 	int GetXAcceleration() const;
 	int GetYAcceleration() const;
