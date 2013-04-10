@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Grand Theft Gentoo is free software: you can redistribute it and/or modify
+ * Foobar is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -25,7 +25,7 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "ChildList.h"
+#include "helpers/ChildList.h"
 
 namespace gtg
 {

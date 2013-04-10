@@ -16,8 +16,8 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef VIEWLIST_H
-#define VIEWLIST_H
+#ifndef TILELAYERSTACK_H
+#define TILELAYERSTACK_H
 
 #include <QtCore/QList>
 #include <QtCore/QMultiMap>
@@ -28,47 +28,51 @@ class QSGNode;
 namespace gtg
 {
 	class Tile;
-	class ViewListEntry;
 
-	class ViewList
+	namespace tile
 	{
-		private:
+		class Layer;
 
-			Tile* m_tile;
-			QList<ViewListEntry*> m_entries;
+		class LayerStack
+		{
+			private:
+				Tile* m_tile;
+				QList<Layer*> m_layers;
 
-			struct Change {
-				enum {
-					ADD,
-					REMOVE,
-					CLEAR
-				} action;
+				struct Change {
+					enum {
+						ADD,
+						REMOVE,
+						CLEAR
+					} action;
 
-				unsigned index;
-				ViewListEntry* entry;
-			};
-			QList<Change> m_changes;
+					unsigned index;
+					Layer* layer;
+				};
 
-		public:
-			ViewList(Tile* tile);
-			~ViewList();
+				QList<Change> m_changes;
 
-			void append(ViewListEntry* view);
-			void insert(unsigned index, ViewListEntry* view);
+			public:
+				LayerStack(Tile* tile);
+				~LayerStack();
 
-			void remove(ViewListEntry* view);
-			void remove(unsigned index);
+				void append(Layer* layer);
+				void insert(unsigned index, Layer* layer);
 
-			int count() const;
-			unsigned indexOf(ViewListEntry* entry) const;
-			ViewListEntry* at(unsigned index) const;
+				void remove(Layer* layer);
+				void remove(unsigned index);
 
-			void clear();
+				Layer* at(unsigned index) const;
+				int count() const;
+				unsigned indexOf(Layer* layer) const;
 
-			// call only from the rendering thread
-			bool applyChanges(QSGNode* node);
-			void updateNode(QSGNode* node);
-	};
+				void clear();
+
+				// call only from the rendering thread
+				bool applyChanges(QSGNode* node);
+				void updateNode(QSGNode* node);
+		};
+	}
 }
 
 #endif

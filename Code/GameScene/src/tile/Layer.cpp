@@ -16,120 +16,129 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ViewListEntry.h"
-#include "TileView.h"
-#include "Tile.h"
-#include "Map.h"
+#include "Layer.h"
 
 #include <QtCore/qmath.h>
 
-gtg::ViewListEntry::ViewListEntry(QObject* parent)
+#include "Texture.h"
+#include "Tile.h"
+#include "Map.h"
+
+
+using gtg::tile::Layer;
+using gtg::tile::Texture;
+
+using gtg::Tile;
+
+
+Layer::Layer(QObject* parent)
 	: QObject(nullptr)
-	, m_view(nullptr)
+	, m_texture(nullptr)
 
-	, m_region(MIDDLE)
-	, m_opacity(100)
+	, m_region(1,1)
 	, m_rotation(0)
+	, m_opacity(100)
 
-	, m_viewContentChanged(true)
+	, m_textureChanged(true)
 	, m_rotationChanged(false)
 	, m_opacityChanged(false)
 
-	, m_viewNode(nullptr)
+	, m_textureNode(nullptr)
 	, m_transformNode(nullptr)
 	, m_opacityNode(nullptr)
 {
-	connect(this, &ViewListEntry::opacityChanged,
-			this, &ViewListEntry::changed,
+	connect(this, &Layer::opacityChanged,
+			this, &Layer::changed,
 			Qt::DirectConnection);
-	connect(this, &ViewListEntry::rotationChanged,
-			this, &ViewListEntry::changed,
+	connect(this, &Layer::rotationChanged,
+			this, &Layer::changed,
 			Qt::DirectConnection);
-	connect(this, &ViewListEntry::viewContentChanged,
-			this, &ViewListEntry::changed,
+	connect(this, &Layer::textureChanged,
+			this, &Layer::changed,
 			Qt::DirectConnection);
 }
 
-gtg::ViewListEntry::~ViewListEntry()
+Layer::~Layer()
 {
 }
 
 
-gtg::TileView* gtg::ViewListEntry::view() const
+Texture* Layer::texture() const
 {
-	return m_view;
+	return m_texture;
 }
 
-void gtg::ViewListEntry::setView(TileView* view)
+void Layer::setTexture(Texture* texture)
 {
-	if (m_view) {
-		disconnect(m_view, &TileView::changed,
-				this, &ViewListEntry::setViewContentChanged);
+	if (m_texture) {
+		disconnect(m_texture, &Texture::changed,
+				this, &Layer::setTextureChanged);
 	}
 
-	m_view = view;
-	connect(m_view, &TileView::changed,
-			this, &ViewListEntry::setViewContentChanged,
+	m_texture = texture;
+
+	connect(m_texture, &Texture::changed,
+			this, &Layer::setTextureChanged,
 			Qt::DirectConnection);
 }
 
 
-gtg::ViewListEntry::Region gtg::ViewListEntry::region() const
+QPoint Layer::region() const
 {
 	return m_region;
 }
 
-void gtg::ViewListEntry::setRegion(ViewListEntry::Region region)
+void Layer::setRegion(QPoint region)
 {
 	m_region = region;
-	setViewContentChanged();
+	setTextureChanged();
 }
 
 
-unsigned gtg::ViewListEntry::opacity() const
+unsigned Layer::opacity() const
 {
 	return m_opacity;
 }
 
-void gtg::ViewListEntry::setOpacity(unsigned opacity)
+void Layer::setOpacity(unsigned opacity)
 {
-	if (opacity >= 0 && opacity <= 100) {
+	if (opacity <= 100) {
 		m_opacity = opacity;
 		setOpacityChanged();
 	}
 }
 
 
-int gtg::ViewListEntry::rotation() const
+int Layer::rotation() const
 {
 	return m_rotation;
 }
 
-void gtg::ViewListEntry::setRotation(int rotation)
+void Layer::setRotation(int rotation)
 {
 	m_rotation = rotation;
 	setRotationChanged();
 }
 
 
-QSGNode* gtg::ViewListEntry::rootNode() const
+QSGNode* Layer::rootNode() const
 {
 	return m_opacityNode? m_opacityNode
 		: m_transformNode? m_transformNode
-		: m_viewNode;
+		: m_textureNode;
 }
 
 
-void gtg::ViewListEntry::insertTransformNode(QSGNode* parent)
+void Layer::insertTransformNode(QSGNode* parent)
 {
 	m_transformNode = new QSGTransformNode;
 
 	if (m_opacityNode) {
-		m_opacityNode->removeChildNode(m_viewNode);
+		m_opacityNode->removeChildNode(m_textureNode);
 		m_opacityNode->appendChildNode(m_transformNode);
 	} else {
-		QSGNode* next = m_viewNode->nextSibling();
-		parent->removeChildNode(m_viewNode);
+		QSGNode* next = m_textureNode->nextSibling();
+		parent->removeChildNode(m_textureNode);
 
 		if (!next)
 			parent->appendChildNode(m_transformNode);
@@ -137,10 +146,10 @@ void gtg::ViewListEntry::insertTransformNode(QSGNode* parent)
 			parent->insertChildNodeBefore(m_transformNode, next);
 	}
 
-	m_transformNode->appendChildNode(m_viewNode);
+	m_transformNode->appendChildNode(m_textureNode);
 }
 
-void gtg::ViewListEntry::insertOpacityNode(QSGNode* parent)
+void Layer::insertOpacityNode(QSGNode* parent)
 {
 	QSGNode* prevRoot = rootNode();
 	m_opacityNode = new QSGOpacityNode;
@@ -157,7 +166,7 @@ void gtg::ViewListEntry::insertOpacityNode(QSGNode* parent)
 }
 
 
-QMatrix4x4 gtg::ViewListEntry::transformMatrix(short tileSize)
+QMatrix4x4 Layer::transformMatrix(short tileSize)
 {
 	return QTransform()
 		.translate(tileSize/2, tileSize/2)
@@ -166,30 +175,30 @@ QMatrix4x4 gtg::ViewListEntry::transformMatrix(short tileSize)
 }
 
 
-void gtg::ViewListEntry::setViewContentChanged()
+void Layer::setTextureChanged()
 {
-	m_viewContentChanged = true;
-	emit viewContentChanged();
+	m_textureChanged = true;
+	emit textureChanged();
 }
 
-void gtg::ViewListEntry::setRotationChanged()
+void Layer::setRotationChanged()
 {
 	m_rotationChanged = true;
 	emit rotationChanged(m_rotation);
 }
 
-void gtg::ViewListEntry::setOpacityChanged()
+void Layer::setOpacityChanged()
 {
 	m_opacityChanged = true;
 	emit opacityChanged(m_opacity);
 }
 
 
-QSGNode* gtg::ViewListEntry::updateNode(QSGNode* parent, Tile* tile)
+QSGNode* Layer::updateNode(QSGNode* parent, Tile* tile)
 {
-	if (m_viewContentChanged) {
-		m_viewNode = view()->updateNode(m_viewNode, tile, region());
-		m_viewContentChanged = false;
+	if (m_textureChanged) {
+		m_textureNode = texture()->updateNode(m_textureNode, tile, region());
+		m_textureChanged = false;
 	}
 
 	if (m_rotationChanged) {

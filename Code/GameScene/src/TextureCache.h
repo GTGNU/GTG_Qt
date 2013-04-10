@@ -19,10 +19,10 @@
 #ifndef TEXTURECACHE_H
 #define TEXTURECACHE_H
 
-#include <array>
-
 #include <QtCore/QHash>
+#include <QtCore/QMap>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 
 #include <QtGui/QImage>
 
@@ -37,28 +37,33 @@ namespace gtg
 			class CacheEntry
 			{
 				private:
+					unsigned m_textureColumns;
+
 					QImage m_full;
-					std::array<QSGTexture*, 9> m_textures;
-					QImage at(uint region) const;
+					QMap<unsigned, QSharedPointer<QSGTexture>> m_textures;
+
+					unsigned index(QPoint toIndex) const;
+					QImage at(QPoint region) const;
 
 				public:
 					CacheEntry() = delete;
-					CacheEntry(QString filename);
+					CacheEntry(QString filename, unsigned textureColumns);
 					~CacheEntry();
 
-					QSGTexture* get(QQuickWindow* w, uint region);
+					QSGTexture* get(QQuickWindow* w, QPoint region);
 			};
 
 			QString m_filePrefix;
 			QHash<QString, CacheEntry> m_entries;
 
 		public:
-			typedef decltype(m_entries)::iterator pointer;
+			typedef decltype(m_entries)::iterator iterator;
 
 			TextureCache(QString filePrefix);
 			~TextureCache();
 
-			QHash<QString, CacheEntry>::iterator get(QString filename);
+			QHash<QString, CacheEntry>::iterator get(QString filename,
+					unsigned textureColumns);
 	};
 }
 

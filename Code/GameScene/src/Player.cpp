@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Grand Theft Gentoo is free software: you can redistribute it and/or modify
+ * Foobar is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -18,55 +18,64 @@
 
 #include "Player.h"
 
-#include "TileBehavior.h"
 #include "Tile.h"
 #include "Row.h"
 #include "Map.h"
+#include "tile/Behavior.h"
 
-gtg::Player::Player(QQuickItem* parent)
+
+using gtg::tile::Behavior;
+
+using gtg::Player;
+using gtg::Tile;
+using gtg::Row;
+using gtg::Map;
+
+
+Player::Player(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_currentTile(nullptr)
 {
 }
 
-gtg::Player::~Player()
+Player::~Player()
 {
 }
 
 
-QString gtg::Player::name() const
+QString Player::name() const
 {
 	return m_name;
 }
 
-void gtg::Player::setName(const QString& name)
+void Player::setName(const QString& name)
 {
 	m_name = name;
 }
 
 
-double gtg::Player::speed() const
+double Player::speed() const
 {
 	return m_speed;
 }
 
-void gtg::Player::setSpeed(double speed)
+void Player::setSpeed(double speed)
 {
 	m_speed = speed;
 }
 
 
-gtg::Tile* gtg::Player::currentTile() const
+Tile* Player::currentTile() const
 {
 	return m_currentTile;
 }
 
-void gtg::Player::moveBy(int dx, int dy)
+void Player::moveBy(int dx, int dy)
 {
 	moveTo(map()->tileAt(currentTile()->mapX() + dx, currentTile()->mapY() + dy));
 }
 
-void gtg::Player::moveTo(Tile* tile)
+void Player::moveTo(Tile* tile)
 {
 	bool differentBehavior = tile->behavior() != m_currentTile->behavior();
 
@@ -82,7 +91,7 @@ void gtg::Player::moveTo(Tile* tile)
 }
 
 
-gtg::Map* gtg::Player::map() const
+Map* Player::map() const
 {
 	return qobject_cast<Map*>(qobject_cast<Row*>(parent())->parent());
 }

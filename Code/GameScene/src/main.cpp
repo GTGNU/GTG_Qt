@@ -28,37 +28,37 @@
 #include "Row.h"
 #include "Tile.h"
 
-#include "TileType.h"
-#include "TileBehavior.h"
-#include "TileView.h"
-#include "ViewListEntry.h"
+#include "tile/Class.h"
+#include "tile/Behavior.h"
+#include "tile/Texture.h"
+#include "tile/Layer.h"
 
 #include "MenuHandler.h"
 
 using namespace gtg;
 
-void loadTileType(QQmlEngine* engine, const QString& fileName)
+void loadTileClass(QQmlEngine* engine, const QString& fileName)
 {
 	qDebug() << "Loading tile definition in" << fileName;
 
 	QQmlComponent component{engine, fileName};
 	QObject* object = component.create();
-	TileType* type = qobject_cast<TileType*>(object);
+	tile::Class* type = qobject_cast<tile::Class*>(object);
 
-	if (type && type->behavior() && type->view())
+	if (type && type->behavior() && type->texture())
 		engine->rootContext()->setContextProperty(type->name(), type);
 	else
-		qWarning() << "Error loading tile type in" << fileName << ":";
+		qWarning() << "Error loading tile class in" << fileName << ":";
 
 	for (auto& error : component.errors())
 		qDebug() << "Error:" << error;
 }
 
-void loadTileTypes(QQmlEngine* engine, const QString& location)
+void loadTileClasses(QQmlEngine* engine, const QString& location)
 {
 	QDir tileDefDir{location};
 	for (QString& entry : tileDefDir.entryList(QDir::Files))
-		loadTileType(engine, tileDefDir.absoluteFilePath(entry));
+		loadTileClass(engine, tileDefDir.absoluteFilePath(entry));
 }
 
 // unused
@@ -99,14 +99,14 @@ QQuickItem* loadMap(QGuiApplication& app, QQmlEngine* engine)
 
 int main(int argc, char* argv[])
 {
-	qmlRegisterType<gtg::ViewListEntry>("GTG", 1, 0, "V"           );
-	qmlRegisterType<gtg::TileView>     ("GTG", 1, 0, "TileView"    );
-	qmlRegisterType<gtg::TileBehavior> ("GTG", 1, 0, "TileBehavior");
-	qmlRegisterType<gtg::TileType>     ("GTG", 1, 0, "TileType"    );
+	qmlRegisterType<tile::Texture> ("gtg.tile", 1, 4, "Texture"   );
+	qmlRegisterType<tile::Behavior>("gtg.tile", 1, 4, "Behavior");
+	qmlRegisterType<tile::Class>   ("gtg.tile", 1, 4, "Class"   );
+	qmlRegisterType<tile::Layer>   ("gtg.tile", 1, 4, "Layer"   );
 
-	qmlRegisterType<gtg::Tile>         ("GTG", 1, 0, "Tile"        );
-	qmlRegisterType<gtg::Row>          ("GTG", 1, 0, "Row"         );
-	qmlRegisterType<gtg::Map>          ("GTG", 1, 0, "Map"         );
+	qmlRegisterType<Tile>("gtg.map", 1, 4, "Tile");
+	qmlRegisterType<Row> ("gtg.map", 1, 4, "Row" );
+	qmlRegisterType<Map> ("gtg.map", 1, 4, "Map" );
 
 	QGuiApplication app(argc, argv);
 
@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 
 
 	// Load tiles meanwhile
-	loadTileTypes(view.engine(), tilesSource);
+	loadTileClasses(view.engine(), tilesSource);
 
 	//view.setSource(QUrl::fromLocalFile(mapSource));
 	/*

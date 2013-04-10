@@ -16,11 +16,7 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ViewList.h"
-
-#include "Tile.h"
-#include "TileView.h"
-#include "ViewListEntry.h"
+#include "LayerStack.h"
 
 #include <iterator>
 #include <algorithm>
@@ -28,102 +24,120 @@
 #include <QtQuick/QSGNode>
 #include <QtQuick/QSGSimpleTextureNode>
 
-gtg::ViewList::ViewList(Tile* tile)
+#include "Tile.h"
+#include "Texture.h"
+#include "Layer.h"
+
+
+using gtg::tile::LayerStack;
+using gtg::tile::Layer;
+
+using gtg::Tile;
+
+
+LayerStack::LayerStack(Tile* tile)
 	: m_tile(tile)
 {
 }
 
-gtg::ViewList::~ViewList()
+LayerStack::~LayerStack()
 {
 }
 
 
-void gtg::ViewList::append(ViewListEntry* entry)
+void LayerStack::append(Layer* layer)
 {
-	insert(m_entries.size(), entry);
+	insert(m_layers.size(), layer);
 }
 
-void gtg::ViewList::insert(unsigned index, ViewListEntry* entry)
+void LayerStack::insert(unsigned index, Layer* layer)
 {
-	QObject::connect(entry, &ViewListEntry::changed,
+	QObject::connect(layer, &Layer::changed,
 			m_tile, &QQuickItem::update,
 			Qt::DirectConnection);
 
-	m_changes.push_back({Change::ADD, index, entry});
-	m_entries.insert(index, entry);
+	m_changes.push_back({Change::ADD, index, layer});
+	m_layers.insert(index, layer);
 
 	m_tile->update();
 }
 
 
-void gtg::ViewList::remove(ViewListEntry* entry)
+void LayerStack::remove(Layer* layer)
 {
-	QObject::disconnect(entry, &ViewListEntry::changed,
+	QObject::disconnect(layer, &Layer::changed,
 			m_tile, &QQuickItem::update);
 
-	auto it = std::find(m_entries.begin(), m_entries.end(), entry);
-	m_changes.push_back({Change::REMOVE, std::distance(m_entries.begin(), it), entry});
-	m_entries.erase(it);
+	QList<Layer*>::iterator it =
+		std::find(m_layers.begin(), m_layers.end(), layer);
+
+	m_changes.push_back({
+			Change::REMOVE,
+			static_cast<unsigned>(std::distance(m_layers.begin(), it)),
+			layer
+		});
+
+	m_layers.erase(it);
 
 	m_tile->update();
 }
 
-void gtg::ViewList::remove(unsigned index)
+void LayerStack::remove(unsigned index)
 {
-	auto it = m_entries.begin() + index;
+	auto it = m_layers.begin() + index;
 
-	QObject::disconnect(*it, &ViewListEntry::changed,
+	QObject::disconnect(*it, &Layer::changed,
 			m_tile, &QQuickItem::update);
 
 	m_changes.push_back({Change::REMOVE, index, *it});
-	m_entries.erase(it);
+	m_layers.erase(it);
 
 	m_tile->update();
 }
 
 
-int gtg::ViewList::count() const
+Layer* LayerStack::at(unsigned index) const
 {
-	return m_entries.size();
+	return m_layers.at(index);
 }
 
-gtg::ViewListEntry* gtg::ViewList::at(unsigned index) const
+int LayerStack::count() const
 {
-	return m_entries.at(index);
+	return m_layers.size();
 }
 
-unsigned gtg::ViewList::indexOf(ViewListEntry* entry) const
+unsigned LayerStack::indexOf(Layer* layer) const
 {
-	return m_entries.indexOf(entry);
+	return m_layers.indexOf(layer);
 }
 
 
-void gtg::ViewList::clear()
+void LayerStack::clear()
 {
 	m_changes.push_back({Change::CLEAR, 0, nullptr});
-	m_entries.clear();
+	m_layers.clear();
 
 	m_tile->update();
 }
 
 
-bool gtg::ViewList::applyChanges(QSGNode* node)
+bool LayerStack::applyChanges(QSGNode* node)
 {
 	QSGNode* newNode;
 
 	for (const Change& change : m_changes) {
 		switch (change.action) {
 			case Change::ADD:
-				newNode = change.entry->updateNode(node, m_tile);
+				newNode = change.layer->updateNode(node, m_tile);
 
-				if (change.index == node->childCount()) {
+				if (change.index == (unsigned)node->childCount()) {
 					node->appendChildNode(newNode);
-				} else if (change.index < node->childCount()) {
+				} else if (change.index < (unsigned)node->childCount()) {
 					node->insertChildNodeBefore(newNode,
 							node->childAtIndex(change.index));
 				} else {
 					qWarning() << "Warning: change index is greater than the number of childs of the node"
-						<< "\tin the ViewList of" << m_tile;
+						<< "\tin the LayerStack of" << m_tile;
 				}
 
 				break;
@@ -142,13 +156,8 @@ bool gtg::ViewList::applyChanges(QSGNode* node)
 	return m_changes.size() > 0;
 }
 
-void gtg::ViewList::updateNode(QSGNode* node)
+void LayerStack::updateNode(QSGNode* node)
 {
-	for (ViewListEntry* entry : m_entries)
-		QSGNode* result = entry->updateNode(node, m_tile);
-
-		/*if (child != result) {
-			node->insertChildNodeBefore(result, child);
-			node->removeChildNode(child);
-		}*/
+	for (Layer* layer : m_layers)
+		layer->updateNode(node, m_tile);
 }

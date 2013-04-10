@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.8)
-project(MapLoader CXX)
+project(GrandTheftGentoo CXX)
 
 if (NOT CMAKE_BUILD_TYPE)
 	# default build type
@@ -39,11 +39,14 @@ find_package(Qt5Gui REQUIRED)
 find_package(Qt5Qml REQUIRED)
 find_package(Qt5Quick REQUIRED)
 
-file(GLOB sources ${MapLoader_SOURCE_DIR}/*.cpp)
-add_executable(maploader ${sources})
+file(GLOB sources ${GrandTheftGentoo_SOURCE_DIR}/*.cpp)
+file(GLOB sources_tile ${GrandTheftGentoo_SOURCE_DIR}/tile/*.cpp)
+file(GLOB sources_helpers ${GrandTheftGentoo_SOURCE_DIR}/helpers/*.cpp)
 
-qt5_use_modules(maploader Core Gui Quick Qml)
+add_executable(gtg ${sources} ${sources_tile} ${sources_helpers})
+
+qt5_use_modules(gtg Core Gui Qml Quick)
 
 if (CMAKE_CXX_COMPILER_IS_CLANG)
-	target_link_libraries(maploader c++abi)
+	target_link_libraries(gtg c++abi)
 endif()

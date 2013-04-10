@@ -1,13 +1,13 @@
-import GTG 1.0
+import gtg.tile 1.4
 
-TileType {
+Class {
 	name: 'concrete'
 
-	view: TileView {
-		texture: 'concrete.png'
+	texture: Texture {
+		file: 'concrete.png'
 	}
 
-	behavior: TileBehavior {
+	behavior: Behavior {
 		trespassable: true
 	}
 }

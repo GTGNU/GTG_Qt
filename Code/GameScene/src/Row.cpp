@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Grand Theft Gentoo is free software: you can redistribute it and/or modify
+ * Foobar is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -17,91 +17,82 @@
  */
 
 #include "Row.h"
-#include "Map.h"
-#include "Tile.h"
 
 #include <QtQuick/QQuickWindow>
-
 #include <QtQuick/QSGSimpleRectNode>
 
-QDebug& operator<<(QDebug& dbg, gtg::Row* row)
-{
-	return dbg
-		<< "Row { parentItem:"
-			<< QString(row->parentItem()->metaObject()->className())
-			+ "(" + QString::number((uintptr_t)row->parentItem(), 16) + ")"
+#include "Tile.h"
+#include "Map.h"
+#include "helpers/QmlListAdapter.h"
 
-		<< ", tiles:" << row->tiles().size()
+using gtg::Tile;
+using gtg::Row;
+using gtg::Map;
 
-		<< ", window:"
-			<< QString(row->window()->metaObject()->className())
-			+ "(" + QString::number((uintptr_t)row->window(), 16) + ")"
-
-		<< "}";
-}
+using gtg::ChildList;
 
 
-gtg::Row::Row(QQuickItem* parent)
+Row::Row(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_tiles(this)
 {
 	setFlag(QQuickItem::ItemHasContents);
 }
 
-gtg::Row::~Row()
+Row::~Row()
 {
 }
 
 
-int gtg::Row::x() const
+int Row::x() const
 {
 	return 0;
 }
 
-int gtg::Row::y() const
+int Row::y() const
 {
 	return mapY() * map()->tileSize();
 }
 
-int gtg::Row::width() const
+int Row::width() const
 {
-	return m_tiles.size() * map()->tileSize();
+	return m_tiles.count() * map()->tileSize();
 }
 
-int gtg::Row::height() const
+int Row::height() const
 {
-	return m_tiles.size() ? m_tiles.at(0)->height() : 0;
+	return m_tiles.count() ? m_tiles.at(0)->height() : 0;
 }
 
-QRectF gtg::Row::boundingRect() const
+QRectF Row::boundingRect() const
 {
 	return QRect(x(), y(), width(), height());
 }
 
 
-int gtg::Row::mapY() const
+int Row::mapY() const
 {
 	return map()->indexOf(this);
 }
 
-gtg::Map* gtg::Row::map() const
+Map* Row::map() const
 {
 	return qobject_cast<Map*>(parentItem());
 }
 
 
-gtg::ChildList<gtg::Tile> gtg::Row::tiles() const
+ChildList<Tile> Row::tiles() const
 {
 	return m_tiles;
 }
 
-QQmlListProperty<gtg::Tile> gtg::Row::qmlTiles()
+QQmlListProperty<Tile> Row::qmlTiles()
 {
-	return m_tiles.toQmlListProperty();
+	return gtg::qml_adapt<Tile>(m_tiles, this);
 }
 
 
-int gtg::Row::indexOf(const Tile* object) const
+int Row::indexOf(const Tile* object) const
 {
 	int i = 0;
 
@@ -116,7 +107,7 @@ int gtg::Row::indexOf(const Tile* object) const
 }
 
 
-QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
+QSGNode* Row::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
 	qDebug() << "----------------------------------------";
@@ -136,11 +127,11 @@ QSGNode* gtg::Row::updatePaintNode(QSGNode* node,
 		int tileSize = map()->tileSize();
 		setX(0);
 		setY(mapY() * tileSize);
-		setWidth(m_tiles.size() * tileSize);
+		setWidth(m_tiles.count() * tileSize);
 		setHeight(tileSize);
 	}
 
-	qDebug() << "mapY:" << mapY();
+	qDebug() << "Bounding rect: " << boundingRect();
 
 	n->setRect(boundingRect());
 

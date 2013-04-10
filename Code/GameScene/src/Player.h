@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Grand Theft Gentoo is free software: you can redistribute it and/or modify
+ * Foobar is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -32,9 +32,21 @@ namespace gtg
 	: public QQuickItem
 	{
 		Q_OBJECT
-		Q_PROPERTY(Map* map READ map)
-		Q_PROPERTY(double speed READ speed WRITE setSpeed)
-		Q_PROPERTY(Tile* currentTile READ currentTile WRITE moveTo)
+
+		Q_PROPERTY(
+				gtg::Map* map
+				READ map)
+
+		Q_PROPERTY(
+				double speed
+				READ speed
+				WRITE setSpeed)
+
+		Q_PROPERTY(
+				gtg::Tile* currentTile
+				READ currentTile
+				WRITE moveTo)
+
 		Q_ENUMS(Direction)
 
 		public:
@@ -58,10 +70,10 @@ namespace gtg
 			double speed() const;
 			void setSpeed(double speed);
 
-			Tile* currentTile() const;
+			gtg::Tile* currentTile() const;
 
 			Q_INVOKABLE void moveBy(int dx, int dy);
-			void moveTo(Tile* target);
+			Q_INVOKABLE void moveTo(gtg::Tile* target);
 
 			Map* map() const;
 

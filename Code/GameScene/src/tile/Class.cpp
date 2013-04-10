@@ -16,40 +16,46 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "TileType.h"
+#include "Class.h"
 
-gtg::TileType::TileType(QObject* parent)
-	: TileDef<TileType>(parent)
 
-	, m_view(nullptr)
+using gtg::tile::Class;
+using gtg::tile::Texture;
+using gtg::tile::Behavior;
+
+
+Class::Class(QObject* parent)
+	: Registered<Class>(parent)
+
+	, m_texture(nullptr)
 	, m_behavior(nullptr)
 {
 }
 
-gtg::TileType::~TileType()
+Class::~Class()
 {
 }
 
 
-gtg::TileView* gtg::TileType::view() const
+Texture* Class::texture() const
 {
-	return m_view;
+	return m_texture;
 }
 
-void gtg::TileType::setView(gtg::TileView* view)
+void Class::setTexture(Texture* texture)
 {
-	auto prev = m_view;
-	m_view = view;
-	emit viewChanged(prev, m_view);
+	auto prev = m_texture;
+	m_texture = texture;
+	emit textureChanged(prev, m_texture);
 }
 
 
-gtg::TileBehavior* gtg::TileType::behavior() const
+Behavior* Class::behavior() const
 {
 	return m_behavior;
 }
 
-void gtg::TileType::setBehavior(gtg::TileBehavior* behavior)
+void Class::setBehavior(Behavior* behavior)
 {
 	auto prev = m_behavior;
 	m_behavior = behavior;

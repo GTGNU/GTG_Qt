@@ -17,64 +17,57 @@
  */
 
 #include "Map.h"
-#include "Row.h"
-#include "Tile.h"
-#include "TileView.h"
-
 #include <QtQuick/QSGNode>
 #include <QtQuick/QSGSimpleRectNode>
 
-QDebug& operator<<(QDebug& dbg, gtg::Map* map)
-{
-	return dbg
-		<< "Map { parentItem:"
-			<< QString(map->parentItem()->metaObject()->className())
-			+ "(" + QString::number((uintptr_t)map->parentItem(), 16) + ")"
+#include "Row.h"
+#include "Tile.h"
+#include "tile/Texture.h"
+#include "helpers/QmlListAdapter.h"
 
-		<< ", rows:" << map->rows().size()
 
-		<< ", window:"
-			<< QString(map->window()->metaObject()->className())
-			+ "(" + QString::number((uintptr_t)map->window(), 16) + ")"
+using gtg::Tile;
+using gtg::Row;
+using gtg::Map;
 
-		<< "}";
-}
+using gtg::ChildList;
 
-gtg::Map::Map(QQuickItem* parent)
+
+Map::Map(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_rows(this)
 {
 	setFlag(QQuickItem::ItemHasContents);
 }
 
-gtg::Map::~Map()
+Map::~Map()
 {
 }
 
 
-unsigned int gtg::Map::tileSize() const
+unsigned int Map::tileSize() const
 {
 	return m_tileSize;
 }
 
-void gtg::Map::setTileSize(unsigned int tileSize)
+void Map::setTileSize(unsigned int tileSize)
 {
 	m_tileSize = tileSize;
 }
 
 
-gtg::ChildList<gtg::Row> gtg::Map::rows() const
+ChildList<Row> Map::rows() const
 {
 	return m_rows;
 }
 
-QQmlListProperty<gtg::Row> gtg::Map::qmlRows()
+QQmlListProperty<Row> Map::qmlRows()
 {
-	return m_rows.toQmlListProperty();
+	return gtg::qml_adapt<Row>(m_rows, this);
 }
 
 
-int gtg::Map::indexOf(const Row* object) const
+int Map::indexOf(const Row* object) const
 {
 	int i = 0;
 	for (QQuickItem* row : m_rows) {
@@ -88,13 +81,13 @@ int gtg::Map::indexOf(const Row* object) const
 }
 
 
-gtg::Tile* gtg::Map::tileAt(int x, int y)
+Tile* Map::tileAt(int x, int y)
 {
 	return m_rows.at(y)->m_tiles.at(x);
 }
 
 
-QSGNode* gtg::Map::updatePaintNode(QSGNode* node,
+QSGNode* Map::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
 	qDebug() << "----------------------------------------";
@@ -112,7 +105,7 @@ QSGNode* gtg::Map::updatePaintNode(QSGNode* node,
 		n = new QSGSimpleRectNode;
 
 	setWidth(m_rows.at(0)->width());
-	setHeight(m_rows.size() * tileSize());
+	setHeight(m_rows.count() * tileSize());
 
 	n->setRect(boundingRect());
 

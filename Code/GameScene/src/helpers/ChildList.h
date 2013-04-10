@@ -63,10 +63,6 @@ namespace gtg
 					child->setParentItem(m_parent.window()->contentItem());
 			}
 
-			int size() const
-			{
-				return count();
-			}
 
 			auto begin() const -> decltype(m_parent.childItems().begin())
 			{
@@ -86,37 +82,6 @@ namespace gtg
 			auto end() -> decltype(m_parent.childItems().end())
 			{
 				return m_parent.childItems().end();
-			}
-
-
-			static void append(QQmlListProperty<T>* data, T* value)
-			{
-				reinterpret_cast<ChildList<T>*>(data)->append(value);
-			}
-
-			static int count(QQmlListProperty<T>* data)
-			{
-				return reinterpret_cast<ChildList<T>*>(data)->count();
-			}
-
-			static T* at(QQmlListProperty<T>* data, int index)
-			{
-				return reinterpret_cast<ChildList<T>*>(data)->at(index);
-			}
-
-			static void clear(QQmlListProperty<T>* data)
-			{
-				reinterpret_cast<ChildList<T>*>(data)->clear();
-			}
-
-
-			QQmlListProperty<T> toQmlListProperty()
-			{
-				return QQmlListProperty<T>(&m_parent, this,
-						ChildList::append,
-						ChildList::count,
-						ChildList::at,
-						ChildList::clear);
 			}
 	};
 }

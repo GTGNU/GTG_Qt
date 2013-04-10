@@ -1,12 +1,12 @@
 import QtQuick 2.0
-import GTG 1.0
+import gtg.tile 1.4
 
-TileType {
+Class {
 	id: tile
 	name: 'water'
 
-	view: TileView {
-		texture: 'water' + timer.currentFrame + '.png'
+	texture: Texture {
+		file: 'water' + timer.currentFrame + '.png'
 
 		property var timer: Timer {
 			interval: 100
@@ -22,7 +22,7 @@ TileType {
 		}
 	}
 
-	behavior: TileBehavior {
+	behavior: Behavior {
 		trespassable: false
 	}
 }

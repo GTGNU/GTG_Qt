@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Grand Theft Gentoo is free software: you can redistribute it and/or modify
+ * Foobar is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -16,8 +16,8 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TILEVIEW_H
-#define TILEVIEW_H
+#ifndef TEXTURE_H
+#define TEXTURE_H
 
 #include <QtCore/QHash>
 #include <QtCore/QMap>
@@ -31,44 +31,52 @@
 #include <QtQuick/QSGSimpleTextureNode>
 #include <QtQuick/QSGTexture>
 
-#include "TileDef.h"
+#include "helpers/Registered.h"
 #include "TextureCache.h"
-#include "ViewListEntry.h"
 
 namespace gtg
 {
 	class Player;
 	class Tile;
 
-	class TileView
-		: public TileDef<TileView>
+	namespace tile
 	{
-		Q_OBJECT
-		Q_PROPERTY(QString texture READ textureFilename WRITE setTextureFilename NOTIFY textureChanged)
+		class Texture
+			: public Registered<Texture>
+		{
+			Q_OBJECT
+				Q_PROPERTY(unsigned columns READ columns WRITE setColumns)
+				Q_PROPERTY(QString file READ file WRITE setFile NOTIFY textureChanged)
 
-		private:
-			static TextureCache m_cache;
+			private:
+				static constexpr unsigned DEFAULT_COLUMNS = 3;
+				static TextureCache m_cache;
 
-			bool m_imageInitialized;
-			TextureCache::pointer m_image;
+				bool m_initialized;
+				TextureCache::iterator m_cacheIterator;
 
-		public:
-			TileView(QObject* parent = nullptr);
-			~TileView();
+				unsigned m_columns;
 
-			QString textureFilename() const;
-			void setTextureFilename(const QString& textureFilename);
+			public:
+				Texture(QObject* parent = nullptr);
+				~Texture();
 
-			QSGNode* updateNode(QSGNode* node, Tile* tile,
-					ViewListEntry::Region region);
+				QString file() const;
+				void setFile(const QString& filename);
 
-		signals:
-			void changed();
+				unsigned columns() const;
+				void setColumns(unsigned columns);
 
-			void textureChanged();
-	};
+				QSGNode* updateNode(QSGNode* node, Tile* tile, QPoint region);
+
+			signals:
+				void changed();
+
+				void textureChanged();
+		};
+	}
 }
 
-QML_DECLARE_TYPE(gtg::TileView)
+QML_DECLARE_TYPE(gtg::tile::Texture)
 
 #endif

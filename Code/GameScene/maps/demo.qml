@@ -1,5 +1,6 @@
 import QtQuick 2.0
-import GTG 1.0
+import gtg.map 1.4
+import gtg.tile 1.4 as T
 
 Map {
 	id: map
@@ -9,34 +10,32 @@ Map {
 	Row {
 		// 0
 		Tile {
-			views: [
-				V{ view: sand.view },
-				V{ view: water.view; region: V.TOP }
-			]
+			T.Layer { texture: sand.texture }
+			T.Layer { texture: water.texture; region: Qt.point(1,0) }
+
 			behavior: sand.behavior
 		}
 
 		// 1
 		Tile {
-			views: [
-				V{ view: concrete.view },
-				V{ view: water.view; region: V.TOPRIGHT }
-			]
+			T.Layer { texture: concrete.texture }
+			T.Layer { texture: water.texture; region: Qt.point(2,0) }
+
 			behavior: concrete.behavior
 		}
 
 		// 2
 		Tile {
-			views: [
-				V{ view: grass_tall.view },
-				V{ view: water.view; region: V.LEFT }
-			]
+			T.Layer { texture: grass_tall.texture }
+			T.Layer { texture: water.texture; region: Qt.point(0,1) }
+
 			behavior: grass_tall.behavior
 		}
 
 		// 3
 		Tile {
-			views: V{ view: water.view }
+			T.Layer { texture: water.texture }
+
 			behavior: water.behavior
 		}
 	}
@@ -45,7 +44,8 @@ Map {
 	Row {
 		// 0
 		Tile {
-			views: V{ view: water.view }
+			layers: T.Layer { texture: water.texture }
+
 			behavior: water.behavior
 
 			property var timer: Timer {
@@ -53,38 +53,35 @@ Map {
 				repeat: true
 				running: true
 				onTriggered: {
-					var v = map.tileAt(0,1).views[0]
-					v.rotation = (v.rotation + 1) % 360
+					var l = map.tileAt(0,1).layers[0]
+					l.rotation = (l.rotation + 1) % 360
 				}
 			}
 		}
 
 		// 1
 		Tile {
-			views: [
-				V{ view: sand.view },
-				V{ view: water.view; region: V.RIGHT },
-				V{ view: water.view; region: V.TOP }
-			]
+			T.Layer { texture: sand.texture }
+			T.Layer { texture: water.texture; region: Qt.point(2,1) }
+			T.Layer { texture: water.texture; region: Qt.point(1,0) }
+
 			behavior: sand.behavior
 		}
 
 		// 2
 		Tile {
-			views: [
-				V{ view: concrete.view },
-				V{ view: water.view; region: V.TOPRIGHT },
-				V{ view: water.view; region: V.BOTLEFT }
-			]
+			T.Layer { texture: concrete.texture }
+			T.Layer { texture: water.texture; region: Qt.point(2,0) }
+			T.Layer { texture: water.texture; region: Qt.point(0,2) }
+
 			behavior: concrete.behavior
 		}
 
 		// 3
 		Tile {
-			views: [
-				V{ view: grass_tall.view },
-				V{ view: water.view; region: V.BOTTOM }
-			]
+			T.Layer { texture: grass_tall.texture }
+			T.Layer { texture: water.texture; region: Qt.point(1,2) }
+
 			behavior: grass_tall.behavior
 		}
 	}
@@ -93,32 +90,32 @@ Map {
 	Row {
 		// 0
 		Tile {
-			views: [
-				V{ view: grass_tall.view },
-				V{ view: water.view; region: V.BOTTOM },
-				V{ view: water.view; region: V.LEFT }
-			]
+			T.Layer { texture: grass_tall.texture }
+			T.Layer { texture: water.texture; region: Qt.point(1,2) }
+			T.Layer { texture: water.texture; region: Qt.point(0,1) }
+
 			behavior: grass_tall.behavior
 		}
 
 		// 1
 		Tile {
-			views: V{ view: water.view }
+			T.Layer { texture: water.texture }
+
 			behavior: water.behavior
 		}
 
 		// 2
 		Tile {
-			views: [
-				V{ view: sand.view },
-				V{ view: water.view; region: V.RIGHT }
-			]
+			T.Layer { texture: sand.texture }
+			T.Layer { texture: water.texture; region: Qt.point(2,1) }
+
 			behavior: sand.behavior
 		}
 
 		// 3
 		Tile {
-			views: V{ view: concrete.view }
+			T.Layer { texture: concrete.texture }
+
 			behavior: concrete.behavior
 		}
 	}

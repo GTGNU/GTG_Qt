@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Grand Theft Gentoo is free software: you can redistribute it and/or modify
+ * Foobar is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -16,37 +16,43 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "TileBehavior.h"
+#include "Behavior.h"
 
-gtg::TileBehavior::TileBehavior(QObject* parent)
-	: TileDef<TileBehavior>(parent)
 
+using gtg::tile::Behavior;
+
+using gtg::Player;
+
+
+Behavior::Behavior(QObject* parent)
+	: Registered<Behavior>(parent)
 	, m_trespassable(false)
 {
 }
 
-gtg::TileBehavior::~TileBehavior()
+Behavior::~Behavior()
 {
 }
 
 
-bool gtg::TileBehavior::isTrespassable() const
+bool Behavior::isTrespassable() const
 {
 	return m_trespassable;
 }
 
-void gtg::TileBehavior::setTrespassable(bool trespassable)
+void Behavior::setTrespassable(bool trespassable)
 {
 	m_trespassable = trespassable;
+	emit trespassabilityChanged(m_trespassable);
 }
 
 
-void gtg::TileBehavior::emitPlayerEnteredArea(Player* player)
+void Behavior::emitPlayerEnteredArea(Player* player)
 {
 	emit playerEnteredArea(player);
 }
 
-void gtg::TileBehavior::emitPlayerExitedArea(Player* player)
+void Behavior::emitPlayerExitedArea(Player* player)
 {
 	emit playerExitedArea(player);
 }

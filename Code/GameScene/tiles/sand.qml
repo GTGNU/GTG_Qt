@@ -1,13 +1,13 @@
-import GTG 1.0
+import gtg.tile 1.4
 
-TileType {
+Class {
 	name: 'sand'
 
-	view: TileView {
-		texture: 'sand.png'
+	texture: Texture {
+		file: 'sand.png'
 	}
 
-	behavior: TileBehavior {
+	behavior: Behavior {
 		trespassable: true
 
 		onPlayerEnteredArea: { player.speed /= 2 }
