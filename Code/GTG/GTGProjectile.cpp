@@ -14,6 +14,8 @@ GTGProjectile::GTGProjectile(	SDL_Surface* screen,
 
 :	fired(false),
 	ready(true),
+	xOffset(0),
+	yOffset(0),
 	xSpeedOffset(0),
 	ySpeedOffset(0),
 	frameDrawCount(0),
