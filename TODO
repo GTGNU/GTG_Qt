@@ -60,7 +60,7 @@
         [ ] Memory management using scoped pointers, shared pointers and qobject trees
         [x] QGuiApplication::quit() (it won't quit currently)
         [x] QQuickWindow::setSource() segfaults
-        [ ] Rename ViewList, ViewListEntry and related methods/variables to
+        [x] Rename ViewList, ViewListEntry and related methods/variables to
             something more appropriate
         [x] Opacity and rotation in ViewListEntry make the tile disappear if
             the initial opacity is not set explicitly in the QML declaration
