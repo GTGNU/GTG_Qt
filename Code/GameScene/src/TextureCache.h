@@ -37,17 +37,14 @@ namespace gtg
 			class CacheEntry
 			{
 				private:
-					unsigned m_textureColumns;
-
 					QImage m_full;
 					QMap<unsigned, QSharedPointer<QSGTexture>> m_textures;
 
-					unsigned index(QPoint toIndex) const;
 					QImage at(QPoint region) const;
 
 				public:
 					CacheEntry() = delete;
-					CacheEntry(QString filename, unsigned textureColumns);
+					CacheEntry(QString path);
 					~CacheEntry();
 
 					QSGTexture* get(QQuickWindow* w, QPoint region);
@@ -62,8 +59,7 @@ namespace gtg
 			TextureCache(QString filePrefix);
 			~TextureCache();
 
-			QHash<QString, CacheEntry>::iterator get(QString filename,
-					unsigned textureColumns);
+			QHash<QString, CacheEntry>::iterator get(QString filename);
 	};
 }
 

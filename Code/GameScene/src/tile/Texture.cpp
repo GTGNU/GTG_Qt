@@ -34,11 +34,8 @@ Texture::Texture(QObject* parent)
 	: Registered<Texture>(parent)
 	, m_initialized(false)
 	, m_cacheIterator()
-	, m_columns(DEFAULT_COLUMNS)
+	, m_offset(0)
 {
-	connect(this, &Texture::textureChanged,
-			this, &Texture::changed,
-			Qt::DirectConnection);
 }
 
 Texture::~Texture()
@@ -53,21 +50,22 @@ QString Texture::file() const
 
 void Texture::setFile(const QString& filename)
 {
-	m_cacheIterator = m_cache.get(filename, m_columns);
+	m_cacheIterator = m_cache.get(filename);
 	m_initialized = true;
 
-	emit textureChanged();
+	emit changed();
 }
 
 
-unsigned Texture::columns() const
+unsigned Texture::offset() const
 {
-	return m_columns;
+	return m_offset;
 }
 
-void Texture::setColumns(unsigned int columns)
+void Texture::setOffset(unsigned offset)
 {
-	m_columns = columns;
+	m_offset = offset;
+	emit changed();
 }
 
 
@@ -82,7 +80,9 @@ QSGNode* Texture::updateNode(QSGNode* node, Tile* tile, QPoint region)
 		n = static_cast<QSGSimpleTextureNode*>(node);
 	}
 
-	n->setTexture( m_cacheIterator.value().get(tile->window(), region) );
+	n->setTexture(
+			m_cacheIterator.value().get(tile->window(),
+			{region.x() + 3*static_cast<int>(offset()), region.y()}) );
 	return n;
 }
 

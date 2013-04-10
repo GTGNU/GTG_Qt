@@ -25,9 +25,8 @@
 using gtg::TextureCache;
 
 
-TextureCache::CacheEntry::CacheEntry(QString path, unsigned textureColumns)
-	: m_textureColumns(textureColumns)
-	, m_full(path)
+TextureCache::CacheEntry::CacheEntry(QString path)
+	: m_full(path)
 	, m_textures()
 {
 }
@@ -36,14 +35,10 @@ TextureCache::CacheEntry::~CacheEntry()
 {
 }
 
-unsigned TextureCache::CacheEntry::index(QPoint region) const
-{
-	return region.x() * m_textureColumns + region.y();
-}
-
+#include <qdebug.h>
 QImage TextureCache::CacheEntry::at(QPoint region) const
 {
-	uint tileSize = m_full.width() / m_textureColumns;
+	unsigned tileSize = m_full.height() / 3;
 
 	return m_full.copy(
 		tileSize * region.x(),
@@ -54,7 +49,7 @@ QImage TextureCache::CacheEntry::at(QPoint region) const
 
 QSGTexture* TextureCache::CacheEntry::get(QQuickWindow* w, QPoint region)
 {
-	unsigned i = index(region);
+	unsigned i = region.x() * 3 + region.y();
 	auto it = m_textures.find(i);
 
 	if (it == m_textures.end())
@@ -75,14 +70,13 @@ TextureCache::~TextureCache()
 {
 }
 
-TextureCache::iterator TextureCache::get(QString filename, unsigned textureColumns)
+TextureCache::iterator TextureCache::get(QString filename)
 {
-	auto pointer = m_entries.find(filename);
+	auto iter = m_entries.find(filename);
 
-	if (pointer == m_entries.end()) {
-		pointer = m_entries.insert(filename,
-				CacheEntry(m_filePrefix + filename, textureColumns));
+	if (iter == m_entries.end()) {
+		iter = m_entries.insert(filename, CacheEntry(m_filePrefix + filename));
 	}
 
-	return pointer;
+	return iter;
 }

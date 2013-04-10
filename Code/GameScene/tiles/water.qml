@@ -6,7 +6,8 @@ Class {
 	name: 'water'
 
 	texture: Texture {
-		file: 'water' + timer.currentFrame + '.png'
+		file: 'water-atlas.png'
+		offset: timer.currentFrame
 
 		property var timer: Timer {
 			interval: 100

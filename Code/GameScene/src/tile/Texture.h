@@ -45,17 +45,24 @@ namespace gtg
 			: public Registered<Texture>
 		{
 			Q_OBJECT
-				Q_PROPERTY(unsigned columns READ columns WRITE setColumns)
-				Q_PROPERTY(QString file READ file WRITE setFile NOTIFY textureChanged)
+
+			Q_PROPERTY(
+					QString file
+					READ file
+					WRITE setFile)
+
+			Q_PROPERTY(
+					unsigned offset
+					READ offset
+					WRITE setOffset)
 
 			private:
-				static constexpr unsigned DEFAULT_COLUMNS = 3;
 				static TextureCache m_cache;
 
 				bool m_initialized;
 				TextureCache::iterator m_cacheIterator;
 
-				unsigned m_columns;
+				unsigned m_offset;
 
 			public:
 				Texture(QObject* parent = nullptr);
@@ -64,15 +71,13 @@ namespace gtg
 				QString file() const;
 				void setFile(const QString& filename);
 
-				unsigned columns() const;
-				void setColumns(unsigned columns);
+				unsigned offset() const;
+				void setOffset(unsigned offset);
 
 				QSGNode* updateNode(QSGNode* node, Tile* tile, QPoint region);
 
 			signals:
 				void changed();
-
-				void textureChanged();
 		};
 	}
 }
