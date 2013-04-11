@@ -60,6 +60,8 @@ int GTG::Run()
 	cameraTargetY = 0;
 	cameraFromY = 0;
 
+	GTGProjectile* projectile = NULL;
+
 	while(run == 0) {
 		timer.Frame();
 		while(SDL_PollEvent(&SDLEvent)) {
@@ -150,9 +152,7 @@ int GTG::Run()
 		}
 
 		// Test projectile
-		GTGProjectile* projectile;
-
-		if(!projectile)
+		if(projectile == NULL)
 		{
 			SDL_Surface* frame0
 				= SDLLoad("res/tiles/char_up_1.png");
@@ -219,7 +219,7 @@ int GTG::Run()
 
 		SDLBlit(map.player.currentTile->GetSurface(),screen,px-cameraTargetX+cameraX,py-cameraTargetY+cameraY);
 
-		if(projectile)
+		if(projectile != NULL)
 			projectile->Draw();
 
 		if(timer.now - cameraTime > cameraMoveSpeed) {
