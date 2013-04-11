@@ -50,6 +50,7 @@ QString Texture::file() const
 
 void Texture::setFile(const QString& filename)
 {
+	// The cache takes care of everything
 	m_cacheIterator = m_cache.get(filename);
 	m_initialized = true;
 
@@ -73,6 +74,7 @@ QSGNode* Texture::updateNode(QSGNode* node, Tile* tile, QPoint region)
 {
 	QSGSimpleTextureNode* n;
 
+	// First update
 	if (!node) {
 		n = new QSGSimpleTextureNode;
 		n->setRect(tile->boundingRect());
@@ -80,8 +82,11 @@ QSGNode* Texture::updateNode(QSGNode* node, Tile* tile, QPoint region)
 		n = static_cast<QSGSimpleTextureNode*>(node);
 	}
 
+	// Update the texture
 	n->setTexture(
+			// Ask the cache for the texture
 			m_cacheIterator.value().get(tile->window(),
+			// Add the offset to the x axis
 			{region.x() + 3*static_cast<int>(offset()), region.y()}) );
 	return n;
 }

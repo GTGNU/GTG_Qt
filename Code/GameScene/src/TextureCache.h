@@ -31,9 +31,18 @@ class QSGTexture;
 
 namespace gtg
 {
+	/*! \brief Caches textures and regions of them
+	 *
+	 * Load and caches textures based on their file name and for each file,
+	 * region copies are turned into cached QSGTextures.
+	 */
 	class TextureCache
 	{
 		private:
+			/*! \brief Encapsulates the cache entry for a file
+			 *
+			 * Contains cached QSGTexture for regions of a given file.
+			 */
 			class CacheEntry
 			{
 				private:
@@ -47,6 +56,12 @@ namespace gtg
 					CacheEntry(QString path);
 					~CacheEntry();
 
+					/*! \brief Makes a cached QSGTexture out of a full image and a given region
+					 *
+					 * \param w The QQuickWindow that contains the scene. It's needed to generate the texture
+					 * \param region (x,y) point that represents where the region starts.
+					 * \return A QSGTexture of that region of the image
+					 */
 					QSGTexture* get(QQuickWindow* w, QPoint region);
 			};
 
@@ -54,11 +69,13 @@ namespace gtg
 			QHash<QString, CacheEntry> m_entries;
 
 		public:
+			//! This typedef a convenient way to keep track of your texture
 			typedef decltype(m_entries)::iterator iterator;
 
 			TextureCache(QString filePrefix);
 			~TextureCache();
 
+			//! Returns an iterator to the requested cache entry. If the file is not in the map, it's loaded.
 			QHash<QString, CacheEntry>::iterator get(QString filename);
 	};
 }

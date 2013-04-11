@@ -32,6 +32,12 @@ namespace gtg
 
 	namespace tile
 	{
+		/*! \brief Encapsulates how a tile interacts with events
+		 *
+		 * This class mainly contains basic behavioral properties
+		 * such as trespassability for tiles and emits signals
+		 * when events are triggered
+		 */
 		class Behavior
 			: public Registered<Behavior>
 		{
@@ -45,7 +51,9 @@ namespace gtg
 			private:
 				bool m_trespassable;
 
+				//! Allow classes emit this signal from the outside
 				void emitPlayerEnteredArea(Player* player);
+				//! Allow classes emit this signal from the outside
 				void emitPlayerExitedArea(Player* player);
 
 			public:

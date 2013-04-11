@@ -38,6 +38,7 @@ TextureCache::CacheEntry::~CacheEntry()
 #include <qdebug.h>
 QImage TextureCache::CacheEntry::at(QPoint region) const
 {
+	// The file is always three rows tall (top/middle/bottom)
 	unsigned tileSize = m_full.height() / 3;
 
 	return m_full.copy(
@@ -52,9 +53,10 @@ QSGTexture* TextureCache::CacheEntry::get(QQuickWindow* w, QPoint region)
 	unsigned i = region.x() * 3 + region.y();
 	auto it = m_textures.find(i);
 
-	if (it == m_textures.end())
+	if (it == m_textures.end()) {
 		it = m_textures.insert(i,
 			QSharedPointer<QSGTexture>(w->createTextureFromImage(at(region))));
+	}
 
 	return it->data();
 }

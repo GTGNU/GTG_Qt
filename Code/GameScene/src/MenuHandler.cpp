@@ -35,9 +35,8 @@ gtg::MenuHandler::MenuHandler(QQuickView* view,
 
 void gtg::MenuHandler::play()
 {
-	qDebug() << "play() chosen";
+	// Load the map
 	m_view->setSource(QUrl::fromLocalFile(m_mapSource));
-	qDebug() << "view replaced";
 }
 
 void gtg::MenuHandler::quit()

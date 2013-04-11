@@ -30,10 +30,17 @@ namespace gtg
 	class Tile;
 	class Row;
 
+	/*!
+	 * \brief The top-level component of a map file.
+	 *
+	 * This class contains a list of rows, the size of tiles and
+	 * an exported method to access a given file.
+	 */
 	class Map
-	: public QQuickItem
+		: public QQuickItem
 	{
 		Q_OBJECT
+
 		Q_PROPERTY(unsigned int tileSize READ tileSize WRITE setTileSize)
 
 		Q_PROPERTY(QQmlListProperty<gtg::Row> rows READ qmlRows)
@@ -43,6 +50,12 @@ namespace gtg
 			unsigned int m_tileSize;
 			ChildList<Row> m_rows;
 
+			//! Virtual function inherited from QQuickItem. See Qt documentation.
+			/*!
+			 * \param node The node to update (see the Qt Scene Graph framework)
+			 * \param updatePaintNode
+			 * \return The updated node
+			 */
 			QSGNode* updatePaintNode(QSGNode* node,
 					QQuickItem::UpdatePaintNodeData* updatePaintNodeData) override;
 
@@ -50,14 +63,29 @@ namespace gtg
 			Map(QQuickItem* parent = nullptr);
 			~Map();
 
+			//! tileSize getter
 			unsigned int tileSize() const;
+			//! tileSize setter
 			void setTileSize(unsigned int tileSize);
 
+			//! Returns the list of child rows
 			ChildList<gtg::Row> rows() const;
+			//! Returns a QQmlListProperty of rows. This is just for QML, you should prefer rows() in C++ code
 			QQmlListProperty<gtg::Row> qmlRows();
 
+			//! Find the index of a given Row
+			/*!
+			 * \param object The row to find
+			 * \return The index of the row or -1 if it's not found
+			 */
 			int indexOf(const Row* object) const;
 
+			//! Get a tile at the given map coordinates (x,y)
+			/*!
+			 * \param x x coordinate (left is x=0)
+			 * \param y y coordinate (top is y=0)
+			 * \return the tile at given coordinates or nullptr if not found
+			 */
 			Q_INVOKABLE gtg::Tile* tileAt(int x, int y);
 	};
 }

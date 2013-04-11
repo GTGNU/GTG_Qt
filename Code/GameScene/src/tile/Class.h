@@ -32,6 +32,15 @@ namespace gtg
 		class Texture;
 		class Behavior;
 
+		/*! \brief Composition of a Texture and a Behavior
+		 *
+		 * This class is used to define new tile classes outside
+		 * of the map definition file so instances can be shared
+		 * so many layers point to a single texture or emit signals
+		 * to the same behavior.
+		 *
+		 * It also reduces verboseness of map files.
+		 */
 		class Class
 			: public Registered<Class>
 		{

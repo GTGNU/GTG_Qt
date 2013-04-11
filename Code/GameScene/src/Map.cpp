@@ -94,13 +94,9 @@ QSGNode* Map::updatePaintNode(QSGNode* node,
 	qDebug() << "Drawing " << this;
 	qDebug() << "Children:";
 
-	for (auto child : childItems()) {
-		child->update();
-		qDebug() << child;
-	}
-
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 
+	// First draw
 	if (!n)
 		n = new QSGSimpleRectNode;
 

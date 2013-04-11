@@ -52,6 +52,7 @@ void LayerStack::append(Layer* layer)
 
 void LayerStack::insert(unsigned index, Layer* layer)
 {
+	// Schedule an update of the tile if the layer changed
 	QObject::connect(layer, &Layer::changed,
 			m_tile, &QQuickItem::update,
 			Qt::DirectConnection);
@@ -128,8 +129,10 @@ bool LayerStack::applyChanges(QSGNode* node)
 	for (const Change& change : m_changes) {
 		switch (change.action) {
 			case Change::ADD:
+				// Ask the layer to generate a new node
 				newNode = change.layer->updateNode(node, m_tile);
 
+				// Add it to the node
 				if (change.index == (unsigned)node->childCount()) {
 					node->appendChildNode(newNode);
 				} else if (change.index < (unsigned)node->childCount()) {
@@ -152,12 +155,15 @@ bool LayerStack::applyChanges(QSGNode* node)
 		}
 	}
 
+	// Changes have been applied, clear for the next call
 	m_changes.clear();
+
 	return m_changes.size() > 0;
 }
 
 void LayerStack::updateNode(QSGNode* node)
 {
+	// We just need to call layer->updateNode for each layer
 	for (Layer* layer : m_layers)
 		layer->updateNode(node, m_tile);
 }

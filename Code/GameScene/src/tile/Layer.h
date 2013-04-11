@@ -35,6 +35,11 @@ namespace gtg
 	{
 		class Texture;
 
+		/*! \brief A layer displayed in a tile
+		 *
+		 * This class is the one that interfaces between a texture
+		 * and a tile with a region and several transformations.
+		 */
 		class Layer
 			: public QObject
 		{
@@ -63,28 +68,51 @@ namespace gtg
 					NOTIFY rotationChanged)
 
 			private:
-				tile::Texture* m_texture;
+
+				Texture* m_texture;
 
 				QPoint m_region;
 				int m_rotation;
 				unsigned m_opacity;
 
+				//! Keep track of what actually needs to be updated
 				bool m_textureChanged;
+				//! Keep track of what actually needs to be updated
 				bool m_rotationChanged;
+				//! Keep track of what actually needs to be updated
 				bool m_opacityChanged;
 
-				// opacityNode owns transformNode owns textureNode
-				// opacityNode and transformNode may be null, so
-				// the next non-null is the root of the subgraph
+				//! The innermost node
 				QSGNode* m_textureNode;
+				//! May be the parent of the textureNode
 				QSGTransformNode* m_transformNode;
+				//! May be the parent of the textureNode or the transformNode if it exists
 				QSGOpacityNode* m_opacityNode;
 
+				//! Returns the parent node
+				/*! textureNode is always present.
+				 *
+				 * If some transformation (such as rotation) is
+				 * set, then the transformNode is created and the
+				 * textureNode is added as a child to it.
+				 *
+				 * If the opacity is changed, then the opacityNode
+				 * is created and the previous rootNode is added
+				 * to it as a child.
+				 *
+				 * This way, opacityNode will always be the root if it exists,
+				 * transformNode will always be the parent of textureNode,
+				 * and textureNode will always be in the last level where all
+				 * modifications will be reflected.
+				 */
 				QSGNode* rootNode() const;
 
+				//! Initialize and insert the transformNode
 				void insertTransformNode(QSGNode* parent);
+				//! Initialize and insert the opacityNode
 				void insertOpacityNode(QSGNode* parent);
 
+				//! Calculate the transformation matrix for the transformNode
 				QMatrix4x4 transformMatrix(short tileSize);
 
 			protected slots:
@@ -96,18 +124,29 @@ namespace gtg
 				Layer(QObject* parent = nullptr);
 				~Layer();
 
+				//! Get a pointer to the texture that takes care of updating textureNode
 				gtg::tile::Texture* texture() const;
+				//! Set the texture.
 				void setTexture(gtg::tile::Texture* texture);
 
+				//! Return the region of the texture that is displayed in the layer (default is 1,1 == middle)
 				QPoint region() const;
+				//! Set the region of the texture that should be displayed in the layer.
 				void setRegion(QPoint region);
 
+				//! Get the opacity (%)
 				unsigned opacity() const;
+				//! Set the opacity (%)
 				void setOpacity(unsigned opacity);
 
+				//! Get the rotation (degrees)
 				int rotation() const;
+				//! Set the rotation (degrees)
 				void setRotation(int rotation);
 
+				//! WARNING: Call only from some point inside a updatePaintNode() function
+				/*! Update the node according to what has changed since the last call
+				 */
 				QSGNode* updateNode(QSGNode* parent, Tile* tile);
 
 			signals:

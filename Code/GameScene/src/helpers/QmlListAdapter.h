@@ -28,6 +28,12 @@
 
 namespace gtg
 {
+	/*! \brief Adapts any class with adequate methods to a QmlListProperty
+	 *
+	 * Due to how inconvenient the QQmlListProperty class is, this can be used
+	 * to wrap a reference to anything that has an append(), count(), at() and clear()
+	 * methods into a QQmlListProperty easily.
+	 */
 	template <class List, class T>
 	struct QmlListAdapter
 	{
@@ -70,6 +76,12 @@ namespace gtg
 	};
 
 
+	/*! \brief Simple function to use a QmlListAdapter
+	 *
+	 * \param list Reference to the object to be wrapped
+	 * \param parent (optional) The object that will be passed as the parent of the QQmlListProperty
+	 * \return A QQmlListProperty which is ready to use.
+	 */
 	template <class T, class List>
 	QQmlListProperty<T> qml_adapt(List& list, QObject* parent = nullptr)
 	{

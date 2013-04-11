@@ -32,6 +32,9 @@ namespace gtg
 	class Tile;
 	class Map;
 
+	/*!
+	 * \brief This class is almost a wrapper for a list of tiles
+	 */
 	class Row
 		: public QQuickItem
 	{
@@ -44,10 +47,15 @@ namespace gtg
 		Q_CLASSINFO("DefaultProperty", "tiles")
 
 		private:
+			int m_mapY;
 			ChildList<Tile> m_tiles;
 
-			int m_mapY;
-
+			//! Virtual function inherited from QQuickItem. See Qt documentation.
+			/*!
+			 * \param node The node to update (see the Qt Scene Graph framework)
+			 * \param updatePaintNode
+			 * \return The updated node
+			 */
 			QSGNode* updatePaintNode(QSGNode* node,
 					QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
@@ -55,18 +63,32 @@ namespace gtg
 			Row(QQuickItem* parent = nullptr);
 			~Row();
 
+			//! x coordinate getter (in pixels)
 			int x() const;
+			//! y coordinate getter (in pixels)
 			int y() const;
+			//! y coordinate getter (in pixels)
 			int width() const;
+			//! width getter (in pixels)
 			int height() const;
+			//! height getter (in pixels)
 			QRectF boundingRect() const;
 
+			//! y coordinate getter (in tiles)
 			int mapY() const;
+			//! Returns the parent map
 			gtg::Map* map() const;
 
+			//! Returns the list of child tiles
 			ChildList<gtg::Tile> tiles() const;
+			//! Returns a QQmlListProperty of tiles. This is just for QML, you should prefer tiles() in C++ code
 			QQmlListProperty<gtg::Tile> qmlTiles();
 
+			//! Find the index of a given Tile
+			/*!
+			 * \param object The tile to find
+			 * \return The index of the tile or -1 if it's not found
+			 */
 			int indexOf(const Tile* object) const;
 
 			friend class Map;

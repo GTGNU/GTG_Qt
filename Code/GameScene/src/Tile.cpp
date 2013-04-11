@@ -66,10 +66,10 @@ Behavior* Tile::behavior() const
 	return m_behavior;
 }
 
-void Tile::setBehavior(tile::Behavior* behavior)
+void Tile::setBehavior(Behavior* behavior)
 {
 	if (m_behavior != behavior) {
-		tile::Behavior* prev = m_behavior;
+		Behavior* prev = m_behavior;
 		m_behavior = behavior;
 		emit behaviorChanged(prev, m_behavior);
 	}
@@ -165,6 +165,7 @@ QSGNode* Tile::updatePaintNode(QSGNode* node,
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
 
+	// First draw, we need to initialize the node and set the geometry
 	if (!node) {
 		node = new QSGNode;
 
@@ -177,6 +178,7 @@ QSGNode* Tile::updatePaintNode(QSGNode* node,
 
 	qDebug() << "Bounding rect: " << boundingRect();
 
+	// Delegate drawing to the layer stack
 	m_layers.applyChanges(node);
 	m_layers.updateNode(node);
 

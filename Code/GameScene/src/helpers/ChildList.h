@@ -28,6 +28,11 @@
 
 namespace gtg
 {
+	/*! \brief A fake list that mirrors the childItem list of a QQuickItem
+	 *
+	 * This is used to access childItems easily and also allows
+	 * for the use of a QmlListAdapter with child items of a component.
+	 */
 	template <class T>
 	class ChildList
 	{

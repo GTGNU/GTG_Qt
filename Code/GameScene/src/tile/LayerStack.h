@@ -39,6 +39,12 @@ namespace gtg
 				Tile* m_tile;
 				QList<Layer*> m_layers;
 
+				/*! \brief Used to register a change that happened in the stack
+				 *
+				 * Since everything related to the scene graph is done in a
+				 * separate thread but the layer stack can be altered at any
+				 * moment, changes must be saved and applied in some updatePaintNode()
+				 */
 				struct Change {
 					enum {
 						ADD,
@@ -56,20 +62,29 @@ namespace gtg
 				LayerStack(Tile* tile);
 				~LayerStack();
 
+				//! Append a layer
 				void append(Layer* layer);
+				//! Insert a layer at the given index
 				void insert(unsigned index, Layer* layer);
 
+				//! Remove a layer
 				void remove(Layer* layer);
+				//! Remove a layer
 				void remove(unsigned index);
 
+				//! Access a layer at a given index
 				Layer* at(unsigned index) const;
+				//! Get the number of layers in the stack
 				int count() const;
+				//! Find the index of a layer in the stack
 				unsigned indexOf(Layer* layer) const;
 
+				//! Remove all layers
 				void clear();
 
-				// call only from the rendering thread
+				//! WARNING: Call only from some point inside a updatePaintNode() function
 				bool applyChanges(QSGNode* node);
+				//! WARNING: Call only from some point inside a updatePaintNode() function
 				void updateNode(QSGNode* node);
 		};
 	}

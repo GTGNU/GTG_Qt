@@ -25,6 +25,8 @@ class QQuickView;
 
 namespace gtg
 {
+	/*! \brief Handlers the user choice in the main menu
+	 */
 	class MenuHandler
 			: public QObject {
 		Q_OBJECT

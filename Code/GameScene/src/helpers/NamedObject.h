@@ -24,6 +24,8 @@
 
 namespace gtg
 {
+	/*! \brief Simple QObject that has a name property
+	 */
 	class NamedObject
 		: public QObject
 	{

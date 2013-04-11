@@ -41,6 +41,15 @@ namespace gtg
 
 	namespace tile
 	{
+		/*! \brief Encapsulates the drawn texture for layers
+		 *
+		 * This class is the one that takes care of updating
+		 * texture nodes. It also allows for the use of basic
+		 * texture atlases through an offset property.
+		 *
+		 * Each texture is three rows tall, where it contains
+		 * top, middle and bottom sprites for the tile.
+		 */
 		class Texture
 			: public Registered<Texture>
 		{
@@ -57,23 +66,42 @@ namespace gtg
 					WRITE setOffset)
 
 			private:
+				//! All textures are cached in the static cache object
 				static TextureCache m_cache;
 
+				//! We need to know wether the iterator is valid or not
 				bool m_initialized;
+
+				//! See TextureCache
 				TextureCache::iterator m_cacheIterator;
 
+				//! The offset of the atlas
 				unsigned m_offset;
 
 			public:
 				Texture(QObject* parent = nullptr);
 				~Texture();
 
+				//! Get the file name of the texture
 				QString file() const;
+				//! Load (if not in the cache) a different file)
 				void setFile(const QString& filename);
 
+				//! Get the offset of the current texture in the atlas
 				unsigned offset() const;
+				//! Set the offset of the current texture in the atlas
 				void setOffset(unsigned offset);
 
+				/*! \brief Update the given node
+				 *
+				 * This is the function that takes actual care of drawing
+				 * the texture (or that interacts with the scene graph)
+				 *
+				 * \param node The node to be updated
+				 * \param tile The tile that contains the node
+				 * \param region The region (topleft, middle, bottom...) to be extracted
+				 * \return The updated node
+				 */
 				QSGNode* updateNode(QSGNode* node, Tile* tile, QPoint region);
 
 			signals:

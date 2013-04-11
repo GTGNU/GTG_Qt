@@ -25,6 +25,11 @@
 
 namespace gtg
 {
+	/*! \brief Base class of anything that can be queried to a static map.
+	 *
+	 * Inheriting this class provides a static map to find objects of the
+	 * given class by name (as specified through the base NamedObejct class)
+	 */
 	template <class T>
 	class Registered
 		: public NamedObject
@@ -36,15 +41,22 @@ namespace gtg
 		protected:
 			QString m_name;
 
+			//! Store a new object in the map
+			static void registerObj(T* obj);
+			//! Remove an object from the map
+			static void unregisterObj(T* obj);
+
 		public:
 			Registered(QObject* parent = nullptr);
 			virtual ~Registered();
 
 			virtual void setName(const QString& name);
 
+			/*! \brief Find an object
+			 * \param name
+			 * \return Object registered with the given name or null if not found
+			 */
 			static T* find(const QString& key);
-			static void registerObj(T* obj);
-			static void unregisterObj(T* obj);
 	};
 }
 

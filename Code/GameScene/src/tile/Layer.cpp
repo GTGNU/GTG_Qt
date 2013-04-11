@@ -136,7 +136,10 @@ void Layer::insertTransformNode(QSGNode* parent)
 	if (m_opacityNode) {
 		m_opacityNode->removeChildNode(m_textureNode);
 		m_opacityNode->appendChildNode(m_transformNode);
+
 	} else {
+		// This hackery needs to be made for proper
+		// reparenting of nodes
 		QSGNode* next = m_textureNode->nextSibling();
 		parent->removeChildNode(m_textureNode);
 
@@ -154,6 +157,8 @@ void Layer::insertOpacityNode(QSGNode* parent)
 	QSGNode* prevRoot = rootNode();
 	m_opacityNode = new QSGOpacityNode;
 
+	// This hackery needs to be made for proper
+	// reparenting of nodes
 	QSGNode* parentNext = prevRoot->nextSibling();
 	parent->removeChildNode(prevRoot);
 
@@ -168,6 +173,7 @@ void Layer::insertOpacityNode(QSGNode* parent)
 
 QMatrix4x4 Layer::transformMatrix(short tileSize)
 {
+	// We need to move the origin of the transformation to the center of the tile
 	return QTransform()
 		.translate(tileSize/2, tileSize/2)
 		.rotate(m_rotation)
