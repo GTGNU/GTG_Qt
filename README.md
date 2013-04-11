@@ -4,11 +4,14 @@ Richard Stallman (RMS) is a programmer and hobbyist hacker whose only love in li
 
 In this frantic top view action game, you will be fighting off waves of code monkeys, proprietary bosses and hack into systems all while defending the rights of the user and hackers everywhere. YOU’LL BE FREE HACKERS! YOU’LL BE FREE!
 
-Communications
-==============
+Documentation
+=============
+* [Wiki](https://github.com/GrandTheftGentoo/Grand-Theft-Gentoo/wiki)
+
+Communication
+=============
 * #GTG @ irc.p2p-irc.net
 * [Website](http://gtg.installgentoo.com)
-* [WIKI](https://github.com/GrandTheftGentoo/Grand-Theft-Gentoo/wiki)
 
 RESOURCES
 =========

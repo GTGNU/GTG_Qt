@@ -1,66 +1,69 @@
 #####things to be done in the game#####
 
->Graphics
-    -Maps
-        -Levels
-            -city
-                -buildings
-                    -rooms
-    -Textures~~basically done~
-    -Sprites~started~
-    -Cut scenes
->Sound
-    -Music
-        -In game
-             -Ambient free roam
-             -Fighting
-             -Cut scenes
-             -Various boss battles
-        -Main menu
-            -Its been decided as the free software song sung by RMS him self
-    -FX
-        - Attacking
-        - Receiving damage
-        - Footsteps
-        - Opening doors and various similar actions
+Maps
+	Levels
+		City
+			[ ] Buildings
+			[ ] Rooms
 
->Story
-    -Script
-    -Story line
+	[ ] Sprites
 
->Coding
-    [ ] Engine design {Qt Scene Graph: OpenGL, QML}
-        [x] Drawing (QtQuick)
-        [x] Map/Tile loader
-        [ ] Scrolling and culling
-        [ ] Players
-            [ ] NPC AI
-            [ ] Projectiles
-            [ ] Health
-        [ ] Animation (QML states and Timers)
-            [ ] Movement
-            [ ] Attacking
 
-    [ ] QML Cut scenes
+Cut scenes
 
-    [ ] Input
 
-    [ ] Game-specific implementation
-        [ ] Respawn points
-        [ ] Check points
-        [ ] Currency
+Sound
+	Music
+		In game
+			 [ ] Ambient free roam
+			 [ ] Fighting
+			 [ ] Various boss battles
+		Main menu
+			[ ] Its been decided as the free software song sung by RMS him self
 
-    [ ] Distribution
-        [ ] Windows installer
-            [ ] Script to set up compiling environment or a zip with libraries
-        [ ] GNU+Linux installer
-            [ ] Script to set up compiling environment or a zip with libraries
 
-    [ ] Known issues (GameScene)
-        [ ] Memory management using scoped pointers, shared pointers and qobject trees
-        [x] QGuiApplication::quit() (it won't quit currently)
-        [x] QQuickWindow::setSource() segfaults
-        [x] Rename ViewList, ViewListEntry and related methods/variables to
-            something more appropriate
-        [x] Opacity and rotation in ViewListEntry make the tile disappear if
-            the initial opacity is not set explicitly in the QML declaration
+Story
+	[W] Script
+	[ ] Story line
+
+
+Coding
+	Engine design (Qt Scene Graph: OpenGL, QML)
+		[x] Drawing (QtQuick)
+		[x] Map/Tile loader
+		[ ] Scrolling and culling
+
+		Players
+			[ ] NPC AI
+			[ ] Projectiles
+			[ ] Health
+
+		Animation (QML states and Timers)
+			[ ] Movement
+			[ ] Attacking
+
+	[ ] QML Cut scenes
+
+	[ ] Input
+
+	Game-specific implementation
+		[ ] Respawn points
+		[ ] Check points
+		[ ] Currency
+
+	Distribution
+		Windows
+			[ ] Script to set up compiling environment or a zip with libraries
+			[ ] Precompiled binaries
+		GNU+Linux
+			[ ] Script to set up compiling environment or a zip with libraries
+			[ ] Precompiled binaries
+
+	[ ] Known issues (Qt GameScene)
+		[ ] Memory management using scoped pointers, shared pointers and qobject trees
+		[x] QGuiApplication::quit() (it won't quit currently)
+		[x] QQuickWindow::setSource() segfaults
+		[x] Rename ViewList, ViewListEntry and related methods/variables to
+			something more appropriate
+		[x] Opacity and rotation in ViewListEntry make the tile disappear if
+			the initial opacity is not set explicitly in the QML declaration
