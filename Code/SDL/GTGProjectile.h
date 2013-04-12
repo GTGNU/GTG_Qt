@@ -47,7 +47,7 @@ protected:
 	int damage; // Damage to inflict on target
 	float xSpeedOffset; // Speed offset of reference speed
 	float ySpeedOffset;
-	float xAcceleration; // Acceration once fired
+	float xAcceleration; // Acceleration once fired
 	float yAcceleration;
 	int frameDrawCount; // Number of times the current frame has been drawn
 	int frameDelay; // Delay between animation frames

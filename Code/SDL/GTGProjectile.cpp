@@ -59,7 +59,7 @@ void GTGProjectile::Draw()
 				this->x+this->xOffset,
 				this->y+this->yOffset );
 
-		// Allow firing again once cooldown elasped
+		// Allow firing again once cooldown elapsed
 		if(++(this->cooldownCount) >= this->cooldown)
 			this->ready = true;
 	}
