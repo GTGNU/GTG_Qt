@@ -12,6 +12,7 @@ class TopPanel : public QWidget
 {
 public:
 	TopPanel();
+	~TopPanel();
 
 protected:
 	QHBoxLayout* layout;

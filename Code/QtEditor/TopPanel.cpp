@@ -33,3 +33,17 @@ TopPanel::TopPanel()
 	this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 	this->setLayout(layout);
 }
+
+TopPanel::~TopPanel()
+{
+	delete this->tileButton;
+	delete this->saveButton;
+	delete this->resetButton;
+	delete this->widthLineEdit;
+	delete this->heightLineEdit;
+
+	delete this->formLayout;
+	delete this->buttonLayout;
+
+	delete this->layout;
+}
