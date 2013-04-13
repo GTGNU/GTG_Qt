@@ -74,5 +74,8 @@ void MapDisplay::setGridSize(const int width, const int height)
 
 void MapDisplay::gridSizeChangedHandler(const int width, const int height)
 {
-	this->setGridSize(width, height);
+	if(width != this->grid.size()
+	||(this->grid[0].size() > 0
+	&& height != this->grid[0].size()))
+		this->setGridSize(width, height);
 }
