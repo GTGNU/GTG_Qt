@@ -13,8 +13,16 @@ TopPanel::TopPanel()
 	this->tileButton = new QPushButton();
 	this->saveButton = new QPushButton("Save");
 	this->resetButton = new QPushButton("Reset");
-	this->widthLineEdit = new QLineEdit();
-	this->heightLineEdit = new QLineEdit();
+	this->widthLineEdit = new QLineEdit("2");
+	this->heightLineEdit = new QLineEdit("2");
+
+	this->connect(	this->widthLineEdit,
+			SIGNAL(editingFinished()),
+			SLOT(editingFinishedHandler()) );
+
+	this->connect(	this->heightLineEdit,
+			SIGNAL(editingFinished()),
+			SLOT(editingFinishedHandler()) );
 
 	this->tileButton->setIcon(icon);
 	this->tileButton->setIconSize(QSize(64, 64));
@@ -46,4 +54,10 @@ TopPanel::~TopPanel()
 	delete this->buttonLayout;
 
 	delete this->layout;
+}
+
+void TopPanel::editingFinishedHandler()
+{
+	emit gridSizeChanged(	this->widthLineEdit->text().toInt(),
+				this->heightLineEdit->text().toInt() );
 }

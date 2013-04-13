@@ -8,6 +8,11 @@ MainWindow::MainWindow()
 	this->mapDisplay = new MapDisplay();
 	this->mapArea = new QScrollArea();
 
+	this->connect(	this->topPanel,
+			SIGNAL(gridSizeChanged(const int, const int)),
+			this->mapDisplay,
+			SLOT(gridSizeChangedHandler(const int, const int)) );
+
 	this->mapArea->setWidget(this->mapDisplay);
 
 	this->layout->addWidget(this->topPanel);

@@ -8,6 +8,8 @@
 
 class MapDisplay : public QWidget
 {
+	Q_OBJECT
+
 public:
 	MapDisplay();
 	~MapDisplay();
@@ -21,4 +23,7 @@ protected:
 	std::vector< std::vector<QPushButton*> > grid;
 
 	QGridLayout* layout;
+
+public slots:
+	void gridSizeChangedHandler(const int width, const int height);
 };

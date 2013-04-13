@@ -10,6 +10,8 @@
 
 class TopPanel : public QWidget
 {
+	Q_OBJECT
+
 public:
 	TopPanel();
 	~TopPanel();
@@ -24,4 +26,10 @@ protected:
 	QPushButton* resetButton;
 	QLineEdit* widthLineEdit;
 	QLineEdit* heightLineEdit;
+
+signals:
+	void gridSizeChanged(const int width, const int height);
+
+public slots:
+	void editingFinishedHandler();
 };
