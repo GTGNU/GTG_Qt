@@ -1,13 +1,14 @@
-import gtg.tile 1.4
+import gtg.map 1.5 as M
+import gtg.gfx 1.5 as G
 
-Class {
+M.Class {
 	name: 'concrete'
 
-	texture: Texture {
+	texture: G.Texture {
 		file: 'concrete.png'
 	}
 
-	behavior: Behavior {
+	behavior: M.Behavior {
 		trespassable: true
 	}
 }

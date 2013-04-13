@@ -1,50 +1,50 @@
 import QtQuick 2.0
-import gtg.map 1.4
-import gtg.tile 1.4 as T
+import gtg.map 1.5 as M
+import gtg.gfx 1.5 as G
 
-Map {
+M.Map {
 	id: map
 	tileSize: 64
 
 	// 0
-	Row {
+	M.Row {
 		// 0
-		Tile {
-			T.Layer { texture: sand.texture }
-			T.Layer { texture: water.texture; region: Qt.point(1,0) }
+		M.Tile {
+			G.Layer { texture: sand.texture }
+			G.Layer { texture: water.texture; region: Qt.point(1,0) }
 
 			behavior: sand.behavior
 		}
 
 		// 1
-		Tile {
-			T.Layer { texture: concrete.texture }
-			T.Layer { texture: water.texture; region: Qt.point(2,0) }
+		M.Tile {
+			G.Layer { texture: concrete.texture }
+			G.Layer { texture: water.texture; region: Qt.point(2,0) }
 
 			behavior: concrete.behavior
 		}
 
 		// 2
-		Tile {
-			T.Layer { texture: grass_tall.texture }
-			T.Layer { texture: water.texture; region: Qt.point(0,1) }
+		M.Tile {
+			G.Layer { texture: grass_tall.texture }
+			G.Layer { texture: water.texture; region: Qt.point(0,1) }
 
 			behavior: grass_tall.behavior
 		}
 
 		// 3
-		Tile {
-			T.Layer { texture: water.texture }
+		M.Tile {
+			G.Layer { texture: water.texture }
 
 			behavior: water.behavior
 		}
 	}
 
 	// 1
-	Row {
+	M.Row {
 		// 0
-		Tile {
-			layers: T.Layer { texture: water.texture }
+		M.Tile {
+			layers: G.Layer { texture: water.texture }
 
 			behavior: water.behavior
 
@@ -60,61 +60,61 @@ Map {
 		}
 
 		// 1
-		Tile {
-			T.Layer { texture: sand.texture }
-			T.Layer { texture: water.texture; region: Qt.point(2,1) }
-			T.Layer { texture: water.texture; region: Qt.point(1,0) }
+		M.Tile {
+			G.Layer { texture: sand.texture }
+			G.Layer { texture: water.texture; region: Qt.point(2,1) }
+			G.Layer { texture: water.texture; region: Qt.point(1,0) }
 
 			behavior: sand.behavior
 		}
 
 		// 2
-		Tile {
-			T.Layer { texture: concrete.texture }
-			T.Layer { texture: water.texture; region: Qt.point(2,0) }
-			T.Layer { texture: water.texture; region: Qt.point(0,2) }
+		M.Tile {
+			G.Layer { texture: concrete.texture }
+			G.Layer { texture: water.texture; region: Qt.point(2,0) }
+			G.Layer { texture: water.texture; region: Qt.point(0,2) }
 
 			behavior: concrete.behavior
 		}
 
 		// 3
-		Tile {
-			T.Layer { texture: grass_tall.texture }
-			T.Layer { texture: water.texture; region: Qt.point(1,2) }
+		M.Tile {
+			G.Layer { texture: grass_tall.texture }
+			G.Layer { texture: water.texture; region: Qt.point(1,2) }
 
 			behavior: grass_tall.behavior
 		}
 	}
 
 	// 2
-	Row {
+	M.Row {
 		// 0
-		Tile {
-			T.Layer { texture: grass_tall.texture }
-			T.Layer { texture: water.texture; region: Qt.point(1,2) }
-			T.Layer { texture: water.texture; region: Qt.point(0,1) }
+		M.Tile {
+			G.Layer { texture: grass_tall.texture }
+			G.Layer { texture: water.texture; region: Qt.point(1,2) }
+			G.Layer { texture: water.texture; region: Qt.point(0,1) }
 
 			behavior: grass_tall.behavior
 		}
 
 		// 1
-		Tile {
-			T.Layer { texture: water.texture }
+		M.Tile {
+			G.Layer { texture: water.texture }
 
 			behavior: water.behavior
 		}
 
 		// 2
-		Tile {
-			T.Layer { texture: sand.texture }
-			T.Layer { texture: water.texture; region: Qt.point(2,1) }
+		M.Tile {
+			G.Layer { texture: sand.texture }
+			G.Layer { texture: water.texture; region: Qt.point(2,1) }
 
 			behavior: sand.behavior
 		}
 
 		// 3
-		Tile {
-			T.Layer { texture: concrete.texture }
+		M.Tile {
+			G.Layer { texture: concrete.texture }
 
 			behavior: concrete.behavior
 		}

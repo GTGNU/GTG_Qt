@@ -40,10 +40,11 @@ find_package(Qt5Qml REQUIRED)
 find_package(Qt5Quick REQUIRED)
 
 file(GLOB sources ${GrandTheftGentoo_SOURCE_DIR}/*.cpp)
-file(GLOB sources_tile ${GrandTheftGentoo_SOURCE_DIR}/tile/*.cpp)
+file(GLOB sources_gfx ${GrandTheftGentoo_SOURCE_DIR}/graphics/*.cpp)
+file(GLOB sources_map ${GrandTheftGentoo_SOURCE_DIR}/map/*.cpp)
 file(GLOB sources_helpers ${GrandTheftGentoo_SOURCE_DIR}/helpers/*.cpp)
 
-add_executable(gtg ${sources} ${sources_tile} ${sources_helpers})
+add_executable(gtg ${sources} ${sources_gfx} ${sources_map} ${sources_helpers})
 
 qt5_use_modules(gtg Core Gui Qml Quick)
 

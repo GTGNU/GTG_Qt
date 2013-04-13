@@ -1,11 +1,12 @@
 import QtQuick 2.0
-import gtg.tile 1.4
+import gtg.map 1.5 as M
+import gtg.gfx 1.5 as G
 
-Class {
+M.Class {
 	id: tile
 	name: 'water'
 
-	texture: Texture {
+	texture: G.Texture {
 		file: 'water-atlas.png'
 		offset: timer.currentFrame
 
@@ -23,7 +24,7 @@ Class {
 		}
 	}
 
-	behavior: Behavior {
+	behavior: M.Behavior {
 		trespassable: false
 	}
 }
