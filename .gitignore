@@ -4,4 +4,8 @@ moc_*.cpp
 *.a
 *.dll
 *.dylib
+
 build/
+
+*.kdev4
+.kdev_include_paths
