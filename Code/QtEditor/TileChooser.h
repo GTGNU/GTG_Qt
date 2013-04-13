@@ -3,9 +3,8 @@
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
 #include <QtCore/QDir>
+#include <QtCore/QVector>
 #include <QtWidgets/QPushButton>
-
-#include <vector>
 
 class TileChooser : public QPushButton
 {
@@ -19,7 +18,7 @@ public:
 protected:
 	int currentTileIndex;
 
-	std::vector<const QIcon*> tileList;
+	QVector<const QIcon*> tileList;
 
 public slots:
 	void releasedHandler();

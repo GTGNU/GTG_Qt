@@ -1,10 +1,9 @@
+#include <QtCore/QVector>
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
-
-#include <vector>
 
 #include "TileButton.h"
 #include "TileChooser.h"
@@ -23,7 +22,7 @@ protected:
 	int gridWidth;
 	int gridHeight;
 
-	std::vector< std::vector<TileButton*> > grid;
+	QVector< QVector<TileButton*> > grid;
 
 	QGridLayout* layout;
 	const TileChooser* tileChooser;

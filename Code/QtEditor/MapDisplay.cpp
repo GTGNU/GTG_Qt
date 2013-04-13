@@ -32,7 +32,7 @@ void MapDisplay::setGridSize(const int width, const int height)
 
 	this->setLayout(this->layout);
 
-	for(std::vector<TileButton*>& i : this->grid)
+	for(QVector<TileButton*>& i : this->grid)
 	{
 		for(TileButton* j : i)
 		{
@@ -43,18 +43,14 @@ void MapDisplay::setGridSize(const int width, const int height)
 	this->grid.clear();
 	this->grid.resize(width);
 
-	//QPixmap pixmap("assets/concrete.png");
-
-	//QIcon icon(pixmap.copy(64, 64, 64, 64));
-
 	int rowIndex = 0;
 	int columnIndex = 0;
 
-	for(std::vector<TileButton*>& i : this->grid)
+	for(QVector<TileButton*>& i : this->grid)
 	{
 		rowIndex = 0;
 
-		i.resize(height, NULL);
+		i.resize(height);
 
 		for(TileButton* j : i)
 		{
