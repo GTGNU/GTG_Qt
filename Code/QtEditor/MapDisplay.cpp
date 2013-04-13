@@ -50,7 +50,7 @@ void MapDisplay::setGridSize(const int width, const int height)
 
 		for(QPushButton* j : i)
 		{
-			QPixmap pixmap("../Qt/assets/grass_tall.png");
+			QPixmap pixmap("assets/concrete.png");
 
 			QIcon icon(pixmap.copy(64, 64, 64, 64));
 
@@ -62,7 +62,9 @@ void MapDisplay::setGridSize(const int width, const int height)
 				j->setIconSize(QSize(64, 64));
 				j->setFixedSize(64, 64);
 
-				this->layout->addWidget(j, rowIndex, columnIndex);
+				this->layout->addWidget(	j,
+								rowIndex,
+								columnIndex );
 			}
 
 			rowIndex++;

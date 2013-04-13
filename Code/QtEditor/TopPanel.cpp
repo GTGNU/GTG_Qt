@@ -6,7 +6,7 @@ TopPanel::TopPanel()
 	this->formLayout = new QFormLayout();
 	this->buttonLayout = new QFormLayout();
 
-	QPixmap pixmap("../Qt/assets/grass_tall.png");
+	QPixmap pixmap("assets/grass_tall.png");
 
 	QIcon icon(pixmap.copy(64, 64, 64, 64));
 
@@ -28,15 +28,15 @@ TopPanel::TopPanel()
 	this->tileButton->setIconSize(QSize(64, 64));
 	this->tileButton->setFixedSize(80, 80);
 
-	formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
-	formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
+	this->formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
+	this->formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
 
-	buttonLayout->addWidget(this->saveButton);
-	buttonLayout->addWidget(this->resetButton);
+	this->buttonLayout->addWidget(this->saveButton);
+	this->buttonLayout->addWidget(this->resetButton);
 
-	layout->addWidget(this->tileButton);
-	layout->addLayout(formLayout);
-	layout->addLayout(buttonLayout);
+	this->layout->addWidget(this->tileButton);
+	this->layout->addLayout(formLayout);
+	this->layout->addLayout(buttonLayout);
 
 	this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
 	this->setLayout(layout);
