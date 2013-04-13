@@ -19,23 +19,23 @@ TopPanel::TopPanel()
 
 	QIcon icon(pixmap.copy(64, 64, 64, 64));
 
-	QPushButton* tileButton = new QPushButton();
-	QPushButton* saveButton = new QPushButton("Save");
-	QPushButton* resetButton = new QPushButton("Reset");
-	QLineEdit* widthLineEdit = new QLineEdit();
-	QLineEdit* heightLineEdit = new QLineEdit();
+	this->tileButton = new QPushButton();
+	this->saveButton = new QPushButton("Save");
+	this->resetButton = new QPushButton("Reset");
+	this->widthLineEdit = new QLineEdit();
+	this->heightLineEdit = new QLineEdit();
 
-	tileButton->setIcon(icon);
-	tileButton->setIconSize(QSize(64, 64));
-	tileButton->setFixedSize(80, 80);
+	this->tileButton->setIcon(icon);
+	this->tileButton->setIconSize(QSize(64, 64));
+	this->tileButton->setFixedSize(80, 80);
 
-	formLayout->addRow(new QLabel("Width:"), widthLineEdit);
-	formLayout->addRow(new QLabel("Height:"), heightLineEdit);
+	formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
+	formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
 
-	buttonLayout->addWidget(saveButton);
-	buttonLayout->addWidget(resetButton);
+	buttonLayout->addWidget(this->saveButton);
+	buttonLayout->addWidget(this->resetButton);
 
-	layout->addWidget(tileButton);
+	layout->addWidget(this->tileButton);
 	layout->addLayout(formLayout);
 	layout->addLayout(buttonLayout);
 
