@@ -2,13 +2,14 @@
 
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QScrollArea>
 
 MapDisplay::MapDisplay()
 {
-	QHBoxLayout* layout = new QHBoxLayout;
+	QHBoxLayout* layout = new QHBoxLayout();
 
-	QPushButton* button = new QPushButton("DRAWAREA");
+	QScrollArea* scrollArea = new QScrollArea();
 
-	layout->addWidget(button);
+	layout->addWidget(scrollArea);
 	this->setLayout(layout);
 }
