@@ -1,19 +1,10 @@
 #include "TopPanel.h"
 
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QVBoxLayout>
-#include <QtWidgets/QFormLayout>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
-#include <QtGui/QPixmap>
-#include <QtGui/QIcon>
-
 TopPanel::TopPanel()
 {
-	QHBoxLayout* layout = new QHBoxLayout();
-	QFormLayout* formLayout = new QFormLayout;
-	QFormLayout* buttonLayout = new QFormLayout;
+	this->layout = new QHBoxLayout();
+	this->formLayout = new QFormLayout();
+	this->buttonLayout = new QFormLayout();
 
 	QPixmap pixmap("../Qt/assets/grass_tall.png");
 

@@ -1,9 +1,8 @@
 #include "MainWindow.h"
 
-
 MainWindow::MainWindow()
 {
-	QVBoxLayout* layout = new QVBoxLayout;
+	QVBoxLayout* layout = new QVBoxLayout();
 
 	this->topPanel = new TopPanel;
 	this->mapDisplay = new MapDisplay;

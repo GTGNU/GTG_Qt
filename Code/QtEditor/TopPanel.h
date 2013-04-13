@@ -14,6 +14,10 @@ public:
 	TopPanel();
 
 protected:
+	QHBoxLayout* layout;
+	QFormLayout* formLayout;
+	QFormLayout* buttonLayout;
+
 	QPushButton* tileButton;
 	QPushButton* saveButton;
 	QPushButton* resetButton;
