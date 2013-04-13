@@ -6,11 +6,7 @@ TopPanel::TopPanel()
 	this->formLayout = new QFormLayout();
 	this->buttonLayout = new QFormLayout();
 
-	QPixmap pixmap("assets/grass_tall.png");
-
-	QIcon icon(pixmap.copy(64, 64, 64, 64));
-
-	this->tileButton = new QPushButton();
+	this->tileChooser = new TileChooser("assets");
 	this->saveButton = new QPushButton("Save");
 	this->resetButton = new QPushButton("Reset");
 	this->widthLineEdit = new QLineEdit("2");
@@ -24,17 +20,13 @@ TopPanel::TopPanel()
 			SIGNAL(editingFinished()),
 			SLOT(editingFinishedHandler()) );
 
-	this->tileButton->setIcon(icon);
-	this->tileButton->setIconSize(QSize(64, 64));
-	this->tileButton->setFixedSize(80, 80);
-
 	this->formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
 	this->formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
 
 	this->buttonLayout->addWidget(this->saveButton);
 	this->buttonLayout->addWidget(this->resetButton);
 
-	this->layout->addWidget(this->tileButton);
+	this->layout->addWidget(this->tileChooser);
 	this->layout->addLayout(formLayout);
 	this->layout->addLayout(buttonLayout);
 
@@ -44,7 +36,7 @@ TopPanel::TopPanel()
 
 TopPanel::~TopPanel()
 {
-	delete this->tileButton;
+	delete this->tileChooser;
 	delete this->saveButton;
 	delete this->resetButton;
 	delete this->widthLineEdit;
@@ -60,4 +52,9 @@ void TopPanel::editingFinishedHandler()
 {
 	emit gridSizeChanged(	this->widthLineEdit->text().toInt(),
 				this->heightLineEdit->text().toInt() );
+}
+
+const TileChooser* TopPanel::getTileChooser() const
+{
+	return this->tileChooser;
 }

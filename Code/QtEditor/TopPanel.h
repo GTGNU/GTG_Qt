@@ -8,6 +8,8 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
+#include "TileChooser.h"
+
 class TopPanel : public QWidget
 {
 	Q_OBJECT
@@ -16,12 +18,14 @@ public:
 	TopPanel();
 	~TopPanel();
 
+	const TileChooser* getTileChooser() const;
+
 protected:
 	QHBoxLayout* layout;
 	QFormLayout* formLayout;
 	QFormLayout* buttonLayout;
 
-	QPushButton* tileButton;
+	TileChooser* tileChooser;
 	QPushButton* saveButton;
 	QPushButton* resetButton;
 	QLineEdit* widthLineEdit;

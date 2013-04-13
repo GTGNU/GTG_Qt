@@ -1,6 +1,10 @@
 #include "MapDisplay.h"
 
-MapDisplay::MapDisplay() : gridWidth(0), gridHeight(0), grid(0)
+MapDisplay::MapDisplay(const TileChooser* chooser)
+:	gridWidth(0),
+	gridHeight(0),
+	grid(0),
+	tileChooser(chooser)
 {
 	this->layout = new QGridLayout();
 
@@ -28,9 +32,9 @@ void MapDisplay::setGridSize(const int width, const int height)
 
 	this->setLayout(this->layout);
 
-	for(std::vector<QPushButton*>& i : this->grid)
+	for(std::vector<TileButton*>& i : this->grid)
 	{
-		for(QPushButton* j : i)
+		for(TileButton* j : i)
 		{
 			delete j;
 		}
@@ -39,28 +43,24 @@ void MapDisplay::setGridSize(const int width, const int height)
 	this->grid.clear();
 	this->grid.resize(width);
 
+	//QPixmap pixmap("assets/concrete.png");
+
+	//QIcon icon(pixmap.copy(64, 64, 64, 64));
+
 	int rowIndex = 0;
 	int columnIndex = 0;
 
-	for(std::vector<QPushButton*>& i : this->grid)
+	for(std::vector<TileButton*>& i : this->grid)
 	{
 		rowIndex = 0;
 
 		i.resize(height, NULL);
 
-		for(QPushButton* j : i)
+		for(TileButton* j : i)
 		{
-			QPixmap pixmap("assets/concrete.png");
-
-			QIcon icon(pixmap.copy(64, 64, 64, 64));
-
 			if(j == NULL)
 			{
-				j = new QPushButton();
-
-				j->setIcon(icon);
-				j->setIconSize(QSize(64, 64));
-				j->setFixedSize(64, 64);
+				j = new TileButton(tileChooser);
 
 				this->layout->addWidget(	j,
 								rowIndex,

@@ -5,7 +5,7 @@ MainWindow::MainWindow()
 	this->layout = new QVBoxLayout();
 
 	this->topPanel = new TopPanel();
-	this->mapDisplay = new MapDisplay();
+	this->mapDisplay = new MapDisplay(this->topPanel->getTileChooser());
 	this->mapArea = new QScrollArea();
 
 	this->connect(	this->topPanel,

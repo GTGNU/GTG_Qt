@@ -1,4 +1,4 @@
-#include <QtWidgets/QMainWindow>
+#pragma once#include <QtWidgets/QMainWindow>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QVBoxLayout>
 

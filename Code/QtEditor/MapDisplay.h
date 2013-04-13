@@ -6,12 +6,15 @@
 
 #include <vector>
 
+#include "TileButton.h"
+#include "TileChooser.h"
+
 class MapDisplay : public QWidget
 {
 	Q_OBJECT
 
 public:
-	MapDisplay();
+	MapDisplay(const TileChooser* chooser);
 	~MapDisplay();
 
 	void setGridSize(const int width, const int height);
@@ -20,9 +23,10 @@ protected:
 	int gridWidth;
 	int gridHeight;
 
-	std::vector< std::vector<QPushButton*> > grid;
+	std::vector< std::vector<TileButton*> > grid;
 
 	QGridLayout* layout;
+	const TileChooser* tileChooser;
 
 public slots:
 	void gridSizeChangedHandler(const int width, const int height);
