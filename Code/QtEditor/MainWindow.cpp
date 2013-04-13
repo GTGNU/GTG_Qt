@@ -13,4 +13,6 @@ MainWindow::MainWindow()
 
 	this->setCentralWidget(new QWidget);
 	this->centralWidget()->setLayout(layout);
+
+	this->setWindowTitle("Map Editor");
 }
