@@ -1,15 +1,19 @@
 #include "MapDisplay.h"
 
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QScrollArea>
-
 MapDisplay::MapDisplay()
 {
-	QHBoxLayout* layout = new QHBoxLayout();
+	this->layout = new QHBoxLayout();
 
-	QScrollArea* scrollArea = new QScrollArea();
+	this->scrollArea = new QScrollArea();
 
-	layout->addWidget(scrollArea);
+	this->layout->addWidget(scrollArea);
+
 	this->setLayout(layout);
+}
+
+MapDisplay::~MapDisplay()
+{
+	delete this->scrollArea;
+
+	delete this->layout;
 }
