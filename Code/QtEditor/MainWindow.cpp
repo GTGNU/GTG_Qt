@@ -13,6 +13,11 @@ MainWindow::MainWindow()
 			this->mapDisplay,
 			SLOT(gridSizeChangedHandler(const int, const int)) );
 
+	this->connect(	this->topPanel,
+			SIGNAL(reset()),
+			this->mapDisplay,
+			SLOT(resetHandler()) );
+
 	this->mapArea->setWidget(this->mapDisplay);
 
 	this->layout->addWidget(this->topPanel);

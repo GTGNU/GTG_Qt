@@ -29,4 +29,5 @@ protected:
 
 public slots:
 	void gridSizeChangedHandler(const int width, const int height);
+	void resetHandler();
 };

@@ -33,7 +33,9 @@ protected:
 
 signals:
 	void gridSizeChanged(const int width, const int height);
+	void reset();
 
 public slots:
 	void editingFinishedHandler();
+	void resetHandler();
 };

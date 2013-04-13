@@ -20,6 +20,10 @@ TopPanel::TopPanel()
 			SIGNAL(editingFinished()),
 			SLOT(editingFinishedHandler()) );
 
+	this->connect(	this->resetButton,
+			SIGNAL(released()),
+			SLOT(resetHandler()) );
+
 	this->formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
 	this->formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
 
@@ -48,13 +52,18 @@ TopPanel::~TopPanel()
 	delete this->layout;
 }
 
+const TileChooser* TopPanel::getTileChooser() const
+{
+	return this->tileChooser;
+}
+
 void TopPanel::editingFinishedHandler()
 {
 	emit gridSizeChanged(	this->widthLineEdit->text().toInt(),
 				this->heightLineEdit->text().toInt() );
 }
 
-const TileChooser* TopPanel::getTileChooser() const
+void TopPanel::resetHandler()
 {
-	return this->tileChooser;
+	emit reset();
 }
