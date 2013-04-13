@@ -39,7 +39,6 @@ using gtg::tile::Layer;
 using gtg::Tile;
 using gtg::Row;
 using gtg::Map;
-using gtg::Player;
 
 
 Tile::Tile(QQuickItem* parent)
@@ -147,17 +146,6 @@ void Tile::replaceLayer(unsigned index, Layer* layer)
 	m_layers.insert(index, layer);
 }
 
-
-void Tile::setPlayer(Player* player)
-{
-	if (m_player)
-		emit playerExited(m_player);
-
-	m_player = player;
-
-	if (m_player)
-		emit playerEntered(m_player);
-}
 
 QSGNode* Tile::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)

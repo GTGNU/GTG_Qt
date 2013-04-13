@@ -79,9 +79,6 @@ namespace gtg
 			tile::LayerStack m_layers;
 			tile::Behavior* m_behavior;
 
-			Player* m_player;
-			void setPlayer(Player* player);
-
 			//! Virtual function inherited from QQuickItem. See Qt documentation.
 			/*!
 			 * \param node The node to update (see the Qt Scene Graph framework)
@@ -178,15 +175,13 @@ namespace gtg
 			 */
 			Q_INVOKABLE void replaceLayer(unsigned index, gtg::tile::Layer* layer);
 
-			friend class Player;
-
 		signals:
 			void behaviorChanged(
 					gtg::tile::Behavior* previousBehavior,
 					gtg::tile::Behavior* newBehavior);
 
-			void playerEntered(gtg::Player* player);
-			void playerExited(gtg::Player* player);
+			void entityEntered(gtg::FloatingEntity* entity);
+			void entityExited(gtg::FloatingEntity* entity);
 	};
 }
 
