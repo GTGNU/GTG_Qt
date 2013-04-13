@@ -1,4 +1,5 @@
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QVBoxLayout>
 
 #include "TopPanel.h"
@@ -15,4 +16,5 @@ protected:
 
 	TopPanel* topPanel;
 	MapDisplay* mapDisplay;
+	QScrollArea* mapArea;
 };

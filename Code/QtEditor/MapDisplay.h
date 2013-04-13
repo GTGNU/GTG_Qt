@@ -1,6 +1,10 @@
-#include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QScrollArea>
+#include <QtGui/QIcon>
+#include <QtGui/QPixmap>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
+
+#include <vector>
 
 class MapDisplay : public QWidget
 {
@@ -8,8 +12,13 @@ public:
 	MapDisplay();
 	~MapDisplay();
 
-protected:
-	QHBoxLayout* layout;
+	void setGridSize(const int width, const int height);
 
-	QScrollArea* scrollArea;
+protected:
+	int gridWidth;
+	int gridHeight;
+
+	std::vector< std::vector<QPushButton*> > grid;
+
+	QGridLayout* layout;
 };

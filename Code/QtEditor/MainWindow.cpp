@@ -6,9 +6,12 @@ MainWindow::MainWindow()
 
 	this->topPanel = new TopPanel();
 	this->mapDisplay = new MapDisplay();
+	this->mapArea = new QScrollArea();
+
+	this->mapArea->setWidget(this->mapDisplay);
 
 	this->layout->addWidget(this->topPanel);
-	this->layout->addWidget(this->mapDisplay);
+	this->layout->addWidget(this->mapArea);
 
 	this->setCentralWidget(new QWidget);
 	this->centralWidget()->setLayout(layout);
@@ -18,8 +21,10 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-	delete this->topPanel;
 	delete this->mapDisplay;
+
+	delete this->topPanel;
+	delete this->mapArea;
 
 	delete this->layout;
 }
