@@ -6,6 +6,8 @@
 #include <QtCore/QTextStream>
 #include <QtGui/QIcon>
 
+#include "config.h"
+
 class Tile
 {
 public:

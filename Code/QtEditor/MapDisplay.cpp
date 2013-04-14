@@ -13,7 +13,7 @@ MapDisplay::MapDisplay(const TileChooser* chooser)
 
 	this->setLayout(layout);
 
-	this->setGridSize(2, 2);
+	this->setGridSize(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 }
 
 MapDisplay::~MapDisplay()
@@ -69,7 +69,7 @@ void MapDisplay::setGridSize(const int width, const int height)
 		columnIndex++;
 	}
 
-	this->setGeometry(QRect(0, 0, width*64, height*64));
+	this->setGeometry(QRect(0, 0, width*TILE_WIDTH, height*TILE_HEIGHT));
 }
 
 void MapDisplay::gridSizeChangedHandler(const int width, const int height)
@@ -115,27 +115,8 @@ QString MapDisplay::serialize() const
 			tileRowString.append(j->getTile()->serialize());
 		}
 
-		QTextStream rowString(new QString());
-
-		rowString	<< "\tRow {\n"
-				<< "%1"
-				<< "\t}\n\n";
-
-		gridString.append(rowString.string()->arg(tileRowString));
+		gridString.append(QString(ROW_TEMPLATE).arg(tileRowString));
 	}
 
-	QTextStream mapString(new QString());
-
-	mapString	<< "import QtQuick 2.0\n"
-			<< "import gtg.map 1.4\n"
-			<< "import gtg.tile 1.4 as T\n"
-			<< "\n"
-			<< "Map {\n"
-			<< "	id: map\n"
-			<< "	tileSize: 64\n"
-			<< "\n"
-			<< "%1"
-			<< "}";
-
-	return mapString.string()->arg(gridString);
+	return QString(MAP_TEMPLATE).arg(gridString);
 }

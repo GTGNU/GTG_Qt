@@ -4,6 +4,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtGui/QIcon>
 
+#include "config.h"
 #include "TileChooser.h"
 
 class TileButton : public QPushButton

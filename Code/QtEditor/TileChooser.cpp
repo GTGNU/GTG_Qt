@@ -11,8 +11,7 @@ TileChooser::TileChooser(const QString& path) : currentTileIndex(0)
 	}
 
 	this->setIcon(*(this->tileList[this->currentTileIndex]->getIcon()));
-	this->setIconSize(QSize(64, 64));
-	this->setFixedSize(80, 80);
+	this->setIconSize(QSize(TILE_WIDTH, TILE_HEIGHT));
 
 	this->connect(this, SIGNAL(released()), SLOT(releasedHandler()));
 }

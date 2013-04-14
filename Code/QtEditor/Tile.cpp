@@ -33,9 +33,12 @@ Tile::Tile(const QString& path)
 
 			line = line.mid(openQuotePos+1, closeQuotePos-1);
 
-			QPixmap pixmap("assets/"+line);
+			QPixmap pixmap(QString(ASSETS_DIR)+"/"+line);
 
-			this->icon = new QIcon(pixmap.copy(64, 64, 64, 64));
+			this->icon = new QIcon(pixmap.copy(	TILE_OFFSET_X,
+								TILE_OFFSET_Y,
+								TILE_WIDTH,
+								TILE_HEIGHT ));
 
 			foundImage = true;
 		}
@@ -54,13 +57,5 @@ const QIcon* Tile::getIcon() const
 
 QString Tile::serialize() const
 {
-	QTextStream tileString(new QString());
-
-	tileString	<< "\t\tTile {\n"
-			<< "\t\t	T.Layer { texture: %1.texture }\n"
-			<< "\n"
-			<< "\t\t	behavior: %1.behavior\n"
-			<< "\t\t}\n\n";
-
-	return tileString.string()->arg(this->name);
+	return QString(TILE_TEMPLATE).arg(this->name);
 }

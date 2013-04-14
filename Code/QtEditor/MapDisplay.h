@@ -9,6 +9,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
 
+#include "config.h"
 #include "TileButton.h"
 #include "TileChooser.h"
 

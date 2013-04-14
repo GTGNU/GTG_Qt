@@ -7,6 +7,7 @@
 #include <QtCore/QVector>
 #include <QtWidgets/QPushButton>
 
+#include "config.h"
 #include "Tile.h"
 
 class TileChooser : public QPushButton

@@ -6,11 +6,18 @@ TopPanel::TopPanel()
 	this->formLayout = new QFormLayout();
 	this->buttonLayout = new QFormLayout();
 
-	this->tileChooser = new TileChooser("tiles");
-	this->saveButton = new QPushButton("Save");
-	this->resetButton = new QPushButton("Reset");
-	this->widthLineEdit = new QLineEdit("2");
-	this->heightLineEdit = new QLineEdit("2");
+	this->tileChooser = new TileChooser(TILES_DIR);
+	this->saveButton = new QPushButton(SAVE_BTN_LABEL);
+	this->resetButton = new QPushButton(RESET_BTN_LABEL);
+
+	this->widthLineEdit
+		= new QLineEdit(QString::number(DEFAULT_GRID_WIDTH));
+
+	this->heightLineEdit
+		= new QLineEdit(QString::number(DEFAULT_GRID_HEIGHT));
+
+	this->tileChooser->setFixedSize(	TILE_CHOOSER_WIDTH,
+						TILE_CHOOSER_HEIGHT );
 
 	this->connect(	this->widthLineEdit,
 			SIGNAL(editingFinished()),
@@ -28,8 +35,11 @@ TopPanel::TopPanel()
 			SIGNAL(released()),
 			SLOT(saveHandler()) );
 
-	this->formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
-	this->formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
+	this->formLayout->addRow(	new QLabel(WIDTH_FORM_LABEL),
+					this->widthLineEdit );
+
+	this->formLayout->addRow(	new QLabel(HEIGHT_FORM_LABEL),
+					this->heightLineEdit );
 
 	this->buttonLayout->addWidget(this->saveButton);
 	this->buttonLayout->addWidget(this->resetButton);

@@ -11,6 +11,7 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
+#include "config.h"
 #include "TileChooser.h"
 
 class TopPanel : public QWidget

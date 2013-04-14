@@ -5,6 +5,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QVBoxLayout>
 
+#include "config.h"
 #include "TopPanel.h"
 #include "MapDisplay.h"
 
