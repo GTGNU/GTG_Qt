@@ -1,4 +1,4 @@
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -g -rdynamic
 CONFIG += qt
 LIBS += -lQt5Widgets
 

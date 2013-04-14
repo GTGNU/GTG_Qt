@@ -4,18 +4,29 @@ Tile::Tile(const QString& path)
 {
 	QFile file(path);
 
-	file.open(QIODevice::ReadOnly);
+	file.open(QIODevice::ReadOnly | QIODevice::Text);
 
 	QTextStream in(&file);
-	QRegExp regexp("file:\\s*'[^']*'", Qt::CaseInsensitive);
+	QRegExp nameRegExp("name:\\s*'[^']*'", Qt::CaseInsensitive);
+	QRegExp fileRegExp("file:\\s*'[^']*'", Qt::CaseInsensitive);
 
+	bool foundName = false;
 	bool foundImage = false;
 
-	while(!in.atEnd() && !foundImage)
+	while(!in.atEnd() && (!foundName || !foundImage))
 	{
 		QString line = in.readLine();
 
-		if(line.contains(regexp))
+		if(line.contains(nameRegExp) && !foundName)
+		{
+			int openQuotePos = line.indexOf('\'');
+			int closeQuotePos = line.lastIndexOf('\'')-openQuotePos;
+
+			this->name = line.mid(openQuotePos+1, closeQuotePos-1);
+
+			foundName = true;
+		}
+		else if(line.contains(fileRegExp) && !foundImage)
 		{
 			int openQuotePos = line.indexOf('\'');
 			int closeQuotePos = line.lastIndexOf('\'')-openQuotePos;
@@ -39,4 +50,17 @@ Tile::~Tile()
 const QIcon* Tile::getIcon() const
 {
 	return this->icon;
+}
+
+QString Tile::serialize() const
+{
+	QTextStream tileString(new QString());
+
+	tileString	<< "\t\tTile {\n"
+			<< "\t\t	T.Layer { texture: %1.texture }\n"
+			<< "\n"
+			<< "\t\t	behavior: %1.behavior\n"
+			<< "\t\t}\n\n";
+
+	return tileString.string()->arg(this->name);
 }

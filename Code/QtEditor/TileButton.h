@@ -10,7 +10,10 @@ class TileButton : public QPushButton
 public:
 	TileButton(const TileChooser* chooser);
 
+	const Tile* getTile() const;
+
 protected:
+	const Tile* tile;
 	const TileChooser* tileChooser;
 
 public slots:

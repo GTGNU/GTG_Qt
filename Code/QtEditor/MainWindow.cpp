@@ -18,6 +18,11 @@ MainWindow::MainWindow()
 			this->mapDisplay,
 			SLOT(resetHandler()) );
 
+	this->connect(	this->topPanel,
+			SIGNAL(save()),
+			this->mapDisplay,
+			SLOT(saveHandler()) );
+
 	this->mapArea->setWidget(this->mapDisplay);
 
 	this->layout->addWidget(this->topPanel);

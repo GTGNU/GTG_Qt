@@ -12,7 +12,9 @@ public:
 	~Tile();
 
 	const QIcon* getIcon() const;
+	QString serialize() const;
 
 protected:
+	QString name;
 	QIcon* icon;
 };

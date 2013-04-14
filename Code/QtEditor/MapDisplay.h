@@ -1,6 +1,7 @@
 #include <QtCore/QVector>
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
+#include <QtWidgets/QFileDialog>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QWidget>
@@ -17,6 +18,7 @@ public:
 	~MapDisplay();
 
 	void setGridSize(const int width, const int height);
+	QString serialize() const;
 
 protected:
 	int gridWidth;
@@ -30,4 +32,5 @@ protected:
 public slots:
 	void gridSizeChangedHandler(const int width, const int height);
 	void resetHandler();
+	void saveHandler();
 };

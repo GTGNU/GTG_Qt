@@ -52,7 +52,7 @@ void MapDisplay::setGridSize(const int width, const int height)
 
 		i.resize(height);
 
-		for(TileButton* j : i)
+		for(TileButton*& j : i)
 		{
 			if(j == NULL)
 			{
@@ -84,4 +84,58 @@ void MapDisplay::resetHandler()
 {
 	if(!this->grid.empty())
 		this->setGridSize(this->grid.size(), this->grid[0].size());
+}
+
+void MapDisplay::saveHandler()
+{
+	QFile file(QFileDialog::getSaveFileName());
+
+	if(!file.fileName().isEmpty())
+	{
+		file.open(QIODevice::WriteOnly | QIODevice::Text);
+
+		QTextStream out(&file);
+
+		out << this->serialize();
+
+		file.close();
+	}
+}
+
+QString MapDisplay::serialize() const
+{
+	QString gridString;
+
+	for(QVector<TileButton*> i : this->grid)
+	{
+		QString tileRowString;
+
+		for(TileButton* j : i)
+		{
+			tileRowString.append(j->getTile()->serialize());
+		}
+
+		QTextStream rowString(new QString());
+
+		rowString	<< "\tRow {\n"
+				<< "%1"
+				<< "\t}\n\n";
+
+		gridString.append(rowString.string()->arg(tileRowString));
+	}
+
+	QTextStream mapString(new QString());
+
+	mapString	<< "import QtQuick 2.0\n"
+			<< "import gtg.map 1.4\n"
+			<< "import gtg.tile 1.4 as T\n"
+			<< "\n"
+			<< "Map {\n"
+			<< "	id: map\n"
+			<< "	tileSize: 64\n"
+			<< "\n"
+			<< "%1"
+			<< "}";
+
+	return mapString.string()->arg(gridString);
 }

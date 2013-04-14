@@ -24,6 +24,10 @@ TopPanel::TopPanel()
 			SIGNAL(released()),
 			SLOT(resetHandler()) );
 
+	this->connect(	this->saveButton,
+			SIGNAL(released()),
+			SLOT(saveHandler()) );
+
 	this->formLayout->addRow(new QLabel("Width:"), this->widthLineEdit);
 	this->formLayout->addRow(new QLabel("Height:"), this->heightLineEdit);
 
@@ -66,4 +70,9 @@ void TopPanel::editingFinishedHandler()
 void TopPanel::resetHandler()
 {
 	emit reset();
+}
+
+void TopPanel::saveHandler()
+{
+	emit save();
 }
