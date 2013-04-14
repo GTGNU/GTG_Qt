@@ -4,7 +4,7 @@
 
 TileButton::TileButton(const TileChooser* chooser) : tileChooser(chooser)
 {
-	this->setIcon(*(this->tileChooser->getCurrentTile()));
+	this->setIcon(*(this->tileChooser->getCurrentTile()->getIcon()));
 	this->setIconSize(QSize(64, 64));
 	this->setFixedSize(64, 64);
 
@@ -13,5 +13,5 @@ TileButton::TileButton(const TileChooser* chooser) : tileChooser(chooser)
 
 void TileButton::releasedHandler()
 {
-	this->setIcon(*(this->tileChooser->getCurrentTile()));
+	this->setIcon(*(this->tileChooser->getCurrentTile()->getIcon()));
 }

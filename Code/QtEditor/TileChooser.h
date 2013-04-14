@@ -6,6 +6,8 @@
 #include <QtCore/QVector>
 #include <QtWidgets/QPushButton>
 
+#include "Tile.h"
+
 class TileChooser : public QPushButton
 {
 	Q_OBJECT
@@ -13,12 +15,12 @@ class TileChooser : public QPushButton
 public:
 	TileChooser(const QString& path);
 
-	const QIcon* getCurrentTile() const;
+	const Tile* getCurrentTile() const;
 
 protected:
 	int currentTileIndex;
 
-	QVector<const QIcon*> tileList;
+	QVector<const Tile*> tileList;
 
 public slots:
 	void releasedHandler();

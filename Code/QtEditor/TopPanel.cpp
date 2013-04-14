@@ -6,7 +6,7 @@ TopPanel::TopPanel()
 	this->formLayout = new QFormLayout();
 	this->buttonLayout = new QFormLayout();
 
-	this->tileChooser = new TileChooser("assets");
+	this->tileChooser = new TileChooser("tiles");
 	this->saveButton = new QPushButton("Save");
 	this->resetButton = new QPushButton("Reset");
 	this->widthLineEdit = new QLineEdit("2");
