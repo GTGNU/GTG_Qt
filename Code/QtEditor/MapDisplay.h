@@ -1,3 +1,6 @@
+#ifndef MAPDISPLAY_H
+#define MAPDISPLAY_H
+
 #include <QtCore/QVector>
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
@@ -34,3 +37,5 @@ public slots:
 	void resetHandler();
 	void saveHandler();
 };
+
+#endif

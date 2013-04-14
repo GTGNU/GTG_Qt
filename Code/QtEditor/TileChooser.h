@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TILECHOOSER_H
+#define TILECHOOSER_H
 
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
@@ -25,3 +26,5 @@ protected:
 public slots:
 	void releasedHandler();
 };
+
+#endif

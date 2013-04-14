@@ -1,4 +1,7 @@
-#pragma once#include <QtWidgets/QMainWindow>
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QtWidgets/QMainWindow>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QVBoxLayout>
 
@@ -18,3 +21,5 @@ protected:
 	MapDisplay* mapDisplay;
 	QScrollArea* mapArea;
 };
+
+#endif

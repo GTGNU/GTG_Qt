@@ -1,3 +1,6 @@
+#ifndef TOPPANEL_H
+#define TOPPANEL_H
+
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
 #include <QtWidgets/QFormLayout>
@@ -41,3 +44,5 @@ public slots:
 	void resetHandler();
 	void saveHandler();
 };
+
+#endif

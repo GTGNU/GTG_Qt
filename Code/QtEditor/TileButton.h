@@ -1,3 +1,6 @@
+#ifndef TILEBUTTON_H
+#define TILEBUTTON_H
+
 #include <QtWidgets/QPushButton>
 #include <QtGui/QIcon>
 
@@ -19,3 +22,5 @@ protected:
 public slots:
 	void releasedHandler();
 };
+
+#endif

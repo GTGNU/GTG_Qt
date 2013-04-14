@@ -1,5 +1,3 @@
-#pragma once
-
 #include "TileButton.h"
 
 TileButton::TileButton(const TileChooser* chooser) : tileChooser(chooser)

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TILE_H
+#define TILE_H
 
 #include <QtCore/QFile>
 #include <QtCore/QRegExp>
@@ -18,3 +19,5 @@ protected:
 	QString name;
 	QIcon* icon;
 };
+
+#endif
