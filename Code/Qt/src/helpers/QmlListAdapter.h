@@ -30,7 +30,7 @@
 
 namespace gtg
 {
-	/*! \brief Adapts any class with adequate methods to a QmlListProperty
+	/*! \brief Adapts any class with adequate methods to a QQmlListProperty
 	 *
 	 * Due to how inconvenient the QQmlListProperty class is, this can be used
 	 * to wrap a reference to anything that has an append(), count(), at() and clear()
@@ -42,6 +42,13 @@ namespace gtg
 		QmlListAdapter(List& list)
 			: m_list(&list)
 		{
+		}
+
+		QmlListAdapter(QmlListAdapter&& other)
+			: m_list(other.m_list)
+			, m_delete(other.m_delete)
+		{
+			other.m_delete = false;
 		}
 
 		~QmlListAdapter()

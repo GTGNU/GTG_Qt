@@ -95,7 +95,7 @@ namespace gtg
 				Tile(QQuickItem* parent = nullptr);
 				~Tile();
 
-				//! Returns a QQmlListProperty of tiles. This is just for QML, you should prefer tiles() in C++ code
+				//! Returns a QQmlListProperty of tiles. This is just a QML accessor.
 				QQmlListProperty<gtg::gfx::Layer> layersQml();
 
 				//! Returns the attached Behavior object
