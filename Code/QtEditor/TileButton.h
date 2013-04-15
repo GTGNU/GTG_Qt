@@ -9,8 +9,6 @@
 
 class TileButton : public QPushButton
 {
-	Q_OBJECT
-
 public:
 	TileButton(const TileChooser* chooser);
 
@@ -20,9 +18,6 @@ public:
 protected:
 	const Tile* tile;
 	const TileChooser* tileChooser;
-
-public slots:
-	void releasedHandler();
 };
 
 #endif

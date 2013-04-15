@@ -7,6 +7,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMessageBox>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -22,6 +23,7 @@ public:
 	TopPanel();
 	~TopPanel();
 
+	void setShowWarning(bool value);
 	const TileChooser* getTileChooser() const;
 
 protected:
@@ -35,6 +37,8 @@ protected:
 	QLineEdit* widthLineEdit;
 	QLineEdit* heightLineEdit;
 
+	bool showWarning;
+
 signals:
 	void gridSizeChanged(const int width, const int height);
 	void open();
@@ -45,6 +49,7 @@ public slots:
 	void openHandler();
 	void saveHandler();
 	void mapLoadHandler(const int width, const int height);
+	void mapEditHandler();
 };
 
 #endif

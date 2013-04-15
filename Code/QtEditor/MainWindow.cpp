@@ -28,6 +28,11 @@ MainWindow::MainWindow()
 			this->topPanel,
 			SLOT(mapLoadHandler(const int, const int)) );
 
+	this->connect(	this->mapDisplay,
+			SIGNAL(edited()),
+			this->topPanel,
+			SLOT(mapEditHandler()) );
+
 	this->mapArea->setWidget(this->mapDisplay);
 
 	this->layout->addWidget(this->topPanel);
@@ -39,6 +44,7 @@ MainWindow::MainWindow()
 	this->setWindowTitle(WINDOW_TITLE);
 
 	this->mapDisplay->load("foo.qml");
+	this->topPanel->setShowWarning(true);
 }
 
 MainWindow::~MainWindow()

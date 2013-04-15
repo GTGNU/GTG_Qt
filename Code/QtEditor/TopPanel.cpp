@@ -70,10 +70,55 @@ const TileChooser* TopPanel::getTileChooser() const
 	return this->tileChooser;
 }
 
+void TopPanel::setShowWarning(bool value)
+{
+	this->showWarning = value;
+}
+
 void TopPanel::editingFinishedHandler()
 {
-	emit gridSizeChanged(	this->widthLineEdit->text().toInt(),
-				this->heightLineEdit->text().toInt() );
+	// Workaround for a bug in QT that causes the editingFinished signal to
+	// fire twice when it's invoked with enter key
+	static bool warningShown = false;
+
+	QMessageBox::StandardButton result = QMessageBox::Ok;
+
+	if(!warningShown)
+	{
+		warningShown = true;
+
+		if(this->showWarning)
+		{
+			result = QMessageBox::warning(	this,
+							WARNING_TITLE,
+							WARNING_MESSAGE,
+							QMessageBox::Ok |
+							QMessageBox::Cancel,
+							QMessageBox::Cancel );
+		}
+
+		QLineEdit* sender = (QLineEdit*)QObject::sender();
+
+		if(result == QMessageBox::Ok)
+		{
+			const int width = this->widthLineEdit->text().toInt();
+			const int height = this->heightLineEdit->text().toInt();
+
+			emit gridSizeChanged(	width,
+						height );
+
+			this->showWarning = false;
+		}
+		else if(QObject::sender() != NULL)
+		{
+			sender->undo();
+			sender->undo();
+		}
+
+		sender->clearFocus();
+
+		warningShown = false;
+	}
 }
 
 void TopPanel::openHandler()
@@ -90,4 +135,9 @@ void TopPanel::mapLoadHandler(const int width, const int height)
 {
 	this->widthLineEdit->setText(QString::number(width));
 	this->heightLineEdit->setText(QString::number(height));
+}
+
+void TopPanel::mapEditHandler()
+{
+	this->setShowWarning(true);
 }

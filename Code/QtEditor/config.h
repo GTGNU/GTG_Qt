@@ -15,6 +15,9 @@
 #define WIDTH_FORM_LABEL "Width:"
 #define HEIGHT_FORM_LABEL "Height:"
 
+#define WARNING_TITLE "Warning"
+#define WARNING_MESSAGE "Changing grid size will destroy all unsaved work."
+
 #define DEFAULT_GRID_WIDTH 3
 #define DEFAULT_GRID_HEIGHT 3
 

@@ -1,7 +1,5 @@
 #include "MapDisplay.h"
 
-#include <iostream>
-
 MapDisplay::MapDisplay(const TileChooser* chooser)
 :	gridWidth(0),
 	gridHeight(0),
@@ -44,6 +42,10 @@ void MapDisplay::setGridSize(const int width, const int height)
 			{
 				j = new TileButton(tileChooser);
 
+				this->connect(	j,
+						SIGNAL(released()),
+						SLOT(tileClickHandler()) );
+
 				this->layout->addWidget(	j,
 								rowIndex,
 								columnIndex );
@@ -85,6 +87,15 @@ void MapDisplay::saveHandler()
 
 		file.close();
 	}
+}
+
+void MapDisplay::tileClickHandler()
+{
+	TileButton* sender = (TileButton*)QObject::sender();
+
+	sender->setTile(this->tileChooser->getCurrentTile());
+
+	emit edited();
 }
 
 void MapDisplay::load(const QString& path)
@@ -148,6 +159,10 @@ void MapDisplay::load(const QString& path)
 			button->setTile(this->tileChooser->getTileByName(name));
 
 			this->grid.last().push_back(button);
+
+			this->connect(	button,
+					SIGNAL(released()),
+					SLOT(tileClickHandler()) );
 
 			this->layout->addWidget(	button,
 							rowIndex,

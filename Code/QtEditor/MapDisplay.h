@@ -38,11 +38,13 @@ protected:
 
 signals:
 	void load(const int width, const int height);
+	void edited();
 
 public slots:
 	void gridSizeChangedHandler(const int width, const int height);
 	void openHandler();
 	void saveHandler();
+	void tileClickHandler();
 };
 
 #endif
