@@ -87,29 +87,31 @@ void TopPanel::editingFinishedHandler()
 	{
 		warningShown = true;
 
-		if(this->showWarning)
+		QLineEdit* sender = (QLineEdit*)QObject::sender();
+
+		if(this->showWarning && sender->isUndoAvailable())
 		{
 			result = QMessageBox::warning(	this,
 							WARNING_TITLE,
-							WARNING_MESSAGE,
+							WARNING_RESIZE,
 							QMessageBox::Ok |
 							QMessageBox::Cancel,
 							QMessageBox::Cancel );
 		}
-
-		QLineEdit* sender = (QLineEdit*)QObject::sender();
 
 		if(result == QMessageBox::Ok)
 		{
 			const int width = this->widthLineEdit->text().toInt();
 			const int height = this->heightLineEdit->text().toInt();
 
-			emit gridSizeChanged(	width,
-						height );
+			emit gridSizeChanged(width, height);
+
+			// Clear undo history
+			sender->text() = sender->text();
 
 			this->showWarning = false;
 		}
-		else if(QObject::sender() != NULL)
+		else
 		{
 			sender->undo();
 			sender->undo();
@@ -137,7 +139,7 @@ void TopPanel::mapLoadHandler(const int width, const int height)
 	this->heightLineEdit->setText(QString::number(height));
 }
 
-void TopPanel::mapEditHandler()
+void TopPanel::mapEditedHandler()
 {
 	this->setShowWarning(true);
 }

@@ -1,12 +1,24 @@
 #include "MainWindow.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow() : mapEdited(false)
 {
 	this->layout = new QVBoxLayout();
 
 	this->topPanel = new TopPanel();
 	this->mapDisplay = new MapDisplay(this->topPanel->getTileChooser());
 	this->mapArea = new QScrollArea();
+
+	this->connect(	this->mapDisplay,
+			SIGNAL(edited()),
+			SLOT(mapEditedHandler()) );
+
+	this->connect(	this->topPanel,
+			SIGNAL(save()),
+			SLOT(mapResetHandler()) );
+
+	this->connect(	this->topPanel,
+			SIGNAL(gridSizeChanged(const int, const int)),
+			SLOT(mapResetHandler()) );
 
 	this->connect(	this->topPanel,
 			SIGNAL(gridSizeChanged(const int, const int)),
@@ -31,7 +43,7 @@ MainWindow::MainWindow()
 	this->connect(	this->mapDisplay,
 			SIGNAL(edited()),
 			this->topPanel,
-			SLOT(mapEditHandler()) );
+			SLOT(mapEditedHandler()) );
 
 	this->mapArea->setWidget(this->mapDisplay);
 
@@ -42,9 +54,6 @@ MainWindow::MainWindow()
 	this->centralWidget()->setLayout(layout);
 
 	this->setWindowTitle(WINDOW_TITLE);
-
-	this->mapDisplay->load("foo.qml");
-	this->topPanel->setShowWarning(true);
 }
 
 MainWindow::~MainWindow()
@@ -55,4 +64,32 @@ MainWindow::~MainWindow()
 	delete this->mapArea;
 
 	delete this->layout;
+}
+
+void MainWindow::mapEditedHandler()
+{
+	this->mapEdited = true;
+}
+
+void MainWindow::mapResetHandler()
+{
+	this->mapEdited = false;
+}
+
+void MainWindow::closeEvent(QCloseEvent* event)
+{
+	if(this->mapEdited)
+	{
+		QMessageBox::StandardButton result;
+
+		result = QMessageBox::warning(	this,
+						WARNING_TITLE,
+						WARNING_EXIT,
+						QMessageBox::Yes |
+						QMessageBox::No,
+						QMessageBox::No );
+
+		if(result == QMessageBox::No)
+			event->ignore();
+	}
 }

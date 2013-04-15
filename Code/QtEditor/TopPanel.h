@@ -49,7 +49,7 @@ public slots:
 	void openHandler();
 	void saveHandler();
 	void mapLoadHandler(const int width, const int height);
-	void mapEditHandler();
+	void mapEditedHandler();
 };
 
 #endif
