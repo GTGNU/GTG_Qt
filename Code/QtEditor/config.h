@@ -34,6 +34,9 @@
 
 #define TEXTURE_LABEL "texture:"
 
+#define PSTRINGIFY(a) #a
+#define STRINGIFY(a) PSTRINGIFY(a)
+
 #define TILE_TEMPLATE \
 "\t\tTile {\n\
 \t\t	T.Layer { texture: %1.texture }\n\
@@ -52,8 +55,8 @@ import gtg.map 1.4\n\
 import gtg.tile 1.4 as T\n\
 \n\
 Map {\n\
-	id: MAP_ID\n\
-	tileSize: TILE_WIDTH\n\
+	id: " MAP_ID "\n\
+	tileSize: " STRINGIFY(TILE_WIDTH) "\n\
 \n\
 %1\
 }"
