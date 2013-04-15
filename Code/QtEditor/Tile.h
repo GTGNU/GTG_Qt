@@ -15,6 +15,7 @@ public:
 	~Tile();
 
 	const QIcon* getIcon() const;
+	const QString& getName() const;
 	QString serialize() const;
 
 protected:

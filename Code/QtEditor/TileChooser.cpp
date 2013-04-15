@@ -21,6 +21,19 @@ const Tile* TileChooser::getCurrentTile() const
 	return this->tileList[this->currentTileIndex];
 }
 
+const Tile* TileChooser::getTileByName(const QString& name) const
+{
+	const Tile* result = NULL;
+
+	for(int i = 0; i < this->tileList.size() && result == NULL; i++)
+	{
+		if(this->tileList[i]->getName() == name)
+			result = this->tileList[i];
+	}
+
+	return result;
+}
+
 void TileChooser::releasedHandler()
 {
 	this->currentTileIndex

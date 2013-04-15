@@ -8,6 +8,7 @@
 #define ASSETS_DIR "assets"
 #define TILES_DIR "tiles"
 
+#define OPEN_BTN_LABEL "Open"
 #define SAVE_BTN_LABEL "Save"
 #define RESET_BTN_LABEL "Reset"
 
@@ -25,6 +26,8 @@
 
 #define TILE_CHOOSER_WIDTH 80
 #define TILE_CHOOSER_HEIGHT 80
+
+#define TEXTURE_LABEL "texture:"
 
 #define TILE_TEMPLATE \
 "\t\tTile {\n\

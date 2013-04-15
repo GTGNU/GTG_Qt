@@ -55,6 +55,11 @@ const QIcon* Tile::getIcon() const
 	return this->icon;
 }
 
+const QString& Tile::getName() const
+{
+	return this->name;
+}
+
 QString Tile::serialize() const
 {
 	return QString(TILE_TEMPLATE).arg(this->name);

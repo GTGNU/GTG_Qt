@@ -13,7 +13,12 @@ TileButton::TileButton(const TileChooser* chooser) : tileChooser(chooser)
 
 void TileButton::releasedHandler()
 {
-	this->tile = this->tileChooser->getCurrentTile();
+	this->setTile(this->tileChooser->getCurrentTile());
+}
+
+void TileButton::setTile(const Tile* tile)
+{
+	this->tile = tile;
 
 	this->setIcon(*(this->tile->getIcon()));
 }

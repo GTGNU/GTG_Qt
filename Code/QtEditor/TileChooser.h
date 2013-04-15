@@ -18,6 +18,7 @@ public:
 	TileChooser(const QString& path);
 
 	const Tile* getCurrentTile() const;
+	const Tile* getTileByName(const QString& name) const;
 
 protected:
 	int currentTileIndex;

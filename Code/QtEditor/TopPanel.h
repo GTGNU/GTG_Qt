@@ -30,20 +30,21 @@ protected:
 	QFormLayout* buttonLayout;
 
 	TileChooser* tileChooser;
+	QPushButton* openButton;
 	QPushButton* saveButton;
-	QPushButton* resetButton;
 	QLineEdit* widthLineEdit;
 	QLineEdit* heightLineEdit;
 
 signals:
 	void gridSizeChanged(const int width, const int height);
-	void reset();
+	void open();
 	void save();
 
 public slots:
 	void editingFinishedHandler();
-	void resetHandler();
+	void openHandler();
 	void saveHandler();
+	void mapLoadHandler(const int width, const int height);
 };
 
 #endif

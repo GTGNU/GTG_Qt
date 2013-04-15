@@ -14,14 +14,19 @@ MainWindow::MainWindow()
 			SLOT(gridSizeChangedHandler(const int, const int)) );
 
 	this->connect(	this->topPanel,
-			SIGNAL(reset()),
+			SIGNAL(open()),
 			this->mapDisplay,
-			SLOT(resetHandler()) );
+			SLOT(openHandler()) );
 
 	this->connect(	this->topPanel,
 			SIGNAL(save()),
 			this->mapDisplay,
 			SLOT(saveHandler()) );
+
+	this->connect(	this->mapDisplay,
+			SIGNAL(load(const int, const int)),
+			this->topPanel,
+			SLOT(mapLoadHandler(const int, const int)) );
 
 	this->mapArea->setWidget(this->mapDisplay);
 
@@ -32,6 +37,8 @@ MainWindow::MainWindow()
 	this->centralWidget()->setLayout(layout);
 
 	this->setWindowTitle(WINDOW_TITLE);
+
+	this->mapDisplay->load("foo.qml");
 }
 
 MainWindow::~MainWindow()

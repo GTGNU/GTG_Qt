@@ -22,6 +22,7 @@ public:
 	~MapDisplay();
 
 	void setGridSize(const int width, const int height);
+	void load(const QString& path);
 	QString serialize() const;
 
 protected:
@@ -33,9 +34,14 @@ protected:
 	QGridLayout* layout;
 	const TileChooser* tileChooser;
 
+	void clear();
+
+signals:
+	void load(const int width, const int height);
+
 public slots:
 	void gridSizeChangedHandler(const int width, const int height);
-	void resetHandler();
+	void openHandler();
 	void saveHandler();
 };
 

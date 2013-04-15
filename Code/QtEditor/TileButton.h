@@ -14,6 +14,7 @@ class TileButton : public QPushButton
 public:
 	TileButton(const TileChooser* chooser);
 
+	void setTile(const Tile* tile);
 	const Tile* getTile() const;
 
 protected:
