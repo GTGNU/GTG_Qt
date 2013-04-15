@@ -10,7 +10,6 @@
 
 #define OPEN_BTN_LABEL "Open"
 #define SAVE_BTN_LABEL "Save"
-#define RESET_BTN_LABEL "Reset"
 
 #define WIDTH_FORM_LABEL "Width:"
 #define HEIGHT_FORM_LABEL "Height:"
