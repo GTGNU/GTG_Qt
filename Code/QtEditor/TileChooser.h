@@ -3,6 +3,7 @@
 
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
+#include <QtGui/QWheelEvent>
 #include <QtCore/QDir>
 #include <QtCore/QVector>
 #include <QtWidgets/QPushButton>
@@ -24,6 +25,8 @@ protected:
 	int currentTileIndex;
 
 	QVector<const Tile*> tileList;
+
+	virtual void wheelEvent(QWheelEvent* event);
 
 public slots:
 	void releasedHandler();

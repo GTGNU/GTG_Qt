@@ -34,6 +34,25 @@ const Tile* TileChooser::getTileByName(const QString& name) const
 	return result;
 }
 
+void TileChooser::wheelEvent(QWheelEvent* event)
+{
+	if(event->delta() < 0)
+	{
+		this->currentTileIndex
+			= (this->currentTileIndex+1)%this->tileList.size();
+	}
+	else
+	{
+		if(this->currentTileIndex <= 0)
+			this->currentTileIndex = this->tileList.size();
+
+		this->currentTileIndex
+			= this->currentTileIndex-1;
+	}
+
+	this->setIcon(*(this->tileList[this->currentTileIndex]->getIcon()));
+}
+
 void TileChooser::releasedHandler()
 {
 	this->currentTileIndex
