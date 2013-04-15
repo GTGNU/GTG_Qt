@@ -83,14 +83,12 @@ void TopPanel::editingFinishedHandler()
 
 	QMessageBox::StandardButton result = QMessageBox::Ok;
 
-	if(!warningShown)
-	{
+	if(!warningShown) {
 		warningShown = true;
 
 		QLineEdit* sender = (QLineEdit*)QObject::sender();
 
-		if(this->showWarning && sender->isUndoAvailable())
-		{
+		if(this->showWarning && sender->isUndoAvailable()) {
 			result = QMessageBox::warning(	this,
 							WARNING_TITLE,
 							WARNING_RESIZE,
@@ -99,8 +97,7 @@ void TopPanel::editingFinishedHandler()
 							QMessageBox::Cancel );
 		}
 
-		if(result == QMessageBox::Ok)
-		{
+		if(result == QMessageBox::Ok) {
 			const int width = this->widthLineEdit->text().toInt();
 			const int height = this->heightLineEdit->text().toInt();
 
@@ -111,8 +108,7 @@ void TopPanel::editingFinishedHandler()
 
 			this->showWarning = false;
 		}
-		else
-		{
+		else {
 			sender->undo();
 			sender->undo();
 		}

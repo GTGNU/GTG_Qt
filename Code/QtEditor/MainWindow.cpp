@@ -78,8 +78,7 @@ void MainWindow::mapResetHandler()
 
 void MainWindow::closeEvent(QCloseEvent* event)
 {
-	if(this->mapEdited)
-	{
+	if(this->mapEdited) {
 		QMessageBox::StandardButton result;
 
 		result = QMessageBox::warning(	this,

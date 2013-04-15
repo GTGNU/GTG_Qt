@@ -30,16 +30,13 @@ void MapDisplay::setGridSize(const int width, const int height)
 	int rowIndex = 0;
 	int columnIndex = 0;
 
-	for(QVector<TileButton*>& i : this->grid)
-	{
+	for(QVector<TileButton*>& i : this->grid) {
 		columnIndex = 0;
 
 		i.resize(width);
 
-		for(TileButton*& j : i)
-		{
-			if(j == NULL)
-			{
+		for(TileButton*& j : i) {
+			if(j == NULL) {
 				j = new TileButton(tileChooser);
 
 				this->connect(	j,
@@ -77,8 +74,7 @@ void MapDisplay::saveHandler()
 {
 	QFile file(QFileDialog::getSaveFileName());
 
-	if(!file.fileName().isEmpty())
-	{
+	if(!file.fileName().isEmpty()) {
 		file.open(QIODevice::WriteOnly | QIODevice::Text);
 
 		QTextStream out(&file);
@@ -114,28 +110,24 @@ void MapDisplay::load(const QString& path)
 	int rowIndex = -1;
 	int columnIndex = -1;
 
-	while(!in.atEnd())
-	{
+	while(!in.atEnd()) {
 		QString line = in.readLine();
 
 		bool foundTexture = false;
 
-		if(line.contains(rowRegExp))
-		{
+		if(line.contains(rowRegExp)) {
 			this->grid.push_back(QVector<TileButton*>());
 
 			rowIndex++;
 
 			columnIndex = -1;
 		}
-		else if(line.contains(tileRegExp))
-		{
+		else if(line.contains(tileRegExp)) {
 			columnIndex++;
 
 			foundTexture = false;
 		}
-		else if(line.contains(textureRegExp) && !foundTexture)
-		{
+		else if(line.contains(textureRegExp) && !foundTexture) {
 			const int labelLength = QString(TEXTURE_LABEL).length();
 			const int labelPos = line.indexOf(TEXTURE_LABEL);
 
@@ -185,12 +177,10 @@ QString MapDisplay::serialize() const
 {
 	QString gridString;
 
-	for(QVector<TileButton*> i : this->grid)
-	{
+	for(QVector<TileButton*> i : this->grid) {
 		QString tileRowString;
 
-		for(TileButton* j : i)
-		{
+		for(TileButton* j : i) {
 			tileRowString.append(j->getTile()->serialize());
 		}
 
@@ -211,10 +201,8 @@ void MapDisplay::clear()
 
 	this->setLayout(this->layout);
 
-	for(QVector<TileButton*>& i : this->grid)
-	{
-		for(TileButton* j : i)
-		{
+	for(QVector<TileButton*>& i : this->grid) {
+		for(TileButton* j : i) {
 			delete j;
 		}
 	}

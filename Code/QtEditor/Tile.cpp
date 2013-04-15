@@ -13,12 +13,10 @@ Tile::Tile(const QString& path)
 	bool foundName = false;
 	bool foundImage = false;
 
-	while(!in.atEnd() && (!foundName || !foundImage))
-	{
+	while(!in.atEnd() && (!foundName || !foundImage)) {
 		QString line = in.readLine();
 
-		if(line.contains(nameRegExp) && !foundName)
-		{
+		if(line.contains(nameRegExp) && !foundName) {
 			int openQuotePos = line.indexOf('\'');
 			int closeQuotePos = line.lastIndexOf('\'')-openQuotePos;
 
@@ -26,8 +24,7 @@ Tile::Tile(const QString& path)
 
 			foundName = true;
 		}
-		else if(line.contains(fileRegExp) && !foundImage)
-		{
+		else if(line.contains(fileRegExp) && !foundImage) {
 			int openQuotePos = line.indexOf('\'');
 			int closeQuotePos = line.lastIndexOf('\'')-openQuotePos;
 
