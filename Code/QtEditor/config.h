@@ -16,7 +16,6 @@
 
 #define WARNING_TITLE "Warning"
 
-#define WARNING_RESIZE "Changing grid size will destroy all unsaved work."
 #define WARNING_EXIT "You have unsaved changes. Are you sure you want to exit?"
 
 #define DEFAULT_GRID_WIDTH 3

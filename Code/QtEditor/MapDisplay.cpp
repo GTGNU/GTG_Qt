@@ -1,5 +1,7 @@
 #include "MapDisplay.h"
 
+#include <iostream>
+
 MapDisplay::MapDisplay(const TileChooser* chooser)
 :	gridWidth(0),
 	gridHeight(0),
@@ -23,36 +25,40 @@ MapDisplay::~MapDisplay()
 
 void MapDisplay::setGridSize(const int width, const int height)
 {
-	this->clear();
+	if(height > this->grid.size())
+		this->grid.resize(height);
 
-	this->grid.resize(height);
+	for(int i = 0; i < this->grid.size(); i++) {
 
-	int rowIndex = 0;
-	int columnIndex = 0;
+		if(width > this->grid[i].size())
+			this->grid[i].resize(width);
 
-	for(QVector<TileButton*>& i : this->grid) {
-		columnIndex = 0;
+		for(int j = 0; j < this->grid[i].size(); j++) {
 
-		i.resize(width);
+			TileButton*& button = this->grid[i][j];
 
-		for(TileButton*& j : i) {
-			if(j == NULL) {
-				j = new TileButton(tileChooser);
+			if(i > height-1 || j > width-1) {
+				this->layout->removeWidget(button);
+			}
+			else if(button == NULL) {
+				button = new TileButton(tileChooser);
 
-				this->connect(	j,
+				this->connect(	button,
 						SIGNAL(released()),
 						SLOT(tileClickHandler()) );
 
-				this->layout->addWidget(	j,
-								rowIndex,
-								columnIndex );
+				this->layout->addWidget(	button,
+								i,
+								j );
 			}
-
-			columnIndex++;
 		}
 
-		rowIndex++;
+		if(width < this->grid[i].size())
+			this->grid[i].resize(width);
 	}
+
+	if(height < this->grid.size())
+		this->grid.resize(height);
 
 	this->setGeometry(QRect(0, 0, width*TILE_WIDTH, height*TILE_HEIGHT));
 }

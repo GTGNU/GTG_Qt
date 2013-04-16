@@ -77,46 +77,10 @@ void TopPanel::setShowWarning(bool value)
 
 void TopPanel::editingFinishedHandler()
 {
-	// Workaround for a bug in QT that causes the editingFinished signal to
-	// fire twice when it's invoked with enter key
-	static bool warningShown = false;
+	const int width = this->widthLineEdit->text().toInt();
+	const int height = this->heightLineEdit->text().toInt();
 
-	QMessageBox::StandardButton result = QMessageBox::Ok;
-
-	if(!warningShown) {
-		warningShown = true;
-
-		QLineEdit* sender = (QLineEdit*)QObject::sender();
-
-		if(this->showWarning && sender->isUndoAvailable()) {
-			result = QMessageBox::warning(	this,
-							WARNING_TITLE,
-							WARNING_RESIZE,
-							QMessageBox::Ok |
-							QMessageBox::Cancel,
-							QMessageBox::Cancel );
-		}
-
-		if(result == QMessageBox::Ok) {
-			const int width = this->widthLineEdit->text().toInt();
-			const int height = this->heightLineEdit->text().toInt();
-
-			emit gridSizeChanged(width, height);
-
-			// Clear undo history
-			sender->text() = sender->text();
-
-			this->showWarning = false;
-		}
-		else {
-			sender->undo();
-			sender->undo();
-		}
-
-		sender->clearFocus();
-
-		warningShown = false;
-	}
+	emit gridSizeChanged(width, height);
 }
 
 void TopPanel::openHandler()

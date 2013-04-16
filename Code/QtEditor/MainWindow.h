@@ -3,6 +3,7 @@
 
 #include <QtGui/QCloseEvent>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMessageBox>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QVBoxLayout>
 
