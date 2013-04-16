@@ -61,6 +61,8 @@ void MapDisplay::setGridSize(const int width, const int height)
 		this->grid.resize(height);
 
 	this->setGeometry(QRect(0, 0, width*TILE_WIDTH, height*TILE_HEIGHT));
+
+	emit edited();
 }
 
 void MapDisplay::gridSizeChangedHandler(const int width, const int height)
