@@ -1,7 +1,9 @@
 #ifndef TILEBUTTON_H
 #define TILEBUTTON_H
 
+#include <QtCore/QEvent>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QApplication>
 #include <QtGui/QIcon>
 
 #include "config.h"
@@ -18,6 +20,8 @@ public:
 protected:
 	const Tile* tile;
 	const TileChooser* tileChooser;
+
+	virtual void enterEvent(QEvent* event);
 };
 
 #endif

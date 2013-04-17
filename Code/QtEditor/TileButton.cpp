@@ -21,3 +21,11 @@ const Tile* TileButton::getTile() const
 {
 	return this->tile;
 }
+
+void TileButton::enterEvent(QEvent* event)
+{
+	event->accept();
+
+	if(QApplication::keyboardModifiers() == Qt::ControlModifier)
+		emit pressed();
+}

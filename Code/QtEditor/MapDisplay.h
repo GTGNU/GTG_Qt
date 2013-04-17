@@ -44,7 +44,7 @@ public slots:
 	void gridSizeChangedHandler(const int width, const int height);
 	void openHandler();
 	void saveHandler();
-	void tileClickHandler();
+	void tilePressedHandler();
 };
 
 #endif

@@ -44,8 +44,8 @@ void MapDisplay::setGridSize(const int width, const int height)
 				button = new TileButton(tileChooser);
 
 				this->connect(	button,
-						SIGNAL(released()),
-						SLOT(tileClickHandler()) );
+						SIGNAL(pressed()),
+						SLOT(tilePressedHandler()) );
 
 				this->layout->addWidget(	button,
 								i,
@@ -93,7 +93,7 @@ void MapDisplay::saveHandler()
 	}
 }
 
-void MapDisplay::tileClickHandler()
+void MapDisplay::tilePressedHandler()
 {
 	TileButton* sender = (TileButton*)QObject::sender();
 
