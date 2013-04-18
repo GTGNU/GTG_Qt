@@ -25,7 +25,9 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "graphics/LayerStack.h"
+#include "gfx/LayerStack.h"
+
+#include "helpers/Registered.h"
 
 namespace gtg
 {
@@ -39,6 +41,7 @@ namespace gtg
 	{
 		class Entity
 			: public QQuickItem
+			, public Registered
 		{
 			Q_OBJECT
 
@@ -47,45 +50,30 @@ namespace gtg
 					READ layersQml)
 
 			Q_PROPERTY(
-					QQmlListProperty<gtg::map::Tile> intersectingTiles
-					READ intersectingTilesQml)
-
-			Q_PROPERTY(
-					QString type
-					READ type
-					WRITE setType)
-
-			Q_PROPERTY(
 					gtg::map::Map* map
 					READ map
 					WRITE setMap)
 
-			Q_PROPERTY(int x READ x WRITE setX)
-			Q_PROPERTY(int y READ y WRITE setY)
+			Q_PROPERTY(
+					QString type
+					READ type)
 
-			Q_PROPERTY(int mapX READ mapX)
-			Q_PROPERTY(int mapX2 READ mapX2)
+			Q_PROPERTY(int tiledX READ tiledX)
+			Q_PROPERTY(int tiledX2 READ tiledX2)
 
-			Q_PROPERTY(int mapY READ mapY)
-			Q_PROPERTY(int mapY2 READ mapY2)
+			Q_PROPERTY(int tiledY READ tiledY)
+			Q_PROPERTY(int tiledY2 READ tiledY2)
 
-			Q_PROPERTY(unsigned mapWidth READ mapWidth)
-			Q_PROPERTY(unsigned mapHeight READ mapHeight)
+			Q_PROPERTY(unsigned tiledWidth READ tiledWidth)
+			Q_PROPERTY(unsigned tiledHeight READ tiledHeight)
 
 			Q_CLASSINFO("DefaultProperty", "layers")
 
 			private:
 				gfx::LayerStack m_layers;
-				QSet<Tile*> m_intersectingTiles;
-				Map* m_map;
 
-				void updateIntersectingTiles(int oldOriginValue,
-						int oldBottomRightValue, bool isX)
-
-				void updateIntersectingTiles(
-						int oldMapCoord, int newMapCoord,
-						std::function<Tile*(int)> getTile, bool atOrigin
-						QSet<Tile*>& removed, QSet<Tile*>& added);
+				QString m_type;
+				map::Map* m_map;
 
 				//! Virtual function inherited from QQuickItem. See Qt documentation.
 				/*!
@@ -97,37 +85,31 @@ namespace gtg
 						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
-				Entity(QQuickItem* parentItem = nullptr);
+				Entity(QString type, Registry* registry, QQuickItem* parentItem = nullptr);
 				~Entity();
+
+				Registry* registry() const override;
 
 				//! Returns a QQmlListProperty of tiles. This is just a QML accessor.
 				QQmlListProperty<gtg::gfx::Layer> layersQml();
 
-				QList<Tile*> intersectingTiles() const;
-				QQmlListProperty<gtg::map::Tile> intersectingTilesQml();
+				QString type() const;
 
 				gtg::map::Map* map() const;
 				void setMap(gtg::map::Map* map);
 
-				int x() const;
-				void setX(int x);
+				int tiledX() const;
+				int tiledX2() const;
 
-				int y() const;
-				void setY(int y);
+				int tiledY() const;
+				int tiledY2() const;
 
-				int mapX() const;
-				int mapX2() const;
-
-				int mapY() const;
-				int mapY2() const;
-
-				int mapWidth() const;
-				int mapHeight() const;
+				int tiledWidth() const;
+				int tiledHeight() const;
 
 				Q_INVOKABLE bool intersects(gtg::map::Tile* tile) const;
 
-				Q_INVOKABLE void move(int dx, int dy);
-				Q_INVOKABLE void move(QPoint d);
+				void move(int dx, int dy);
 
 			signals:
 				void enteredTile(gtg::map::Tile*);

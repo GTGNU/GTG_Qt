@@ -19,18 +19,18 @@
 /*
 #include "Player.h"
 
-#include "Tile.h"
-#include "Row.h"
-#include "Map.h"
-#include "tile/Behavior.h"
+#include "map/Tile.h"
+#include "map/Row.h"
+#include "map/Map.h"
+#include "map/Behavior.h"
 
 
-using gtg::tile::Behavior;
+using gtg::floating::Player;
 
-using gtg::Player;
-using gtg::Tile;
-using gtg::Row;
-using gtg::Map;
+using gtg::map::Behavior;
+using gtg::map::Tile;
+using gtg::map::Row;
+using gtg::map::Map;
 
 
 Player::Player(QQuickItem* parent)
@@ -66,6 +66,12 @@ void Player::setSpeed(double speed)
 }
 
 
+Map* Player::map() const
+{
+	return qobject_cast<Map*>(qobject_cast<Row*>(parent())->parent());
+}
+
+
 Tile* Player::currentTile() const
 {
 	return m_currentTile;
@@ -73,27 +79,15 @@ Tile* Player::currentTile() const
 
 void Player::moveBy(int dx, int dy)
 {
-	moveTo(map()->tileAt(currentTile()->mapX() + dx, currentTile()->mapY() + dy));
-}
+	Tile* target = map()->tileAt(x() + dx, y() + dy);
+	bool differentBehavior = currentTile()->behavior() != target->behavior();
 
-void Player::moveTo(Tile* tile)
-{
-	bool differentBehavior = tile->behavior() != m_currentTile->behavior();
-
-	m_currentTile->setPlayer(nullptr);
 	if (differentBehavior)
 		m_currentTile->behavior()->emitPlayerExitedArea(this);
 
-	m_currentTile = tile;
+	m_currentTile = target;
 
-	m_currentTile->setPlayer(this);
 	if (differentBehavior)
 		m_currentTile->behavior()->emitPlayerEnteredArea(this);
-}
-
-
-Map* Player::map() const
-{
-	return qobject_cast<Map*>(qobject_cast<Row*>(parent())->parent());
 }
 */

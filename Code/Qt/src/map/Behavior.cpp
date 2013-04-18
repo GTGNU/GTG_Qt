@@ -18,18 +18,30 @@
 
 #include "Behavior.h"
 
+#include "helpers/Registered.h"
+
 
 using gtg::map::Behavior;
 
+using gtg::Registry;
+
 
 Behavior::Behavior(QObject* parent)
-	: Registered<Behavior>(parent)
+	: Registered()
 	, m_trespassable(false)
 {
 }
 
 Behavior::~Behavior()
 {
+}
+
+
+Registry* Behavior::registry() const
+{
+	static Registry* behaviorRegistry = new Registry("Behavior");
+
+	return behaviorRegistry;
 }
 
 

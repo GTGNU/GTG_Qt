@@ -44,13 +44,6 @@ namespace gtg
 		{
 		}
 
-		QmlListAdapter(QmlListAdapter&& other)
-			: m_list(other.m_list)
-			, m_delete(other.m_delete)
-		{
-			other.m_delete = false;
-		}
-
 		~QmlListAdapter()
 		{
 		}
@@ -98,7 +91,6 @@ namespace gtg
 	template <class T, class List>
 	QQmlListProperty<T> qml_adapt(List& list, QObject* parent = nullptr)
 	{
-		qDebug() << "Adapting as lvalue reference" << &list;
 		return QmlListAdapter<List, T>(list).toQmlListProperty(nullptr);
 	}
 }

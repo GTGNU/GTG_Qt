@@ -24,10 +24,11 @@ using gtg::map::Behavior;
 
 using gtg::gfx::Texture;
 
+using gtg::Registry;
+
 
 Class::Class(QObject* parent)
-	: Registered<Class>(parent)
-
+	: Registered()
 	, m_texture(nullptr)
 	, m_behavior(nullptr)
 {
@@ -35,6 +36,13 @@ Class::Class(QObject* parent)
 
 Class::~Class()
 {
+}
+
+
+Registry* Class::registry() const
+{
+	static Registry* classRegistry = new Registry("Class");
+	return classRegistry;
 }
 
 

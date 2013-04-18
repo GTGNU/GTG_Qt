@@ -21,7 +21,7 @@ endif()
 if (CMAKE_CXX_COMPILER MATCHES ".*/g(cc|\\+\\+).*")
 	set(CMAKE_CXX_COMPILER_IS_CLANG 0)
 	set(CMAKE_CXX_COMPILER_IS_GCC   1)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wzero-as-null-pointer-constant")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 endif()
 
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
@@ -40,11 +40,12 @@ find_package(Qt5Qml REQUIRED)
 find_package(Qt5Quick REQUIRED)
 
 file(GLOB sources ${GrandTheftGentoo_SOURCE_DIR}/*.cpp)
-file(GLOB sources_gfx ${GrandTheftGentoo_SOURCE_DIR}/graphics/*.cpp)
+file(GLOB sources_gfx ${GrandTheftGentoo_SOURCE_DIR}/gfx/*.cpp)
 file(GLOB sources_map ${GrandTheftGentoo_SOURCE_DIR}/map/*.cpp)
+file(GLOB sources_floating ${GrandTheftGentoo_SOURCE_DIR}/floating/*.cpp)
 file(GLOB sources_helpers ${GrandTheftGentoo_SOURCE_DIR}/helpers/*.cpp)
 
-add_executable(gtg ${sources} ${sources_gfx} ${sources_map} ${sources_helpers})
+add_executable(gtg ${sources} ${sources_gfx} ${sources_map} ${sources_floating} ${sources_helpers})
 
 qt5_use_modules(gtg Core Gui Qml Quick)
 

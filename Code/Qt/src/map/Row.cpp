@@ -112,7 +112,6 @@ QSGNode* Row::updatePaintNode(QSGNode* node,
 {
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
-	qDebug() << "Children:";
 
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 

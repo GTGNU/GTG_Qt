@@ -16,26 +16,23 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "NamedObject.h"
+#include "Registered.h"
 
-#include <QtCore/QDebug>
 
-gtg::NamedObject::NamedObject(QObject* parent)
-	: QObject(parent)
-	, m_name()
+using gtg::Registered;
+
+
+gtg::Registered::Registered()
+	: m_name()
+	, m_nameSet(false)
 {}
 
-gtg::NamedObject::~NamedObject()
+gtg::Registered::~Registered()
 {
 }
 
-QString gtg::NamedObject::name() const
+
+QString gtg::Registered::name() const
 {
 	return m_name;
-}
-
-
-void gtg::NamedObject::setName(const QString& name)
-{
-	m_name = name;
 }

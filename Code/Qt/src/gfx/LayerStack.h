@@ -28,8 +28,6 @@ class QQuickItem;
 
 namespace gtg
 {
-	class Tile;
-
 	namespace gfx
 	{
 		class Layer;

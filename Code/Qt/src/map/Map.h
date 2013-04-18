@@ -59,7 +59,7 @@ namespace gtg
 				 * \return The updated node
 				 */
 				QSGNode* updatePaintNode(QSGNode* node,
-						QQuickItem::UpdatePaintNodeData* updatePaintNodeData) override;
+						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
 				Map(QQuickItem* parent = nullptr);

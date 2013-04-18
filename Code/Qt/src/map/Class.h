@@ -21,7 +21,7 @@
 
 #include <QtCore/QObject>
 
-#include <QtQml>
+#include <QtQuick/QQuickItem>
 
 #include "helpers/Registered.h"
 
@@ -46,23 +46,28 @@ namespace gtg
 		 * It also reduces verboseness of map files.
 		 */
 		class Class
-			: public Registered<Class>
+			: public QObject
+			, public Registered
 		{
 			Q_OBJECT
 
-				Q_PROPERTY(
-						gtg::gfx::Texture* texture
-						READ texture
-						WRITE setTexture
-						NOTIFY textureChanged)
+			GTG_REGISTERED(Class)
 
-				Q_PROPERTY(
-						gtg::map::Behavior* behavior
-						READ behavior
-						WRITE setBehavior
-						NOTIFY behaviorChanged)
+			Q_PROPERTY(
+					gtg::gfx::Texture* texture
+					READ texture
+					WRITE setTexture
+					NOTIFY textureChanged)
+
+			Q_PROPERTY(
+					gtg::map::Behavior* behavior
+					READ behavior
+					WRITE setBehavior
+					NOTIFY behaviorChanged)
 
 			private:
+				Registry* registry() const override;
+
 				gfx::Texture* m_texture;
 				Behavior* m_behavior;
 

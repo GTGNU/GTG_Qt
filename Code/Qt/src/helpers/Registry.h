@@ -16,32 +16,14 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef NAMEDOBJECT_H
-#define NAMEDOBJECT_H
+#ifndef REGISTRY_H
+#define REGISTRY_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-
-namespace gtg
-{
-	/*! \brief Simple QObject that has a name property
-	 */
-	class NamedObject
-		: public QObject
-	{
-		Q_OBJECT
-		Q_PROPERTY(QString name READ name WRITE setName)
-
-		private:
-			QString m_name;
-
-		public:
-			NamedObject(QObject* parent = nullptr);
-			virtual ~NamedObject();
-
-			QString name() const;
-			virtual void setName(const QString& name);
-	};
-}
+/*!
+ * This file is a placeholder that includes Registered.h
+ * due to template definition limitations and circular
+ * dependencies
+ */
+#include "Registered.h"
 
 #endif

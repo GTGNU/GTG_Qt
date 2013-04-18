@@ -26,7 +26,7 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "graphics/LayerStack.h"
+#include "gfx/LayerStack.h"
 
 namespace gtg
 {

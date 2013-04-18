@@ -19,81 +19,97 @@
 #ifndef REGISTERED_H
 #define REGISTERED_H
 
-#include <QtCore/QObject>
+#include <QtCore/QString>
+#include <QtCore/QDebug>
 
-#include "NamedObject.h"
+#include <QtQuick/QQuickItem>
+
+
+#define GTG_REGISTERED(TYPE) \
+		Q_PROPERTY(QString name READ name WRITE __setName) \
+		public: \
+		void __setName(const QString& name) { Registered::setName<TYPE>(name); } \
+		private:
 
 namespace gtg
 {
+	class Registry;
+
+	/*! \brief Simple QObject that has a name property
+	 */
+	class Registered
+	{
+		private:
+			QString m_name;
+			bool m_nameSet;
+
+		public:
+			Registered();
+			virtual ~Registered();
+
+			Registered(const Registered& other) = delete;
+			Registered& operator= (const Registered& other) = delete;
+
+			QString name() const;
+
+			template <class T>
+			void setName(const QString& name);
+
+			virtual Registry* registry() const = 0;
+	};
+
+
 	/*! \brief Base class of anything that can be queried to a static map.
 	 *
 	 * Inheriting this class provides a static map to find objects of the
 	 * given class by name (as specified through the base NamedObejct class)
 	 */
-	template <class T>
-	class Registered
-		: public NamedObject
+	class Registry
+		: public QObject
+		, public Registered
 	{
-		protected:
-			bool m_nameSet;
-			static QHash<QString, T*> m_table;
+		Q_OBJECT
 
-		protected:
-			QString m_name;
+		GTG_REGISTERED(Registry)
 
-			//! Store a new object in the map
-			static void registerObj(T* obj);
-			//! Remove an object from the map
-			static void unregisterObj(T* obj);
+		private:
+			QString m_staticKey;
+			QHash<QString, QObject*> m_table;
 
 		public:
-			Registered(QObject* parent = nullptr);
-			virtual ~Registered();
+			Registry(QObject* parent = nullptr);
+			Registry(QString staticKey, QObject* parent = global());
+			virtual ~Registry();
 
-			virtual void setName(const QString& name);
+			Registry(const Registry& other) = delete;
+			Registry& operator= (const Registry& other) = delete;
+
+			Registry* registry() const override;
+
+			//! Store a new object in the map
+			template <class T>
+			void registerObj(T* obj);
+
+			//! Remove an object from the map
+			template <class T>
+			void unregisterObj(T* obj);
+
+			//! \brief Returns the static registry
+			Q_INVOKABLE static gtg::Registry* global();
+
+			//! \brief Get all names in this registry
+			Q_INVOKABLE QList<QString> names() const;
 
 			/*! \brief Find an object
 			 * \param name
 			 * \return Object registered with the given name or null if not found
 			 */
-			static T* find(const QString& key);
+			Q_INVOKABLE QObject* find(const QString& name) const;
 	};
 }
 
 template <class T>
-QHash<QString, T*> gtg::Registered<T>::m_table;
-
-template <class T>
-gtg::Registered<T>::Registered(QObject* parent)
-	: NamedObject(parent)
-	, m_nameSet(false)
-{}
-
-template <class T>
-gtg::Registered<T>::~Registered()
-{}
-
-template <class T>
-void gtg::Registered<T>::setName(const QString& name)
-{
-	if (name != m_name) {
-		if (m_nameSet)
-			unregisterObj(static_cast<T*>(this));
-
-		NamedObject::setName(name);
-		registerObj(static_cast<T*>(this));
-		m_nameSet = true;
-	}
-}
-
-template <class T>
-T* gtg::Registered<T>::find(const QString& key)
-{
-	return m_table[key];
-}
-
-template <class T>
-void gtg::Registered<T>::registerObj(T* obj)
+void gtg::Registry::registerObj(T* obj)
 {
 	if (!m_table.contains(obj->name())) {
 		m_table.insert(obj->name(), obj);
@@ -105,20 +121,37 @@ void gtg::Registered<T>::registerObj(T* obj)
 }
 
 template <class T>
-void gtg::Registered<T>::unregisterObj(T* obj)
+void gtg::Registry::unregisterObj(T* obj)
 {
-	for (auto it = m_table.begin(); it != m_table.end(); it++) {
-		if (it.key() == obj->name()) {
-			if (it.value() == obj) {
-				m_table.erase(it);
-				qDebug() << obj << obj->name() << "unregisterObjed successfully";
-				return;
-			} else {
-				qWarning() << "Found partial match at unregisterObj(" << obj << "):"
-					<< it.key() << "=>" << it.value();
-			}
+	auto it = m_table.find(obj->name());
+
+	if (it != m_table.end()) {
+		if (it.value() == static_cast<QObject*>(obj)) {
+			m_table.erase(it);
+			qDebug() << obj << obj->name() << "unregisterObjed successfully";
+			return;
+		} else {
+			qWarning() << "Found partial match at unregisterObj(" << obj << "):"
+				<< it.key() << "=>" << it.value();
 		}
 	}
 }
+
+QML_DECLARE_TYPE(gtg::Registry)
+
+
+template <class T>
+void gtg::Registered::setName(const QString& name)
+{
+	if (name != this->name()) {
+		if (m_nameSet)
+			registry()->unregisterObj(static_cast<T*>(this));
+
+		m_name = name;
+		registry()->registerObj(static_cast<T*>(this));
+		m_nameSet = true;
+	}
+}
+
 
 #endif

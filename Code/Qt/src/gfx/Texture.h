@@ -48,9 +48,12 @@ namespace gtg
 		 * top, middle and bottom sprites for the item.
 		 */
 		class Texture
-			: public Registered<Texture>
+			: public QObject
+			, public Registered
 		{
 			Q_OBJECT
+
+			GTG_REGISTERED(Texture)
 
 			Q_PROPERTY(
 					QString file
@@ -65,6 +68,9 @@ namespace gtg
 			private:
 				//! All textures are cached in the static cache object
 				static TextureCache m_cache;
+
+				//! Texture registry
+				Registry* registry() const override;
 
 				//! We need to know wether the iterator is valid or not
 				bool m_initialized;

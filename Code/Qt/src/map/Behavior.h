@@ -21,15 +21,12 @@
 
 #include <QtCore/QObject>
 
-#include <QtQml>
+#include <QtQuick/QQuickItem>
 
 #include "helpers/Registered.h"
-#include "helpers/NamedObject.h"
 
 namespace gtg
 {
-	class Player;
-
 	namespace map
 	{
 		/*! \brief Encapsulates how a tile interacts with events
@@ -39,9 +36,13 @@ namespace gtg
 		 * when events are triggered
 		 */
 		class Behavior
-			: public Registered<Behavior>
+			: public QObject
+			, public Registered
 		{
 			Q_OBJECT
+
+			GTG_REGISTERED(Behavior)
+
 			Q_PROPERTY(
 					bool trespassable
 					READ isTrespassable
@@ -55,13 +56,13 @@ namespace gtg
 				Behavior(QObject* parent = nullptr);
 				~Behavior();
 
+				Registry* registry() const override;
+
 				bool isTrespassable() const;
 				void setTrespassable(bool trespassable);
 
 			signals:
 				void trespassabilityChanged(bool trespassable);
-
-				friend class gtg::Player;
 		};
 	}
 }

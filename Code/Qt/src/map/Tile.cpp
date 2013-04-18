@@ -21,6 +21,7 @@
 #include <QtGui/QImage>
 
 #include <QtQuick/QSGNode>
+#include <QtQuick/QSGSimpleRectNode>
 #include <QtQuick/QSGTexture>
 #include <QtQuick/QQuickWindow>
 
@@ -28,7 +29,7 @@
 #include "Map.h"
 #include "Behavior.h"
 
-#include "graphics/Layer.h"
+#include "gfx/Layer.h"
 
 #include "helpers/QmlListAdapter.h"
 
@@ -155,13 +156,16 @@ QSGNode* Tile::updatePaintNode(QSGNode* node,
 
 	// First draw, we need to initialize the node and set the geometry
 	if (!node) {
-		node = new QSGNode;
+		auto* n = new QSGSimpleRectNode;
 
 		int tileSize = map()->tileSize();
 		setX(mapX() * tileSize);
 		setY(0); // relative to row
 		setWidth(tileSize);
 		setHeight(tileSize);
+
+		n->setRect(boundingRect());
+		node = n;
 	}
 
 	qDebug() << "Bounding rect: " << boundingRect();

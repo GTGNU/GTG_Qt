@@ -6,6 +6,19 @@ M.Map {
 	id: map
 	tileSize: 64
 
+	Component.onCompleted: {
+		var registryNames = Registry.names()
+		for (var i = 0; i < registryNames.length; i++) {
+			var registry = Registry.find(registryNames[i])
+			var objectNames = registry.names()
+
+			for (var j = 0; j < objectNames.length; j++) {
+				var object = registry.find(objectNames[j])
+				console.log(registry.name + "." + object.name + " = (" + typeof(object) + ") " + object);
+			}
+		}
+	}
+
 	// 0
 	M.Row {
 		// 0

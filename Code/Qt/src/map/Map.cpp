@@ -23,7 +23,7 @@
 #include "Row.h"
 #include "Tile.h"
 
-#include "graphics/Texture.h"
+#include "gfx/Texture.h"
 
 #include "helpers/QmlListAdapter.h"
 
@@ -94,7 +94,6 @@ QSGNode* Map::updatePaintNode(QSGNode* node,
 {
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
-	qDebug() << "Children:";
 
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 

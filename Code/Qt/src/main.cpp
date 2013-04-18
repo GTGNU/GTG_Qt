@@ -22,7 +22,12 @@
 
 #include <QtGui/QGuiApplication>
 
+#include <QtQml/QQmlEngine>
+#include <QtQml/QQmlContext>
+
 #include <QtQuick/QQuickView>
+
+#include "helpers/Registered.h"
 
 #include "map/Map.h"
 #include "map/Row.h"
@@ -30,8 +35,8 @@
 #include "map/Class.h"
 #include "map/Behavior.h"
 
-#include "graphics/Texture.h"
-#include "graphics/Layer.h"
+#include "gfx/Texture.h"
+#include "gfx/Layer.h"
 
 #include "MenuHandler.h"
 
@@ -66,6 +71,7 @@ void loadTileClass(QQmlEngine* engine, const QString& fileName)
  */
 void loadTileClasses(QQmlEngine* engine, const QString& location)
 {
+	engine->rootContext()->setContextProperty("Registry", Registry::global());
 	QDir tileDefDir{location};
 	for (QString& entry : tileDefDir.entryList(QDir::Files))
 		loadTileClass(engine, tileDefDir.absoluteFilePath(entry));
@@ -73,14 +79,14 @@ void loadTileClasses(QQmlEngine* engine, const QString& location)
 
 int main(int argc, char* argv[])
 {
-	// export the gtg.tile package
-	qmlRegisterType<gfx::Texture> ("gtg.gfx", 1, 5, "Texture"   );
+	qmlRegisterType<Registry>("gtg.core", 1, 5, "Registry_t");
+
+	qmlRegisterType<gfx::Texture> ("gtg.gfx", 1, 5, "Texture" );
 	qmlRegisterType<gfx::Layer>   ("gtg.gfx", 1, 5, "Layer"   );
 
 	qmlRegisterType<map::Behavior>("gtg.map", 1, 5, "Behavior");
 	qmlRegisterType<map::Class>   ("gtg.map", 1, 5, "Class"   );
 
-	// export the gtg.map package
 	qmlRegisterType<map::Tile>("gtg.map", 1, 5, "Tile");
 	qmlRegisterType<map::Row> ("gtg.map", 1, 5, "Row" );
 	qmlRegisterType<map::Map> ("gtg.map", 1, 5, "Map" );
