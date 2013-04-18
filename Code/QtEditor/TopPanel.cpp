@@ -77,8 +77,22 @@ void TopPanel::setShowWarning(bool value)
 
 void TopPanel::editingFinishedHandler()
 {
-	const int width = this->widthLineEdit->text().toInt();
-	const int height = this->heightLineEdit->text().toInt();
+	int width = this->widthLineEdit->text().toInt();
+	int height = this->heightLineEdit->text().toInt();
+
+	if(width < 1)
+	{
+		width = 1;
+
+		this->widthLineEdit->setText("1");
+	}
+
+	if(height < 1)
+	{
+		height = 1;
+
+		this->heightLineEdit->setText("1");
+	}
 
 	emit gridSizeChanged(width, height);
 }
