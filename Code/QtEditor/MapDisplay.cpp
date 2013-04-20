@@ -3,62 +3,62 @@
 #include <iostream>
 
 MapDisplay::MapDisplay(const TileChooser* chooser)
-:	gridWidth(0),
-	gridHeight(0),
-	grid(0),
-	tileChooser(chooser)
+:	m_gridWidth(0),
+	m_gridHeight(0),
+	m_grid(0),
+	m_tileChooser(chooser)
 {
-	this->layout = new QGridLayout();
+	m_layout = new QGridLayout();
 
-	this->layout->setContentsMargins(QMargins(0, 0, 0, 0));
-	this->layout->setSpacing(0);
+	m_layout->setContentsMargins(QMargins(0, 0, 0, 0));
+	m_layout->setSpacing(0);
 
-	this->setLayout(layout);
+	this->setLayout(m_layout);
 
 	this->setGridSize(DEFAULT_GRID_WIDTH, DEFAULT_GRID_HEIGHT);
 }
 
 MapDisplay::~MapDisplay()
 {
-	delete this->layout;
+	delete m_layout;
 }
 
 void MapDisplay::setGridSize(const int width, const int height)
 {
-	if(height > this->grid.size())
-		this->grid.resize(height);
+	if(height > m_grid.size())
+		m_grid.resize(height);
 
-	for(int i = 0; i < this->grid.size(); i++) {
+	for(int i = 0; i < m_grid.size(); i++) {
 
-		if(width > this->grid[i].size())
-			this->grid[i].resize(width);
+		if(width > m_grid[i].size())
+			m_grid[i].resize(width);
 
-		for(int j = 0; j < this->grid[i].size(); j++) {
+		for(int j = 0; j < m_grid[i].size(); j++) {
 
-			TileButton*& button = this->grid[i][j];
+			TileButton*& button = m_grid[i][j];
 
 			if(i > height-1 || j > width-1) {
-				this->layout->removeWidget(button);
+				m_layout->removeWidget(button);
 			}
 			else if(button == NULL) {
-				button = new TileButton(tileChooser);
+				button = new TileButton(m_tileChooser);
 
 				this->connect(	button,
 						SIGNAL(pressed()),
 						SLOT(tilePressedHandler()) );
 
-				this->layout->addWidget(	button,
+				m_layout->addWidget(	button,
 								i,
 								j );
 			}
 		}
 
-		if(width < this->grid[i].size())
-			this->grid[i].resize(width);
+		if(width < m_grid[i].size())
+			m_grid[i].resize(width);
 	}
 
-	if(height < this->grid.size())
-		this->grid.resize(height);
+	if(height < m_grid.size())
+		m_grid.resize(height);
 
 	this->setGeometry(QRect(0, 0, width*TILE_WIDTH, height*TILE_HEIGHT));
 
@@ -67,9 +67,9 @@ void MapDisplay::setGridSize(const int width, const int height)
 
 void MapDisplay::gridSizeChangedHandler(const int width, const int height)
 {
-	if(width != this->grid.size()
-	||(this->grid[0].size() > 0
-	&& height != this->grid[0].size()))
+	if(width != m_grid.size()
+	||(m_grid[0].size() > 0
+	&& height != m_grid[0].size()))
 		this->setGridSize(width, height);
 }
 
@@ -97,7 +97,7 @@ void MapDisplay::tilePressedHandler()
 {
 	TileButton* sender = (TileButton*)QObject::sender();
 
-	sender->setTile(this->tileChooser->getCurrentTile());
+	sender->setTile(m_tileChooser->getCurrentTile());
 
 	emit edited();
 }
@@ -124,7 +124,7 @@ void MapDisplay::load(const QString& path)
 		bool foundTexture = false;
 
 		if(line.contains(rowRegExp)) {
-			this->grid.push_back(QVector<TileButton*>());
+			m_grid.push_back(QVector<TileButton*>());
 
 			rowIndex++;
 
@@ -154,17 +154,17 @@ void MapDisplay::load(const QString& path)
 
 			const QString name(valueRegExp.cap(0).left(lastDotPos));
 
-			TileButton* button = new TileButton(this->tileChooser);
+			TileButton* button = new TileButton(m_tileChooser);
 
-			button->setTile(this->tileChooser->getTileByName(name));
+			button->setTile(m_tileChooser->getTileByName(name));
 
-			this->grid.last().push_back(button);
+			m_grid.last().push_back(button);
 
 			this->connect(	button,
 					SIGNAL(released()),
 					SLOT(tileClickHandler()) );
 
-			this->layout->addWidget(	button,
+			m_layout->addWidget(	button,
 							rowIndex,
 							columnIndex );
 
@@ -185,7 +185,7 @@ QString MapDisplay::serialize() const
 {
 	QString gridString;
 
-	for(QVector<TileButton*> i : this->grid) {
+	for(QVector<TileButton*> i : m_grid) {
 		QString tileRowString;
 
 		for(TileButton* j : i) {
@@ -200,20 +200,20 @@ QString MapDisplay::serialize() const
 
 void MapDisplay::clear()
 {
-	delete this->layout;
+	delete m_layout;
 
-	this->layout = new QGridLayout();
+	m_layout = new QGridLayout();
 
-	this->layout->setContentsMargins(QMargins(0, 0, 0, 0));
-	this->layout->setSpacing(0);
+	m_layout->setContentsMargins(QMargins(0, 0, 0, 0));
+	m_layout->setSpacing(0);
 
-	this->setLayout(this->layout);
+	this->setLayout(m_layout);
 
-	for(QVector<TileButton*>& i : this->grid) {
+	for(QVector<TileButton*>& i : m_grid) {
 		for(TileButton* j : i) {
 			delete j;
 		}
 	}
 
-	this->grid.clear();
+	m_grid.clear();
 }

@@ -18,8 +18,8 @@ public:
 	const Tile* getTile() const;
 
 protected:
-	const Tile* tile;
-	const TileChooser* tileChooser;
+	const Tile* m_tile;
+	const TileChooser* m_tileChooser;
 
 	virtual void enterEvent(QEvent* event);
 };

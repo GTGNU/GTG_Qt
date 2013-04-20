@@ -22,9 +22,9 @@ public:
 	const Tile* getTileByName(const QString& name) const;
 
 protected:
-	int currentTileIndex;
+	int m_currentTileIndex;
 
-	QVector<const Tile*> tileList;
+	QVector<const Tile*> m_tileList;
 
 	virtual void wheelEvent(QWheelEvent* event);
 

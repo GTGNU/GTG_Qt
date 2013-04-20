@@ -1,16 +1,16 @@
 #include "TileChooser.h"
 
-TileChooser::TileChooser(const QString& path) : currentTileIndex(0)
+TileChooser::TileChooser(const QString& path) : m_currentTileIndex(0)
 {
 	QDir directory(path);
 
 	for(	const QString& i
 		: directory.entryList(QStringList("*.qml"), QDir::Files) ) {
 
-		this->tileList.push_back(new Tile(path+"/"+i));
+		m_tileList.push_back(new Tile(path+"/"+i));
 	}
 
-	this->setIcon(*(this->tileList[this->currentTileIndex]->getIcon()));
+	this->setIcon(*(m_tileList[m_currentTileIndex]->getIcon()));
 	this->setIconSize(QSize(TILE_WIDTH, TILE_HEIGHT));
 
 	this->connect(this, SIGNAL(released()), SLOT(releasedHandler()));
@@ -18,16 +18,16 @@ TileChooser::TileChooser(const QString& path) : currentTileIndex(0)
 
 const Tile* TileChooser::getCurrentTile() const
 {
-	return this->tileList[this->currentTileIndex];
+	return m_tileList[m_currentTileIndex];
 }
 
 const Tile* TileChooser::getTileByName(const QString& name) const
 {
 	const Tile* result = NULL;
 
-	for(int i = 0; i < this->tileList.size() && result == NULL; i++) {
-		if(this->tileList[i]->getName() == name)
-			result = this->tileList[i];
+	for(int i = 0; i < m_tileList.size() && result == NULL; i++) {
+		if(m_tileList[i]->getName() == name)
+			result = m_tileList[i];
 	}
 
 	return result;
@@ -36,24 +36,24 @@ const Tile* TileChooser::getTileByName(const QString& name) const
 void TileChooser::wheelEvent(QWheelEvent* event)
 {
 	if(event->delta() < 0) {
-		this->currentTileIndex
-			= (this->currentTileIndex+1)%this->tileList.size();
+		m_currentTileIndex
+			= (m_currentTileIndex+1)%m_tileList.size();
 	}
 	else {
-		if(this->currentTileIndex <= 0)
-			this->currentTileIndex = this->tileList.size();
+		if(m_currentTileIndex <= 0)
+			m_currentTileIndex = m_tileList.size();
 
-		this->currentTileIndex
-			= this->currentTileIndex-1;
+		m_currentTileIndex
+			= m_currentTileIndex-1;
 	}
 
-	this->setIcon(*(this->tileList[this->currentTileIndex]->getIcon()));
+	this->setIcon(*(m_tileList[m_currentTileIndex]->getIcon()));
 }
 
 void TileChooser::releasedHandler()
 {
-	this->currentTileIndex
-		= (this->currentTileIndex+1)%this->tileList.size();
+	m_currentTileIndex
+		= (m_currentTileIndex+1)%m_tileList.size();
 
-	this->setIcon(*(this->tileList[this->currentTileIndex]->getIcon()));
+	this->setIcon(*(m_tileList[m_currentTileIndex]->getIcon()));
 }

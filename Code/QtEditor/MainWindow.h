@@ -20,13 +20,13 @@ public:
 	~MainWindow();
 
 protected:
-	QVBoxLayout* layout;
+	QVBoxLayout* m_layout;
 
-	TopPanel* topPanel;
-	MapDisplay* mapDisplay;
-	QScrollArea* mapArea;
+	TopPanel* m_topPanel;
+	MapDisplay* m_mapDisplay;
+	QScrollArea* m_mapArea;
 
-	bool mapEdited;
+	bool m_mapEdited;
 
 	virtual void closeEvent(QCloseEvent* event);
 

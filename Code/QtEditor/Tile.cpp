@@ -20,7 +20,7 @@ Tile::Tile(const QString& path)
 			int openQuotePos = line.indexOf('\'');
 			int closeQuotePos = line.lastIndexOf('\'')-openQuotePos;
 
-			this->name = line.mid(openQuotePos+1, closeQuotePos-1);
+			m_name = line.mid(openQuotePos+1, closeQuotePos-1);
 
 			foundName = true;
 		}
@@ -32,7 +32,7 @@ Tile::Tile(const QString& path)
 
 			QPixmap pixmap(QString(ASSETS_DIR)+"/"+line);
 
-			this->icon = new QIcon(pixmap.copy(	TILE_OFFSET_X,
+			m_icon = new QIcon(pixmap.copy(	TILE_OFFSET_X,
 								TILE_OFFSET_Y,
 								TILE_WIDTH,
 								TILE_HEIGHT ));
@@ -44,20 +44,20 @@ Tile::Tile(const QString& path)
 
 Tile::~Tile()
 {
-	delete this->icon;
+	delete m_icon;
 }
 
 const QIcon* Tile::getIcon() const
 {
-	return this->icon;
+	return m_icon;
 }
 
 const QString& Tile::getName() const
 {
-	return this->name;
+	return m_name;
 }
 
 QString Tile::serialize() const
 {
-	return QString(TILE_TEMPLATE).arg(this->name);
+	return QString(TILE_TEMPLATE).arg(m_name);
 }

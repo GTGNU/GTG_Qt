@@ -26,17 +26,17 @@ public:
 	const TileChooser* getTileChooser() const;
 
 protected:
-	QHBoxLayout* layout;
-	QFormLayout* formLayout;
-	QFormLayout* buttonLayout;
+	QHBoxLayout* m_layout;
+	QFormLayout* m_formLayout;
+	QFormLayout* m_buttonLayout;
 
-	TileChooser* tileChooser;
-	QPushButton* openButton;
-	QPushButton* saveButton;
-	QLineEdit* widthLineEdit;
-	QLineEdit* heightLineEdit;
+	TileChooser* m_tileChooser;
+	QPushButton* m_openButton;
+	QPushButton* m_saveButton;
+	QLineEdit* m_widthLineEdit;
+	QLineEdit* m_heightLineEdit;
 
-	bool showWarning;
+	bool m_showWarning;
 
 signals:
 	void gridSizeChanged(const int width, const int height);

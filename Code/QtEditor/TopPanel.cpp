@@ -2,96 +2,96 @@
 
 TopPanel::TopPanel()
 {
-	this->layout = new QHBoxLayout();
-	this->formLayout = new QFormLayout();
-	this->buttonLayout = new QFormLayout();
+	m_layout = new QHBoxLayout();
+	m_formLayout = new QFormLayout();
+	m_buttonLayout = new QFormLayout();
 
-	this->tileChooser = new TileChooser(TILES_DIR);
-	this->openButton = new QPushButton(OPEN_BTN_LABEL);
-	this->saveButton = new QPushButton(SAVE_BTN_LABEL);
+	m_tileChooser = new TileChooser(TILES_DIR);
+	m_openButton = new QPushButton(OPEN_BTN_LABEL);
+	m_saveButton = new QPushButton(SAVE_BTN_LABEL);
 
-	this->widthLineEdit
+	m_widthLineEdit
 		= new QLineEdit(QString::number(DEFAULT_GRID_WIDTH));
 
-	this->heightLineEdit
+	m_heightLineEdit
 		= new QLineEdit(QString::number(DEFAULT_GRID_HEIGHT));
 
-	this->tileChooser->setFixedSize(	TILE_CHOOSER_WIDTH,
+	m_tileChooser->setFixedSize(	TILE_CHOOSER_WIDTH,
 						TILE_CHOOSER_HEIGHT );
 
-	this->connect(	this->widthLineEdit,
+	this->connect(	m_widthLineEdit,
 			SIGNAL(editingFinished()),
 			SLOT(editingFinishedHandler()) );
 
-	this->connect(	this->heightLineEdit,
+	this->connect(	m_heightLineEdit,
 			SIGNAL(editingFinished()),
 			SLOT(editingFinishedHandler()) );
 
-	this->connect(	this->openButton,
+	this->connect(	m_openButton,
 			SIGNAL(released()),
 			SLOT(openHandler()) );
 
-	this->connect(	this->saveButton,
+	this->connect(	m_saveButton,
 			SIGNAL(released()),
 			SLOT(saveHandler()) );
 
-	this->formLayout->addRow(	new QLabel(WIDTH_FORM_LABEL),
-					this->widthLineEdit );
+	m_formLayout->addRow(	new QLabel(WIDTH_FORM_LABEL),
+					m_widthLineEdit );
 
-	this->formLayout->addRow(	new QLabel(HEIGHT_FORM_LABEL),
-					this->heightLineEdit );
+	m_formLayout->addRow(	new QLabel(HEIGHT_FORM_LABEL),
+					m_heightLineEdit );
 
-	this->buttonLayout->addWidget(this->openButton);
-	this->buttonLayout->addWidget(this->saveButton);
+	m_buttonLayout->addWidget(m_openButton);
+	m_buttonLayout->addWidget(m_saveButton);
 
-	this->layout->addWidget(this->tileChooser);
-	this->layout->addLayout(formLayout);
-	this->layout->addLayout(buttonLayout);
+	m_layout->addWidget(m_tileChooser);
+	m_layout->addLayout(m_formLayout);
+	m_layout->addLayout(m_buttonLayout);
 
 	this->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-	this->setLayout(layout);
+	this->setLayout(m_layout);
 }
 
 TopPanel::~TopPanel()
 {
-	delete this->tileChooser;
-	delete this->saveButton;
-	delete this->widthLineEdit;
-	delete this->heightLineEdit;
+	delete m_tileChooser;
+	delete m_saveButton;
+	delete m_widthLineEdit;
+	delete m_heightLineEdit;
 
-	delete this->formLayout;
-	delete this->buttonLayout;
+	delete m_formLayout;
+	delete m_buttonLayout;
 
-	delete this->layout;
+	delete m_layout;
 }
 
 const TileChooser* TopPanel::getTileChooser() const
 {
-	return this->tileChooser;
+	return m_tileChooser;
 }
 
 void TopPanel::setShowWarning(bool value)
 {
-	this->showWarning = value;
+	m_showWarning = value;
 }
 
 void TopPanel::editingFinishedHandler()
 {
-	int width = this->widthLineEdit->text().toInt();
-	int height = this->heightLineEdit->text().toInt();
+	int width = m_widthLineEdit->text().toInt();
+	int height = m_heightLineEdit->text().toInt();
 
 	if(width < 1)
 	{
 		width = 1;
 
-		this->widthLineEdit->setText("1");
+		m_widthLineEdit->setText("1");
 	}
 
 	if(height < 1)
 	{
 		height = 1;
 
-		this->heightLineEdit->setText("1");
+		m_heightLineEdit->setText("1");
 	}
 
 	emit gridSizeChanged(width, height);
@@ -109,8 +109,8 @@ void TopPanel::saveHandler()
 
 void TopPanel::mapLoadHandler(const int width, const int height)
 {
-	this->widthLineEdit->setText(QString::number(width));
-	this->heightLineEdit->setText(QString::number(height));
+	m_widthLineEdit->setText(QString::number(width));
+	m_heightLineEdit->setText(QString::number(height));
 }
 
 void TopPanel::mapEditedHandler()

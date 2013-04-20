@@ -26,13 +26,13 @@ public:
 	QString serialize() const;
 
 protected:
-	int gridWidth;
-	int gridHeight;
+	int m_gridWidth;
+	int m_gridHeight;
 
-	QVector< QVector<TileButton*> > grid;
+	QVector< QVector<TileButton*> > m_grid;
 
-	QGridLayout* layout;
-	const TileChooser* tileChooser;
+	QGridLayout* m_layout;
+	const TileChooser* m_tileChooser;
 
 	void clear();
 

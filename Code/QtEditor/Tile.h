@@ -19,8 +19,8 @@ public:
 	QString serialize() const;
 
 protected:
-	QString name;
-	QIcon* icon;
+	QString m_name;
+	QIcon* m_icon;
 };
 
 #endif
