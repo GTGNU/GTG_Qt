@@ -1,5 +1,7 @@
 #include "TileChooser.h"
 
+using namespace gtgeditor;
+
 TileChooser::TileChooser(const QString& path) : m_currentTileIndex(0)
 {
 	QDir directory(path);

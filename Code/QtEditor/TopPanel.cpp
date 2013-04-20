@@ -1,5 +1,7 @@
 #include "TopPanel.h"
 
+using namespace gtgeditor;
+
 TopPanel::TopPanel()
 {
 	m_layout = new QHBoxLayout();

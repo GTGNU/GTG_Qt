@@ -1,5 +1,7 @@
 #include "TileButton.h"
 
+using namespace gtgeditor;
+
 TileButton::TileButton(const TileChooser* chooser) : m_tileChooser(chooser)
 {
 	m_tile = m_tileChooser->getCurrentTile();

@@ -11,25 +11,28 @@
 #include "config.h"
 #include "Tile.h"
 
-class TileChooser : public QPushButton
+namespace gtgeditor
 {
-	Q_OBJECT
+	class TileChooser : public QPushButton
+	{
+		Q_OBJECT
 
-public:
-	TileChooser(const QString& path);
+	public:
+		TileChooser(const QString& path);
 
-	const Tile* getCurrentTile() const;
-	const Tile* getTileByName(const QString& name) const;
+		const Tile* getCurrentTile() const;
+		const Tile* getTileByName(const QString& name) const;
 
-protected:
-	int m_currentTileIndex;
+	protected:
+		int m_currentTileIndex;
 
-	QVector<const Tile*> m_tileList;
+		QVector<const Tile*> m_tileList;
 
-	virtual void wheelEvent(QWheelEvent* event);
+		virtual void wheelEvent(QWheelEvent* event);
 
-public slots:
-	void releasedHandler();
-};
+	public slots:
+		void releasedHandler();
+	};
+}
 
 #endif

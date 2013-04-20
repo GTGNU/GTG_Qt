@@ -11,28 +11,31 @@
 #include "TopPanel.h"
 #include "MapDisplay.h"
 
-class MainWindow : public QMainWindow
+namespace gtgeditor
 {
-	Q_OBJECT
+	class MainWindow : public QMainWindow
+	{
+		Q_OBJECT
 
-public:
-	MainWindow();
-	~MainWindow();
+	public:
+		MainWindow();
+		~MainWindow();
 
-protected:
-	QVBoxLayout* m_layout;
+	protected:
+		QVBoxLayout* m_layout;
 
-	TopPanel* m_topPanel;
-	MapDisplay* m_mapDisplay;
-	QScrollArea* m_mapArea;
+		TopPanel* m_topPanel;
+		MapDisplay* m_mapDisplay;
+		QScrollArea* m_mapArea;
 
-	bool m_mapEdited;
+		bool m_mapEdited;
 
-	virtual void closeEvent(QCloseEvent* event);
+		virtual void closeEvent(QCloseEvent* event);
 
-public slots:
-	void mapEditedHandler();
-	void mapResetHandler();
-};
+	public slots:
+		void mapEditedHandler();
+		void mapResetHandler();
+	};
+}
 
 #endif

@@ -8,19 +8,22 @@
 
 #include "config.h"
 
-class Tile
+namespace gtgeditor
 {
-public:
-	Tile(const QString& path);
-	~Tile();
+	class Tile
+	{
+	public:
+		Tile(const QString& path);
+		~Tile();
 
-	const QIcon* getIcon() const;
-	const QString& getName() const;
-	QString serialize() const;
+		const QIcon* getIcon() const;
+		const QString& getName() const;
+		QString serialize() const;
 
-protected:
-	QString m_name;
-	QIcon* m_icon;
-};
+	protected:
+		QString m_name;
+		QIcon* m_icon;
+	};
+}
 
 #endif

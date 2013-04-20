@@ -1,5 +1,7 @@
 #include "MainWindow.h"
 
+using namespace gtgeditor;
+
 MainWindow::MainWindow() : m_mapEdited(false)
 {
 	m_layout = new QVBoxLayout();

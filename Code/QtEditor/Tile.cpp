@@ -1,5 +1,7 @@
 #include "Tile.h"
 
+using namespace gtgeditor;
+
 Tile::Tile(const QString& path)
 {
 	QFile file(path);

@@ -13,38 +13,41 @@
 #include "TileButton.h"
 #include "TileChooser.h"
 
-class MapDisplay : public QWidget
+namespace gtgeditor
 {
-	Q_OBJECT
+	class MapDisplay : public QWidget
+	{
+		Q_OBJECT
 
-public:
-	MapDisplay(const TileChooser* chooser);
-	~MapDisplay();
+	public:
+		MapDisplay(const TileChooser* chooser);
+		~MapDisplay();
 
-	void setGridSize(const int width, const int height);
-	void load(const QString& path);
-	QString serialize() const;
+		void setGridSize(const int width, const int height);
+		void load(const QString& path);
+		QString serialize() const;
 
-protected:
-	int m_gridWidth;
-	int m_gridHeight;
+	protected:
+		int m_gridWidth;
+		int m_gridHeight;
 
-	QVector< QVector<TileButton*> > m_grid;
+		QVector< QVector<TileButton*> > m_grid;
 
-	QGridLayout* m_layout;
-	const TileChooser* m_tileChooser;
+		QGridLayout* m_layout;
+		const TileChooser* m_tileChooser;
 
-	void clear();
+		void clear();
 
-signals:
-	void load(const int width, const int height);
-	void edited();
+	signals:
+		void load(const int width, const int height);
+		void edited();
 
-public slots:
-	void gridSizeChangedHandler(const int width, const int height);
-	void openHandler();
-	void saveHandler();
-	void tilePressedHandler();
-};
+	public slots:
+		void gridSizeChangedHandler(const int width, const int height);
+		void openHandler();
+		void saveHandler();
+		void tilePressedHandler();
+	};
+}
 
 #endif

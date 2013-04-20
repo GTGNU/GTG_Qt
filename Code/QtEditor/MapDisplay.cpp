@@ -1,5 +1,7 @@
 #include "MapDisplay.h"
 
+using namespace gtgeditor;
+
 #include <iostream>
 
 MapDisplay::MapDisplay(const TileChooser* chooser)
