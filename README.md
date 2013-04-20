@@ -12,7 +12,7 @@ $ mkdir build
 $ cd build
 $ <see below>
 $ make
-$ cd ..
+$ cd ../..
 $ ./gtg
 ```
 
