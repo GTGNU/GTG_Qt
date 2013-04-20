@@ -36,10 +36,7 @@
 
 namespace gtg
 {
-	class Player;
-	class Tile;
-
-	namespace tile
+	namespace gfx
 	{
 		/*! \brief Encapsulates the drawn texture for layers
 		 *
@@ -48,12 +45,15 @@ namespace gtg
 		 * texture atlases through an offset property.
 		 *
 		 * Each texture is three rows tall, where it contains
-		 * top, middle and bottom sprites for the tile.
+		 * top, middle and bottom sprites for the item.
 		 */
 		class Texture
-			: public Registered<Texture>
+			: public QObject
+			, public Registered
 		{
 			Q_OBJECT
+
+			GTG_REGISTERED(Texture)
 
 			Q_PROPERTY(
 					QString file
@@ -68,6 +68,9 @@ namespace gtg
 			private:
 				//! All textures are cached in the static cache object
 				static TextureCache m_cache;
+
+				//! Texture registry
+				Registry* registry() const override;
 
 				//! We need to know wether the iterator is valid or not
 				bool m_initialized;
@@ -98,11 +101,11 @@ namespace gtg
 				 * the texture (or that interacts with the scene graph)
 				 *
 				 * \param node The node to be updated
-				 * \param tile The tile that contains the node
+				 * \param item The item that contains the node
 				 * \param region The region (topleft, middle, bottom...) to be extracted
 				 * \return The updated node
 				 */
-				QSGNode* updateNode(QSGNode* node, Tile* tile, QPoint region);
+				QSGNode* updateNode(QSGNode* node, QQuickItem* item, QPoint region);
 
 			signals:
 				void changed();
@@ -110,6 +113,6 @@ namespace gtg
 	}
 }
 
-QML_DECLARE_TYPE(gtg::tile::Texture)
+QML_DECLARE_TYPE(gtg::gfx::Texture)
 
 #endif

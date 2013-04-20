@@ -1,0 +1,6 @@
+-I /usr/include/qt
+-I /usr/include/qt/QtCore
+-I /usr/include/qt/QtGui
+-I /usr/include/qt/QtQml
+-I /usr/include/qt/QtQuick
+-fPIC

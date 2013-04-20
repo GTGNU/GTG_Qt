@@ -21,14 +21,10 @@
 #include <QtCore/qmath.h>
 
 #include "Texture.h"
-#include "Tile.h"
-#include "Map.h"
 
 
-using gtg::tile::Layer;
-using gtg::tile::Texture;
-
-using gtg::Tile;
+using gtg::gfx::Layer;
+using gtg::gfx::Texture;
 
 
 Layer::Layer(QObject* parent)
@@ -171,13 +167,13 @@ void Layer::insertOpacityNode(QSGNode* parent)
 }
 
 
-QMatrix4x4 Layer::transformMatrix(short tileSize)
+QMatrix4x4 Layer::transformMatrix(int width, int height)
 {
-	// We need to move the origin of the transformation to the center of the tile
+	// We need to move the origin of the transformation to the center of the item
 	return QTransform()
-		.translate(tileSize/2, tileSize/2)
+		.translate(width/2, height/2)
 		.rotate(m_rotation)
-		.translate(-tileSize/2, -tileSize/2);
+		.translate(-width/2, -height/2);
 }
 
 
@@ -200,10 +196,10 @@ void Layer::setOpacityChanged()
 }
 
 
-QSGNode* Layer::updateNode(QSGNode* parent, Tile* tile)
+QSGNode* Layer::updateNode(QSGNode* parent, QQuickItem* item)
 {
 	if (m_textureChanged) {
-		m_textureNode = texture()->updateNode(m_textureNode, tile, region());
+		m_textureNode = texture()->updateNode(m_textureNode, item, region());
 		m_textureChanged = false;
 	}
 
@@ -211,7 +207,7 @@ QSGNode* Layer::updateNode(QSGNode* parent, Tile* tile)
 		if (!m_transformNode)
 			insertTransformNode(parent);
 
-		m_transformNode->setMatrix(transformMatrix(tile->map()->tileSize()));
+		m_transformNode->setMatrix(transformMatrix(item->width(), item->height()));
 		m_rotationChanged = false;
 	}
 

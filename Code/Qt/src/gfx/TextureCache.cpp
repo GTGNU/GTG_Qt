@@ -22,7 +22,7 @@
 #include <QtQuick/QSGTexture>
 
 
-using gtg::TextureCache;
+using gtg::gfx::TextureCache;
 
 
 TextureCache::CacheEntry::CacheEntry(QString path)
@@ -35,17 +35,16 @@ TextureCache::CacheEntry::~CacheEntry()
 {
 }
 
-#include <qdebug.h>
 QImage TextureCache::CacheEntry::at(QPoint region) const
 {
 	// The file is always three rows tall (top/middle/bottom)
-	unsigned tileSize = m_full.height() / 3;
+	unsigned spriteSize = m_full.height() / 3;
 
 	return m_full.copy(
-		tileSize * region.x(),
-		tileSize * region.y(),
-		tileSize,
-		tileSize);
+		spriteSize * region.x(),
+		spriteSize * region.y(),
+		spriteSize,
+		spriteSize);
 }
 
 QSGTexture* TextureCache::CacheEntry::get(QQuickWindow* w, QPoint region)

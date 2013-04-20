@@ -1,16 +1,14 @@
-import gtg.tile 1.4
+import gtg.map 1.5 as M
+import gtg.gfx 1.5 as G
 
-Class {
+M.Class {
 	name: 'grass_tall'
 
-	texture: Texture {
+	texture: G.Texture {
 		file: 'grass_tall.png'
 	}
 
-	behavior: Behavior {
+	behavior: M.Behavior {
 		trespassable: true
-
-		onPlayerEnteredArea: { player.speed /= 3 }
-		onPlayerExitedArea:  { player.speed *= 3 }
 	}
 }

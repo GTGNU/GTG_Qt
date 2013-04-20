@@ -22,13 +22,15 @@
 
 #include "Row.h"
 #include "Tile.h"
-#include "tile/Texture.h"
+
+#include "gfx/Texture.h"
+
 #include "helpers/QmlListAdapter.h"
 
 
-using gtg::Tile;
-using gtg::Row;
-using gtg::Map;
+using gtg::map::Tile;
+using gtg::map::Row;
+using gtg::map::Map;
 
 using gtg::ChildList;
 
@@ -92,7 +94,6 @@ QSGNode* Map::updatePaintNode(QSGNode* node,
 {
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
-	qDebug() << "Children:";
 
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 

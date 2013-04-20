@@ -18,20 +18,30 @@
 
 #include "Behavior.h"
 
+#include "helpers/Registered.h"
 
-using gtg::tile::Behavior;
 
-using gtg::Player;
+using gtg::map::Behavior;
+
+using gtg::Registry;
 
 
 Behavior::Behavior(QObject* parent)
-	: Registered<Behavior>(parent)
+	: Registered()
 	, m_trespassable(false)
 {
 }
 
 Behavior::~Behavior()
 {
+}
+
+
+Registry* Behavior::registry() const
+{
+	static Registry* behaviorRegistry = new Registry("Behavior");
+
+	return behaviorRegistry;
 }
 
 
@@ -46,13 +56,3 @@ void Behavior::setTrespassable(bool trespassable)
 	emit trespassabilityChanged(m_trespassable);
 }
 
-
-void Behavior::emitPlayerEnteredArea(Player* player)
-{
-	emit playerEnteredArea(player);
-}
-
-void Behavior::emitPlayerExitedArea(Player* player)
-{
-	emit playerExitedArea(player);
-}

@@ -3,7 +3,7 @@
  *
  * This file is part of Grand Theft Gentoo.
  *
- * Foobar is free software: you can redistribute it and/or modify
+ * Grand Theft Gentoo is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation version 3.
  *
@@ -21,25 +21,25 @@
 #include <QtGui/QImage>
 
 #include <QtQuick/QSGNode>
+#include <QtQuick/QSGSimpleRectNode>
 #include <QtQuick/QSGTexture>
 #include <QtQuick/QQuickWindow>
 
 #include "Row.h"
 #include "Map.h"
+#include "Behavior.h"
 
-#include "tile/Layer.h"
-#include "tile/Behavior.h"
+#include "gfx/Layer.h"
 
 #include "helpers/QmlListAdapter.h"
 
 
-using gtg::tile::Behavior;
-using gtg::tile::Layer;
+using gtg::gfx::Layer;
 
-using gtg::Tile;
-using gtg::Row;
-using gtg::Map;
-using gtg::Player;
+using gtg::map::Behavior;
+using gtg::map::Tile;
+using gtg::map::Row;
+using gtg::map::Map;
 
 
 Tile::Tile(QQuickItem* parent)
@@ -148,17 +148,6 @@ void Tile::replaceLayer(unsigned index, Layer* layer)
 }
 
 
-void Tile::setPlayer(Player* player)
-{
-	if (m_player)
-		emit playerExited(m_player);
-
-	m_player = player;
-
-	if (m_player)
-		emit playerEntered(m_player);
-}
-
 QSGNode* Tile::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
@@ -167,13 +156,16 @@ QSGNode* Tile::updatePaintNode(QSGNode* node,
 
 	// First draw, we need to initialize the node and set the geometry
 	if (!node) {
-		node = new QSGNode;
+		auto* n = new QSGSimpleRectNode;
 
 		int tileSize = map()->tileSize();
 		setX(mapX() * tileSize);
 		setY(0); // relative to row
 		setWidth(tileSize);
 		setHeight(tileSize);
+
+		n->setRect(boundingRect());
+		node = n;
 	}
 
 	qDebug() << "Bounding rect: " << boundingRect();

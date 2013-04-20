@@ -20,18 +20,19 @@
 
 #include <QtQuick/QQuickWindow>
 
-#include "Tile.h"
+#include "helpers/Registered.h"
 
 
-using gtg::tile::Texture;
+using gtg::gfx::Texture;
+using gtg::gfx::TextureCache;
 
-using gtg::TextureCache;
+using gtg::Registry;
 
 
 TextureCache Texture::m_cache("assets/");
 
 Texture::Texture(QObject* parent)
-	: Registered<Texture>(parent)
+	: Registered()
 	, m_initialized(false)
 	, m_cacheIterator()
 	, m_offset(0)
@@ -40,6 +41,13 @@ Texture::Texture(QObject* parent)
 
 Texture::~Texture()
 {
+}
+
+
+Registry* Texture::registry() const
+{
+	static Registry* textureRegistry = new Registry("Texture");
+	return textureRegistry;
 }
 
 
@@ -70,14 +78,14 @@ void Texture::setOffset(unsigned offset)
 }
 
 
-QSGNode* Texture::updateNode(QSGNode* node, Tile* tile, QPoint region)
+QSGNode* Texture::updateNode(QSGNode* node, QQuickItem* item, QPoint region)
 {
 	QSGSimpleTextureNode* n;
 
 	// First update
 	if (!node) {
 		n = new QSGSimpleTextureNode;
-		n->setRect(tile->boundingRect());
+		n->setRect(item->boundingRect());
 	} else {
 		n = static_cast<QSGSimpleTextureNode*>(node);
 	}
@@ -85,7 +93,7 @@ QSGNode* Texture::updateNode(QSGNode* node, Tile* tile, QPoint region)
 	// Update the texture
 	n->setTexture(
 			// Ask the cache for the texture
-			m_cacheIterator.value().get(tile->window(),
+			m_cacheIterator.value().get(item->window(),
 			// Add the offset to the x axis
 			{region.x() + 3*static_cast<int>(offset()), region.y()}) );
 	return n;

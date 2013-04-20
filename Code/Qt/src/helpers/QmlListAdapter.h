@@ -19,6 +19,8 @@
 #ifndef LISTADAPTER_H
 #define LISTADAPTER_H
 
+#include <utility>
+
 #include <QtCore/QDebug>
 #include <QtCore/QList>
 
@@ -28,7 +30,7 @@
 
 namespace gtg
 {
-	/*! \brief Adapts any class with adequate methods to a QmlListProperty
+	/*! \brief Adapts any class with adequate methods to a QQmlListProperty
 	 *
 	 * Due to how inconvenient the QQmlListProperty class is, this can be used
 	 * to wrap a reference to anything that has an append(), count(), at() and clear()
@@ -37,8 +39,12 @@ namespace gtg
 	template <class List, class T>
 	struct QmlListAdapter
 	{
-		QmlListAdapter(List* list)
-			: m_list(list)
+		QmlListAdapter(List& list)
+			: m_list(&list)
+		{
+		}
+
+		~QmlListAdapter()
 		{
 		}
 
@@ -85,7 +91,7 @@ namespace gtg
 	template <class T, class List>
 	QQmlListProperty<T> qml_adapt(List& list, QObject* parent = nullptr)
 	{
-		return QmlListAdapter<List, T>(&list).toQmlListProperty(nullptr);
+		return QmlListAdapter<List, T>(list).toQmlListProperty(nullptr);
 	}
 }
 

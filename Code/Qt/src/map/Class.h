@@ -21,15 +21,19 @@
 
 #include <QtCore/QObject>
 
-#include <QtQml>
+#include <QtQuick/QQuickItem>
 
 #include "helpers/Registered.h"
 
 namespace gtg
 {
-	namespace tile
+	namespace gfx
 	{
 		class Texture;
+	}
+
+	namespace map
+	{
 		class Behavior;
 
 		/*! \brief Composition of a Texture and a Behavior
@@ -42,48 +46,53 @@ namespace gtg
 		 * It also reduces verboseness of map files.
 		 */
 		class Class
-			: public Registered<Class>
+			: public QObject
+			, public Registered
 		{
 			Q_OBJECT
 
-				Q_PROPERTY(
-						gtg::tile::Texture* texture
-						READ texture
-						WRITE setTexture
-						NOTIFY textureChanged)
+			GTG_REGISTERED(Class)
 
-				Q_PROPERTY(
-						gtg::tile::Behavior* behavior
-						READ behavior
-						WRITE setBehavior
-						NOTIFY behaviorChanged)
+			Q_PROPERTY(
+					gtg::gfx::Texture* texture
+					READ texture
+					WRITE setTexture
+					NOTIFY textureChanged)
+
+			Q_PROPERTY(
+					gtg::map::Behavior* behavior
+					READ behavior
+					WRITE setBehavior
+					NOTIFY behaviorChanged)
 
 			private:
-				Texture* m_texture;
+				Registry* registry() const override;
+
+				gfx::Texture* m_texture;
 				Behavior* m_behavior;
 
 			public:
 				Class(QObject* parent = nullptr);
 				~Class();
 
-				gtg::tile::Texture* texture() const;
-				void setTexture(gtg::tile::Texture* texture);
+				gtg::gfx::Texture* texture() const;
+				void setTexture(gtg::gfx::Texture* texture);
 
-				gtg::tile::Behavior* behavior() const;
-				void setBehavior(gtg::tile::Behavior* behavior);
+				gtg::map::Behavior* behavior() const;
+				void setBehavior(gtg::map::Behavior* behavior);
 
 			signals:
 				void textureChanged(
-						gtg::tile::Texture* oldTexture,
-						gtg::tile::Texture* newTexture);
+						gtg::gfx::Texture* oldTexture,
+						gtg::gfx::Texture* newTexture);
 
 				void behaviorChanged(
-						gtg::tile::Behavior* oldBehavior,
-						gtg::tile::Behavior* newBehavior);
+						gtg::map::Behavior* oldBehavior,
+						gtg::map::Behavior* newBehavior);
 		};
 	}
 }
 
-QML_DECLARE_TYPE(gtg::tile::Class)
+QML_DECLARE_TYPE(gtg::map::Class)
 
 #endif

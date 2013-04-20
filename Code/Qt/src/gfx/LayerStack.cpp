@@ -24,19 +24,16 @@
 #include <QtQuick/QSGNode>
 #include <QtQuick/QSGSimpleTextureNode>
 
-#include "Tile.h"
 #include "Texture.h"
 #include "Layer.h"
 
 
-using gtg::tile::LayerStack;
-using gtg::tile::Layer;
-
-using gtg::Tile;
+using gtg::gfx::LayerStack;
+using gtg::gfx::Layer;
 
 
-LayerStack::LayerStack(Tile* tile)
-	: m_tile(tile)
+LayerStack::LayerStack(QQuickItem* item)
+	: m_item(item)
 {
 }
 
@@ -52,22 +49,22 @@ void LayerStack::append(Layer* layer)
 
 void LayerStack::insert(unsigned index, Layer* layer)
 {
-	// Schedule an update of the tile if the layer changed
+	// Schedule an update of the item if the layer changed
 	QObject::connect(layer, &Layer::changed,
-			m_tile, &QQuickItem::update,
+			m_item, &QQuickItem::update,
 			Qt::DirectConnection);
 
 	m_changes.push_back({Change::ADD, index, layer});
 	m_layers.insert(index, layer);
 
-	m_tile->update();
+	m_item->update();
 }
 
 
 void LayerStack::remove(Layer* layer)
 {
 	QObject::disconnect(layer, &Layer::changed,
-			m_tile, &QQuickItem::update);
+			m_item, &QQuickItem::update);
 
 	QList<Layer*>::iterator it =
 		std::find(m_layers.begin(), m_layers.end(), layer);
@@ -80,7 +77,7 @@ void LayerStack::remove(Layer* layer)
 
 	m_layers.erase(it);
 
-	m_tile->update();
+	m_item->update();
 }
 
 void LayerStack::remove(unsigned index)
@@ -88,12 +85,12 @@ void LayerStack::remove(unsigned index)
 	auto it = m_layers.begin() + index;
 
 	QObject::disconnect(*it, &Layer::changed,
-			m_tile, &QQuickItem::update);
+			m_item, &QQuickItem::update);
 
 	m_changes.push_back({Change::REMOVE, index, *it});
 	m_layers.erase(it);
 
-	m_tile->update();
+	m_item->update();
 }
 
 
@@ -118,7 +115,7 @@ void LayerStack::clear()
 	m_changes.push_back({Change::CLEAR, 0, nullptr});
 	m_layers.clear();
 
-	m_tile->update();
+	m_item->update();
 }
 
 
@@ -130,7 +127,7 @@ bool LayerStack::applyChanges(QSGNode* node)
 		switch (change.action) {
 			case Change::ADD:
 				// Ask the layer to generate a new node
-				newNode = change.layer->updateNode(node, m_tile);
+				newNode = change.layer->updateNode(node, m_item);
 
 				// Add it to the node
 				if (change.index == (unsigned)node->childCount()) {
@@ -140,7 +137,7 @@ bool LayerStack::applyChanges(QSGNode* node)
 							node->childAtIndex(change.index));
 				} else {
 					qWarning() << "Warning: change index is greater than the number of childs of the node"
-						<< "\tin the LayerStack of" << m_tile;
+						<< "\tin the LayerStack of" << m_item;
 				}
 
 				break;
@@ -165,5 +162,5 @@ void LayerStack::updateNode(QSGNode* node)
 {
 	// We just need to call layer->updateNode for each layer
 	for (Layer* layer : m_layers)
-		layer->updateNode(node, m_tile);
+		layer->updateNode(node, m_item);
 }

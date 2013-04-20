@@ -24,19 +24,18 @@
 #include <QtCore/QObject>
 
 class QSGNode;
+class QQuickItem;
 
 namespace gtg
 {
-	class Tile;
-
-	namespace tile
+	namespace gfx
 	{
 		class Layer;
 
 		class LayerStack
 		{
 			private:
-				Tile* m_tile;
+				QQuickItem* m_item;
 				QList<Layer*> m_layers;
 
 				/*! \brief Used to register a change that happened in the stack
@@ -59,7 +58,7 @@ namespace gtg
 				QList<Change> m_changes;
 
 			public:
-				LayerStack(Tile* tile);
+				LayerStack(QQuickItem* item);
 				~LayerStack();
 
 				//! Append a layer

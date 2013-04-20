@@ -31,14 +31,14 @@ namespace gtg
 {
 	class Tile;
 
-	namespace tile
+	namespace gfx
 	{
 		class Texture;
 
-		/*! \brief A layer displayed in a tile
+		/*! \brief A layer displayed in an entity
 		 *
 		 * This class is the one that interfaces between a texture
-		 * and a tile with a region and several transformations.
+		 * and an entity with a region and several transformations.
 		 */
 		class Layer
 			: public QObject
@@ -46,7 +46,7 @@ namespace gtg
 			Q_OBJECT
 
 			Q_PROPERTY(
-					gtg::tile::Texture* texture
+					gtg::gfx::Texture* texture
 					READ texture
 					WRITE setTexture)
 
@@ -113,7 +113,7 @@ namespace gtg
 				void insertOpacityNode(QSGNode* parent);
 
 				//! Calculate the transformation matrix for the transformNode
-				QMatrix4x4 transformMatrix(short tileSize);
+				QMatrix4x4 transformMatrix(int width, int height);
 
 			protected slots:
 				void setTextureChanged();
@@ -125,9 +125,9 @@ namespace gtg
 				~Layer();
 
 				//! Get a pointer to the texture that takes care of updating textureNode
-				gtg::tile::Texture* texture() const;
+				gtg::gfx::Texture* texture() const;
 				//! Set the texture.
-				void setTexture(gtg::tile::Texture* texture);
+				void setTexture(gtg::gfx::Texture* texture);
 
 				//! Return the region of the texture that is displayed in the layer (default is 1,1 == middle)
 				QPoint region() const;
@@ -147,7 +147,7 @@ namespace gtg
 				//! WARNING: Call only from some point inside a updatePaintNode() function
 				/*! Update the node according to what has changed since the last call
 				 */
-				QSGNode* updateNode(QSGNode* parent, Tile* tile);
+				QSGNode* updateNode(QSGNode* parent, QQuickItem* item);
 
 			signals:
 				void changed();
@@ -159,6 +159,6 @@ namespace gtg
 	}
 }
 
-QML_DECLARE_TYPE(gtg::tile::Layer)
+QML_DECLARE_TYPE(gtg::gfx::Layer)
 
 #endif
