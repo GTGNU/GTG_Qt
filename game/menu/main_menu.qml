@@ -74,7 +74,7 @@ Image {
 		anchors.right: window.right
 		anchors.rightMargin: 10
 
-		text: "v 0.1.2 pre-alpha"
+		text: "v 1.5 pre-alpha"
 		font.family: titleScreenFont.name
 		font.pointSize: 15
 		color: "white"
