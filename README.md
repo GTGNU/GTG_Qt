@@ -8,13 +8,15 @@ In order to build this, you will need Qt5 installed in your system or the Qt SDK
 ```
 $ git clone https://github.com/GrandTheftGentoo/GTG_Qt
 $ cd game/src
+$ mkdir build
+$ cd build
 $ <see below>
 $ make
 $ cd ..
 $ ./gtg
 ```
 
-Step 3:
+Step 5:
 If you are using system's Qt5, run
 ```
 $ cmake ..
