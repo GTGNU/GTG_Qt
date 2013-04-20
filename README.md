@@ -5,18 +5,24 @@ Wiki
 Compiling
 =========
 In order to build this, you will need Qt5 installed in your system or the Qt SDK >= 5.0
-    $ git clone https://github.com/GrandTheftGentoo/GTG_Qt
-    $ cd game/src
-    $ <see below>
-    $ make
-    $ cd ..
-    $ ./gtg
+```
+$ git clone https://github.com/GrandTheftGentoo/GTG_Qt
+$ cd game/src
+$ <see below>
+$ make
+$ cd ..
+$ ./gtg
+```
 
 Step 3:
 If you are using system's Qt5, run
-    $ cmake ..
+```
+$ cmake ..
+```
 If you are using Qt's SDK, run
-    $ cmake .. -DCMAKE_MODULE_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/cmake
+```
+$ cmake .. -DCMAKE_MODULE_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/cmake
+```
 
 Communication
 =============
