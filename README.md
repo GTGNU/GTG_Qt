@@ -26,6 +26,19 @@ If you are using Qt's SDK, run
 $ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/cmake
 ```
 
+To build the editor:
+```
+$ cd editor
+$ qmake
+$ make
+$ ./editor
+```
+
+If you are using Qt's SDK, run this first:
+```
+$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
+```
+
 Communication
 =============
 * #GTG @ irc.p2p-irc.net
