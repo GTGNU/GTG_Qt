@@ -37,27 +37,34 @@
 #define STRINGIFY(a) PSTRINGIFY(a)
 
 #define TILE_TEMPLATE \
-"\t\tTile {\n\
-\t\t	T.Layer { texture: %1.texture }\n\
+"\t\tM.Tile {\n\
+\t\t	G.Layer { texture: %1.texture }\n\
 \n\
 \t\t	behavior: %1.behavior\n\
 \t\t}\n\n"
 
 #define ROW_TEMPLATE \
-"\tRow {\n\
+"\tM.Row {\n\
 %1\
 \t}\n\n"
 
+#define PROPERTY_TEMPLATE "\tproperty var %1: tiles.find(\"%1\")\n"
+
 #define MAP_TEMPLATE \
 "import QtQuick 2.0\n\
-import gtg.map 1.4\n\
-import gtg.tile 1.4 as T\n\
+import gtg.map 1.5 as M\n\
+import gtg.gfx 1.5 as G\n\
 \n\
-Map {\n\
+M.Map {\n\
 	id: " MAP_ID "\n\
 	tileSize: " STRINGIFY(TILE_WIDTH) "\n\
 \n\
-%1\
+	requires: [ %1 ]\n\
+\n\
+	property var tiles: Registry.find(\"Class\")\n\
+%2\
+\n\
+%3\
 }"
 
 #endif

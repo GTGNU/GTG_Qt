@@ -18,11 +18,14 @@ namespace gtgeditor
 
 		const QIcon* getIcon() const;
 		const QString& getName() const;
+		const QString& getPath() const;
+		const QString getFileName() const;
 		QString serialize() const;
 
 	protected:
-		QString m_name;
 		QIcon* m_icon;
+		QString m_name;
+		QString m_path;
 	};
 }
 

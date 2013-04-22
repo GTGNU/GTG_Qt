@@ -2,7 +2,7 @@
 
 using namespace gtgeditor;
 
-Tile::Tile(const QString& path)
+Tile::Tile(const QString& path) : m_path(path)
 {
 	QFile file(path);
 
@@ -57,6 +57,20 @@ const QIcon* Tile::getIcon() const
 const QString& Tile::getName() const
 {
 	return m_name;
+}
+
+const QString& Tile::getPath() const
+{
+	return m_path;
+}
+
+const QString Tile::getFileName() const
+{
+	QRegExp regExp("[^\\/]*$");
+
+	regExp.indexIn(m_path);
+
+	return regExp.cap(0);
 }
 
 QString Tile::serialize() const
