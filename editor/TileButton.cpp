@@ -31,3 +31,14 @@ void TileButton::enterEvent(QEvent* event)
 	if(QApplication::keyboardModifiers() == Qt::ControlModifier)
 		emit pressed();
 }
+
+void TileButton::paintEvent(QPaintEvent* event)
+{
+	event->accept();
+
+	QPainter* painter = new QPainter(this);
+
+	this->icon().paint(painter, 0, 0, this->width(), this->height());
+
+	delete painter;
+}

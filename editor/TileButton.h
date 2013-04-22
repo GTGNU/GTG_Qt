@@ -2,16 +2,16 @@
 #define TILEBUTTON_H
 
 #include <QtCore/QEvent>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QApplication>
 #include <QtGui/QIcon>
+#include <QtGui/QPainter>
 
 #include "config.h"
 #include "TileChooser.h"
 
 namespace gtgeditor
 {
-	class TileButton : public QPushButton
+	class TileButton : public QAbstractButton
 	{
 	public:
 		TileButton(const TileChooser* chooser);
@@ -24,6 +24,7 @@ namespace gtgeditor
 		const TileChooser* m_tileChooser;
 
 		virtual void enterEvent(QEvent* event);
+		virtual void paintEvent(QPaintEvent* event);
 	};
 }
 
