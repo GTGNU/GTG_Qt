@@ -31,8 +31,9 @@
 #include <QtQuick/QSGSimpleTextureNode>
 #include <QtQuick/QSGTexture>
 
-#include "helpers/Registered.h"
 #include "TextureCache.h"
+
+#include "util/Registered.h"
 
 namespace gtg
 {

@@ -26,7 +26,7 @@
 #include "map/Tile.h"
 #include "map/Map.h"
 
-#include "helpers/QmlListAdapter.h"
+#include "util/QmlListAdapter.h"
 
 
 using gtg::floating::Entity;
@@ -50,13 +50,14 @@ Entity::Entity(QString type, Registry* registry, QQuickItem* parentItem)
 
 Entity::~Entity()
 {
+	registry()->unregisterObj(this);
 }
 
 
 Registry* Entity::registry() const
 {
-	static Registry reg {"Entity"};
-	return &reg;
+	static Registry* reg = new Registry("Entity");
+	return reg;
 }
 
 

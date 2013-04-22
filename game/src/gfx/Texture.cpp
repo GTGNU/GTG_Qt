@@ -20,8 +20,6 @@
 
 #include <QtQuick/QQuickWindow>
 
-#include "helpers/Registered.h"
-
 
 using gtg::gfx::Texture;
 using gtg::gfx::TextureCache;
@@ -29,7 +27,7 @@ using gtg::gfx::TextureCache;
 using gtg::Registry;
 
 
-TextureCache Texture::m_cache("assets/");
+TextureCache Texture::m_cache("assets/images/");
 
 Texture::Texture(QObject* parent)
 	: Registered()
@@ -41,6 +39,7 @@ Texture::Texture(QObject* parent)
 
 Texture::~Texture()
 {
+	registry()->unregisterObj(this);
 }
 
 

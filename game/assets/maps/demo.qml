@@ -6,8 +6,18 @@ M.Map {
 	id: map
 	tileSize: 64
 
+	requires: [ 'tiles/sand.qml', 'tiles/concrete.qml', 'tiles/grass_tall.qml', 'tiles/water.qml' ]
+
+	property var tiles: Registry.find("Class")
+	property var sand: tiles.find("sand")
+	property var concrete: tiles.find("concrete")
+	property var grass_tall: tiles.find("grass_tall")
+	property var water: tiles.find("water")
+
 	Component.onCompleted: {
 		var registryNames = Registry.names()
+
+		console.log("Registry content:")
 		for (var i = 0; i < registryNames.length; i++) {
 			var registry = Registry.find(registryNames[i])
 			var objectNames = registry.names()

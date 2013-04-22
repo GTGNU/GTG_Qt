@@ -17,6 +17,9 @@
  */
 
 #include "Map.h"
+
+#include <utility>
+
 #include <QtQuick/QSGNode>
 #include <QtQuick/QSGSimpleRectNode>
 
@@ -25,7 +28,8 @@
 
 #include "gfx/Texture.h"
 
-#include "helpers/QmlListAdapter.h"
+#include "util/QmlListAdapter.h"
+#include "util/qmlengine.h"
 
 
 using gtg::map::Tile;
@@ -37,6 +41,7 @@ using gtg::ChildList;
 
 Map::Map(QQuickItem* parent)
 	: QQuickItem(parent)
+	, m_requiresSet(false)
 	, m_rows(this)
 {
 	setFlag(QQuickItem::ItemHasContents);
@@ -44,6 +49,26 @@ Map::Map(QQuickItem* parent)
 
 Map::~Map()
 {
+}
+
+
+QStringList Map::requires() const
+{
+	return m_requires;
+}
+
+void Map::setRequires(QStringList requires)
+{
+	if (!m_requiresSet) {
+		m_requires = std::move(requires);
+		m_requiresSet = true;
+
+		for (auto& requirement : m_requires)
+			gtg::qmlengine::loadDefinition(requirement);
+
+	} else {
+		qWarning() << "Map: 'requires' is read-only";
+	}
 }
 
 
@@ -92,8 +117,8 @@ Tile* Map::tileAt(int x, int y)
 QSGNode* Map::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
-	qDebug() << "----------------------------------------";
-	qDebug() << "Drawing " << this;
+	/*qDebug() << "----------------------------------------";
+	qDebug() << "Drawing " << this;*/
 
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 

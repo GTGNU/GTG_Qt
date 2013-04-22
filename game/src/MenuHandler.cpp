@@ -25,7 +25,9 @@
 #include <QtQuick/QQuickView>
 #include <QtQuick/QQuickWindow>
 
-gtg::MenuHandler::MenuHandler(QQuickView* view,
+using gtg::MenuHandler;
+
+MenuHandler::MenuHandler(QQuickView& view,
 		QString mapSource, QObject* parent)
 	: QObject(parent)
 	, m_view(view)
@@ -33,15 +35,23 @@ gtg::MenuHandler::MenuHandler(QQuickView* view,
 {
 }
 
-void gtg::MenuHandler::play()
+
+void MenuHandler::setMenu(QQuickItem* menu)
 {
-	// Load the map
-	m_view->setSource(QUrl::fromLocalFile(m_mapSource));
+	connect(menu, SIGNAL(play()), this, SLOT(play()), Qt::QueuedConnection);
+	connect(menu, SIGNAL(quit()), this, SLOT(quit()), Qt::QueuedConnection);
 }
 
-void gtg::MenuHandler::quit()
+
+void MenuHandler::play()
 {
-	m_view->close();
+	// Load the map
+	m_view.setSource(QUrl::fromLocalFile(m_mapSource));
+}
+
+void MenuHandler::quit()
+{
+	m_view.close();
 }
 
 

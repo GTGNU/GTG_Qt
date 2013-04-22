@@ -22,6 +22,7 @@
 #include <QtCore/QObject>
 
 class QQuickView;
+class QQuickItem;
 
 namespace gtg
 {
@@ -32,13 +33,15 @@ namespace gtg
 		Q_OBJECT
 
 		private:
-			QQuickView* m_view;
+			QQuickView& m_view;
 			QString m_mapSource;
 
 		public:
-			MenuHandler(QQuickView* view,
+			MenuHandler(QQuickView& view,
 					QString mapSource,
 					QObject* parent = nullptr);
+
+			void setMenu(QQuickItem* menuItem);
 
 		public slots:
 			void play();

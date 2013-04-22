@@ -18,8 +18,6 @@
 
 #include "Behavior.h"
 
-#include "helpers/Registered.h"
-
 
 using gtg::map::Behavior;
 
@@ -34,13 +32,13 @@ Behavior::Behavior(QObject* parent)
 
 Behavior::~Behavior()
 {
+	registry()->unregisterObj(this);
 }
 
 
 Registry* Behavior::registry() const
 {
 	static Registry* behaviorRegistry = new Registry("Behavior");
-
 	return behaviorRegistry;
 }
 

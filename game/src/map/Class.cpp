@@ -36,6 +36,7 @@ Class::Class(QObject* parent)
 
 Class::~Class()
 {
+	registry()->unregisterObj(this);
 }
 
 

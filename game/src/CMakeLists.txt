@@ -43,9 +43,9 @@ file(GLOB sources ${GrandTheftGentoo_SOURCE_DIR}/*.cpp)
 file(GLOB sources_gfx ${GrandTheftGentoo_SOURCE_DIR}/gfx/*.cpp)
 file(GLOB sources_map ${GrandTheftGentoo_SOURCE_DIR}/map/*.cpp)
 file(GLOB sources_floating ${GrandTheftGentoo_SOURCE_DIR}/floating/*.cpp)
-file(GLOB sources_helpers ${GrandTheftGentoo_SOURCE_DIR}/helpers/*.cpp)
+file(GLOB sources_util ${GrandTheftGentoo_SOURCE_DIR}/util/*.cpp)
 
-add_executable(gtg ${sources} ${sources_gfx} ${sources_map} ${sources_floating} ${sources_helpers})
+add_executable(gtg ${sources} ${sources_gfx} ${sources_map} ${sources_floating} ${sources_util})
 
 qt5_use_modules(gtg Core Gui Qml Quick)
 

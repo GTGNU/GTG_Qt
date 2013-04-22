@@ -23,7 +23,7 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "helpers/ChildList.h"
+#include "util/ChildList.h"
 
 namespace gtg
 {
@@ -43,12 +43,17 @@ namespace gtg
 		{
 			Q_OBJECT
 
+			Q_PROPERTY(QStringList requires READ requires WRITE setRequires)
+
 			Q_PROPERTY(unsigned int tileSize READ tileSize WRITE setTileSize)
 
 			Q_PROPERTY(QQmlListProperty<gtg::map::Row> rows READ qmlRows)
 			Q_CLASSINFO("DefaultProperty", "rows")
 
 			private:
+				QStringList m_requires;
+				bool m_requiresSet;
+
 				unsigned int m_tileSize;
 				ChildList<Row> m_rows;
 
@@ -64,6 +69,11 @@ namespace gtg
 			public:
 				Map(QQuickItem* parent = nullptr);
 				~Map();
+
+				//! requires getter
+				QStringList requires() const;
+				//! requires setter
+				void setRequires(QStringList requires);
 
 				//! tileSize getter
 				unsigned int tileSize() const;

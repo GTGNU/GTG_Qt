@@ -31,7 +31,7 @@
 
 #include "gfx/Layer.h"
 
-#include "helpers/QmlListAdapter.h"
+#include "util/QmlListAdapter.h"
 
 
 using gtg::gfx::Layer;
@@ -151,8 +151,8 @@ void Tile::replaceLayer(unsigned index, Layer* layer)
 QSGNode* Tile::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
-	qDebug() << "----------------------------------------";
-	qDebug() << "Drawing " << this;
+	/*qDebug() << "----------------------------------------";
+	qDebug() << "Drawing " << this;*/
 
 	// First draw, we need to initialize the node and set the geometry
 	if (!node) {
@@ -168,7 +168,7 @@ QSGNode* Tile::updatePaintNode(QSGNode* node,
 		node = n;
 	}
 
-	qDebug() << "Bounding rect: " << boundingRect();
+	//qDebug() << "Bounding rect: " << boundingRect();
 
 	// Delegate drawing to the layer stack
 	m_layers.applyChanges(node);

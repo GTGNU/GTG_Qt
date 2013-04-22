@@ -23,7 +23,8 @@
 
 #include "Tile.h"
 #include "Map.h"
-#include "helpers/QmlListAdapter.h"
+
+#include "util/QmlListAdapter.h"
 
 using gtg::map::Tile;
 using gtg::map::Row;
@@ -110,8 +111,8 @@ int Row::indexOf(const Tile* object) const
 QSGNode* Row::updatePaintNode(QSGNode* node,
 		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
 {
-	qDebug() << "----------------------------------------";
-	qDebug() << "Drawing " << this;
+	/*qDebug() << "----------------------------------------";
+	qDebug() << "Drawing " << this;*/
 
 	QSGSimpleRectNode* n = static_cast<QSGSimpleRectNode*>(node);
 
@@ -126,7 +127,7 @@ QSGNode* Row::updatePaintNode(QSGNode* node,
 		setHeight(tileSize);
 	}
 
-	qDebug() << "Bounding rect: " << boundingRect();
+	//qDebug() << "Bounding rect: " << boundingRect();
 
 	n->setRect(boundingRect());
 

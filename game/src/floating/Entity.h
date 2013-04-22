@@ -27,7 +27,7 @@
 
 #include "gfx/LayerStack.h"
 
-#include "helpers/Registered.h"
+#include "util/Registered.h"
 
 namespace gtg
 {

@@ -23,7 +23,7 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "helpers/Registered.h"
+#include "util/Registered.h"
 
 namespace gtg
 {

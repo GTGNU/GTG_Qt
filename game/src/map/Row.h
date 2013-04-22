@@ -25,7 +25,7 @@
 
 #include <QtQuick/QQuickItem>
 
-#include "helpers/ChildList.h"
+#include "util/ChildList.h"
 
 namespace gtg
 {

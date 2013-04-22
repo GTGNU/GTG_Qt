@@ -27,7 +27,8 @@
 
 #include <QtQuick/QQuickView>
 
-#include "helpers/Registered.h"
+#include "util/Registered.h"
+#include "util/qmlengine.h"
 
 #include "map/Map.h"
 #include "map/Row.h"
@@ -40,18 +41,16 @@
 
 #include "MenuHandler.h"
 
-using namespace gtg;
-
 /*! \brief Loads a tile class from a file
  *
  * \param engine The QML engine where it should be loaded and registered
  * \param fileName The qml file where the Class component is defined
  */
-void loadTileClass(QQmlEngine* engine, const QString& fileName)
+/*void loadTileClass(QQmlEngine* engine, const QString& fileName)
 {
 	qDebug() << "Loading tile definition in" << fileName;
 
-	QQmlComponent component{engine, fileName};
+	QQmlComponent component(engine, fileName);
 	QObject* object = component.create();
 	map::Class* type = qobject_cast<map::Class*>(object);
 
@@ -62,43 +61,31 @@ void loadTileClass(QQmlEngine* engine, const QString& fileName)
 
 	for (auto& error : component.errors())
 		qDebug() << "Error:" << error;
-}
+}*/
 
 /*! \brief Calls loadTileClass for each qml file in the given directory
  *
  * \param engine The QML engine where classes should be loaded and registered
  * \param location The directory to be inspected
  */
-void loadTileClasses(QQmlEngine* engine, const QString& location)
+/*void loadTileClasses(QQmlEngine* engine, const QString& location)
 {
 	engine->rootContext()->setContextProperty("Registry", Registry::global());
-	QDir tileDefDir{location};
+	QDir tileDefDir(location);
 	for (QString& entry : tileDefDir.entryList(QDir::Files))
 		loadTileClass(engine, tileDefDir.absoluteFilePath(entry));
-}
+}*/
 
 int main(int argc, char* argv[])
 {
-	qmlRegisterType<Registry>("gtg.core", 1, 5, "Registry_t");
-
-	qmlRegisterType<gfx::Texture> ("gtg.gfx", 1, 5, "Texture" );
-	qmlRegisterType<gfx::Layer>   ("gtg.gfx", 1, 5, "Layer"   );
-
-	qmlRegisterType<map::Behavior>("gtg.map", 1, 5, "Behavior");
-	qmlRegisterType<map::Class>   ("gtg.map", 1, 5, "Class"   );
-
-	qmlRegisterType<map::Tile>("gtg.map", 1, 5, "Tile");
-	qmlRegisterType<map::Row> ("gtg.map", 1, 5, "Row" );
-	qmlRegisterType<map::Map> ("gtg.map", 1, 5, "Map" );
-
 	QGuiApplication app(argc, argv);
 
-	QString tilesSource = "tiles/";
 	QString menuSource = "menu/main_menu.qml";
-	QString mapSource = "maps/demo.qml";
+	QString mapSource = "assets/maps/demo.qml";
 
 	// Window
-	QQuickView view;
+	QSharedPointer<QQmlEngine> engine = gtg::qmlengine::init(1,5);
+	QQuickView view(engine.data(), nullptr);
 
 	// Show QML warnings
 	QObject::connect(view.engine(), &QQmlEngine::warnings,
@@ -114,16 +101,14 @@ int main(int argc, char* argv[])
 	});
 
 	// Load tile classes
-	loadTileClasses(view.engine(), tilesSource);
+	//loadTileClasses(view.engine(), tilesSource);
 
 	// Open the menu
 	view.setSource(QUrl::fromLocalFile(menuSource));
 
 	// Handle user choice (change)
-	gtg::MenuHandler menuHandler{&view, mapSource};
-	QQuickItem* menu = view.rootObject();
-	QObject::connect(menu, SIGNAL(play()), &menuHandler, SLOT(play()), Qt::QueuedConnection);
-	QObject::connect(menu, SIGNAL(quit()), &menuHandler, SLOT(quit()), Qt::QueuedConnection);
+	gtg::MenuHandler menuHandler(view, mapSource);
+	menuHandler.setMenu(view.rootObject());
 
 	view.show();
 

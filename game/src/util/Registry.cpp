@@ -22,6 +22,9 @@ using gtg::Registry;
 using gtg::Registered;
 
 
+bool Registry::m_staticDeleted = false;
+
+
 Registry::Registry(QObject* parent)
 	: QObject(parent)
 	, Registered()
@@ -35,12 +38,19 @@ Registry::Registry(QString staticKey, QObject* parent)
 	, m_staticKey(staticKey)
 {
 	setName<Registry>(m_staticKey);
-	qDebug() << "Registry" << name() << "initialized with key" << staticKey;
+	qDebug() << "Registry initialized with key" << staticKey;
 }
 
 Registry::~Registry()
 {
 	qDebug() << "Deleting" << (this == global()?"global":"") << "registry with name" << name();
+
+	// If there's still a global register, cleanup first
+	if (!m_staticDeleted && this != global())
+		registry()->unregisterObj(this);
+	// If the static register, mark as deleted to avoid segfaults
+	else
+		m_staticDeleted = true;
 }
 
 
@@ -65,3 +75,21 @@ QObject* Registry::find(const QString& name) const
 	return static_cast<QObject*>(m_table.find(name).value());
 }
 
+
+void gtg::Registry::unregisterObj(Registered* obj)
+{
+	auto it = m_table.find(obj->name());
+
+	if (it != m_table.end()) {
+		// dynamic_cast<void*> returns a pointer to the "most derived object"
+		// so we can compare by identity (base pointers don't hold the same address)
+		if (dynamic_cast<void*>(it.value()) == dynamic_cast<void*>(obj)) {
+			m_table.erase(it);
+			qDebug() << obj << obj->name() << "unregistered successfully";
+			return;
+		} else {
+			qWarning() << "Found partial match at unregisterObj(" << obj << "):"
+				<< it.key() << "=>" << it.value();
+		}
+	}
+}
