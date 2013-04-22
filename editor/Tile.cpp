@@ -32,12 +32,12 @@ Tile::Tile(const QString& path)
 
 			line = line.mid(openQuotePos+1, closeQuotePos-1);
 
-			QPixmap pixmap(QString(ASSETS_DIR)+"/"+line);
+			QPixmap pixmap(QString(IMAGES_DIR)+"/"+line);
 
 			m_icon = new QIcon(pixmap.copy(	TILE_OFFSET_X,
-								TILE_OFFSET_Y,
-								TILE_WIDTH,
-								TILE_HEIGHT ));
+							TILE_OFFSET_Y,
+							TILE_WIDTH,
+							TILE_HEIGHT ));
 
 			foundImage = true;
 		}

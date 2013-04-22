@@ -6,7 +6,8 @@
 #define MAP_ID "map"
 
 #define ASSETS_DIR "assets"
-#define TILES_DIR "tiles"
+#define TILES_DIR ASSETS_DIR"/definitions/tiles"
+#define IMAGES_DIR ASSETS_DIR"/images"
 
 #define OPEN_BTN_LABEL "Open"
 #define SAVE_BTN_LABEL "Save"
