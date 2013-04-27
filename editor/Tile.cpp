@@ -2,7 +2,7 @@
 
 using namespace gtgeditor;
 
-Tile::Tile(const QString& path)
+Tile::Tile(const QString& path) : m_path(path)
 {
 	QFile file(path);
 
@@ -32,12 +32,12 @@ Tile::Tile(const QString& path)
 
 			line = line.mid(openQuotePos+1, closeQuotePos-1);
 
-			QPixmap pixmap(QString(ASSETS_DIR)+"/"+line);
+			QPixmap pixmap(QString(IMAGES_DIR)+"/"+line);
 
 			m_icon = new QIcon(pixmap.copy(	TILE_OFFSET_X,
-								TILE_OFFSET_Y,
-								TILE_WIDTH,
-								TILE_HEIGHT ));
+							TILE_OFFSET_Y,
+							TILE_WIDTH,
+							TILE_HEIGHT ));
 
 			foundImage = true;
 		}
@@ -57,6 +57,20 @@ const QIcon* Tile::getIcon() const
 const QString& Tile::getName() const
 {
 	return m_name;
+}
+
+const QString& Tile::getPath() const
+{
+	return m_path;
+}
+
+const QString Tile::getFileName() const
+{
+	QRegExp regExp("[^\\/]*$");
+
+	regExp.indexIn(m_path);
+
+	return regExp.cap(0);
 }
 
 QString Tile::serialize() const

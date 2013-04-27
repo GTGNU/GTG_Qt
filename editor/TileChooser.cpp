@@ -18,6 +18,11 @@ TileChooser::TileChooser(const QString& path) : m_currentTileIndex(0)
 	this->connect(this, SIGNAL(released()), SLOT(releasedHandler()));
 }
 
+const QVector<const Tile*>& TileChooser::getTileList() const
+{
+	return m_tileList;
+}
+
 const Tile* TileChooser::getCurrentTile() const
 {
 	return m_tileList[m_currentTileIndex];

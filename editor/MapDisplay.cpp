@@ -2,8 +2,6 @@
 
 using namespace gtgeditor;
 
-#include <iostream>
-
 MapDisplay::MapDisplay(const TileChooser* chooser)
 :	m_gridWidth(0),
 	m_gridHeight(0),
@@ -50,8 +48,8 @@ void MapDisplay::setGridSize(const int width, const int height)
 						SLOT(tilePressedHandler()) );
 
 				m_layout->addWidget(	button,
-								i,
-								j );
+							i,
+							j );
 			}
 		}
 
@@ -164,11 +162,11 @@ void MapDisplay::load(const QString& path)
 
 			this->connect(	button,
 					SIGNAL(released()),
-					SLOT(tileClickHandler()) );
+					SLOT(tilePressedHandler()) );
 
 			m_layout->addWidget(	button,
-							rowIndex,
-							columnIndex );
+						rowIndex,
+						columnIndex );
 
 			foundTexture = true;
 		}
@@ -186,6 +184,18 @@ void MapDisplay::load(const QString& path)
 QString MapDisplay::serialize() const
 {
 	QString gridString;
+	QString tileListString;
+	QString propertyListString;
+
+	for(const Tile* i : m_tileChooser->getTileList())
+	{
+		tileListString.append("'tiles/"+i->getFileName()+"', ");
+
+		propertyListString
+			.append(QString(PROPERTY_TEMPLATE).arg(i->getName()));
+	}
+
+	tileListString = tileListString.left(tileListString.length()-2);
 
 	for(QVector<TileButton*> i : m_grid) {
 		QString tileRowString;
@@ -197,7 +207,10 @@ QString MapDisplay::serialize() const
 		gridString.append(QString(ROW_TEMPLATE).arg(tileRowString));
 	}
 
-	return QString(MAP_TEMPLATE).arg(gridString);
+	return QString(MAP_TEMPLATE)
+		.arg(tileListString)
+		.arg(propertyListString)
+		.arg(gridString);
 }
 
 void MapDisplay::clear()

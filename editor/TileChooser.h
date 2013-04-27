@@ -20,6 +20,7 @@ namespace gtgeditor
 	public:
 		TileChooser(const QString& path);
 
+		const QVector<const Tile*>& getTileList() const;
 		const Tile* getCurrentTile() const;
 		const Tile* getTileByName(const QString& name) const;
 
