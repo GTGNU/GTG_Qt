@@ -158,6 +158,10 @@ namespace gtg
 				bool applyChanges(QSGNode* node);
 				//! WARNING: Call only from some point inside a updatePaintNode() function
 				void updateNode(QSGNode* node);
+
+			signals:
+				void layerAdded(unsigned index, Layer* layer);
+				void layerRemoved(unsigned index, Layer* layer);
 		};
 	}
 }

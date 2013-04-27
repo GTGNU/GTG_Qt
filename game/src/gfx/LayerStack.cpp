@@ -91,6 +91,8 @@ void LayerStack::insert(unsigned index, Layer* layer)
 	m_layers.insert(index, layer);
 
 	m_item->update();
+
+	emit layerAdded(index, layer);
 }
 
 
@@ -102,20 +104,20 @@ void LayerStack::remove(Layer* layer)
 	QList<Layer*>::iterator it =
 		std::find(m_layers.begin(), m_layers.end(), layer);
 
-	m_changes.push_back({
-			Change::REMOVE,
-			static_cast<unsigned>(std::distance(m_layers.begin(), it)),
-			layer
-		});
+	unsigned index = static_cast<unsigned>(std::distance(m_layers.begin(), it));
 
+	m_changes.push_back({Change::REMOVE, index, layer});
 	m_layers.erase(it);
 
 	m_item->update();
+
+	emit layerRemoved(index, layer);
 }
 
 void LayerStack::remove(unsigned index)
 {
 	auto it = m_layers.begin() + index;
+	Layer* layer = *it;
 
 	QObject::disconnect(*it, &Layer::changed,
 			m_item, &QQuickItem::update);
@@ -124,6 +126,8 @@ void LayerStack::remove(unsigned index)
 	m_layers.erase(it);
 
 	m_item->update();
+
+	emit layerRemoved(index, layer);
 }
 
 
