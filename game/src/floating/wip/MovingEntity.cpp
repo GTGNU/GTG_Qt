@@ -16,8 +16,7 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
-#include "Player.h"
+#include "MovingEntity.h"
 
 #include "map/Tile.h"
 #include "map/Row.h"
@@ -25,7 +24,7 @@
 #include "map/Behavior.h"
 
 
-using gtg::floating::Player;
+using gtg::floating::MovingEntity;
 
 using gtg::map::Behavior;
 using gtg::map::Tile;
@@ -33,61 +32,57 @@ using gtg::map::Row;
 using gtg::map::Map;
 
 
-Player::Player(QQuickItem* parent)
+MovingEntity::MovingEntity(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_currentTile(nullptr)
 {
 }
 
-Player::~Player()
+MovingEntity::~MovingEntity()
 {
 }
 
 
-QString Player::name() const
+QTimer& MovingEntity::timer() const
 {
-	return m_name;
+	static QTimer timer;
+	timer.setInterval(timerInterval());
+
 }
 
-void Player::setName(const QString& name)
+Registry* MovingEntity::registry() const
 {
-	m_name = name;
+	static Registry* playerRegistry = new Registry("MovingEntity");
+	return playerRegistry;
 }
 
 
-double Player::speed() const
+double MovingEntity::speed() const
 {
 	return m_speed;
 }
 
-void Player::setSpeed(double speed)
+void MovingEntity::setSpeed(double speed)
 {
 	m_speed = speed;
 }
 
 
-Map* Player::map() const
-{
-	return qobject_cast<Map*>(qobject_cast<Row*>(parent())->parent());
-}
-
-
-Tile* Player::currentTile() const
+Tile* MovingEntity::currentTile() const
 {
 	return m_currentTile;
 }
 
-void Player::moveBy(int dx, int dy)
+void MovingEntity::moveBy(int dx, int dy)
 {
 	Tile* target = map()->tileAt(x() + dx, y() + dy);
 	bool differentBehavior = currentTile()->behavior() != target->behavior();
 
 	if (differentBehavior)
-		m_currentTile->behavior()->emitPlayerExitedArea(this);
+		m_currentTile->behavior()->emitMovingEntityExitedArea(this);
 
 	m_currentTile = target;
 
 	if (differentBehavior)
-		m_currentTile->behavior()->emitPlayerEnteredArea(this);
+		m_currentTile->behavior()->emitMovingEntityEnteredArea(this);
 }
-*/

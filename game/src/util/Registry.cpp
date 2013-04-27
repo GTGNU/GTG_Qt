@@ -18,6 +18,13 @@
 
 #include "Registered.h"
 
+#include <QtQml/QJSValue>
+#include <QtQml/QJSValueList>
+#include <QtQml/QQmlEngine>
+
+#include "qmlengine.h"
+
+
 using gtg::Registry;
 using gtg::Registered;
 
@@ -73,6 +80,17 @@ QList<QString> Registry::names() const
 QObject* Registry::find(const QString& name) const
 {
 	return static_cast<QObject*>(m_table.find(name).value());
+}
+
+void Registry::for_each(QJSValue block) const
+{
+	if (block.isCallable()) {
+		for (QObject* entry : m_table) {
+			QJSValueList args;
+			args << qmlengine::engine()->toScriptValue(entry);
+			block.call(args);
+		}
+	}
 }
 
 

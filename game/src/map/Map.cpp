@@ -88,7 +88,7 @@ ChildList<Row> Map::rows() const
 	return m_rows;
 }
 
-QQmlListProperty<Row> Map::qmlRows()
+QQmlListProperty<Row> Map::rowsQml()
 {
 	return gtg::qml_adapt<Row>(m_rows, this);
 }
@@ -112,6 +112,7 @@ Tile* Map::tileAt(int x, int y)
 {
 	return m_rows.at(y)->m_tiles.at(x);
 }
+
 
 
 QSGNode* Map::updatePaintNode(QSGNode* node,

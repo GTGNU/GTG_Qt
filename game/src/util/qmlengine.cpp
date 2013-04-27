@@ -23,14 +23,27 @@ using namespace gtg;
 
 QQmlEngine* g_engine;
 
+
+QQmlEngine* qmlengine::engine()
+{
+	return g_engine;
+}
+
+
 void registerTypes(int versionMajor, int versionMinor)
 {
 	qDebug() << "Registering GTG QML types";
 
-	qmlRegisterType<Registry>     ("gtg.core", versionMajor, versionMinor, "Registry_t");
+	qmlRegisterUncreatableType<Registry>("gtg.core", versionMajor, versionMinor, "Registry_t",
+			"Registry is not meant to be instantiated from QML");
+
 
 	qmlRegisterType<gfx::Texture> ("gtg.gfx",  versionMajor, versionMinor, "Texture"   );
 	qmlRegisterType<gfx::Layer>   ("gtg.gfx",  versionMajor, versionMinor, "Layer"     );
+
+	qmlRegisterUncreatableType<gfx::LayerStack>("gtg.gfx", versionMajor, versionMinor, "LayerStack",
+			"LayerStack is a set of accessors and modifiers, not an instantiable type");
+
 
 	qmlRegisterType<map::Behavior>("gtg.map",  versionMajor, versionMinor, "Behavior"  );
 	qmlRegisterType<map::Class>   ("gtg.map",  versionMajor, versionMinor, "Class"     );

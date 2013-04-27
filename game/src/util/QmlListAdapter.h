@@ -39,7 +39,7 @@ namespace gtg
 	template <class List, class T>
 	struct QmlListAdapter
 	{
-		QmlListAdapter(List& list)
+		explicit QmlListAdapter(List& list)
 			: m_list(&list)
 		{
 		}

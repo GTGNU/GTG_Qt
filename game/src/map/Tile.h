@@ -59,8 +59,12 @@ namespace gtg
 			Q_OBJECT
 
 			Q_PROPERTY(
-					QQmlListProperty<gtg::gfx::Layer> layers
-					READ layersQml)
+					QQmlListProperty<gtg::gfx::Layer> layerList
+					READ layerQmlList)
+
+			Q_PROPERTY(
+					gtg::gfx::LayerStack* layers
+					READ layers)
 
 			Q_PROPERTY(
 					gtg::map::Behavior* behavior
@@ -74,9 +78,7 @@ namespace gtg
 			Q_PROPERTY(gtg::map::Row* row READ row)
 			Q_PROPERTY(gtg::map::Map* map READ map)
 
-			Q_PROPERTY(unsigned layerCount READ layerCount)
-
-			Q_CLASSINFO("DefaultProperty", "layers")
+			Q_CLASSINFO("DefaultProperty", "layerList")
 
 			private:
 				gfx::LayerStack m_layers;
@@ -92,11 +94,15 @@ namespace gtg
 						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
-				Tile(QQuickItem* parent = nullptr);
+				explicit Tile(QQuickItem* parent = nullptr);
 				~Tile();
 
+				//! Access to the layer stack
+				const gtg::gfx::LayerStack* layers() const;
+				gtg::gfx::LayerStack* layers();
+
 				//! Returns a QQmlListProperty of tiles. This is just a QML accessor.
-				QQmlListProperty<gtg::gfx::Layer> layersQml();
+				QQmlListProperty<gtg::gfx::Layer> layerQmlList();
 
 				//! Returns the attached Behavior object
 				gtg::map::Behavior* behavior() const;
@@ -112,71 +118,6 @@ namespace gtg
 				gtg::map::Row* row() const;
 				//! Equivalent to row()->map()
 				gtg::map::Map* map() const;
-
-				//! The number of layers in the stack
-				unsigned layerCount() const;
-
-				/*!
-				 * \brief Search for a layer
-				 *
-				 * \param layer The layer to look for
-				 * \return The index where the layer is
-				 */
-				Q_INVOKABLE unsigned indexOfLayer(gtg::gfx::Layer* layer) const;
-
-				/*!
-				 * \brief Prepend a layer
-				 *
-				 * \param layer The layer to prepend
-				 */
-				Q_INVOKABLE void unshiftLayer(gtg::gfx::Layer* layer);
-
-				/*!
-				 * \brief Append a layer
-				 *
-				 * \param layer The layer to append
-				 */
-				Q_INVOKABLE void pushLayer(gtg::gfx::Layer* layer);
-
-				/*!
-				 * \brief Insert a layer
-				 *
-				 * \param index Where the layer will be inserted
-				 * \param layer The layer to append
-				 */
-				Q_INVOKABLE void addLayer(unsigned index, gtg::gfx::Layer* layer);
-
-				/*!
-				 * \brief Remove a layer
-				 *
-				 * \param layer The layer to remove
-				 */
-				Q_INVOKABLE void removeLayer(gtg::gfx::Layer* layer);
-
-				/*!
-				 * \brief Remove a layer
-				 *
-				 * \param index The index of the layer to be removed
-				 */
-				Q_INVOKABLE void removeLayer(unsigned index);
-
-				/*!
-				 * \brief Replace a layer
-				 *
-				 * \param prev The layer to be replaced
-				 * \param layer The new layer
-				 */
-				Q_INVOKABLE void replaceLayer(
-						gtg::gfx::Layer* prev,
-						gtg::gfx::Layer* layer);
-
-				/*!
-				 * \brief Replace a layer
-				 *
-				 * \param index The index of the layer to be replaced
-				 * \param layer The new layer
-				 */
-				Q_INVOKABLE void replaceLayer(unsigned index, gtg::gfx::Layer* layer);
 
 			signals:
 				void behaviorChanged(

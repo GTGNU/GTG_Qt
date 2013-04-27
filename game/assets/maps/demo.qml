@@ -17,14 +17,21 @@ M.Map {
 	Component.onCompleted: {
 		var registryNames = Registry.names()
 
+		var registry, objectNames
+
+		function toStr(obj) {
+			return registry.name + "." + obj.name + " = (" + typeof(obj) + ") " + obj
+		}
+
 		console.log("Registry content:")
+
 		for (var i = 0; i < registryNames.length; i++) {
-			var registry = Registry.find(registryNames[i])
-			var objectNames = registry.names()
+			registry = Registry.find(registryNames[i])
+			objectNames = registry.names()
 
 			for (var j = 0; j < objectNames.length; j++) {
 				var object = registry.find(objectNames[j])
-				console.log(registry.name + "." + object.name + " = (" + typeof(object) + ") " + object);
+				console.log(toStr(object))
 			}
 		}
 	}
@@ -67,18 +74,23 @@ M.Map {
 	M.Row {
 		// 0
 		M.Tile {
-			layers: G.Layer { texture: water.texture }
+			id: tile01
+			G.Layer { texture: water.texture }
 
 			behavior: water.behavior
 
-			property var timer: Timer {
+			property var rotationTimer: Timer {
 				interval: 100
 				repeat: true
 				running: true
-				onTriggered: {
-					var l = map.tileAt(0,1).layers[0]
-					l.rotation = (l.rotation + 1) % 360
-				}
+				onTriggered: tile01.layers.at(0).rotation++
+			}
+
+			property var mutationTimer: Timer {
+				interval: 5000
+				repeat: false
+				running: true
+				onTriggered: tile01.layers.at(0).texture = sand.texture
 			}
 		}
 

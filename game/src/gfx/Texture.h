@@ -83,7 +83,7 @@ namespace gtg
 				unsigned m_offset;
 
 			public:
-				Texture(QObject* parent = nullptr);
+				explicit Texture(QObject* parent = nullptr);
 				~Texture();
 
 				//! Get the file name of the texture

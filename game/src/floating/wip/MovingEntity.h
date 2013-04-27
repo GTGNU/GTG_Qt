@@ -16,7 +16,6 @@
  * along with Grand Theft Gentoo.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -36,15 +35,20 @@ namespace gtg
 
 	namespace floating
 	{
-		class Player
+		class MovingEntity
 			: public Entity
 		{
 			Q_OBJECT
 
 			Q_PROPERTY(
-					double speed
-					READ speed
-					WRITE setSpeed)
+					double speedX
+					READ speedX
+					WRITE setSpeedX)
+
+			Q_PROPERTY(
+					double speedY
+					READ speedY
+					WRITE setSpeedY)
 
 			private:
 				QString m_name;
@@ -52,18 +56,19 @@ namespace gtg
 
 				map::Tile* m_currentTile;
 
-			public:
+				QTimer& timer() const override;
 
-				Player(QQuickItem* parent);
+			public:
+				Player(QQuickItem* parent = nullptr);
 				~Player();
 
-				double speed() const;
-				void setSpeed(double speed);
+				Registry* registry() const override;
 
-				gtg::map::Map* map() const;
-				gtg::map::Tile* currentTile() const;
+				qreal speedX() const;
+				void setSpeedX(qreal speed);
 
-				Q_INVOKABLE void moveBy(int dx, int dy);
+				qreal speedY() const;
+				void setSpeedY(qreal speed);
 
 			signals:
 				void moved(int, int);
@@ -74,4 +79,3 @@ namespace gtg
 QML_DECLARE_TYPE(gtg::floating::Player)
 
 #endif
-*/

@@ -47,7 +47,7 @@ namespace gtg
 
 			Q_PROPERTY(unsigned int tileSize READ tileSize WRITE setTileSize)
 
-			Q_PROPERTY(QQmlListProperty<gtg::map::Row> rows READ qmlRows)
+			Q_PROPERTY(QQmlListProperty<gtg::map::Row> rows READ rowsQml)
 			Q_CLASSINFO("DefaultProperty", "rows")
 
 			private:
@@ -67,7 +67,7 @@ namespace gtg
 						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
-				Map(QQuickItem* parent = nullptr);
+				explicit Map(QQuickItem* parent = nullptr);
 				~Map();
 
 				//! requires getter
@@ -83,7 +83,7 @@ namespace gtg
 				//! Returns the list of child rows
 				ChildList<gtg::map::Row> rows() const;
 				//! Returns a QQmlListProperty of rows. This is just for QML, you should prefer rows() in C++ code
-				QQmlListProperty<gtg::map::Row> qmlRows();
+				QQmlListProperty<gtg::map::Row> rowsQml();
 
 				//! Find the index of a given Row
 				/*!

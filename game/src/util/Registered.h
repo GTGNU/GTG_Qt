@@ -103,7 +103,7 @@ namespace gtg
 
 		public:
 			//! Reserved for the global registry. Public is needed for QML exposure
-			Registry(QObject* parent = nullptr);
+			explicit Registry(QObject* parent = nullptr);
 
 			/*! \brief Constructor for Registry
 			 * \param staticKey The key that should be inserted into the static registry
@@ -139,6 +139,13 @@ namespace gtg
 			 * \return Object registered with the given name or null if not found
 			 */
 			Q_INVOKABLE QObject* find(const QString& name) const;
+
+			/*! \brief Loop through the contents of the registry
+			 * \param block The JavaScript function to be evaulauted
+			 *              for each element. It should take one argument,
+			 *              "each element".
+			 */
+			Q_INVOKABLE void for_each(QJSValue block) const;
 	};
 }
 

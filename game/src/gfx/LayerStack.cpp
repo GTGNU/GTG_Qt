@@ -32,8 +32,15 @@ using gtg::gfx::LayerStack;
 using gtg::gfx::Layer;
 
 
-LayerStack::LayerStack(QQuickItem* item)
-	: m_item(item)
+LayerStack::LayerStack(QObject* parent)
+	: QObject(parent)
+	, m_item(nullptr)
+{
+}
+
+LayerStack::LayerStack(QQuickItem* item, QObject* parent)
+	: QObject(parent)
+	, m_item(item)
 {
 }
 
@@ -42,9 +49,35 @@ LayerStack::~LayerStack()
 }
 
 
+unsigned LayerStack::count() const
+{
+	return m_layers.size();
+}
+
+Layer* LayerStack::at(unsigned index) const
+{
+	return m_layers.at(index);
+}
+
+unsigned LayerStack::indexOf(Layer* layer) const
+{
+	return m_layers.indexOf(layer);
+}
+
+
 void LayerStack::append(Layer* layer)
 {
 	insert(m_layers.size(), layer);
+}
+
+void LayerStack::unshift(Layer* layer)
+{
+	insert(0, layer);
+}
+
+void LayerStack::push(Layer* layer)
+{
+	append(layer);
 }
 
 void LayerStack::insert(unsigned index, Layer* layer)
@@ -94,22 +127,6 @@ void LayerStack::remove(unsigned index)
 }
 
 
-Layer* LayerStack::at(unsigned index) const
-{
-	return m_layers.at(index);
-}
-
-int LayerStack::count() const
-{
-	return m_layers.size();
-}
-
-unsigned LayerStack::indexOf(Layer* layer) const
-{
-	return m_layers.indexOf(layer);
-}
-
-
 void LayerStack::clear()
 {
 	m_changes.push_back({Change::CLEAR, 0, nullptr});
@@ -117,6 +134,19 @@ void LayerStack::clear()
 
 	m_item->update();
 }
+
+
+void LayerStack::replace(Layer* prev, Layer* layer)
+{
+	replace(indexOf(prev), layer);
+}
+
+void LayerStack::replace(unsigned index, Layer* layer)
+{
+	remove(index);
+	insert(index, layer);
+}
+
 
 
 bool LayerStack::applyChanges(QSGNode* node)

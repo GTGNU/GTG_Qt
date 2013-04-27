@@ -53,7 +53,7 @@ namespace gtg
 				bool m_trespassable;
 
 			public:
-				Behavior(QObject* parent = nullptr);
+				explicit Behavior(QObject* parent = nullptr);
 				~Behavior();
 
 				Registry* registry() const override;

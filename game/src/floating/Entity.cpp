@@ -21,6 +21,8 @@
 #include <algorithm>
 #include <cmath>
 
+#include <QtCore/QTimer>
+
 #include <QtQuick/QSGNode>
 
 #include "map/Tile.h"
@@ -35,31 +37,35 @@ using gtg::map::Map;
 using gtg::map::Tile;
 
 using gtg::gfx::Layer;
+using gtg::gfx::LayerStack;
 
 using gtg::Registry;
 
 
-Entity::Entity(QString type, Registry* registry, QQuickItem* parentItem)
+Entity::Entity(QString type, QQuickItem* parentItem)
 	: QQuickItem(parentItem)
 	, Registered()
 	, m_layers(this)
-	, m_type(type)
+
 	, m_map(nullptr)
 {
+	setFlag(QQuickItem::ItemHasContents);
 }
 
 Entity::~Entity()
 {
-	registry()->unregisterObj(this);
 }
 
 
-Registry* Entity::registry() const
+const LayerStack* Entity::layers() const
 {
-	static Registry* reg = new Registry("Entity");
-	return reg;
+	return &m_layers;
 }
 
+LayerStack* Entity::layers()
+{
+	return &m_layers;
+}
 
 QQmlListProperty<Layer> Entity::layersQml()
 {
@@ -67,9 +73,10 @@ QQmlListProperty<Layer> Entity::layersQml()
 }
 
 
-QString Entity::type() const
+QTimer* Entity::timer() const
 {
-	return m_type;
+	static QTimer timer;
+	return &timer;
 }
 
 
@@ -115,17 +122,17 @@ int Entity::tiledHeight() const
 }
 
 
-bool Entity::intersects(Tile* tile) const
+bool Entity::intersects(Entity* tile) const
 {
 	return tile->boundingRect().intersects(boundingRect());
 }
 
-
-void Entity::move(int dx, int dy)
+bool Entity::intersectsTile(int x, int y) const
 {
-	// to get animations, this needs to be used instead of the setter
-	setProperty("x", x() + dx);
-	setProperty("y", y() + dy);
+	return QRect(
+			QPoint(tiledX(), tiledY()),
+			QPoint(tiledX2(), tiledY2()))
+					.intersects({x,y,1,1});
 }
 
 
@@ -136,9 +143,8 @@ QSGNode* Entity::updatePaintNode(QSGNode* node,
 	qDebug() << "Drawing " << this;
 
 	// First draw, we need to initialize the node and set the geometry
-	if (!node) {
+	if (!node)
 		node = new QSGNode;
-	}
 
 	// Delegate drawing to the layer stack
 	m_layers.applyChanges(node);

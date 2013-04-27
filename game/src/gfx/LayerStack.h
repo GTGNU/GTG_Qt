@@ -23,6 +23,8 @@
 #include <QtCore/QMultiMap>
 #include <QtCore/QObject>
 
+#include <QtQuick/QQuickItem>
+
 class QSGNode;
 class QQuickItem;
 
@@ -32,8 +34,15 @@ namespace gtg
 	{
 		class Layer;
 
+		class LayerStack;
+
 		class LayerStack
+			: public QObject
 		{
+			Q_OBJECT
+
+			Q_PROPERTY(unsigned length READ count)
+
 			private:
 				QQuickItem* m_item;
 				QList<Layer*> m_layers;
@@ -58,28 +67,92 @@ namespace gtg
 				QList<Change> m_changes;
 
 			public:
-				LayerStack(QQuickItem* item);
+				//! Required by QML_REGISTER_TYPE, do not use
+				explicit LayerStack(QObject* parent = nullptr);
+
+				//! Theoretically the only constructor
+				explicit LayerStack(QQuickItem* item, QObject* parent = nullptr);
 				~LayerStack();
 
-				//! Append a layer
-				void append(Layer* layer);
-				//! Insert a layer at the given index
-				void insert(unsigned index, Layer* layer);
 
-				//! Remove a layer
-				void remove(Layer* layer);
-				//! Remove a layer
-				void remove(unsigned index);
+				//! The number of layers
+				unsigned count() const;
 
-				//! Access a layer at a given index
-				Layer* at(unsigned index) const;
-				//! Get the number of layers in the stack
-				int count() const;
-				//! Find the index of a layer in the stack
-				unsigned indexOf(Layer* layer) const;
+				//! Get the specified element of the list
+				Q_INVOKABLE gtg::gfx::Layer* at(unsigned index) const;
 
-				//! Remove all layers
-				void clear();
+				/*!
+				 * \brief Search for a layer
+				 *
+				 * \param layer The layer to look for
+				 * \return The index where the layer is
+				 */
+				Q_INVOKABLE unsigned indexOf(gtg::gfx::Layer* layer) const;
+
+
+				//! Alias for push, needed by QmlListAdapter
+				void append(gtg::gfx::Layer* layer);
+
+				/*!
+				 * \brief Prepend a layer
+				 *
+				 * \param layer The layer to prepend
+				 */
+				Q_INVOKABLE void unshift(gtg::gfx::Layer* layer);
+
+				/*!
+				 * \brief Append a layer
+				 *
+				 * \param layer The layer to append
+				 */
+				Q_INVOKABLE void push(gtg::gfx::Layer* layer);
+
+				/*!
+				 * \brief Insert a layer
+				 *
+				 * \param index Where the layer will be inserted
+				 * \param layer The layer to append
+				 */
+				Q_INVOKABLE void insert(unsigned index, gtg::gfx::Layer* layer);
+
+
+				/*!
+				 * \brief Remove a layer
+				 *
+				 * \param layer The layer to remove
+				 */
+				Q_INVOKABLE void remove(gtg::gfx::Layer* layer);
+
+				/*!
+				 * \brief Remove a layer
+				 *
+				 * \param index The index of the layer to be removed
+				 */
+				Q_INVOKABLE void remove(unsigned index);
+
+
+				//! Remove all layers from the list
+				Q_INVOKABLE void clear();
+
+
+				/*!
+				 * \brief Replace a layer
+				 *
+				 * \param prev The layer to be replaced
+				 * \param layer The new layer
+				 */
+				Q_INVOKABLE void replace(
+						gtg::gfx::Layer* prev,
+						gtg::gfx::Layer* layer);
+
+				/*!
+				 * \brief Replace a layer
+				 *
+				 * \param index The index of the layer to be replaced
+				 * \param layer The new layer
+				 */
+				Q_INVOKABLE void replace(unsigned index, gtg::gfx::Layer* layer);
+
 
 				//! WARNING: Call only from some point inside a updatePaintNode() function
 				bool applyChanges(QSGNode* node);
@@ -88,5 +161,7 @@ namespace gtg
 		};
 	}
 }
+
+QML_DECLARE_TYPE(gtg::gfx::LayerStack)
 
 #endif

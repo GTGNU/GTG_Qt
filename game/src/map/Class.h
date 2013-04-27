@@ -72,7 +72,7 @@ namespace gtg
 				Behavior* m_behavior;
 
 			public:
-				Class(QObject* parent = nullptr);
+				explicit Class(QObject* parent = nullptr);
 				~Class();
 
 				gtg::gfx::Texture* texture() const;

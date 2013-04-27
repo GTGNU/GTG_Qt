@@ -112,7 +112,7 @@ int Layer::rotation() const
 
 void Layer::setRotation(int rotation)
 {
-	m_rotation = rotation;
+	m_rotation = rotation % 360;
 	setRotationChanged();
 }
 

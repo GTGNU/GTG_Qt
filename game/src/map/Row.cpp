@@ -87,7 +87,7 @@ ChildList<Tile> Row::tiles() const
 	return m_tiles;
 }
 
-QQmlListProperty<Tile> Row::qmlTiles()
+QQmlListProperty<Tile> Row::tilesQml()
 {
 	return gtg::qml_adapt<Tile>(m_tiles, this);
 }
@@ -106,6 +106,7 @@ int Row::indexOf(const Tile* object) const
 
 	return -1;
 }
+
 
 
 QSGNode* Row::updatePaintNode(QSGNode* node,

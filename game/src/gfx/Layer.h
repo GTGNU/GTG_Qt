@@ -68,7 +68,6 @@ namespace gtg
 					NOTIFY rotationChanged)
 
 			private:
-
 				Texture* m_texture;
 
 				QPoint m_region;
@@ -121,7 +120,7 @@ namespace gtg
 				void setOpacityChanged();
 
 			public:
-				Layer(QObject* parent = nullptr);
+				explicit Layer(QObject* parent = nullptr);
 				~Layer();
 
 				//! Get a pointer to the texture that takes care of updating textureNode

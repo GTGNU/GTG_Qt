@@ -30,11 +30,13 @@
 #include "Behavior.h"
 
 #include "gfx/Layer.h"
+#include "gfx/LayerStack.h"
 
 #include "util/QmlListAdapter.h"
 
 
 using gtg::gfx::Layer;
+using gtg::gfx::LayerStack;
 
 using gtg::map::Behavior;
 using gtg::map::Tile;
@@ -55,7 +57,17 @@ Tile::~Tile()
 }
 
 
-QQmlListProperty<Layer> Tile::layersQml()
+const LayerStack* Tile::layers() const
+{
+	return &m_layers;
+}
+
+LayerStack* Tile::layers()
+{
+	return &m_layers;
+}
+
+QQmlListProperty<Layer> Tile::layerQmlList()
 {
 	return gtg::qml_adapt<Layer>(m_layers, this);
 }
@@ -97,55 +109,6 @@ Map* Tile::map() const
 	return row()->map();
 }
 
-
-unsigned Tile::layerCount() const
-{
-	return m_layers.count();
-}
-
-unsigned Tile::indexOfLayer(Layer* layer) const
-{
-	return m_layers.indexOf(layer);
-}
-
-
-void Tile::unshiftLayer(Layer* layer)
-{
-	addLayer(0, layer);
-}
-
-void Tile::pushLayer(Layer* layer)
-{
-	addLayer(layerCount(), layer);
-}
-
-void Tile::addLayer(unsigned index, Layer* layer)
-{
-	m_layers.insert(index, layer);
-}
-
-
-void Tile::removeLayer(Layer* layer)
-{
-	removeLayer(indexOfLayer(layer));
-}
-
-void Tile::removeLayer(unsigned index)
-{
-	m_layers.remove(index);
-}
-
-
-void Tile::replaceLayer(Layer* prev, Layer* layer)
-{
-	replaceLayer(indexOfLayer(prev), layer);
-}
-
-void Tile::replaceLayer(unsigned index, Layer* layer)
-{
-	m_layers.remove(index);
-	m_layers.insert(index, layer);
-}
 
 
 QSGNode* Tile::updatePaintNode(QSGNode* node,

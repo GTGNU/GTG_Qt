@@ -1,6 +1,8 @@
-Wiki
+Documentation
 ====
 [Wiki](https://github.com/GrandTheftGentoo/GTG_Qt/wiki)
+
+Check out the new Doxygen docs. See INSTALL for doc generation instructions
 
 Compiling
 =========

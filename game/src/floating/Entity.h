@@ -46,7 +46,11 @@ namespace gtg
 			Q_OBJECT
 
 			Q_PROPERTY(
-					QQmlListProperty<gtg::gfx::Layer> layers
+					gtg::gfx::LayerStack* layers
+					READ layers)
+
+			Q_PROPERTY(
+					QQmlListProperty<gtg::gfx::Layer> layersQml
 					READ layersQml)
 
 			Q_PROPERTY(
@@ -54,9 +58,9 @@ namespace gtg
 					READ map
 					WRITE setMap)
 
-			Q_PROPERTY(
-					QString type
-					READ type)
+			Q_PROPERTY(QString type READ type)
+
+			Q_PROPERTY(QTimer* timer READ timer)
 
 			Q_PROPERTY(int tiledX READ tiledX)
 			Q_PROPERTY(int tiledX2 READ tiledX2)
@@ -67,13 +71,15 @@ namespace gtg
 			Q_PROPERTY(unsigned tiledWidth READ tiledWidth)
 			Q_PROPERTY(unsigned tiledHeight READ tiledHeight)
 
-			Q_CLASSINFO("DefaultProperty", "layers")
+			Q_CLASSINFO("DefaultProperty", "layerQml")
 
 			private:
 				gfx::LayerStack m_layers;
 
 				QString m_type;
 				map::Map* m_map;
+
+				int m_timerInterval;
 
 				//! Virtual function inherited from QQuickItem. See Qt documentation.
 				/*!
@@ -85,15 +91,19 @@ namespace gtg
 						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
-				Entity(QString type, Registry* registry, QQuickItem* parentItem = nullptr);
-				~Entity();
+				Entity(QString type, QQuickItem* parentItem = nullptr);
+				virtual ~Entity();
 
-				Registry* registry() const override;
+				const gtg::gfx::LayerStack* layers() const;
+				gtg::gfx::LayerStack* layers();
 
 				//! Returns a QQmlListProperty of tiles. This is just a QML accessor.
 				QQmlListProperty<gtg::gfx::Layer> layersQml();
 
-				QString type() const;
+				//! Return the global timer
+				QTimer* timer() const;
+
+				virtual QString type() const = 0;
 
 				gtg::map::Map* map() const;
 				void setMap(gtg::map::Map* map);
@@ -107,13 +117,14 @@ namespace gtg
 				int tiledWidth() const;
 				int tiledHeight() const;
 
-				Q_INVOKABLE bool intersects(gtg::map::Tile* tile) const;
-
-				void move(int dx, int dy);
+				Q_INVOKABLE bool intersects(gtg::floating::Entity* other) const;
+				Q_INVOKABLE bool intersectsTile(int x, int y) const;
 
 			signals:
 				void enteredTile(gtg::map::Tile*);
 				void leftTile(gtg::map::Tile*);
+
+				void act(int delta);
 		};
 	}
 }

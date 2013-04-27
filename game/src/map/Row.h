@@ -45,7 +45,7 @@ namespace gtg
 			Q_PROPERTY(int mapY READ mapY)
 			Q_PROPERTY(gtg::map::Map* map READ map)
 
-			Q_PROPERTY(QQmlListProperty<gtg::map::Tile> tiles READ qmlTiles)
+			Q_PROPERTY(QQmlListProperty<gtg::map::Tile> tiles READ tilesQml)
 			Q_CLASSINFO("DefaultProperty", "tiles")
 
 			private:
@@ -62,7 +62,7 @@ namespace gtg
 						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
-				Row(QQuickItem* parent = nullptr);
+				explicit Row(QQuickItem* parent = nullptr);
 				~Row();
 
 				//! x coordinate getter (in pixels)
@@ -84,7 +84,7 @@ namespace gtg
 				//! Returns the list of child tiles
 				ChildList<gtg::map::Tile> tiles() const;
 				//! Returns a QQmlListProperty of tiles. This is just for QML, you should prefer tiles() in C++ code
-				QQmlListProperty<gtg::map::Tile> qmlTiles();
+				QQmlListProperty<gtg::map::Tile> tilesQml();
 
 				//! Find the index of a given Tile
 				/*!

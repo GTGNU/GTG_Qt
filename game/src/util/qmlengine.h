@@ -10,6 +10,9 @@ namespace gtg
 {
 	namespace qmlengine
 	{
+		//! \brief Get the QQmlEngine used by GTG
+		QQmlEngine* engine();
+
 		/*! \brief Load a GTG QML definition (tiles, textures, players, etc)
 		 *
 		 * This function doesn't modify the QML global namespace,

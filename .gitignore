@@ -6,6 +6,7 @@ moc_*.cpp
 *.dylib
 
 build/
+doc/
 
 *.kdev4
 .kdev_include_paths

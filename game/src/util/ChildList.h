@@ -40,7 +40,7 @@ namespace gtg
 			QQuickItem& m_parent;
 
 		public:
-			ChildList(QQuickItem* parent)
+			explicit ChildList(QQuickItem* parent)
 				: m_parent(*parent)
 			{}
 

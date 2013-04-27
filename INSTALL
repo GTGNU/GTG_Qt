@@ -1,24 +1,50 @@
-Currently the installation is very simple. The examples in here are directed at linux users.
-For other platforms you would have to figure how to compile using makefiles.
+Requirements
+------------
+Game:
+    Qt >= 5.0 (system or SDK)
 
-REQUIREMENTS:
-gcc
-sdl
-sdl_image
-sdl_ttf (for the editor only)
+Editor:
+    Qt >= 5.0 (system or SDK)
 
-To install the game:
+Documentation:
+    doxygen
+    graphviz
 
-cd Code/GTG/
-make
+Compiling
+---------
 
-Thats it you should get a file named game, copy that to a directory with a res folder (you can find one
-in Binaries/res) and run it.
+Game:
 
-To install the editor: (make sure you have sdl_ttf installed)
+$ cd game/src
+$ mkdir build
+$ cd build
+$ <see below>
+$ make
+$ cd ../..
+$ ./gtg
 
-cd Code/GTGEditor/
-make
+Step 4: If you are using system's Qt5, run
 
-You will get the editor binary.
-Same thing as you did for the game, you also need the res folder.
+$ cmake ..
+
+otherwise, if you are using Qt's SDK, run
+
+$ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/cmake
+
+
+Editor:
+
+$ cd editor
+$ qmake
+$ make
+$ ./editor
+
+If you are using Qt's SDK, run this first:
+
+$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
+
+Documentation:
+
+$ cd game
+$ doxygen Doxyfile
+$ <your-browser> doc/html/index.html
