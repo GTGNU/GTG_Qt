@@ -43,8 +43,10 @@ If you are using Qt's SDK, run this first:
 
 $ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
 
+
 Documentation:
 
+Game:
 $ cd game
 $ doxygen Doxyfile
 $ <your-browser> doc/html/index.html
