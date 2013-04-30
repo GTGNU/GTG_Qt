@@ -91,7 +91,7 @@ namespace gtg
 	template <class T, class List>
 	QQmlListProperty<T> qml_adapt(List& list, QObject* parent = nullptr)
 	{
-		return QmlListAdapter<List, T>(list).toQmlListProperty(nullptr);
+		return QmlListAdapter<List, T>(list).toQmlListProperty(parent);
 	}
 }
 

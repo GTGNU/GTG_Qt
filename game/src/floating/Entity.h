@@ -103,7 +103,7 @@ namespace gtg
 				//! Return the global timer
 				QTimer* timer() const;
 
-				virtual QString type() const = 0;
+				QString type() const;
 
 				gtg::map::Map* map() const;
 				void setMap(gtg::map::Map* map);

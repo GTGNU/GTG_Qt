@@ -109,8 +109,7 @@ int Row::indexOf(const Tile* object) const
 
 
 
-QSGNode* Row::updatePaintNode(QSGNode* node,
-		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
+QSGNode* Row::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData*)
 {
 	/*qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;*/

@@ -111,8 +111,7 @@ Map* Tile::map() const
 
 
 
-QSGNode* Tile::updatePaintNode(QSGNode* node,
-		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
+QSGNode* Tile::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData*)
 {
 	/*qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;*/

@@ -28,7 +28,8 @@ using gtg::Registry;
 
 
 Class::Class(QObject* parent)
-	: Registered()
+	: QObject(parent)
+	, Registered()
 	, m_texture(nullptr)
 	, m_behavior(nullptr)
 {

@@ -30,7 +30,8 @@ using gtg::Registry;
 TextureCache Texture::m_cache("assets/images/");
 
 Texture::Texture(QObject* parent)
-	: Registered()
+	: QObject(parent)
+	, Registered()
 	, m_initialized(false)
 	, m_cacheIterator()
 	, m_offset(0)

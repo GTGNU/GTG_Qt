@@ -25,7 +25,8 @@ using gtg::Registry;
 
 
 Behavior::Behavior(QObject* parent)
-	: Registered()
+	: QObject(parent)
+	, Registered()
 	, m_trespassable(false)
 {
 }

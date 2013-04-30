@@ -28,7 +28,7 @@ using gtg::gfx::Texture;
 
 
 Layer::Layer(QObject* parent)
-	: QObject(nullptr)
+	: QObject(parent)
 	, m_texture(nullptr)
 
 	, m_region(1,1)

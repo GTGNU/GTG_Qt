@@ -47,6 +47,7 @@ Entity::Entity(QString type, QQuickItem* parentItem)
 	, Registered()
 	, m_layers(this)
 
+	, m_type(type)
 	, m_map(nullptr)
 {
 	setFlag(QQuickItem::ItemHasContents);
@@ -77,6 +78,12 @@ QTimer* Entity::timer() const
 {
 	static QTimer timer;
 	return &timer;
+}
+
+
+QString Entity::type() const
+{
+	return m_type;
 }
 
 
@@ -136,8 +143,7 @@ bool Entity::intersectsTile(int x, int y) const
 }
 
 
-QSGNode* Entity::updatePaintNode(QSGNode* node,
-		QQuickItem::UpdatePaintNodeData* updatePaintNodeData)
+QSGNode* Entity::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData*)
 {
 	qDebug() << "----------------------------------------";
 	qDebug() << "Drawing " << this;
