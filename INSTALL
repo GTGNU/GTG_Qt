@@ -1,52 +1,7 @@
-Requirements
-------------
-Game:
-    Qt >= 5.0 (system or SDK)
+There is an INSTALL file for each platform. Please refer to the one according to yours:
 
-Editor:
-    Qt >= 5.0 (system or SDK)
+Unix-like:
+	INSTALL.unix
 
-Documentation:
-    doxygen
-    graphviz
-
-Compiling
----------
-
-Game:
-
-$ cd game/src
-$ mkdir build
-$ cd build
-$ <see below>
-$ make
-$ cd ../..
-$ ./gtg
-
-Step 4: If you are using system's Qt5, run
-
-$ cmake ..
-
-otherwise, if you are using Qt's SDK, run
-
-$ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/lib/cmake
-
-
-Editor:
-
-$ cd editor
-$ qmake
-$ make
-$ ./editor
-
-If you are using Qt's SDK, run this first:
-
-$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
-
-
-Documentation:
-
-Game:
-$ cd game
-$ doxygen Doxyfile
-$ <your-browser> doc/html/index.html
+Windows:
+	INSTALL.win32

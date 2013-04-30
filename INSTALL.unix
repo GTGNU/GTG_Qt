@@ -1,0 +1,64 @@
+Requirements
+------------
+Code:
+	Qt >= 5.0 (system or SDK)
+
+Documentation:
+	doxygen
+	graphviz
+
+
+===== Building the game and the editor =====
+
+==== Game ====
+
+$ cd game/src
+$ mkdir build
+$ cd build
+
+Now, there are two options for build configuration, CMake or QMake.
+
+With CMake:
+
+	$ cmake ..
+
+	If you are using Qt's SDK, you will need an extra argument:
+
+	$ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/lib/cmake
+
+With QMake:
+
+	$ qmake ..
+
+	If you are using Qt's SDK, you will need to adjust your PATH first:
+
+	$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
+
+
+Finally, start compiling and run:
+
+$ make
+$ cd ../..
+$ ./gtg
+
+
+==== Editor ====
+
+$ cd editor
+$ qmake
+$ make
+$ ./editor
+
+If you are using Qt's SDK, run this first:
+
+$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
+
+
+===== Generating doxygen documentation =====
+
+==== Game ====
+
+$ cd game
+$ doxygen Doxyfile
+
+To view it, open doc/html/index.html in your browser.
