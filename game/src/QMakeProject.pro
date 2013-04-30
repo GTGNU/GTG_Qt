@@ -6,10 +6,22 @@ TEMPLATE = app
 TARGET = gtg
 INCLUDEPATH += .
 
-CONFIG += qt debug
 QT = core gui qml quick
 
-QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS += -std=c++11 -pedantic
+
+
+CONFIG += qt debug
+CONFIG -= release
+
+release {
+    DEFINES += QT_NO_DEBUG_OUTPUT
+}
+
+linux-g++:debug {
+    QMAKE_CXXFLAGS += -ggdb3
+}
+
 
 # Input
 HEADERS += $$PWD/*.h \
