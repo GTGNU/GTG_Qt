@@ -25,7 +25,7 @@ $ cmake ..
 ```
 If you are using Qt's SDK, run
 ```
-$ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/cmake
+$ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/lib/cmake
 ```
 
 To build the editor:
