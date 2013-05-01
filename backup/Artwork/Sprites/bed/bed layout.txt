@@ -1,4 +1,0 @@
-to be layed out as
-
-p1 dt1 dr dr
-p2 dt1 dr dr
