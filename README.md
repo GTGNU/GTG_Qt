@@ -10,5 +10,5 @@ For instructions, see the [INSTALL](INSTALL) file
 
 Communication
 =============
-* #GTG @ irc.p2p-irc.net
+* #GTG, #GTGProg @ irc.installgentoo.com
 * [Website](http://gtg.installgentoo.com)
