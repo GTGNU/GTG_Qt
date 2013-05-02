@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 trap error EXIT
 
@@ -59,7 +59,7 @@ SCRIPT=$(readlink -f $0)
 DIR=$(dirname $SCRIPT)
 cd "$DIR"
 
-show_n ">> Qt SDK location (empty to use system's): "
+show_n ">> Qt SDK location (leave empty if not using the SDK): "
 read qt_sdk_dir
 
 if [ -z "$qt_sdk_dir" ]

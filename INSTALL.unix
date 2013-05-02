@@ -15,8 +15,8 @@ Documentation:
 There are some shell scripts to make the process a bit more straightforward:
 
 $ cd game
-$ sh compile.sh
-$ sh run.sh
+$ bash compile.sh
+$ bash run.sh
 
 ==== Editor ====
 
