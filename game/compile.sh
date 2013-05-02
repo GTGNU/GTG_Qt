@@ -81,7 +81,7 @@ else
 
 	if [ ! -e $bin ]
 	then
-		show "### Could not find qmake. Please compile manually" >&2
+		show "### Could not find qmake ($bin does not exist). Please compile manually" >&2
 		exit_with 1
 	fi
 fi
