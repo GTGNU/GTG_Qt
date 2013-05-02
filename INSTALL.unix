@@ -12,35 +12,11 @@ Documentation:
 
 ==== Game ====
 
-$ cd game/src
-$ mkdir build
-$ cd build
+There are some shell scripts to make the process a bit more straightforward:
 
-Now, there are two options for build configuration, CMake or QMake.
-
-With CMake:
-
-	$ cmake ..
-
-	If you are using Qt's SDK, you will need an extra argument:
-
-	$ cmake .. -DCMAKE_PREFIX_PATH=/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/lib/cmake
-
-With QMake:
-
-	$ qmake ..
-
-	If you are using Qt's SDK, you will need to adjust your PATH first:
-
-	$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
-
-
-Finally, start compiling and run:
-
-$ make
-$ cd ../..
-$ ./gtg
-
+$ cd game
+$ sh compile.sh
+$ sh run.sh
 
 ==== Editor ====
 

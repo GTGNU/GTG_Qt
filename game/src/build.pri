@@ -4,12 +4,13 @@
 
 TEMPLATE = app
 TARGET = gtg
-INCLUDEPATH += .
+
+# Build options
+INCLUDEPATH += $$PWD
 
 QT = core gui qml quick
 
 QMAKE_CXXFLAGS += -std=c++11 -pedantic
-
 
 CONFIG += qt debug
 CONFIG -= release
@@ -23,7 +24,7 @@ linux-g++:debug {
 }
 
 
-# Input
+# Sources
 HEADERS += $$PWD/*.h \
            $$PWD/floating/*.h \
            $$PWD/gfx/*.h \
@@ -35,3 +36,7 @@ SOURCES += $$PWD/*.cpp \
            $$PWD/gfx/*.cpp \
            $$PWD/map/*.cpp \
            $$PWD/util/*.cpp
+
+# Define install target
+target.path = $$DESTDIR/.
+INSTALLS += target
