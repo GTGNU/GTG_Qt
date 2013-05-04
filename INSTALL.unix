@@ -10,19 +10,19 @@ Documentation:
 
 ===== Building the game and the editor =====
 
-There are some shell scripts to make the process a bit more straightforward:
+There are some shell scripts to make the process straightforward:
+
+Note: Add extra arguments to compile.sh for custom make flags
 
 ==== Game ====
 
-$ cd game
-$ bash compile.sh
-$ bash run.sh
+$ bash compile.sh game
+$ bash run.sh game
 
 ==== Editor ====
 
-$ cd editor
-$ bash compile.sh
-$ bash run.sh
+$ bash compile.sh editor
+$ bash run.sh editor
 
 ===== Generating doxygen documentation =====
 
