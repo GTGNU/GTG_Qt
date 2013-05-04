@@ -3,4 +3,5 @@
 -I /usr/include/qt/QtGui
 -I /usr/include/qt/QtQml
 -I /usr/include/qt/QtQuick
+-I .
 -fPIC

@@ -28,6 +28,7 @@
 #include "gfx/LayerStack.h"
 
 #include "util/Registered.h"
+#include "util/TiledRect.h"
 
 namespace gtg
 {
@@ -58,20 +59,15 @@ namespace gtg
 					READ map
 					WRITE setMap)
 
+			Q_PROPERTY(
+					QList<QObject*> containerTiles
+					READ containerTiles)
+
 			Q_PROPERTY(QString type READ type)
 
 			Q_PROPERTY(QTimer* timer READ timer)
 
-			Q_PROPERTY(int tiledX READ tiledX)
-			Q_PROPERTY(int tiledX2 READ tiledX2)
-
-			Q_PROPERTY(int tiledY READ tiledY)
-			Q_PROPERTY(int tiledY2 READ tiledY2)
-
-			Q_PROPERTY(unsigned tiledWidth READ tiledWidth)
-			Q_PROPERTY(unsigned tiledHeight READ tiledHeight)
-
-			Q_CLASSINFO("DefaultProperty", "layerQml")
+			Q_CLASSINFO("DefaultProperty", "layersQml")
 
 			private:
 				gfx::LayerStack m_layers;
@@ -79,7 +75,8 @@ namespace gtg
 				QString m_type;
 				map::Map* m_map;
 
-				int m_timerInterval;
+				TiledRect m_tiledRect;
+				QList<QObject*> m_containerTiles;
 
 				//! Virtual function inherited from QQuickItem. See Qt documentation.
 				/*!
@@ -108,23 +105,20 @@ namespace gtg
 				gtg::map::Map* map() const;
 				void setMap(gtg::map::Map* map);
 
-				int tiledX() const;
-				int tiledX2() const;
+				TiledRect tiledRect() const;
 
-				int tiledY() const;
-				int tiledY2() const;
+				QList<QObject*> containerTiles() const;
 
-				int tiledWidth() const;
-				int tiledHeight() const;
-
-				Q_INVOKABLE bool intersects(gtg::floating::Entity* other) const;
-				Q_INVOKABLE bool intersectsTile(int x, int y) const;
+				Q_INVOKABLE bool intersects(const QQuickItem* other) const;
 
 			signals:
 				void enteredTile(gtg::map::Tile*);
 				void leftTile(gtg::map::Tile*);
 
 				void act(int delta);
+
+			protected slots:
+				void updateContainerTiles();
 		};
 	}
 }

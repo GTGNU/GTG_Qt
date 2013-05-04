@@ -51,10 +51,37 @@ Entity::Entity(QString type, QQuickItem* parentItem)
 	, m_map(nullptr)
 {
 	setFlag(QQuickItem::ItemHasContents);
+
+	connect(this, &QQuickItem::xChanged,
+			this, &Entity::updateContainerTiles,
+			Qt::DirectConnection);
+
+	connect(this, &QQuickItem::yChanged,
+			this, &Entity::updateContainerTiles,
+			Qt::DirectConnection);
+
+	connect(this, &QQuickItem::widthChanged,
+			this, &Entity::updateContainerTiles,
+			Qt::DirectConnection);
+
+	connect(this, &QQuickItem::heightChanged,
+			this, &Entity::updateContainerTiles,
+			Qt::DirectConnection);
 }
 
 Entity::~Entity()
 {
+	disconnect(this, &QQuickItem::xChanged,
+			this, &Entity::updateContainerTiles);
+
+	disconnect(this, &QQuickItem::yChanged,
+			this, &Entity::updateContainerTiles);
+
+	disconnect(this, &QQuickItem::widthChanged,
+			this, &Entity::updateContainerTiles);
+
+	disconnect(this, &QQuickItem::heightChanged,
+			this, &Entity::updateContainerTiles);
 }
 
 
@@ -98,48 +125,34 @@ void Entity::setMap(Map* map)
 }
 
 
-int Entity::tiledX() const
+QList<QObject*> Entity::containerTiles() const
 {
-	return std::floor(x() / map()->tileSize());
-}
-
-int Entity::tiledX2() const
-{
-	return std::ceil((x() + width()) / map()->tileSize());
-}
-
-int Entity::tiledY() const
-{
-	return std::floor(y() / map()->tileSize());
-}
-
-int Entity::tiledY2() const
-{
-	return std::ceil((y() + height()) / map()->tileSize());
-}
-
-int Entity::tiledWidth() const
-{
-	return tiledX2() - tiledX();
-}
-
-int Entity::tiledHeight() const
-{
-	return tiledY2() - tiledY();
+	return m_containerTiles;
 }
 
 
-bool Entity::intersects(Entity* tile) const
+bool Entity::intersects(const QQuickItem* other) const
 {
-	return tile->boundingRect().intersects(boundingRect());
+	return boundingRect().intersects(other->boundingRect());
 }
 
-bool Entity::intersectsTile(int x, int y) const
+
+void Entity::updateContainerTiles()
 {
-	return QRect(
-			QPoint(tiledX(), tiledY()),
-			QPoint(tiledX2(), tiledY2()))
-					.intersects({x,y,1,1});
+	m_tiledRect.rect().setTopLeft({x(), y()});
+
+	int newX = m_tiledRect.x();
+	int newX2 = m_tiledRect.x2();
+
+	int newY = m_tiledRect.y();
+	int newY2 = m_tiledRect.y2();
+
+	m_containerTiles.clear();
+
+	for (int i = newX; i < newX2; i++) {
+		for (int j = newY; j < newY2; j++)
+			m_containerTiles << map()->tileAt(i, j);
+	}
 }
 
 
@@ -158,3 +171,4 @@ QSGNode* Entity::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData*
 
 	return node;
 }
+
