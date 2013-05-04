@@ -24,6 +24,7 @@ $ bash run.sh game
 $ bash compile.sh editor
 $ bash run.sh editor
 
+
 ===== Generating doxygen documentation =====
 
 ==== Game ====
