@@ -21,14 +21,8 @@ $ bash run.sh
 ==== Editor ====
 
 $ cd editor
-$ qmake
-$ make
-$ ./editor
-
-If you are using Qt's SDK, run this first:
-
-$ export PATH="$PATH:/<QTSDK-PATH>/<VERSION>/<YOUR-COMPILER>/bin"
-
+$ bash compile.sh
+$ bash run.sh
 
 ===== Generating doxygen documentation =====
 
