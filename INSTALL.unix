@@ -10,9 +10,9 @@ Documentation:
 
 ===== Building the game and the editor =====
 
-==== Game ====
-
 There are some shell scripts to make the process a bit more straightforward:
+
+==== Game ====
 
 $ cd game
 $ bash compile.sh
