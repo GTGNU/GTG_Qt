@@ -1,78 +1,48 @@
 #!/bin/bash
-set -e
-shopt -s nullglob
-trap error EXIT
-
-step=""
 
 function print_help {
-	echo "Usage: $0 [MAKE_FLAGS]"
-}
-
-function show_n {
-	echo -n -e "\033[1m$@\033[0m"
-}
-
-function show {
-	echo -e "\033[1m$@\033[0m"
-}
-
-function run {
-	show ">>> $@"
-	step="$@"
-	$@
+	echo "Usage: $0 component $@"
+	echo "  Known components: ${known_components[@]}"
 }
 
 function clean {
-	show ">>> Cleaning"
+	show "\033[33m>>> Cleaning"
 	rm -rf build
 }
 
-function error {
-	if [ ! "$step" = "--finish-ok--" ]
-	then
-		show "### Error running $step" >&2
-		exit 1
-	fi
-}
 
-function exit_with {
-	step="--finish-ok--"
+source helpers.sh
 
-	if [ ! "$1" = 0 ]
-	then
-		clean
-	fi
+argv_help_flag "$@"
+argv_component_arg "$@"
 
-	exit $1
-}
+cd "$component_dir"
 
 
-
-if [ "$1" = "-h" ] || [ "$1" = "--help" ]
-then
-	print_help
-	exit_with 0
-fi
+# Get make flags
+make_flags=("$@")
+unset -v 'make_flags[0]'
+make_flags_printable=$(printf "'%s' " "${make_flags[@]}")
 
 
-SCRIPT=$(readlink -f $0)
-DIR=$(dirname $SCRIPT)
-cd "$DIR"
-
+# Support building with the Qt SDK
 show_n ">> Qt SDK location (leave empty if not using the SDK): "
 read -e qt_sdk_dir
 
-qmake_bins=()
+
 
 # Find all qmake binaries in the specified location
+qmake_bins=()
+
 if [ -z "$qt_sdk_dir" ]
 then
+	# Use system's Qt5
 	qmake_bins=("$(qtchooser -qt=5 -run-tool=qmake -query QT_INSTALL_BINS)/qmake")
 else
-	qmake_dirs="$qt_sdk_dir"/5.*/*/bin
+	# Use Qt SDK
+	qmake_dirs=("$qt_sdk_dir"/5.*/*/bin)
 
-	for qmake_dir in ${qmake_dirs[@]}
+	for qmake_dir in "${qmake_dirs[@]}"
 	do
 		qmake_path="$qmake_dir/qmake"
 		if [ -e "$qmake_path" ]
@@ -85,12 +55,13 @@ fi
 # Select the binary automatically if only one
 if [ "${#qmake_bins[@]}" = 0 ]
 then
-	# Skip, catch the empty variable below
+	# Skip, error is handled later
 	true
 
 elif [ "${#qmake_bins[@]}" = 1 ]
 then
-	qmake_bin=${qmake_bins[0]}
+	# Choose the first binary if only one qmake is found
+	qmake_bin="${qmake_bins[0]}"
 
 else
 	# Ask the user which one to use
@@ -101,36 +72,42 @@ else
 	done
 fi
 
-# Check if it exists
+# Check if the result it exists
 if [ ! -f "$qmake_bin" ] || [ ! -x "$qmake_bin" ]
 then
-	show "### Could not find qmake ('$qmake_bin' is not an executable file). Please compile manually" >&2
+	show_error "Could not find qmake ('$qmake_bin' is not an executable file). Please compile manually"
 	exit_with 1
 fi
 
-# Confirm
+
+
+# Confirm before proceeding
 show
-show "> cwd: $PWD"
-show "> qmake: $qmake_bin"
+show "> component:       $component"
+show "> build directory: $PWD"
+show "> qmake binary:    $qmake_bin"
+show "> make flags (${#make_flags[@]}):  ${make_flags_printable[@]}"
 show
 
 show_n ">> Continue? "
 read ans
 
-# Continue
+
+
+# Main action
 if [ "$ans" = "y" ] || [ "$ans" = "Y" ] || [ "$ans" = "yes" ]
 then
 	clean
 	run mkdir build
 	run cd build
 	run "$qmake_bin" ..
-	run make $@
+	run make "${make_flags[@]}"
 	run make INSTALL_ROOT=package install
 
-	show Build successful
+	show "Build successful"
 	exit_with 0
 
 else
-	show Aborted
+	show_error "Aborted"
 	exit_with 1
 fi
