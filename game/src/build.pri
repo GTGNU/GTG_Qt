@@ -10,7 +10,7 @@ INCLUDEPATH += $$PWD
 
 QT = core gui qml quick
 
-QMAKE_CXXFLAGS += -std=c++11 -pedantic
+QMAKE_CXXFLAGS += -std=c++11 -pedantic -Werror
 
 CONFIG += qt debug
 CONFIG -= release
