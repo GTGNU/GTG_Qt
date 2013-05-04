@@ -17,6 +17,8 @@
 #include "map/Row.h"
 #include "map/Map.h"
 
+#include "floating/Entity.h"
+
 
 using namespace gtg;
 
@@ -44,7 +46,6 @@ void registerTypes(int versionMajor, int versionMinor)
 	qmlRegisterUncreatableType<gfx::LayerStack>("gtg.gfx", versionMajor, versionMinor, "LayerStack",
 			"LayerStack is a set of accessors and modifiers, not an instantiable type");
 
-
 	qmlRegisterType<map::Behavior>("gtg.map",  versionMajor, versionMinor, "Behavior"  );
 	qmlRegisterType<map::Class>   ("gtg.map",  versionMajor, versionMinor, "Class"     );
 
@@ -52,6 +53,7 @@ void registerTypes(int versionMajor, int versionMinor)
 	qmlRegisterType<map::Row>     ("gtg.map",  versionMajor, versionMinor, "Row"       );
 	qmlRegisterType<map::Map>     ("gtg.map",  versionMajor, versionMinor, "Map"       );
 
+	qmlRegisterType<floating::Entity>("gtg.floating", versionMajor, versionMinor, "Entity");
 }
 
 void registerGlobals()

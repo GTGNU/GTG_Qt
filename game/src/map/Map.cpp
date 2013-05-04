@@ -28,6 +28,8 @@
 
 #include "gfx/Texture.h"
 
+#include "floating/Entity.h"
+
 #include "util/QmlListAdapter.h"
 #include "util/qmlengine.h"
 
@@ -36,6 +38,8 @@ using gtg::map::Tile;
 using gtg::map::Row;
 using gtg::map::Map;
 
+using gtg::floating::Entity;
+
 using gtg::ChildList;
 
 
@@ -43,6 +47,8 @@ Map::Map(QQuickItem* parent)
 	: QQuickItem(parent)
 	, m_requiresSet(false)
 	, m_rows(this)
+
+	, m_testEntity(nullptr)
 {
 	setFlag(QQuickItem::ItemHasContents);
 }
@@ -91,6 +97,23 @@ ChildList<Row> Map::rows() const
 QQmlListProperty<Row> Map::rowsQml()
 {
 	return gtg::qml_adapt<Row>(m_rows, this);
+}
+
+
+Entity* Map::testEntity() const
+{
+	return m_testEntity;
+}
+
+void Map::setTestEntity(Entity* value)
+{
+	if (m_testEntity)
+		m_testEntity->setParentItem(nullptr);
+
+	m_testEntity = value;
+	m_testEntity->setParentItem(this);
+	m_testEntity->setMap(this);
+	m_testEntity->update();
 }
 
 

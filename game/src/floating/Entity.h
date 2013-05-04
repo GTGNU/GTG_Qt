@@ -46,6 +46,8 @@ namespace gtg
 		{
 			Q_OBJECT
 
+			GTG_REGISTERED(Entity)
+
 			Q_PROPERTY(
 					gtg::gfx::LayerStack* layers
 					READ layers)
@@ -88,6 +90,8 @@ namespace gtg
 						QQuickItem::UpdatePaintNodeData* updatePaintNodeData);
 
 			public:
+				explicit Entity(QQuickItem* parentItem = nullptr);
+
 				Entity(QString type, QQuickItem* parentItem = nullptr);
 				virtual ~Entity();
 
@@ -96,6 +100,8 @@ namespace gtg
 
 				//! Returns a QQmlListProperty of tiles. This is just a QML accessor.
 				QQmlListProperty<gtg::gfx::Layer> layersQml();
+
+				Registry* registry() const override;
 
 				//! Return the global timer
 				QTimer* timer() const;

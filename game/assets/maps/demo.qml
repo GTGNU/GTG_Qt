@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import gtg.map 1.5 as M
 import gtg.gfx 1.5 as G
+import gtg.floating 1.5 as F
 
 M.Map {
 	id: map
@@ -35,6 +36,16 @@ M.Map {
 			}
 		}
 	}
+
+	testEntity: F.Entity {
+		name: "whatever"
+		x: 50
+		y: 30
+		width: 64
+		height: 64
+		Component.onCompleted: console.log(">>>>>>> completed entity")
+	}
+
 
 	// 0
 	M.Row {

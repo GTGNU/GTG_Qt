@@ -24,6 +24,7 @@
 #include <QtCore/QTimer>
 
 #include <QtQuick/QSGNode>
+#include <QtQuick/QSGSimpleRectNode>
 
 #include "map/Tile.h"
 #include "map/Map.h"
@@ -41,6 +42,10 @@ using gtg::gfx::LayerStack;
 
 using gtg::Registry;
 
+Entity::Entity(QQuickItem* parentItem)
+	: Entity("TestEntity", parentItem)
+{
+}
 
 Entity::Entity(QString type, QQuickItem* parentItem)
 	: QQuickItem(parentItem)
@@ -82,6 +87,8 @@ Entity::~Entity()
 
 	disconnect(this, &QQuickItem::heightChanged,
 			this, &Entity::updateContainerTiles);
+
+	registry()->unregisterObj(this);
 }
 
 
@@ -97,36 +104,49 @@ LayerStack* Entity::layers()
 
 QQmlListProperty<Layer> Entity::layersQml()
 {
+	qDebug() << "Entity::layersQml()";
 	return gtg::qml_adapt<Layer>(m_layers, this);
 }
 
 
 QTimer* Entity::timer() const
 {
+	qDebug() << "Entity::timer()";
 	static QTimer timer;
 	return &timer;
+}
+
+Registry* Entity::registry() const
+{
+	qDebug() << "Entity::registry()";
+	static Registry* entityRegistry = new Registry("Class");
+	return entityRegistry;
 }
 
 
 QString Entity::type() const
 {
+	qDebug() << "Entity::type()";
 	return m_type;
 }
 
 
 Map* Entity::map() const
 {
+	qDebug() << "Entity::map()";
 	return m_map? m_map : qobject_cast<Map*>(parentItem());
 }
 
 void Entity::setMap(Map* map)
 {
+	qDebug() << "Entity::setMap()";
 	m_map = map;
 }
 
 
 QList<QObject*> Entity::containerTiles() const
 {
+	qDebug() << "Entity::containerTiles()";
 	return m_containerTiles;
 }
 
@@ -139,6 +159,7 @@ bool Entity::intersects(const QQuickItem* other) const
 
 void Entity::updateContainerTiles()
 {
+	qDebug() << "Entity::updateContainerTiles()";
 	m_tiledRect.rect().setTopLeft({x(), y()});
 
 	int newX = m_tiledRect.x();
@@ -162,8 +183,13 @@ QSGNode* Entity::updatePaintNode(QSGNode* node, QQuickItem::UpdatePaintNodeData*
 	qDebug() << "Drawing " << this;
 
 	// First draw, we need to initialize the node and set the geometry
-	if (!node)
-		node = new QSGNode;
+	if (!node) {
+		auto* n = new QSGSimpleRectNode;
+
+		n->setRect(boundingRect());
+
+		node = n;
+	}
 
 	// Delegate drawing to the layer stack
 	m_layers.applyChanges(node);

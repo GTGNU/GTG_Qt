@@ -27,6 +27,11 @@
 
 namespace gtg
 {
+	namespace floating
+	{
+		class Entity;
+	}
+
 	namespace map
 	{
 		class Tile;
@@ -47,6 +52,8 @@ namespace gtg
 
 			Q_PROPERTY(unsigned int tileSize READ tileSize WRITE setTileSize)
 
+			Q_PROPERTY(gtg::floating::Entity* testEntity READ testEntity WRITE setTestEntity)
+
 			Q_PROPERTY(QQmlListProperty<gtg::map::Row> rows READ rowsQml)
 			Q_CLASSINFO("DefaultProperty", "rows")
 
@@ -56,6 +63,8 @@ namespace gtg
 
 				unsigned int m_tileSize;
 				ChildList<Row> m_rows;
+
+				floating::Entity* m_testEntity;
 
 				//! Virtual function inherited from QQuickItem. See Qt documentation.
 				/*!
@@ -84,6 +93,9 @@ namespace gtg
 				ChildList<gtg::map::Row> rows() const;
 				//! Returns a QQmlListProperty of rows. This is just for QML, you should prefer rows() in C++ code
 				QQmlListProperty<gtg::map::Row> rowsQml();
+
+				gtg::floating::Entity* testEntity() const;
+				void setTestEntity(gtg::floating::Entity* value);
 
 				//! Find the index of a given Row
 				/*!
